@@ -57,25 +57,26 @@ letter                                                  [a-zA-Z_]
 digit                                                   [0-9]
 hexdigit                                                [0-9A-Fa-f]
 octaldigit                                              [0-7]
-decint                                                  {digit}({digit})*
+decint                                                  [1-9]({digit})*|0
 hexint                                                  {hexdigit}({hexdigit})*
-octalint                                                {octaldigit}({octaldigit})*
+octalint                                                0({octaldigit})*
 alphanum                                                {letter}|{digit}
 ID                                                      {letter}{alphanum}*
 STRLIT                                                  \"([^\r\n\"]|(\\\"))*\"
-INTLIT                                                  {decint}|(0{octalint})|(0[xX]{hexint})
-REALLIT                                                 (({decint}"."?{decint}?)|({decint}?"."{decint}))([eE][+-]?{decint})?
+INTLIT                                                  {decint}|({octalint})|(0[xX]{hexint})
+INVALID_OCTAL                                           0[0-9]+
+REALLIT                                                 (({digit}+"."{digit}*)|({digit}*"."{digit}+)|({digit}+))([eE][+-]?{digit}+)?
 RESERVED                                                "--"|"++"|"break"|"default"|"interface"|"select"|"case"|"defer"|"go"|"map"|"struct"|"chan"|"goto"|"package"|"switch"|"const"|"fallthrough"|"range"|"type"|"continue"|"import"
 NEWLINE                                                 "\n" 
 %%
 {COMMENT}                                               { BEGIN COMMENT_LINE; semicolon = 0; column += yyleng; }
-<COMMENT_LINE>\n                                        { BEGIN 0; line += 1; semicolon = 0; column = 1; }
+<COMMENT_LINE>\n                                        { BEGIN 0; semicolon = 0; line++; column = 1; }
 <COMMENT_LINE>.                                         { column += yyleng; }
 {OPEN_COMMENT}                                          { BEGIN COMMENT_MULTILINE; semicolon = 0; comment_line = line, comment_column = column; column += yyleng;}
 <COMMENT_MULTILINE>{CLOSE_COMMENT}                      { BEGIN 0; semicolon = 0; column += yyleng; }
 <COMMENT_MULTILINE><<EOF>>                              { printf("Line %d, column %d: unterminated comment\n", comment_line, comment_column); BEGIN 0; }
 <COMMENT_MULTILINE>.                                    { column += yyleng; }
-<COMMENT_MULTILINE>\n                                   { line += 1; column = 1; }
+<COMMENT_MULTILINE>\n                                   { line ++; column = 1; }
 {SEMICOLON}                                             { printf("SEMICOLON\n"); semicolon = 0; column += yyleng; }
 {COMMA}                                                 { printf("COMMA\n"); semicolon = 0; column += yyleng; }
 {BLANKID}                                               { printf("BLANKID\n"); semicolon = 0; column += yyleng; }
@@ -118,6 +119,7 @@ NEWLINE                                                 "\n"
 {ID}                                                    { printf("ID(%s)\n", yytext); semicolon = 1; column += yyleng; }
 {STRLIT}                                                { printf("STRLIT(%s)\n", yytext); semicolon = 1; column += yyleng; }
 {INTLIT}                                                { printf("INTLIT(%s)\n", yytext); semicolon = 1; column += yyleng; }
+{INVALID_OCTAL}                                         { printf("Line %d, column %d: invalid octal constant (%s)\n", line, column, yytext); semicolon = 0; column += yyleng; }
 {REALLIT}                                               { printf("REALLIT(%s)\n", yytext); semicolon = 1; column += yyleng; }
 \n                                                      { if(semicolon) printf("SEMICOLON\n"); semicolon = 0; column = 1; line++; }
 " "|"\t"|"\r"                                           { column += yyleng; }
