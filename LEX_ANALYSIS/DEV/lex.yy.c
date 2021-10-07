@@ -902,13 +902,13 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 76 "gocompiler.l"
-{ BEGIN COMMENT_LINE; semicolon = 0; column += yyleng; }
+{ BEGIN COMMENT_LINE; column += yyleng; }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
 #line 77 "gocompiler.l"
-{ BEGIN 0; semicolon = 0; line++; column = 1; }
+{ BEGIN 0; line++; column = 1; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
@@ -918,12 +918,12 @@ YY_RULE_SETUP
 case 4:
 YY_RULE_SETUP
 #line 79 "gocompiler.l"
-{ BEGIN COMMENT_MULTILINE; semicolon = 0; saved_line = line, saved_column = column; column += yyleng; }
+{ BEGIN COMMENT_MULTILINE; saved_line = line, saved_column = column; column += yyleng; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 80 "gocompiler.l"
-{ BEGIN 0; semicolon = 0; column += yyleng; }
+{ BEGIN 0; column += yyleng; }
 	YY_BREAK
 case YY_STATE_EOF(COMMENT_MULTILINE):
 #line 81 "gocompiler.l"
@@ -1244,7 +1244,7 @@ YY_RULE_SETUP
 case 65:
 YY_RULE_SETUP
 #line 144 "gocompiler.l"
-{ printf("Line %d, column %d: illegal character (%s)\n", line, column, yytext); column += yyleng; }
+{ printf("Line %d, column %d: illegal character (%s)\n", line, column, yytext); semicolon = 0; column += yyleng; }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP

@@ -73,11 +73,11 @@ REALLIT                                                 (({digit}+"."{digit}*)|(
 RESERVED                                                "--"|"++"|"break"|"default"|"interface"|"select"|"case"|"defer"|"go"|"map"|"struct"|"chan"|"goto"|"package"|"switch"|"const"|"fallthrough"|"range"|"type"|"continue"|"import"
 NEWLINE                                                 "\n" 
 %%
-{COMMENT}                                               { BEGIN COMMENT_LINE; semicolon = 0; column += yyleng; }
-<COMMENT_LINE>\n                                        { BEGIN 0; semicolon = 0; line++; column = 1; }
+{COMMENT}                                               { BEGIN COMMENT_LINE; column += yyleng; }
+<COMMENT_LINE>\n                                        { BEGIN 0; line++; column = 1; }
 <COMMENT_LINE>.                                         { column += yyleng; }
-{OPEN_COMMENT}                                          { BEGIN COMMENT_MULTILINE; semicolon = 0; saved_line = line, saved_column = column; column += yyleng; }
-<COMMENT_MULTILINE>{CLOSE_COMMENT}                      { BEGIN 0; semicolon = 0; column += yyleng; }
+{OPEN_COMMENT}                                          { BEGIN COMMENT_MULTILINE; saved_line = line, saved_column = column; column += yyleng; }
+<COMMENT_MULTILINE>{CLOSE_COMMENT}                      { BEGIN 0; column += yyleng; }
 <COMMENT_MULTILINE><<EOF>>                              { printf("Line %d, column %d: unterminated comment\n", saved_line, saved_column); BEGIN 0; }
 <COMMENT_MULTILINE>.                                    { column += yyleng; }
 <COMMENT_MULTILINE>\n                                   { line ++; column = 1; }
