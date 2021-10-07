@@ -8,9 +8,9 @@
         Samuel Carinhas, uc2019217199
 */
 
-%X COMMENT_LINE COMMENT_MULTILINE
+%X COMMENT_LINE COMMENT_MULTILINE STRING INVALID_STRING
 %{
-    int semicolon = 0, column = 1, line = 1, comment_line, comment_column;
+    int semicolon = 0, column = 1, line = 1, saved_line, saved_column;
 %}
 COMMENT                                                 "//"
 OPEN_COMMENT                                            "/*"
@@ -62,7 +62,11 @@ hexint                                                  {hexdigit}({hexdigit})*
 octalint                                                0({octaldigit})*
 alphanum                                                {letter}|{digit}
 ID                                                      {letter}{alphanum}*
-STRLIT                                                  \"([^\r\n\"]|(\\\"))*\"
+VALID_ESCAPE                                            "\\f"|"\\n"|"\\t"|"\\\\"|"\\\""|"\\r"
+EMPTY_STRING                                            \"\"
+STRLIT                                                  ([^\r\n\"\\]|({VALID_ESCAPE}))+\"
+QUOTE                                                   \"
+INVALID_ESCAPE                                          "\\"|("\\"[^\n\r])
 INTLIT                                                  {decint}|({octalint})|(0[xX]{hexint})
 INVALID_OCTAL                                           0[0-9]+
 REALLIT                                                 (({digit}+"."{digit}*)|({digit}*"."{digit}+)|({digit}+))([eE][+-]?{digit}+)?
@@ -72,9 +76,9 @@ NEWLINE                                                 "\n"
 {COMMENT}                                               { BEGIN COMMENT_LINE; semicolon = 0; column += yyleng; }
 <COMMENT_LINE>\n                                        { BEGIN 0; semicolon = 0; line++; column = 1; }
 <COMMENT_LINE>.                                         { column += yyleng; }
-{OPEN_COMMENT}                                          { BEGIN COMMENT_MULTILINE; semicolon = 0; comment_line = line, comment_column = column; column += yyleng;}
+{OPEN_COMMENT}                                          { BEGIN COMMENT_MULTILINE; semicolon = 0; saved_line = line, saved_column = column; column += yyleng; }
 <COMMENT_MULTILINE>{CLOSE_COMMENT}                      { BEGIN 0; semicolon = 0; column += yyleng; }
-<COMMENT_MULTILINE><<EOF>>                              { printf("Line %d, column %d: unterminated comment\n", comment_line, comment_column); BEGIN 0; }
+<COMMENT_MULTILINE><<EOF>>                              { printf("Line %d, column %d: unterminated comment\n", saved_line, saved_column); BEGIN 0; }
 <COMMENT_MULTILINE>.                                    { column += yyleng; }
 <COMMENT_MULTILINE>\n                                   { line ++; column = 1; }
 {SEMICOLON}                                             { printf("SEMICOLON\n"); semicolon = 0; column += yyleng; }
@@ -117,11 +121,25 @@ NEWLINE                                                 "\n"
 {CMDARGS}                                               { printf("CMDARGS\n"); semicolon = 0; column += yyleng; }
 {RESERVED}                                              { printf("RESERVED(%s)\n", yytext); semicolon = 0; column += yyleng; }
 {ID}                                                    { printf("ID(%s)\n", yytext); semicolon = 1; column += yyleng; }
-{STRLIT}                                                { printf("STRLIT(%s)\n", yytext); semicolon = 1; column += yyleng; }
 {INTLIT}                                                { printf("INTLIT(%s)\n", yytext); semicolon = 1; column += yyleng; }
 {INVALID_OCTAL}                                         { printf("Line %d, column %d: invalid octal constant (%s)\n", line, column, yytext); semicolon = 0; column += yyleng; }
 {REALLIT}                                               { printf("REALLIT(%s)\n", yytext); semicolon = 1; column += yyleng; }
+{EMPTY_STRING}                                          { printf("STRLIT(%s)\n", yytext); semicolon = 1; column += yyleng; }
+{QUOTE}                                                 { BEGIN STRING; semicolon = 0; saved_line = line, saved_column = column; column += yyleng; } 
+<STRING>{STRLIT}                                        { printf("STRLIT(\"%s)\n", yytext); semicolon = 1; column += yyleng; BEGIN 0; }
+<STRING>{VALID_ESCAPE}                                  { column += yyleng; semicolon = 0; }
+<STRING>{INVALID_ESCAPE}                                { printf("Line %d, column %d: invalid escape sequence (%s)\n", line, column, yytext); column += yyleng; semicolon = 0; BEGIN INVALID_STRING; }
+<INVALID_STRING>{QUOTE}                                 { BEGIN 0; column += yyleng; semicolon = 0; }
+<INVALID_STRING>{VALID_ESCAPE}                          { column += yyleng; semicolon = 0; }
+<INVALID_STRING>{INVALID_ESCAPE}                        { printf("Line %d, column %d: invalid escape sequence (%s)\n", line, column, yytext); column += yyleng; }
+<INVALID_STRING><<EOF>>                                 { BEGIN 0; printf("Line %d, column %d: unterminated string literal\n", saved_line, saved_column); column += yyleng; semicolon = 0; }
+<INVALID_STRING>\n                                      { semicolon = 0; BEGIN 0; printf("Line %d, column %d: unterminated string literal\n", saved_line, saved_column); column = 1; line++;}
+<INVALID_STRING>.                                       { column += yyleng; semicolon = 0; }
+<STRING><<EOF>>                                         { BEGIN 0; printf("Line %d, column %d: unterminated string literal\n", saved_line, saved_column); semicolon = 0; column += yyleng; }
+<STRING>\n                                              { BEGIN 0; printf("Line %d, column %d: unterminated string literal\n", saved_line, saved_column); semicolon = 0; column = 1; line++; }
+<STRING>.                                               { column += yyleng; semicolon = 1; }
 \n                                                      { if(semicolon) printf("SEMICOLON\n"); semicolon = 0; column = 1; line++; }
+<<EOF>>                                                 { if(semicolon) printf("SEMICOLON\n"); return 0; }
 " "|"\t"|"\r"                                           { column += yyleng; }
 .                                                       { printf("Line %d, column %d: illegal character (%s)\n", line, column, yytext); semicolon = 0; column += yyleng; }
 %%
