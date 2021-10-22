@@ -6,6 +6,12 @@
         printf("Declarations\n");
     }
     extern char* yytext;
+    typedef enum {
+        Program, VarDecl, Int, Float32, Bool, String, FuncDecl, FuncHeader, FuncParams, ParamDecl, FuncBody, Block, 
+        If, For, Return, ParseArgs, Print, Int, Float32, Bool, String, IntLit, RealLit, Id, StrLit,
+        Or, And, Eq, Ne, Lt, Gt, Le, Ge, Add, Sub, Mul, Div, Mod,
+        Not, Minus, Plus, Assign, Call
+    } ast_node_type;
 %}
 %token AND ASSIGN BLANKID BOOL CMDARGS COMMA DIV ELSE EQ FLOAT32 FOR FUNC GE GT ID IF INT INTLIT LBRACE LE LPAR LSQ LT MINUS MOD NE NOT OR PACKAGE PARSEINT PLUS PRINT RBRACE REALLIT RESERVED RETURN RPAR RSQ SEMICOLON STAR STRING STRLIT VAR 
 
@@ -18,7 +24,7 @@ Declarations :  VarDeclaration SEMICOLON Declarations
                 ;
 VarDeclaration  : VAR VarSpec {printf("VarDecl\n");}
                 | VAR LPAR VarSpec SEMICOLON RPAR {printf("VarDecl\n");}
-VarSpec : ID_NTERM REP_COMMA_ID Type {printf("VarSpec\n");}
+VarSpec : ID_NTERM REP_COMMA_ID Type; 
 REP_COMMA_ID: COMMA ID_NTERM REP_COMMA_ID | ;
 Type :          INT {printf("Int\n");} 
                 | FLOAT32 {printf("Float32\n");} 
@@ -53,29 +59,30 @@ REP_STATEMENT_SEMICOLON: Statement SEMICOLON REP_STATEMENT_SEMICOLON |  ;
 Statement :     ID_NTERM ASSIGN Expr {printf("Assign\n");};
                 | LBRACE BLOCK RBRACE ;
                 | IF Expr LBRACE BLOCK RBRACE {printf("If\n");}
-                | IF Expr LBRACE BLOCK RBRACE ELSE LBRACE BLOCK RBRACE {printf("Else\n");};
+                | IF Expr LBRACE BLOCK RBRACE ELSE LBRACE BLOCK RBRACE {printf("If\n");};
                 | FOR LBRACE BLOCK RBRACE {printf("For\n");}
                 | FOR Expr LBRACE BLOCK RBRACE {printf("For\n");}
                 | RETURN {printf("Return\n");}
                 | RETURN Expr {printf("Return\n");} 
-                | FuncInvocation {printf("Call\n");} // calling a function? 
-                | ParseArgs {printf("ParseArgs");} ;
+                | FuncInvocation  // calling a function? 
+                | ParseArgs
                 | PRINT LPAR Expr RPAR {printf("Print\n");}
                 | PRINT LPAR STRLIT RPAR {printf("Print\n");};
 ParseArgs : ID_NTERM COMMA BLANKID ASSIGN PARSEINT LPAR CMDARGS LSQ Expr RSQ RPAR {printf("Parseargs\n");}
 REP_COMMA_EXPR: COMMA Expr REP_COMMA_EXPR 
                 | 
                 ;
-FuncInvocation : ID_NTERM LPAR Expr REP_COMMA_EXPR RPAR
-                | ID_NTERM LPAR RPAR ;
+FuncInvocation : ID_NTERM LPAR Expr REP_COMMA_EXPR RPAR {printf("Call\n");}
+                | ID_NTERM LPAR RPAR {printf("Call\n");}
+                ;
 Pred4 : INTLIT {printf("IntLit(%s)\n", yytext);} 
         | REALLIT {printf("RealLit(%s)\n", yytext);}
-        | ID {printf("Id(%s)\n", yytext);}
+        | ID_NTERM
         | FuncInvocation
-        | LPAR Expr RPAR {printf("Expr\n");};
+        | LPAR Expr RPAR
 Pred3 : Pred4 PLUS Pred3 {printf("Plus\n");}
         | Pred4 MINUS Pred3 {printf("Minus\n");}
-        | Pred4 STAR Pred3 {printf("Star\n");}
+        | Pred4 STAR Pred3 {printf("Mul\n");}
         | Pred4 DIV Pred3 {printf("Div\n");}
         | Pred4 MOD Pred3 {printf("Mod\n");}
         | Pred4 ;
