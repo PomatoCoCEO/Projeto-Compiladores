@@ -10,59 +10,67 @@
 %token AND ASSIGN BLANKID BOOL CMDARGS COMMA DIV ELSE EQ FLOAT32 FOR FUNC GE GT ID IF INT INTLIT LBRACE LE LPAR LSQ LT MINUS MOD NE NOT OR PACKAGE PARSEINT PLUS PRINT RBRACE REALLIT RESERVED RETURN RPAR RSQ SEMICOLON STAR STRING STRLIT VAR 
 
 %%
-calc: Program {printf("PROGRAM BOO\n");}
-Program :   PACKAGE ID SEMICOLON Declarations {printf("Program boo\n");} 
-            ;
-Declarations : VarDeclaration SEMICOLON Declarations { decl(); } 
-                | FuncDeclaration SEMICOLON Declarations {decl();} 
+Program :       PACKAGE ID SEMICOLON Declarations {printf("Program\n");} 
+                ;
+Declarations :  VarDeclaration SEMICOLON Declarations 
+                | FuncDeclaration SEMICOLON Declarations
                 | 
                 ;
-VarDeclaration : VAR VarSpec {printf("Declare1\n");}
-VarDeclaration : VAR LPAR VarSpec SEMICOLON RPAR {printf("Declare2\n");}
-VarSpec : ID REP_COMMA_ID Type {printf("VarSpec\n");}
-REP_COMMA_ID: COMMA ID REP_COMMA_ID | ;
+VarDeclaration  : VAR VarSpec {printf("VarDecl\n");}
+                | VAR LPAR VarSpec SEMICOLON RPAR {printf("VarDecl\n");}
+VarSpec : ID_NTERM REP_COMMA_ID Type {printf("VarSpec\n");}
+REP_COMMA_ID: COMMA ID_NTERM REP_COMMA_ID | ;
 Type :          INT {printf("Int\n");} 
                 | FLOAT32 {printf("Float32\n");} 
-                | BOOL {printf("bool\n");}
+                | BOOL {printf("Bool\n");}
                 | STRING {printf("String\n");}
                 ;
-FuncDeclaration : FUNC ID LPAR Parameters RPAR Type FuncBody {printf("Func Declared 1\n");}
+FuncDeclaration : FuncHeader FuncBody {printf("FuncDecl\n");}
+                ;
+FuncHeader      : FUNC ID_NTERM FuncParams Type {printf("FuncHeader\n");}
+                | FUNC ID_NTERM FuncParams {printf("FuncHeader\n");}
+                ;
+FuncParams      : LPAR Parameters RPAR {printf("FuncParams\n");}
+                | LPAR RPAR {printf("FuncParams\n");}
+/*
+FUNC ID LPAR Parameters RPAR Type FuncBody {printf("Func Declared 1\n");}
                 | FUNC ID LPAR RPAR Type FuncBody {printf("Func Declared 2\n");}
                 | FUNC ID LPAR Parameters RPAR FuncBody {printf("Func Declared 3\n");}
                 | FUNC ID LPAR RPAR FuncBody {printf("Func Declared 4\n");}
                 ;
-REP_COMMA_ID_TYPE:  COMMA ID Type REP_COMMA_ID_TYPE 
+                */
+REP_COMMA_ID_TYPE:  COMMA ID_NTERM Type REP_COMMA_ID_TYPE 
                     | 
                     ;
-Parameters : ID Type REP_COMMA_ID_TYPE ;
+Parameters : ID_NTERM Type REP_COMMA_ID_TYPE {printf("ParamDecl\n");};
 FuncBody : LBRACE VarsAndStatements RBRACE {printf("FuncBody\n");}
 VarsAndStatements : VarsAndStatements VarDeclaration SEMICOLON 
-                    | 
-                    ; 
-VarsAndStatements : VarsAndStatements Statement SEMICOLON ; 
-REP_STATEMENT_SEMICOLON: Statement SEMICOLON REP_STATEMENT_SEMICOLON {printf("BLOCK\n");} | {printf("Empty ");} ;
-Statement : ID ASSIGN Expr ;
-Statement : LBRACE REP_STATEMENT_SEMICOLON RBRACE ;
-Statement : IF Expr LBRACE REP_STATEMENT_SEMICOLON RBRACE 
-            | IF Expr LBRACE REP_STATEMENT_SEMICOLON RBRACE ELSE LBRACE REP_STATEMENT_SEMICOLON RBRACE;
-Statement : FOR LBRACE REP_STATEMENT_SEMICOLON RBRACE 
-            |  FOR Expr LBRACE REP_STATEMENT_SEMICOLON RBRACE ;
-Statement : RETURN {printf("Return\n");}
-            | RETURN Expr {printf("Return\n");} 
-            ;
-Statement : FuncInvocation 
-            | ParseArgs {printf("ParseArgs");} ;
-Statement : PRINT LPAR Expr RPAR 
-            | PRINT LPAR STRLIT RPAR;
-ParseArgs : ID COMMA BLANKID ASSIGN PARSEINT LPAR CMDARGS LSQ Expr RSQ RPAR {printf("Parseargs\n");}
+                    | VarsAndStatements Statement SEMICOLON
+                    |
+                    ;
+BLOCK: REP_STATEMENT_SEMICOLON {printf("Block\n");}
+REP_STATEMENT_SEMICOLON: Statement SEMICOLON REP_STATEMENT_SEMICOLON |  ;
+Statement :     ID_NTERM ASSIGN Expr {printf("Assign\n");};
+                | LBRACE BLOCK RBRACE ;
+                | IF Expr LBRACE BLOCK RBRACE {printf("If\n");}
+                | IF Expr LBRACE BLOCK RBRACE ELSE LBRACE BLOCK RBRACE {printf("Else\n");};
+                | FOR LBRACE BLOCK RBRACE {printf("For\n");}
+                | FOR Expr LBRACE BLOCK RBRACE {printf("For\n");}
+                | RETURN {printf("Return\n");}
+                | RETURN Expr {printf("Return\n");} 
+                | FuncInvocation {printf("Call\n");} // calling a function? 
+                | ParseArgs {printf("ParseArgs");} ;
+                | PRINT LPAR Expr RPAR {printf("Print\n");}
+                | PRINT LPAR STRLIT RPAR {printf("Print\n");};
+ParseArgs : ID_NTERM COMMA BLANKID ASSIGN PARSEINT LPAR CMDARGS LSQ Expr RSQ RPAR {printf("Parseargs\n");}
 REP_COMMA_EXPR: COMMA Expr REP_COMMA_EXPR 
                 | 
                 ;
-FuncInvocation : ID LPAR Expr REP_COMMA_EXPR RPAR {printf("func_invocation\n");}
-                | ID LPAR RPAR {printf("func_invocation\n");};
-Pred4 : INTLIT {printf("Intlit(%s)\n", yytext);} 
-        | REALLIT {printf("REALLIT(%s)\n", yytext);}
-        | ID {printf("ID(%s)\n", yytext);}
+FuncInvocation : ID_NTERM LPAR Expr REP_COMMA_EXPR RPAR
+                | ID_NTERM LPAR RPAR ;
+Pred4 : INTLIT {printf("IntLit(%s)\n", yytext);} 
+        | REALLIT {printf("RealLit(%s)\n", yytext);}
+        | ID {printf("Id(%s)\n", yytext);}
         | FuncInvocation
         | LPAR Expr RPAR {printf("Expr\n");};
 Pred3 : Pred4 PLUS Pred3 {printf("Plus\n");}
@@ -71,21 +79,22 @@ Pred3 : Pred4 PLUS Pred3 {printf("Plus\n");}
         | Pred4 DIV Pred3 {printf("Div\n");}
         | Pred4 MOD Pred3 {printf("Mod\n");}
         | Pred4 ;
-Pred2 : Pred3 LT Pred2 {printf("LT\n");}
-        | Pred3 GT Pred2 {printf("GT\n");}
-        | Pred3 EQ Pred2 {printf("EQ\n");}
-        | Pred3 NE  Pred2 {printf("NE\n");}
-        | Pred3  LE Pred2 {printf("LE\n");}
-        | Pred3 GE Pred2 {printf("GE\n");}
+Pred2 : Pred3 LT Pred2 {printf("Lt\n");}
+        | Pred3 GT Pred2 {printf("Gt\n");}
+        | Pred3 EQ Pred2 {printf("Eq\n");}
+        | Pred3 NE  Pred2 {printf("Ne\n");}
+        | Pred3  LE Pred2 {printf("Le\n");}
+        | Pred3 GE Pred2 {printf("Ge\n");}
         | Pred3;
-Pred1:  Pred2 AND Pred1 {printf("AND\n");}
+Pred1:  Pred2 AND Pred1 {printf("And\n");}
         | Pred2;
-Expr :  Pred1 OR Pred1 {printf("OR\n");}
+Expr :  Pred1 OR Pred1 {printf("Or\n");}
         | Pred1 ;
-Expr :  NOT Expr {printf("NOT\n");}
-        | MINUS Expr {printf("MINUS\n");}
-        | PLUS Expr {printf("PLUS\n");}
+        | NOT Expr {printf("Not\n");}
+        | MINUS Expr {printf("Minus\n");}
+        | PLUS Expr {printf("Plus\n");}
         ;
+ID_NTERM: ID {printf("Id(%s)\n", yytext);}
 %%
 int main()
 {
