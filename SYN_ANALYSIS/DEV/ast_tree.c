@@ -29,11 +29,14 @@ void push_back(vector *vec, void *elem)
 {
     if (vec->size == 0)
     {
+        // printf("Boopb1\n");
         void *new_vec = malloc(vec->el_size);
         vec->array = new_vec;
         memcpy(vec->array, elem, vec->el_size);
+        // printf("Boopb2\n");
         vec->capacity = 1;
         vec->size++;
+        // printf("Boopb3\n");
         return;
     }
     if (vec->size >= vec->capacity)
@@ -119,14 +122,22 @@ ast_node *new_node_ptr(int node_type, char *name)
 void add_child(ast_node *node, ast_node **child)
 {
     push_back(&(node->children), /*(void *)(**/ child);
+    // printf("Add Child1\n");
     ast_node **ch = (ast_node **)node->children.array + node->children.size - 1; // get(&(node->children), node->children.size - 1);
-    printf("Child: %s\n", (*child)->str);
-    printf("Child: %s\n", (*ch)->str);
+    // printf("Add Child2\n");
+    // printf("Child: %s\n", (*child)->str);
+    // printf("Child: %s\n", (*ch)->str);
 }
 
 void remove_child(ast_node *node)
 {
     pop_back(&(node->children));
+}
+
+void free_ast_ptr(ast_ptr node)
+{
+    free(node->children.array);
+    free(node);
 }
 
 void print_ast_tree(ast_node *node, int depth)
@@ -152,9 +163,10 @@ void ast_test()
     strcpy(b->str, "Heir?");
     print_ast_tree(a, 0);
 }
-
+/*
 int main()
 {
     ast_test();
     return 0;
 }
+*/
