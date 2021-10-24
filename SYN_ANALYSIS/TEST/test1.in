@@ -1,5 +1,8 @@
 package main ;
 func factorial ( n int, c int, d int ) int {
+    var d int;
+    d = 1mwer;
+    e=1w; f=2e;
     if n == 0 {
         return 1;
     };

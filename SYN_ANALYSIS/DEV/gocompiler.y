@@ -10,6 +10,8 @@
         printf("Declarations\n");
     }
     extern char* yytext;
+    extern int line, column, yyleng;
+    int syn_error = 0;
     typedef enum {
         Program, VarDecl, Int, Float32, Bool, String, FuncDecl, FuncHeader, FuncParams, ParamDecl, FuncBody, Block, 
         If, For, Return, ParseArgs, Print, IntLit, RealLit, Id, StrLit,
@@ -152,6 +154,12 @@
         }
         free(to_free.array);
         return ans;
+    }
+
+    void yyerror(const char* s)
+    {
+        printf("Line %d, column %d: %s: %s\n", line, column-yyleng,s, yytext);
+        syn_error=1;
     }
 
 %}
@@ -358,9 +366,10 @@ Statement :     ID_NTERM ASSIGN Expr {/*printf("Assign\n");*/ push_with_children
                 | FuncInvocation  // calling a function? 
                 | ParseArgs
                 | PRINT LPAR Expr RPAR {/*printf("Print\n");*/push_with_children(Print, "Print", 1);}
-                | PRINT LPAR STRLIT_NTERM RPAR {/*printf("Print\n");*/push_with_children(Print, "Print", 1);};
+                | PRINT LPAR STRLIT_NTERM RPAR {/*printf("Print\n");*/push_with_children(Print, "Print", 1);}
+                | error {/*yyerror("syntax error");*/}
 ParseArgs : ID_NTERM COMMA BLANKID ASSIGN PARSEINT LPAR CMDARGS LSQ Expr RSQ RPAR {/*printf("Parseargs\n");*/ push_with_children(ParseArgs, "ParseArgs", 2);}
-
+            |  ID_NTERM COMMA BLANKID ASSIGN PARSEINT LPAR CMDARGS LSQ error RSQ RPAR {/*yyerror("syntax error");*/}
 REP_COMMA_EXPR: COMMA Expr REP_COMMA_EXPR {push_with_children(Rep_Comma_Expr, "", 2);}
                 | {push_node(Rep_Comma_Expr, "", "");}
                 ;
@@ -389,6 +398,7 @@ FuncInvocation : ID_NTERM LPAR Expr REP_COMMA_EXPR RPAR {
                     }
                 }
                 | ID_NTERM LPAR RPAR {/*printf("Call\n");*/push_with_children(Call,"Call", 1);}
+                | ID_NTERM LPAR error RPAR { /*yyerror("syntax error");*/}
                 ;
 Pred5 : INTLIT {
             // printf("IntLit(%s)\n", yytext);
@@ -400,7 +410,8 @@ Pred5 : INTLIT {
             }
         | ID_NTERM
         | FuncInvocation
-        | LPAR Expr RPAR;
+        | LPAR Expr RPAR
+        | LPAR error RPAR {/*yyerror("syntax error");*/}
 Pred4:  Pred5 STAR Pred4 {/*printf("Mul\n");*/push_with_children(Mul, "Mul",2);}
         | Pred5 DIV Pred4 {/*printf("Div\n");*/push_with_children(Div, "Div",2);}
         | Pred5 MOD Pred4 {/*printf("Mod\n");*/push_with_children(Mod, "Mod",2);}
@@ -436,11 +447,8 @@ int main()
 {
     stack = new_vector(sizeof(ast_ptr));
     yyparse();
-    print_ast_tree(*(ast_ptr*)get(&stack,0), 0);
+    if(stack.size == 1 && ! syn_error)
+        print_ast_tree(*(ast_ptr*)get(&stack,0), 0);
 
     return 0;
-}
-void yyerror(const char *s)
-{
-    printf("%s\n", s);
 }
