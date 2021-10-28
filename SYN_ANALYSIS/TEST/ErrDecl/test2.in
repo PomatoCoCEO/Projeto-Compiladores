@@ -1,0 +1,14 @@
+package main;
+
+func main() {
+    var e float32;
+    var d string;
+    ;;;
+};
+
+var (a, b,c,d int;)
+
+func v(a,c,b) {
+    return g;
+}
+

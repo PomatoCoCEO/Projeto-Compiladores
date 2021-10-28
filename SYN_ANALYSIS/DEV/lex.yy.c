@@ -1230,12 +1230,12 @@ case 63:
 /* rule 63 can match eol */
 YY_RULE_SETUP
 #line 142 "gocompiler.l"
-{ column = 1; line++; if(semicolon) {semicolon = 0; return SEMICOLON;}   }
+{ column = 1; line++; if(semicolon) {semicolon = 0; yytext=";"; return SEMICOLON;}   }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(COMMENT_LINE):
 #line 143 "gocompiler.l"
-{ if(semicolon) { semicolon=0; return SEMICOLON;} return 0; }
+{ if(semicolon) { semicolon=0; yytext=";"; return SEMICOLON;} return 0; }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP

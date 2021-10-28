@@ -1,0 +1,26 @@
+package main ;
+func main () {
+    var argument int ;
+    var a float32;
+    var c string;
+    var b bool;
+    argument = 12e3;
+    argument = 12e3 && 12;
+    argument = r + 34e2;
+    argument = a || r || b;
+    argument = a-b-c-d;
+    a = b/c/d;
+    a = 2 * 3 / 4 / 5;
+    a = ! 2;
+    // a = "wee"; -> syntax error
+    a = !2.3;
+    fmt.Println("Aoh yeah!");
+    a=!23-2.3; 
+    b = A || C && D || e + F;
+    a =a || b && c >= d + ! e;  // appears to be right
+    a = a || b && c >= d + !! e || q; // as well
+    a = 5 * 3 % 2 / 4;
+    a=!;
+    
+    // a; -> syntax error in the ;
+};

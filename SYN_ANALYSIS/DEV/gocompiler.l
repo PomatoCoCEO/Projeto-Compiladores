@@ -139,8 +139,8 @@ NEWLINE                                                 "\n"
 <STR><<EOF>>                                         { BEGIN 0; printf("Line %d, column %d: unterminated string literal\n", saved_line, saved_column); semicolon = 0; column += yyleng; }
 <STR>\n                                              { BEGIN 0; printf("Line %d, column %d: unterminated string literal\n", saved_line, saved_column); semicolon = 0; column = 1; line++; }
 <STR>.                                               { column += yyleng; semicolon = 1; }
-\n                                                      { column = 1; line++; if(semicolon) {semicolon = 0; return SEMICOLON;}   }
-<<EOF>>                                                 { if(semicolon) { semicolon=0; return SEMICOLON;} return 0; }
+\n                                                      { column = 1; line++; if(semicolon) {semicolon = 0; yytext=";"; return SEMICOLON;}   }
+<<EOF>>                                                 { if(semicolon) { semicolon=0; yytext=";"; return SEMICOLON;} return 0; }
 " "|"\t"|"\r"                                           { column += yyleng; }
 .                                                       { printf("Line %d, column %d: illegal character (%s)\n", line, column, yytext); semicolon = 0; column += yyleng; }
 %%

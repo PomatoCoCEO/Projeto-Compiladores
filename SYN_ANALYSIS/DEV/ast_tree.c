@@ -55,12 +55,22 @@ void push_back(vector *vec, void *elem)
 
 void *get(vector *vec, int pos)
 {
-    if (pos >= vec->size)
+    if (pos >= (int)vec->size)
     {
         printf("Vec with no children...\n");
         return NULL;
     }
     return (char *)vec->array + vec->el_size * pos;
+}
+
+void set(vector *vec, int pos, void *val)
+{
+    if (vec->size <= pos || pos < 0)
+    {
+        fprintf(stderr, "Invalid set in vector\n");
+        exit(0);
+    }
+    memcpy(vec->array + vec->el_size * pos, val, vec->el_size);
 }
 
 void pop_back(vector *vec)
@@ -70,8 +80,12 @@ void pop_back(vector *vec)
     vec->size--;
     if (vec->size < vec->capacity / 4)
     {
-        void *new_vec = realloc(vec->array, vec->el_size * vec->capacity / 2);
+        vec->array /*void *r*/ = realloc(vec->array, vec->el_size * vec->capacity / 2);
         vec->capacity /= 2;
+        /*void *new_array = malloc(vec->el_size * vec->capacity);
+        memcpy(new_array, vec->array, vec->capacity * vec->el_size);
+        free(vec->array);
+        vec->array = new_array;*/
     }
 }
 
@@ -80,17 +94,27 @@ void test_vector()
     int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     vector v = new_vector(sizeof(int));
 
-    for (int x = 0; x < sizeof(a) / sizeof(int); x++)
+    for (int x = 0; x < (int)(sizeof(a) / sizeof(int)); x++)
         push_back(&v, &a[x]);
 
-    for (int i = 0; i < v.size; i++)
+    for (int i = 0; i < (int)v.size; i++)
     {
         printf("v[%d] = %d\n", i, (*(int *)get(&v, i)));
     }
     printf("%ld\n", v.capacity);
+    for (int i = 0; i < 9; i++)
+    {
+        int k = 2 * i;
+        set(&v, i, &k);
+    }
+    for (int i = 0; i < (int)v.size; i++)
+    {
+        printf("v[%d] = %d\n", i, (*(int *)get(&v, i)));
+    }
+    printf("\n");
     for (int i = 0; i < 6; i++)
         pop_back(&v);
-    for (int i = 0; i < v.size; i++)
+    for (int i = 0; i < (int)v.size; i++)
     {
         printf("v[%d] = %d\n", i, (*(int *)get(&v, i)));
     }
@@ -123,7 +147,7 @@ void add_child(ast_node *node, ast_node **child)
 {
     push_back(&(node->children), /*(void *)(**/ child);
     // printf("Add Child1\n");
-    ast_node **ch = (ast_node **)node->children.array + node->children.size - 1; // get(&(node->children), node->children.size - 1);
+    // ast_node **ch = (ast_node **)node->children.array + node->children.size - 1; // get(&(node->children), node->children.size - 1);
     // printf("Add Child2\n");
     // printf("Child: %s\n", (*child)->str);
     // printf("Child: %s\n", (*ch)->str);
@@ -163,10 +187,10 @@ void ast_test()
     strcpy(b->str, "Heir?");
     print_ast_tree(a, 0);
 }
-/*
+
 int main()
 {
+    test_vector();
     ast_test();
     return 0;
 }
-*/
