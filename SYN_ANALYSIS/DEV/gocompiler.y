@@ -196,14 +196,14 @@ int main()
         printf("Declarations\n");
     }
     extern char* yytext;
-    extern int line, column, yyleng;
+    extern int prev_line, prev_col, yyleng;
     int syn_error = 0;
     typedef enum {
         Program, VarDecl, Int, Float32, Bool, String, FuncDecl, FuncHeader, FuncParams, ParamDecl, FuncBody, Block, 
         If, For, Return, ParseArgs, Print, IntLit, RealLit, Id, StrLit,
         Or, And, Eq, Ne, Lt, Gt, Le, Ge, Add, Sub, Mul, Div, Mod,
         Not, Minus, Plus, Assign, Call,
-        Rep_Statement_Semicolon, Rep_Comma_Id, Vars_Statements, Rep_Comma_Expr
+        Rep_Statement_Semicolon, Rep_Comma_Id, Vars_Statements, Rep_Comma_Expr, VarSpec
     } ast_node_type;
 
     vector stack;
@@ -229,9 +229,14 @@ int main()
         ast_ptr n = new_node_ptr(node_type, name);
         //printf("Stack size: %ld; no_children: %d\n", stack.size, no_children);
         // printf("B001 - %p\n", n);
+        if(node_type==Program) printf("Program children:(%ld)\n", stack.size);
         for(int i = stack.size-no_children; i<stack.size; i++) {
             // printf("%d\n", i);
             add_child(n, get(&stack, i));
+            if(node_type == Program) {
+                ast_ptr ch = *(ast_ptr*)get(&(stack), i);
+                printf("%s\n", ch->str);
+            }
             //print_ast_tree(*(ast_ptr*)get(&stack, i),0);
         }
         // printf("Boo2children\n");
@@ -344,7 +349,7 @@ int main()
 
     void yyerror(const char* s)
     {
-        printf("Line %d, column %d: %s: %s\n", line, column-yyleng,s, yytext);
+        printf("Line %d, column %d: %s: %s\n", prev_line, prev_col,s, yytext);
         syn_error=1;
         // yyerrok;
     }
@@ -401,11 +406,13 @@ VarSpec : ID_NTERM REP_COMMA_ID Type {
     ast_ptr rep = pop_node();
     ast_ptr id = pop_node();
     // printf("Id:%s\n", id->str);
+    ast_ptr v_spec = new_node_ptr(VarSpec, "");
     ast_ptr n = new_node_ptr(VarDecl, "VarDecl");
     if(rep->children.size==0) {
         push_back(&(n->children), &type);
         push_back(&(n->children), &id);
-        push_back(&stack, &n);
+        push_back(&(v_spec->children), &n);
+        // push_back(&stack, &n);
     }
     
     else {
@@ -421,11 +428,13 @@ VarSpec : ID_NTERM REP_COMMA_ID Type {
             // printf("Boo1\n");
             push_back(&(ch->children), &t);
             push_back(&(ch->children), get(&(aid->children), 0));
-            push_back(&stack, &ch);
+            // push_back(&stack, &ch);
             //printf("Boo1\n");
+            push_back(&(v_spec->children), &ch);
             aid = (*(ast_ptr*)get(&(aid->children), 1));
             push_back(&to_free, &aid);
         }
+        push_back(&stack, &v_spec);
         for(int i = 0; i<to_free.size; i++) free_ast_ptr(*(ast_ptr*)get(&to_free, i));
         free(to_free.array);
     }
@@ -454,7 +463,15 @@ Type :          INT {
                 ;
 FuncDeclaration : FuncHeader FuncBody {
                     //printf("FuncDecl\n");
-                    push_with_children(FuncDecl, "FuncDecl", 2);
+                    // push_with_children(FuncDecl, "FuncDecl", 2);
+                    ast_ptr body, header;
+                    body = pop_node();
+                    header = pop_node();
+                    printf("FuncDecl: body : %s and header = %s\n", body->str, header->str);
+                    ast_ptr n = new_node_ptr(FuncDecl, "FuncDecl");
+                    push_back(&(n->children), &header);
+                    push_back(&(n->children), &body);
+                    push_back(&stack, &n);
                     //printf("FuncDecl2\n");
                     //print_ast_tree(*(ast_ptr*)get(&stack, stack.size-1),0);
     /*
@@ -474,6 +491,7 @@ FuncHeader      : FUNC ID_NTERM FuncParams Type {
                     type = pop_node();
                     params = pop_node();
                     id = pop_node();
+                    printf("FuncHeader: id: %s, type: %s, params: %s", id->str, type->str, params->str);
                     ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader");
                     push_back(&(n->children), &id);
                     push_back(&(n->children), &type);
@@ -481,7 +499,19 @@ FuncHeader      : FUNC ID_NTERM FuncParams Type {
                     
                     push_back(&stack,&n);
                 }
-                | FUNC ID_NTERM FuncParams {/*printf("FuncHeader\n"); */push_with_children(FuncHeader, "FuncHeader",2); /*print_top();*/}
+                | FUNC ID_NTERM FuncParams {
+                    ast_ptr id , params;
+                    // type = pop_node();
+                    params = pop_node();
+                    id = pop_node();
+                    printf("FuncHeader: id:%s; params:%s\n",id->str, params->str);
+                    ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader");
+                    push_back(&(n->children), &id);
+                    push_back(&(n->children), &params);
+                    push_back(&stack,&n);
+                    // push_with_children(FuncHeader, "FuncHeader",2); /*print_top();*/
+                
+                }
                 ;
 FuncParams      : LPAR Parameters RPAR {
                         // push_with_children(FuncParams, "FuncParams", 1);
@@ -540,17 +570,30 @@ Parameters : ID_NTERM Type REP_COMMA_ID_TYPE {
     }
 };
 FuncBody : LBRACE VarsAndStatements RBRACE {
-    // printf("FuncBody\n");
+    printf("FuncBody\n");
     ast_ptr rp = pop_node();
     if(rp->children.size == 0) {
         free(rp);
         P_NODE(FuncBody, "");
     }
     else {
+        ast_ptr node = new_node_ptr(FuncBody, "FuncBody");
         // fazer função para retornar vetor
         vector v = flat_children(rp, 1,0);
-        // CAREFUL: RP HAS BEEN FREED 
-        ast_ptr node = new_node_ptr(FuncBody, "FuncBody");
+        // CAREFUL: RP HAS BEEN FREED
+        for(int i = 0; i<v.size; i++)  {
+            ast_ptr ch = *(ast_ptr*)get(&(v), i);
+            if(ch->node_type == VarSpec) {
+                vector w = ch->children;
+                for(int i = 0; i<w.size; i++) {push_back(&(node->children), get(&w, i));}
+                free_ast_ptr(ch);
+            }
+            else push_back(&(node->children), &ch);
+            printf("%s;\n", ch->str);
+            printf("no_children: %ld\n", ch->children.size);
+        }
+        // printf("\n");
+
         node->children = v;
         push_back(&stack, &node);
     }
@@ -603,22 +646,25 @@ REP_COMMA_EXPR: COMMA Expr REP_COMMA_EXPR {push_with_children(Rep_Comma_Expr, ""
 FuncInvocation : ID_NTERM LPAR Expr REP_COMMA_EXPR RPAR {
                     // printf("Call\n");
                     ast_ptr rp = *(ast_ptr*)get(&stack, stack.size-1);
-                    printf("CALLL\n");
+                    // printf("CALLL\n");
                     if(rp->children.size > 0) {
-                        handle_rep(Call, "Call",1, 0);
+                        // handle_rep(Call, "Call",1, 0);
                         rp = pop_node();
+                        vector ch = flat_children(rp, 1, false); //! rp was freed
+                        rp = new_node_ptr(Call, "Call");
                         vector new_children = new_vector(sizeof(ast_ptr));
+                        // rp->children = ch;
                         ast_ptr expr = pop_node();
                         ast_ptr id = pop_node();
                         push_back(&new_children, &id);
                         push_back(&new_children, &expr);
-                        printf("All: %s\n", rp->str);
-                        for(int i = 0; i< rp->children.size; i++) {
-                            push_back(&new_children, get(&(rp->children), i));
-                            ast_ptr a = *(ast_ptr*)get(&(rp->children), i);
-                            printf("Child: %s\n", a->str);
+                        // printf("All: %s\n", rp->str);
+                        for(int i = 0; i<ch.size; i++) {
+                            push_back(&new_children, get(&ch, i));
+                            // ast_ptr a = *(ast_ptr*)get(&ch, i);
+                            // printf("Child: %s\n", a->str);
                         } 
-                        free(rp->children.array);
+                        free(ch.array);
                         rp->children = new_children;
                         push_back(&stack, &rp);
                     }
@@ -671,7 +717,7 @@ ID_NTERM: ID {
 }
 STRLIT_NTERM: STRLIT {
     //printf("StrLit(%s)", yytext);
-    push_node(StrLit, "StrLit(\"%s)", yytext);
+    push_node(StrLit, "StrLit(%s)", yytext);
 }
 ERR_NTERM: error {}
 %%
