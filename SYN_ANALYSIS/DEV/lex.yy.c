@@ -1166,7 +1166,7 @@ YY_RULE_SETUP
 case 53:
 YY_RULE_SETUP
 #line 131 "gocompiler.l"
-{ BEGIN INVALID_STRING; semicolon = 0; act_prev(); column += yyleng; } 
+{ BEGIN INVALID_STRING; saved_line = line, saved_column = column; semicolon = 0; act_prev(); column += yyleng; } 
 	YY_BREAK
 case 54:
 YY_RULE_SETUP

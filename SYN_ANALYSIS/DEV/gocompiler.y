@@ -2,7 +2,6 @@
     #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 typedef struct
 {
     void *array;
@@ -30,28 +29,22 @@ void push_back(vector *vec, void *elem)
 {
     if (vec->size == 0)
     {
-        // printf("Boopb1\n");
         void *new_vec = malloc(vec->el_size);
         vec->array = new_vec;
         memcpy(vec->array, elem, vec->el_size);
-        // printf("Boopb2\n");
         vec->capacity = 1;
         vec->size++;
-        // printf("Boopb3\n");
         return;
     }
     if (vec->size >= vec->capacity)
     {
         void *new_vec = realloc(vec->array, 2 * vec->capacity * vec->el_size);
-        // memcpy(new_vec, vec->array, vec->el_size * vec->capacity);
         vec->capacity *= 2;
-        // free(vec->array);
         vec->array = new_vec;
     }
 
     memcpy(vec->array + vec->size * vec->el_size, elem, vec->el_size);
     vec->size++;
-    // free(elem); //! might be problematic if the thing is static
 }
 
 void *get(vector *vec, int pos)
@@ -64,7 +57,7 @@ void *get(vector *vec, int pos)
     return (char *)vec->array + vec->el_size * pos;
 }
 
-void set(vector *vec, int pos, void *val)
+void set(vector *vec, size_t pos, void *val)
 {
     if (vec->size <= pos || pos < 0)
     {
@@ -83,10 +76,6 @@ void pop_back(vector *vec)
     {
         vec->array /*void *r*/ = realloc(vec->array, vec->el_size * vec->capacity / 2);
         vec->capacity /= 2;
-        /*void *new_array = malloc(vec->el_size * vec->capacity);
-        memcpy(new_array, vec->array, vec->capacity * vec->el_size);
-        free(vec->array);
-        vec->array = new_array;*/
     }
 }
 
@@ -137,11 +126,6 @@ ast_node *new_node_ptr(int node_type, char *name)
 void add_child(ast_node *node, ast_node **child)
 {
     push_back(&(node->children), /*(void *)(**/ child);
-    // printf("Add Child1\n");
-    // ast_node **ch = (ast_node **)node->children.array + node->children.size - 1; // get(&(node->children), node->children.size - 1);
-    // printf("Add Child2\n");
-    // printf("Child: %s\n", (*child)->str);
-    // printf("Child: %s\n", (*ch)->str);
 }
 
 void remove_child(ast_node *node)
@@ -159,34 +143,16 @@ void print_ast_tree(ast_node *node, int depth)
 {
     /*if (node == NULL || node->children.size == 0)
         return;*/
+    //     if(depth>5) return;
     for (int i = 0; i < depth; i++)
         printf("..");
     printf("%s\n", node->str);
-    for (int i = 0; i < node->children.size; i++)
+    for (size_t i = 0; i < node->children.size; i++)
     {
         print_ast_tree(*((ast_node **)get(&(node->children), i)), depth + 1);
     }
 }
 
-void ast_test()
-{
-    ast_ptr a = new_node_ptr(0, "Father"), b = new_node_ptr(0, "Child1"), c = new_node_ptr(0, "Child2");
-    // ast_node *f = &a, *g = &b, *h = &c;
-    add_child(a, &b);
-    add_child(a, &c);
-    print_ast_tree(a, 0);
-    strcpy(b->str, "Heir?");
-    print_ast_tree(a, 0);
-}
-
-/*
-int main()
-{
-    test_vector();
-    ast_test();
-    return 0;
-}
-*/
     #define true 1
     #define false 0
     #define P_NODE(a,b) push_node(a, #a, b)
@@ -220,31 +186,18 @@ int main()
         }
         ast_ptr n = new_node_ptr(node_type, name);
         push_back(&stack, &n);
-        // printf("Pushing node %s\n", name);
-        //printf("Stack size: %ld\n", stack.size);
         free(name);
     }
 
     void push_with_children(int node_type, char* name, int no_children) {
         ast_ptr n = new_node_ptr(node_type, name);
-        //printf("Stack size: %ld; no_children: %d\n", stack.size, no_children);
-        // printf("B001 - %p\n", n);
-        if(node_type==Program) printf("Program children:(%ld)\n", stack.size);
-        for(int i = stack.size-no_children; i<stack.size; i++) {
-            // printf("%d\n", i);
-            add_child(n, get(&stack, i));
-            if(node_type == Program) {
-                ast_ptr ch = *(ast_ptr*)get(&(stack), i);
-                printf("%s\n", ch->str);
-            }
-            //print_ast_tree(*(ast_ptr*)get(&stack, i),0);
+        for(size_t i = stack.size-no_children; i<stack.size; i++) {
+            ast_ptr ch = *(ast_ptr*) get(&stack, i);
+            add_child(n, &ch);
         }
-        // printf("Boo2children\n");
         for(int i = 0; i<no_children; i++) pop_back(&stack);
-        // printf("Boo3children\n");
 
         push_back(&stack, &n);
-        //printf("Stack final size: %ld\n", stack.size);
     }
 
     ast_ptr pop_node() {
@@ -264,56 +217,39 @@ int main()
     }
 
     void handle_rep(int node_type, char* name, int no_children, int reverse) {
-        //printf("AWDHKAGDJ\n");
-        //printf("%s\n", name);
         ast_ptr n = pop_node(), aid = n;
         vector nodes = new_vector(sizeof(ast_ptr));
         vector to_free = new_vector(sizeof(ast_ptr));
         push_back(&to_free, &aid);
-        //printf("Handling node %s; no_children: %d\n", name, no_children);
-        while(aid->children.size > no_children) {
+        while((int)aid->children.size > no_children) {
             if(!reverse) {
                 for(int j = 0; j<no_children; j++) {
-                    // printf("Boo1.1.1\n");
                     ast_ptr st_node = (*(ast_ptr*) get(&(aid->children), j));
-                    //printf("Pushing node %s\n", st_node->str);
                     push_back(&nodes, &st_node);
                 }
             }
             else {
                 for(int j = no_children-1; j>0; j--) {
-                    // printf("Boo1.1.1\n");
                     ast_ptr st_node = (*(ast_ptr*) get(&(aid->children), j));
-                    //printf("Pushing node %s\n", st_node->str);
                     push_back(&nodes, &st_node);
                 }
             }
-            // printf("Boo1.2\n");
             aid = (*(ast_ptr*) get(&(aid->children),no_children));
             push_back(&to_free, &aid);
-            // printf("Boo1.3\n");
         }
-        // printf("Boo2\n");
         if(nodes.size > 1/*no_children*/) {
-            // printf("Boo2.1\n");
             ast_ptr block_node = new_node_ptr(node_type, name);
-            for(int i = 0; i<nodes.size; i++) {
+            for(size_t i = 0; i<nodes.size; i++) {
                 push_back(&(block_node->children), get(&nodes, i));
             }
-            // printf("Boo2.2\n");
             push_back(&stack, &block_node);
         }
-        // printf("Boo3\n");
         if(nodes.size == 1) push_back(&stack, get(&nodes, 0));
-        // printf("Boo4\n");
-        for(int i = 0; i< to_free.size; i++) {
+        for(size_t i = 0; i< to_free.size; i++) {
             free_ast_ptr((*(ast_ptr*)get(&to_free, i)));
         }
-        // printf("Boo5\n");
         free(nodes.array);
-        // printf("Boo6\n");
         free(to_free.array);
-        // printf("Boo7\n");
     }
 
     vector flat_children(ast_ptr node, int children, int reverse) {
@@ -321,7 +257,7 @@ int main()
         vector to_free = new_vector(sizeof(ast_ptr));
         ast_ptr cur = node;
         push_back(&to_free,&cur);
-        while(cur->children.size > children) {
+        while(cur->children.size > (size_t) children) {
             if(!reverse){
                 for(int i = 0; i < children; i++) {
                 push_back(&ans, get(&(cur->children), i));
@@ -340,7 +276,7 @@ int main()
                 S RS*/
             push_back(&to_free,&cur);
         }
-        for(int i = 0; i< to_free.size; i++) {
+        for(size_t i = 0; i< to_free.size; i++) {
             free_ast_ptr(*(ast_ptr*)get(&to_free, i));
         }
         free(to_free.array);
@@ -351,23 +287,47 @@ int main()
     {
         printf("Line %d, column %d: %s: %s\n", prev_line, prev_col,s, yytext);
         syn_error=1;
-        // yyerrok;
     }
 
     void handle_blocks(ast_ptr node) {
         int t = node->node_type;
-        for(int i = 0; i<node->children.size; i++) {
+        for(size_t i = 0; i<node->children.size; i++) {
             handle_blocks(*(ast_ptr*)get(&(node->children), i));
         }
         if(t != If && t != For) {
-            for(int i = 0; i<node->children.size; i++) {
+            vector to_eliminate = new_vector(sizeof(int));
+            for(size_t i = 0; i<node->children.size; i++) {
                 ast_ptr ch = *(ast_ptr*)get(&(node->children), i);
-                if(ch->node_type == Block && ch->children.size==1) {
-                    ast_ptr grandson = *(ast_ptr*)get(&(ch->children),0);
-                    set(&(node->children), i, &grandson);
-                    free_ast_ptr(ch);
-                    ch = grandson;
+                if(ch->node_type == Block) {
+                    if(ch->children.size==1) {
+                        ast_ptr grandson = *(ast_ptr*)get(&(ch->children),0);
+                        set(&(node->children), i, &grandson);
+                        free_ast_ptr(ch);
+                        ch = grandson;
+                    }
+                    else if(ch->children.size == 0) {
+                        push_back(&to_eliminate, &i);
+                    }
+                    
                 }
+            }
+            push_back(&to_eliminate, &(node->children.size));
+            if(to_eliminate.size>0) {
+                vector new_children = new_vector(sizeof(ast_ptr));
+                int pos1 = *(int*)get(&to_eliminate, 0), pos_aid = 0;
+                for(int i = 0; i<(int)node->children.size; i++) {
+                    if(i==pos1) {
+                        free_ast_ptr(*(ast_ptr*)get(&(node->children), i));
+                        pos_aid++;
+                        pos1 = *(int*)get(&to_eliminate, pos_aid);
+                        continue;
+                    }
+                    else {
+                        push_back(&new_children, get(&(node->children), i));
+                    }
+                }
+                free(node->children.array);
+                node->children = new_children;
             }
         }
     } 
@@ -377,8 +337,22 @@ int main()
 
 %%
 Program :       PACKAGE ID SEMICOLON Declarations {
-                    // printf("Program - %ld\n", stack.size);
                     push_with_children(Program, "Program", stack.size);
+                    ast_ptr n = *(ast_ptr*)get(&stack,0);
+                    vector d = new_vector(sizeof(ast_ptr));
+                    for(size_t i = 0; i<n->children.size; i++) {
+                        ast_ptr ch = *(ast_ptr*)get(&(n->children), i);
+                        if(ch->node_type == VarSpec) {
+                            for(size_t j = 0; j<(ch->children.size); j++) {
+                                push_back(&d, get(&(ch->children), j));
+                            }
+                            free_ast_ptr(ch);
+                        }
+                        else push_back(&d, &ch);
+                    }
+                    free(n->children.array);
+                    n->children = d;
+
                 /*
                     S S S ->
                        RS
@@ -401,6 +375,7 @@ VarDeclaration  : VAR VarSpec {/*printf("VarDecl\n");push_with_children(VarDecl,
                 ;
 VarSpec : ID_NTERM REP_COMMA_ID Type {
     // ast_ptr n = new_node_ptr(VarDecl, "VarDecl");
+    // printf("VarSpec\n");
     ast_ptr type = pop_node();
     // printf("Type: %s\n", type->str);
     ast_ptr rep = pop_node();
@@ -408,18 +383,17 @@ VarSpec : ID_NTERM REP_COMMA_ID Type {
     // printf("Id:%s\n", id->str);
     ast_ptr v_spec = new_node_ptr(VarSpec, "");
     ast_ptr n = new_node_ptr(VarDecl, "VarDecl");
-    if(rep->children.size==0) {
+    
+    // if(rep->children.size ==0) {
         push_back(&(n->children), &type);
         push_back(&(n->children), &id);
         push_back(&(v_spec->children), &n);
+    // }
         // push_back(&stack, &n);
-    }
+   
     
-    else {
+    if(rep->children.size >0) {
         vector to_free = new_vector(sizeof(ast_ptr));
-        push_back(&(n->children), &type);
-        push_back(&(n->children), &id);
-        push_back(&stack, &n);
         ast_ptr aid = rep;
         push_back(&to_free, &aid);
         while(aid->children.size > 1) {
@@ -434,10 +408,10 @@ VarSpec : ID_NTERM REP_COMMA_ID Type {
             aid = (*(ast_ptr*)get(&(aid->children), 1));
             push_back(&to_free, &aid);
         }
-        push_back(&stack, &v_spec);
-        for(int i = 0; i<to_free.size; i++) free_ast_ptr(*(ast_ptr*)get(&to_free, i));
+        for(size_t i = 0; i<to_free.size; i++) free_ast_ptr(*(ast_ptr*)get(&to_free, i));
         free(to_free.array);
     }
+    push_back(&stack, &v_spec);
     // handle_rep(VarDecl, "VarDecl", 1);
     // ast_ptr tot = pop_node();
     // push_back(&(n->children), )
@@ -462,61 +436,41 @@ Type :          INT {
                 }
                 ;
 FuncDeclaration : FuncHeader FuncBody {
-                    //printf("FuncDecl\n");
-                    // push_with_children(FuncDecl, "FuncDecl", 2);
                     ast_ptr body, header;
                     body = pop_node();
                     header = pop_node();
-                    printf("FuncDecl: body : %s and header = %s\n", body->str, header->str);
                     ast_ptr n = new_node_ptr(FuncDecl, "FuncDecl");
                     push_back(&(n->children), &header);
                     push_back(&(n->children), &body);
                     push_back(&stack, &n);
-                    //printf("FuncDecl2\n");
-                    //print_ast_tree(*(ast_ptr*)get(&stack, stack.size-1),0);
-    /*
-                    printf("FuncDecl\n");
-                    ast_ptr fdecl_node = new_node_ptr(FuncDecl, "FuncDecl");
-                    for(int i = stack.size-2; i<stack.size; i++) {
-                        add_child(prog_node, get(&stack, i));
-                    }
-                    pop_back(&stack), pop_back(&stack);
-                    push_back(&stack, &fdecl_node);*/
                 }
                 ;
 FuncHeader      : FUNC ID_NTERM FuncParams Type {
-                    // push_with_children(FuncHeader, "FuncHeader",3); 
-                    // print_top();
                     ast_ptr type, id , params;
                     type = pop_node();
                     params = pop_node();
                     id = pop_node();
-                    printf("FuncHeader: id: %s, type: %s, params: %s", id->str, type->str, params->str);
                     ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader");
                     push_back(&(n->children), &id);
                     push_back(&(n->children), &type);
                     push_back(&(n->children), &params);
-                    
                     push_back(&stack,&n);
                 }
                 | FUNC ID_NTERM FuncParams {
                     ast_ptr id , params;
-                    // type = pop_node();
                     params = pop_node();
                     id = pop_node();
-                    printf("FuncHeader: id:%s; params:%s\n",id->str, params->str);
                     ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader");
                     push_back(&(n->children), &id);
                     push_back(&(n->children), &params);
                     push_back(&stack,&n);
-                    // push_with_children(FuncHeader, "FuncHeader",2); /*print_top();*/
                 
                 }
                 ;
 FuncParams      : LPAR Parameters RPAR {
                         // push_with_children(FuncParams, "FuncParams", 1);
                         ast_ptr par = pop_node(), funcPar = new_node_ptr(FuncParams, "FuncParams");
-                        for(int i = 0; i< par->children.size/2; i++) {
+                        for(size_t i = 0; i< par->children.size/2; i++) {
                             ast_ptr p = new_node_ptr(ParamDecl, "ParamDecl");
                             push_back(&(p->children), get(&(par->children), 2*i));
                             push_back(&(p->children), get(&(par->children), 2*i+1));
@@ -526,23 +480,13 @@ FuncParams      : LPAR Parameters RPAR {
                         push_back(&stack, &funcPar);
                     }
                 | LPAR RPAR {/*printf("FuncParams\n");*/push_node(FuncParams, "FuncParams", "");}
-/*
-FUNC ID LPAR Parameters RPAR Type FuncBody {printf("Func Declared 1\n");}
-                | FUNC ID LPAR RPAR Type FuncBody {printf("Func Declared 2\n");}
-                | FUNC ID LPAR Parameters RPAR FuncBody {printf("Func Declared 3\n");}
-                | FUNC ID LPAR RPAR FuncBody {printf("Func Declared 4\n");}
-                ;
-                */
+
 REP_COMMA_ID_TYPE:  COMMA ID_NTERM Type REP_COMMA_ID_TYPE {/* printf("Rep_Comma_id here!!!\n"); */push_with_children(Rep_Comma_Id, "", 3);}
                     | {push_node(Rep_Comma_Id, "", "");};
                     ;
 Parameters : ID_NTERM Type REP_COMMA_ID_TYPE {
     ast_ptr rp = pop_node();
-    // printf("ParamDecl: children_size: %ld\n", rp->children.size);
     if(rp->children.size > 0) {
-        // push_back(&stack, &rp);
-        // handle_rep(ParamDecl, "ParamDecl", 2,true);
-        // rp = pop_node();
         vector ch = flat_children(rp, 2, true);
         rp = new_node_ptr(ParamDecl, "ParamDecl");
         vector new_children = new_vector(sizeof(ast_ptr));
@@ -550,7 +494,7 @@ Parameters : ID_NTERM Type REP_COMMA_ID_TYPE {
         ast_ptr id = pop_node();
         push_back(&new_children, &type);
         push_back(&new_children, &id);
-        for(int i =0; i< ch.size; i++) {
+        for(size_t i =0; i< ch.size; i++) {
             push_back(&new_children, get(&(ch), i));
         }
         rp->children = new_children;
@@ -558,7 +502,6 @@ Parameters : ID_NTERM Type REP_COMMA_ID_TYPE {
     }
     else {
         free_ast_ptr(rp);
-        // push_with_children(ParamDecl, "ParamDecl", 2);
         ast_ptr type = pop_node();
         ast_ptr id = pop_node();
         vector new_children = new_vector(sizeof(ast_ptr));
@@ -570,7 +513,6 @@ Parameters : ID_NTERM Type REP_COMMA_ID_TYPE {
     }
 };
 FuncBody : LBRACE VarsAndStatements RBRACE {
-    printf("FuncBody\n");
     ast_ptr rp = pop_node();
     if(rp->children.size == 0) {
         free(rp);
@@ -578,26 +520,23 @@ FuncBody : LBRACE VarsAndStatements RBRACE {
     }
     else {
         ast_ptr node = new_node_ptr(FuncBody, "FuncBody");
-        // fazer função para retornar vetor
         vector v = flat_children(rp, 1,0);
-        // CAREFUL: RP HAS BEEN FREED
-        for(int i = 0; i<v.size; i++)  {
+        for(size_t i = 0; i<v.size; i++)  {
             ast_ptr ch = *(ast_ptr*)get(&(v), i);
             if(ch->node_type == VarSpec) {
                 vector w = ch->children;
-                for(int i = 0; i<w.size; i++) {push_back(&(node->children), get(&w, i));}
+                for(size_t i = 0; i<w.size; i++) {
+                    ast_ptr s = *(ast_ptr*) get(&w, i);
+                    push_back(&(node->children), &s);
+                }
                 free_ast_ptr(ch);
             }
-            else push_back(&(node->children), &ch);
-            printf("%s;\n", ch->str);
-            printf("no_children: %ld\n", ch->children.size);
+            else{ 
+                push_back(&(node->children), &ch);
+            }
         }
-        // printf("\n");
-
-        node->children = v;
         push_back(&stack, &node);
     }
-    // handle_rep(FuncBody, "FuncBody", 1);
 }
 VarsAndStatements : VarDeclaration SEMICOLON VarsAndStatements  {push_with_children(Vars_Statements, "", 2);}
                     | Statement SEMICOLON VarsAndStatements  {push_with_children(Vars_Statements, "", 2);}
@@ -605,7 +544,6 @@ VarsAndStatements : VarDeclaration SEMICOLON VarsAndStatements  {push_with_child
                     | SEMICOLON VarsAndStatements
                     ;
 BLOCK: REP_STATEMENT_SEMICOLON {
-    // handle_rep(Block, "Block", 1, 0);
     ast_ptr rp = pop_node();
     vector ch = flat_children(rp, 1,0);
     ast_ptr n = new_node_ptr(Block, "Block");
@@ -644,25 +582,18 @@ REP_COMMA_EXPR: COMMA Expr REP_COMMA_EXPR {push_with_children(Rep_Comma_Expr, ""
                 | {push_node(Rep_Comma_Expr, "", "");}
                 ;
 FuncInvocation : ID_NTERM LPAR Expr REP_COMMA_EXPR RPAR {
-                    // printf("Call\n");
                     ast_ptr rp = *(ast_ptr*)get(&stack, stack.size-1);
-                    // printf("CALLL\n");
                     if(rp->children.size > 0) {
-                        // handle_rep(Call, "Call",1, 0);
                         rp = pop_node();
                         vector ch = flat_children(rp, 1, false); //! rp was freed
                         rp = new_node_ptr(Call, "Call");
                         vector new_children = new_vector(sizeof(ast_ptr));
-                        // rp->children = ch;
                         ast_ptr expr = pop_node();
                         ast_ptr id = pop_node();
                         push_back(&new_children, &id);
                         push_back(&new_children, &expr);
-                        // printf("All: %s\n", rp->str);
-                        for(int i = 0; i<ch.size; i++) {
+                        for(size_t i = 0; i<ch.size; i++) {
                             push_back(&new_children, get(&ch, i));
-                            // ast_ptr a = *(ast_ptr*)get(&ch, i);
-                            // printf("Child: %s\n", a->str);
                         } 
                         free(ch.array);
                         rp->children = new_children;
@@ -678,11 +609,9 @@ FuncInvocation : ID_NTERM LPAR Expr REP_COMMA_EXPR RPAR {
                 | ID_NTERM LPAR ERR_NTERM RPAR { }
                 ;
 Pred5 : INTLIT {
-            // printf("IntLit(%s)\n", yytext);
             push_node(IntLit, "IntLit(%s)", yytext);
         } 
         | REALLIT {
-            // printf("RealLit(%s)\n", yytext);
             push_node(RealLit, "RealLit(%s)", yytext);
             }
         | ID_NTERM
@@ -712,11 +641,9 @@ Expr :  Expr OR Pred1 {/*printf("Or\n");*/push_with_children(Or, "Or",2);}
         | Pred1
         ;
 ID_NTERM: ID {
-    // printf("Id(%s)", yytext);
     push_node(Id, "Id(%s)", yytext);
 }
 STRLIT_NTERM: STRLIT {
-    //printf("StrLit(%s)", yytext);
     push_node(StrLit, "StrLit(%s)", yytext);
 }
 ERR_NTERM: error {}
@@ -724,14 +651,11 @@ ERR_NTERM: error {}
 int main()
 {
     stack = new_vector(sizeof(ast_ptr));
-    // printf("Boo1\n");
     yyparse();
-    // printf("Boo2\n");
     if(stack.size == 1 && ! syn_error){
         ast_ptr root = *(ast_ptr*)get(&stack,0);
         handle_blocks(root);
         print_ast_tree(root, 0);
     }
-
     return 0;
 }

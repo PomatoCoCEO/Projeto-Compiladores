@@ -1,0 +1,6 @@
+package main;
+
+func main() {
+    a(b(c,d), e(f,g));
+    
+}

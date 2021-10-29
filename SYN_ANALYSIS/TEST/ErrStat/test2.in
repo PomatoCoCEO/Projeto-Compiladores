@@ -1,0 +1,4 @@
+package main;
+func f2() {
+    var (a,b,c float32;)
+}

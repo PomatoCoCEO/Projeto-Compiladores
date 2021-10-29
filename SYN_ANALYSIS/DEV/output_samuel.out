@@ -1,0 +1,62 @@
+0
+blocks.dgo
+0
+braces.dgo
+0
+circle.dgo
+0
+eof1.dgo
+9c9
+< ........IntLit(2)
+---
+> ........IntLit(2)
+\ No newline at end of file
+0
+eof.dgo
+0
+errors.dgo
+0
+error_unbalanced_par.dgo
+0
+expressionHard.dgo
+0
+expressions_2.dgo
+0
+expressions.dgo
+0
+factorial.dgo
+0
+funcParams.dgo
+30c30
+< ....FuncBody
+---
+> ....FuncBody
+\ No newline at end of file
+0
+multiple_funcdecl_blocks.dgo
+0
+precedence.dgo
+0
+smallest.dgo
+0
+statements.dgo
+151c151
+< ........StrLit("ola")
+---
+> ........StrLit("ola")
+\ No newline at end of file
+0
+sum.dgo
+0
+syntax_errors_stmt.dgo
+3c3
+< Line 35, column 18: syntax error: )
+---
+> Line 35, column 18: syntax error: )
+\ No newline at end of file
+0
+testeErros.dgo
+0
+varfuncdecl.dgo
+0
+variable_func_declarations.dgo

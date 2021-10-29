@@ -128,7 +128,7 @@ NEWLINE                                                 "\n"
 {REALLIT}                                               { semicolon = 1; act_prev(); column += yyleng; return REALLIT;}
 {EMPTY_STRING}                                          { semicolon = 1; act_prev(); column += yyleng; return STRLIT;}
 {STRLIT}                                                { semicolon = 1; act_prev(); column += yyleng; BEGIN 0; return STRLIT;}
-{QUOTE}                                                 { BEGIN INVALID_STRING; semicolon = 0; act_prev(); column += yyleng; } 
+{QUOTE}                                                 { BEGIN INVALID_STRING; saved_line = line, saved_column = column; semicolon = 0; act_prev(); column += yyleng; } 
 <INVALID_STRING>{QUOTE}                                 { BEGIN 0;  semicolon = 0; act_prev(); column += yyleng;}
 <INVALID_STRING>{VALID_ESCAPE}                          { semicolon = 0; act_prev(); column += yyleng;  }
 <INVALID_STRING>{INVALID_ESCAPE}                        { printf("Line %d, column %d: invalid escape sequence (%s)\n", line, column, yytext); act_prev(); column += yyleng; }

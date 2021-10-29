@@ -1168,7 +1168,7 @@ YY_RULE_SETUP
 case 53:
 YY_RULE_SETUP
 #line 129 "gocompiler.l"
-{ printf("STRLIT(\"%s)\n", yytext); semicolon = 1; column += yyleng; BEGIN 0; }
+{ yytext[strlen(yytext)-1]='\0'; printf("STRLIT(\"%s\")\n", yytext); semicolon = 1; column += yyleng; BEGIN 0; }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP

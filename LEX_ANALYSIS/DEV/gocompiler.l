@@ -126,7 +126,7 @@ NEWLINE                                                 "\n"
 {REALLIT}                                               { printf("REALLIT(%s)\n", yytext); semicolon = 1; column += yyleng; }
 {EMPTY_STRING}                                          { printf("STRLIT(%s)\n", yytext); semicolon = 1; column += yyleng; }
 {QUOTE}                                                 { BEGIN STRING; semicolon = 0; saved_line = line, saved_column = column; column += yyleng; } 
-<STRING>{STRLIT}                                        { printf("STRLIT(\"%s)\n", yytext); semicolon = 1; column += yyleng; BEGIN 0; }
+<STRING>{STRLIT}                                        { yytext[strlen(yytext)-1]='\0'; printf("STRLIT(\"%s\")\n", yytext); semicolon = 1; column += yyleng; BEGIN 0; }
 <STRING>{VALID_ESCAPE}                                  { column += yyleng; semicolon = 0; }
 <STRING>{INVALID_ESCAPE}                                { printf("Line %d, column %d: invalid escape sequence (%s)\n", line, column, yytext); column += yyleng; semicolon = 0; BEGIN INVALID_STRING; }
 <INVALID_STRING>{QUOTE}                                 { BEGIN 0; column += yyleng; semicolon = 0; }

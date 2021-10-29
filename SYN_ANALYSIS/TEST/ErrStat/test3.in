@@ -1,0 +1,9 @@
+package main;
+func ninefunc(one int, two float32) bool {}
+
+
+func tenfunc(one int) int {
+    var (a, b, c, d float32;);
+    var e, f, g, i int;
+    var j int;
+}

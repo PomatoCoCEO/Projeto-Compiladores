@@ -71,7 +71,6 @@
     #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 typedef struct
 {
     void *array;
@@ -99,28 +98,22 @@ void push_back(vector *vec, void *elem)
 {
     if (vec->size == 0)
     {
-        // printf("Boopb1\n");
         void *new_vec = malloc(vec->el_size);
         vec->array = new_vec;
         memcpy(vec->array, elem, vec->el_size);
-        // printf("Boopb2\n");
         vec->capacity = 1;
         vec->size++;
-        // printf("Boopb3\n");
         return;
     }
     if (vec->size >= vec->capacity)
     {
         void *new_vec = realloc(vec->array, 2 * vec->capacity * vec->el_size);
-        // memcpy(new_vec, vec->array, vec->el_size * vec->capacity);
         vec->capacity *= 2;
-        // free(vec->array);
         vec->array = new_vec;
     }
 
     memcpy(vec->array + vec->size * vec->el_size, elem, vec->el_size);
     vec->size++;
-    // free(elem); //! might be problematic if the thing is static
 }
 
 void *get(vector *vec, int pos)
@@ -133,7 +126,7 @@ void *get(vector *vec, int pos)
     return (char *)vec->array + vec->el_size * pos;
 }
 
-void set(vector *vec, int pos, void *val)
+void set(vector *vec, size_t pos, void *val)
 {
     if (vec->size <= pos || pos < 0)
     {
@@ -152,10 +145,6 @@ void pop_back(vector *vec)
     {
         vec->array /*void *r*/ = realloc(vec->array, vec->el_size * vec->capacity / 2);
         vec->capacity /= 2;
-        /*void *new_array = malloc(vec->el_size * vec->capacity);
-        memcpy(new_array, vec->array, vec->capacity * vec->el_size);
-        free(vec->array);
-        vec->array = new_array;*/
     }
 }
 
@@ -206,11 +195,6 @@ ast_node *new_node_ptr(int node_type, char *name)
 void add_child(ast_node *node, ast_node **child)
 {
     push_back(&(node->children), /*(void *)(**/ child);
-    // printf("Add Child1\n");
-    // ast_node **ch = (ast_node **)node->children.array + node->children.size - 1; // get(&(node->children), node->children.size - 1);
-    // printf("Add Child2\n");
-    // printf("Child: %s\n", (*child)->str);
-    // printf("Child: %s\n", (*ch)->str);
 }
 
 void remove_child(ast_node *node)
@@ -228,34 +212,16 @@ void print_ast_tree(ast_node *node, int depth)
 {
     /*if (node == NULL || node->children.size == 0)
         return;*/
+    //     if(depth>5) return;
     for (int i = 0; i < depth; i++)
         printf("..");
     printf("%s\n", node->str);
-    for (int i = 0; i < node->children.size; i++)
+    for (size_t i = 0; i < node->children.size; i++)
     {
         print_ast_tree(*((ast_node **)get(&(node->children), i)), depth + 1);
     }
 }
 
-void ast_test()
-{
-    ast_ptr a = new_node_ptr(0, "Father"), b = new_node_ptr(0, "Child1"), c = new_node_ptr(0, "Child2");
-    // ast_node *f = &a, *g = &b, *h = &c;
-    add_child(a, &b);
-    add_child(a, &c);
-    print_ast_tree(a, 0);
-    strcpy(b->str, "Heir?");
-    print_ast_tree(a, 0);
-}
-
-/*
-int main()
-{
-    test_vector();
-    ast_test();
-    return 0;
-}
-*/
     #define true 1
     #define false 0
     #define P_NODE(a,b) push_node(a, #a, b)
@@ -289,31 +255,18 @@ int main()
         }
         ast_ptr n = new_node_ptr(node_type, name);
         push_back(&stack, &n);
-        // printf("Pushing node %s\n", name);
-        //printf("Stack size: %ld\n", stack.size);
         free(name);
     }
 
     void push_with_children(int node_type, char* name, int no_children) {
         ast_ptr n = new_node_ptr(node_type, name);
-        //printf("Stack size: %ld; no_children: %d\n", stack.size, no_children);
-        // printf("B001 - %p\n", n);
-        if(node_type==Program) printf("Program children:(%ld)\n", stack.size);
-        for(int i = stack.size-no_children; i<stack.size; i++) {
-            // printf("%d\n", i);
-            add_child(n, get(&stack, i));
-            if(node_type == Program) {
-                ast_ptr ch = *(ast_ptr*)get(&(stack), i);
-                printf("%s\n", ch->str);
-            }
-            //print_ast_tree(*(ast_ptr*)get(&stack, i),0);
+        for(size_t i = stack.size-no_children; i<stack.size; i++) {
+            ast_ptr ch = *(ast_ptr*) get(&stack, i);
+            add_child(n, &ch);
         }
-        // printf("Boo2children\n");
         for(int i = 0; i<no_children; i++) pop_back(&stack);
-        // printf("Boo3children\n");
 
         push_back(&stack, &n);
-        //printf("Stack final size: %ld\n", stack.size);
     }
 
     ast_ptr pop_node() {
@@ -333,56 +286,39 @@ int main()
     }
 
     void handle_rep(int node_type, char* name, int no_children, int reverse) {
-        //printf("AWDHKAGDJ\n");
-        //printf("%s\n", name);
         ast_ptr n = pop_node(), aid = n;
         vector nodes = new_vector(sizeof(ast_ptr));
         vector to_free = new_vector(sizeof(ast_ptr));
         push_back(&to_free, &aid);
-        //printf("Handling node %s; no_children: %d\n", name, no_children);
-        while(aid->children.size > no_children) {
+        while((int)aid->children.size > no_children) {
             if(!reverse) {
                 for(int j = 0; j<no_children; j++) {
-                    // printf("Boo1.1.1\n");
                     ast_ptr st_node = (*(ast_ptr*) get(&(aid->children), j));
-                    //printf("Pushing node %s\n", st_node->str);
                     push_back(&nodes, &st_node);
                 }
             }
             else {
                 for(int j = no_children-1; j>0; j--) {
-                    // printf("Boo1.1.1\n");
                     ast_ptr st_node = (*(ast_ptr*) get(&(aid->children), j));
-                    //printf("Pushing node %s\n", st_node->str);
                     push_back(&nodes, &st_node);
                 }
             }
-            // printf("Boo1.2\n");
             aid = (*(ast_ptr*) get(&(aid->children),no_children));
             push_back(&to_free, &aid);
-            // printf("Boo1.3\n");
         }
-        // printf("Boo2\n");
         if(nodes.size > 1/*no_children*/) {
-            // printf("Boo2.1\n");
             ast_ptr block_node = new_node_ptr(node_type, name);
-            for(int i = 0; i<nodes.size; i++) {
+            for(size_t i = 0; i<nodes.size; i++) {
                 push_back(&(block_node->children), get(&nodes, i));
             }
-            // printf("Boo2.2\n");
             push_back(&stack, &block_node);
         }
-        // printf("Boo3\n");
         if(nodes.size == 1) push_back(&stack, get(&nodes, 0));
-        // printf("Boo4\n");
-        for(int i = 0; i< to_free.size; i++) {
+        for(size_t i = 0; i< to_free.size; i++) {
             free_ast_ptr((*(ast_ptr*)get(&to_free, i)));
         }
-        // printf("Boo5\n");
         free(nodes.array);
-        // printf("Boo6\n");
         free(to_free.array);
-        // printf("Boo7\n");
     }
 
     vector flat_children(ast_ptr node, int children, int reverse) {
@@ -390,7 +326,7 @@ int main()
         vector to_free = new_vector(sizeof(ast_ptr));
         ast_ptr cur = node;
         push_back(&to_free,&cur);
-        while(cur->children.size > children) {
+        while(cur->children.size > (size_t) children) {
             if(!reverse){
                 for(int i = 0; i < children; i++) {
                 push_back(&ans, get(&(cur->children), i));
@@ -409,7 +345,7 @@ int main()
                 S RS*/
             push_back(&to_free,&cur);
         }
-        for(int i = 0; i< to_free.size; i++) {
+        for(size_t i = 0; i< to_free.size; i++) {
             free_ast_ptr(*(ast_ptr*)get(&to_free, i));
         }
         free(to_free.array);
@@ -420,29 +356,53 @@ int main()
     {
         printf("Line %d, column %d: %s: %s\n", prev_line, prev_col,s, yytext);
         syn_error=1;
-        // yyerrok;
     }
 
     void handle_blocks(ast_ptr node) {
         int t = node->node_type;
-        for(int i = 0; i<node->children.size; i++) {
+        for(size_t i = 0; i<node->children.size; i++) {
             handle_blocks(*(ast_ptr*)get(&(node->children), i));
         }
         if(t != If && t != For) {
-            for(int i = 0; i<node->children.size; i++) {
+            vector to_eliminate = new_vector(sizeof(int));
+            for(size_t i = 0; i<node->children.size; i++) {
                 ast_ptr ch = *(ast_ptr*)get(&(node->children), i);
-                if(ch->node_type == Block && ch->children.size==1) {
-                    ast_ptr grandson = *(ast_ptr*)get(&(ch->children),0);
-                    set(&(node->children), i, &grandson);
-                    free_ast_ptr(ch);
-                    ch = grandson;
+                if(ch->node_type == Block) {
+                    if(ch->children.size==1) {
+                        ast_ptr grandson = *(ast_ptr*)get(&(ch->children),0);
+                        set(&(node->children), i, &grandson);
+                        free_ast_ptr(ch);
+                        ch = grandson;
+                    }
+                    else if(ch->children.size == 0) {
+                        push_back(&to_eliminate, &i);
+                    }
+                    
                 }
+            }
+            push_back(&to_eliminate, &(node->children.size));
+            if(to_eliminate.size>0) {
+                vector new_children = new_vector(sizeof(ast_ptr));
+                int pos1 = *(int*)get(&to_eliminate, 0), pos_aid = 0;
+                for(int i = 0; i<(int)node->children.size; i++) {
+                    if(i==pos1) {
+                        free_ast_ptr(*(ast_ptr*)get(&(node->children), i));
+                        pos_aid++;
+                        pos1 = *(int*)get(&to_eliminate, pos_aid);
+                        continue;
+                    }
+                    else {
+                        push_back(&new_children, get(&(node->children), i));
+                    }
+                }
+                free(node->children.array);
+                node->children = new_children;
             }
         }
     } 
 
 
-#line 446 "y.tab.c"
+#line 406 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -959,15 +919,15 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   379,   379,   395,   396,   397,   399,   400,   402,   446,
-     446,   447,   451,   455,   459,   464,   487,   502,   516,   528,
-     536,   537,   539,   572,   602,   603,   604,   605,   607,   615,
-     616,   618,   619,   620,   631,   632,   633,   634,   635,   636,
-     637,   638,   639,   640,   641,   642,   643,   644,   646,   677,
-     678,   680,   684,   688,   689,   690,   691,   692,   693,   694,
-     695,   696,   697,   698,   699,   700,   701,   702,   703,   704,
-     705,   706,   707,   708,   709,   710,   711,   712,   714,   718,
-     722
+       0,   339,   339,   369,   370,   371,   373,   374,   376,   420,
+     420,   421,   425,   429,   433,   438,   448,   459,   470,   482,
+     484,   485,   487,   515,   541,   542,   543,   544,   546,   553,
+     554,   556,   557,   558,   569,   570,   571,   572,   573,   574,
+     575,   576,   577,   578,   579,   580,   581,   582,   584,   608,
+     609,   611,   614,   617,   618,   619,   620,   621,   622,   623,
+     624,   625,   626,   627,   628,   629,   630,   631,   632,   633,
+     634,   635,   636,   637,   638,   639,   640,   641,   643,   646,
+     649
 };
 #endif
 
@@ -1878,10 +1838,24 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 379 "gocompiler.y"
+#line 339 "gocompiler.y"
                                                   {
-                    // printf("Program - %ld\n", stack.size);
                     push_with_children(Program, "Program", stack.size);
+                    ast_ptr n = *(ast_ptr*)get(&stack,0);
+                    vector d = new_vector(sizeof(ast_ptr));
+                    for(size_t i = 0; i<n->children.size; i++) {
+                        ast_ptr ch = *(ast_ptr*)get(&(n->children), i);
+                        if(ch->node_type == VarSpec) {
+                            for(size_t j = 0; j<(ch->children.size); j++) {
+                                push_back(&d, get(&(ch->children), j));
+                            }
+                            free_ast_ptr(ch);
+                        }
+                        else push_back(&d, &ch);
+                    }
+                    free(n->children.array);
+                    n->children = d;
+
                 /*
                     S S S ->
                        RS
@@ -1894,25 +1868,26 @@ yyreduce:
                         ()
                     */
                 }
-#line 1898 "y.tab.c"
+#line 1872 "y.tab.c"
     break;
 
   case 6:
-#line 399 "gocompiler.y"
+#line 373 "gocompiler.y"
                               {/*printf("VarDecl\n");push_with_children(VarDecl, "VarDecl",1);*/}
-#line 1904 "y.tab.c"
+#line 1878 "y.tab.c"
     break;
 
   case 7:
-#line 400 "gocompiler.y"
+#line 374 "gocompiler.y"
                                                   {/*printf("VarDecl\n");push_with_children(VarDecl, "VarDecl",1);*/}
-#line 1910 "y.tab.c"
+#line 1884 "y.tab.c"
     break;
 
   case 8:
-#line 402 "gocompiler.y"
+#line 376 "gocompiler.y"
                                      {
     // ast_ptr n = new_node_ptr(VarDecl, "VarDecl");
+    // printf("VarSpec\n");
     ast_ptr type = pop_node();
     // printf("Type: %s\n", type->str);
     ast_ptr rep = pop_node();
@@ -1920,18 +1895,17 @@ yyreduce:
     // printf("Id:%s\n", id->str);
     ast_ptr v_spec = new_node_ptr(VarSpec, "");
     ast_ptr n = new_node_ptr(VarDecl, "VarDecl");
-    if(rep->children.size==0) {
+    
+    // if(rep->children.size ==0) {
         push_back(&(n->children), &type);
         push_back(&(n->children), &id);
         push_back(&(v_spec->children), &n);
+    // }
         // push_back(&stack, &n);
-    }
+   
     
-    else {
+    if(rep->children.size >0) {
         vector to_free = new_vector(sizeof(ast_ptr));
-        push_back(&(n->children), &type);
-        push_back(&(n->children), &id);
-        push_back(&stack, &n);
         ast_ptr aid = rep;
         push_back(&to_free, &aid);
         while(aid->children.size > 1) {
@@ -1946,137 +1920,117 @@ yyreduce:
             aid = (*(ast_ptr*)get(&(aid->children), 1));
             push_back(&to_free, &aid);
         }
-        push_back(&stack, &v_spec);
-        for(int i = 0; i<to_free.size; i++) free_ast_ptr(*(ast_ptr*)get(&to_free, i));
+        for(size_t i = 0; i<to_free.size; i++) free_ast_ptr(*(ast_ptr*)get(&to_free, i));
         free(to_free.array);
     }
+    push_back(&stack, &v_spec);
     // handle_rep(VarDecl, "VarDecl", 1);
     // ast_ptr tot = pop_node();
     // push_back(&(n->children), )
 
 }
-#line 1959 "y.tab.c"
+#line 1933 "y.tab.c"
     break;
 
   case 9:
-#line 446 "gocompiler.y"
+#line 420 "gocompiler.y"
                                           {push_with_children(Rep_Comma_Id, "", 2);}
-#line 1965 "y.tab.c"
+#line 1939 "y.tab.c"
     break;
 
   case 10:
-#line 446 "gocompiler.y"
+#line 420 "gocompiler.y"
                                                                                        {push_node(Rep_Comma_Id, "", "");}
-#line 1971 "y.tab.c"
+#line 1945 "y.tab.c"
     break;
 
   case 11:
-#line 447 "gocompiler.y"
+#line 421 "gocompiler.y"
                     {
                     // printf("Int\n");
                     P_NODE(Int, "");
                 }
-#line 1980 "y.tab.c"
+#line 1954 "y.tab.c"
     break;
 
   case 12:
-#line 451 "gocompiler.y"
+#line 425 "gocompiler.y"
                           {
                     // printf("Float32\n");
                     P_NODE(Float32, "");
                 }
-#line 1989 "y.tab.c"
+#line 1963 "y.tab.c"
     break;
 
   case 13:
-#line 455 "gocompiler.y"
+#line 429 "gocompiler.y"
                        {
                     //printf("Bool\n");
                     P_NODE(Bool, "");
                 }
-#line 1998 "y.tab.c"
+#line 1972 "y.tab.c"
     break;
 
   case 14:
-#line 459 "gocompiler.y"
+#line 433 "gocompiler.y"
                          {
                     //printf("String\n");
                     P_NODE(String, "");
                 }
-#line 2007 "y.tab.c"
+#line 1981 "y.tab.c"
     break;
 
   case 15:
-#line 464 "gocompiler.y"
+#line 438 "gocompiler.y"
                                       {
-                    //printf("FuncDecl\n");
-                    // push_with_children(FuncDecl, "FuncDecl", 2);
                     ast_ptr body, header;
                     body = pop_node();
                     header = pop_node();
-                    printf("FuncDecl: body : %s and header = %s\n", body->str, header->str);
                     ast_ptr n = new_node_ptr(FuncDecl, "FuncDecl");
                     push_back(&(n->children), &header);
                     push_back(&(n->children), &body);
                     push_back(&stack, &n);
-                    //printf("FuncDecl2\n");
-                    //print_ast_tree(*(ast_ptr*)get(&stack, stack.size-1),0);
-    /*
-                    printf("FuncDecl\n");
-                    ast_ptr fdecl_node = new_node_ptr(FuncDecl, "FuncDecl");
-                    for(int i = stack.size-2; i<stack.size; i++) {
-                        add_child(prog_node, get(&stack, i));
-                    }
-                    pop_back(&stack), pop_back(&stack);
-                    push_back(&stack, &fdecl_node);*/
                 }
-#line 2034 "y.tab.c"
+#line 1995 "y.tab.c"
     break;
 
   case 16:
-#line 487 "gocompiler.y"
+#line 448 "gocompiler.y"
                                                 {
-                    // push_with_children(FuncHeader, "FuncHeader",3); 
-                    // print_top();
                     ast_ptr type, id , params;
                     type = pop_node();
                     params = pop_node();
                     id = pop_node();
-                    printf("FuncHeader: id: %s, type: %s, params: %s", id->str, type->str, params->str);
                     ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader");
                     push_back(&(n->children), &id);
                     push_back(&(n->children), &type);
                     push_back(&(n->children), &params);
-                    
                     push_back(&stack,&n);
                 }
-#line 2054 "y.tab.c"
+#line 2011 "y.tab.c"
     break;
 
   case 17:
-#line 502 "gocompiler.y"
+#line 459 "gocompiler.y"
                                            {
                     ast_ptr id , params;
-                    // type = pop_node();
                     params = pop_node();
                     id = pop_node();
-                    printf("FuncHeader: id:%s; params:%s\n",id->str, params->str);
                     ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader");
                     push_back(&(n->children), &id);
                     push_back(&(n->children), &params);
                     push_back(&stack,&n);
-                    // push_with_children(FuncHeader, "FuncHeader",2); /*print_top();*/
                 
                 }
-#line 2072 "y.tab.c"
+#line 2026 "y.tab.c"
     break;
 
   case 18:
-#line 516 "gocompiler.y"
+#line 470 "gocompiler.y"
                                        {
                         // push_with_children(FuncParams, "FuncParams", 1);
                         ast_ptr par = pop_node(), funcPar = new_node_ptr(FuncParams, "FuncParams");
-                        for(int i = 0; i< par->children.size/2; i++) {
+                        for(size_t i = 0; i< par->children.size/2; i++) {
                             ast_ptr p = new_node_ptr(ParamDecl, "ParamDecl");
                             push_back(&(p->children), get(&(par->children), 2*i));
                             push_back(&(p->children), get(&(par->children), 2*i+1));
@@ -2085,36 +2039,32 @@ yyreduce:
                         free_ast_ptr(par);
                         push_back(&stack, &funcPar);
                     }
-#line 2089 "y.tab.c"
+#line 2043 "y.tab.c"
     break;
 
   case 19:
-#line 528 "gocompiler.y"
+#line 482 "gocompiler.y"
                             {/*printf("FuncParams\n");*/push_node(FuncParams, "FuncParams", "");}
-#line 2095 "y.tab.c"
+#line 2049 "y.tab.c"
     break;
 
   case 20:
-#line 536 "gocompiler.y"
+#line 484 "gocompiler.y"
                                                           {/* printf("Rep_Comma_id here!!!\n"); */push_with_children(Rep_Comma_Id, "", 3);}
-#line 2101 "y.tab.c"
+#line 2055 "y.tab.c"
     break;
 
   case 21:
-#line 537 "gocompiler.y"
+#line 485 "gocompiler.y"
                       {push_node(Rep_Comma_Id, "", "");}
-#line 2107 "y.tab.c"
+#line 2061 "y.tab.c"
     break;
 
   case 22:
-#line 539 "gocompiler.y"
+#line 487 "gocompiler.y"
                                              {
     ast_ptr rp = pop_node();
-    // printf("ParamDecl: children_size: %ld\n", rp->children.size);
     if(rp->children.size > 0) {
-        // push_back(&stack, &rp);
-        // handle_rep(ParamDecl, "ParamDecl", 2,true);
-        // rp = pop_node();
         vector ch = flat_children(rp, 2, true);
         rp = new_node_ptr(ParamDecl, "ParamDecl");
         vector new_children = new_vector(sizeof(ast_ptr));
@@ -2122,7 +2072,7 @@ yyreduce:
         ast_ptr id = pop_node();
         push_back(&new_children, &type);
         push_back(&new_children, &id);
-        for(int i =0; i< ch.size; i++) {
+        for(size_t i =0; i< ch.size; i++) {
             push_back(&new_children, get(&(ch), i));
         }
         rp->children = new_children;
@@ -2130,7 +2080,6 @@ yyreduce:
     }
     else {
         free_ast_ptr(rp);
-        // push_with_children(ParamDecl, "ParamDecl", 2);
         ast_ptr type = pop_node();
         ast_ptr id = pop_node();
         vector new_children = new_vector(sizeof(ast_ptr));
@@ -2141,13 +2090,12 @@ yyreduce:
         push_back(&stack, &n);
     }
 }
-#line 2145 "y.tab.c"
+#line 2094 "y.tab.c"
     break;
 
   case 23:
-#line 572 "gocompiler.y"
+#line 515 "gocompiler.y"
                                            {
-    printf("FuncBody\n");
     ast_ptr rp = pop_node();
     if(rp->children.size == 0) {
         free(rp);
@@ -2155,81 +2103,77 @@ yyreduce:
     }
     else {
         ast_ptr node = new_node_ptr(FuncBody, "FuncBody");
-        // fazer função para retornar vetor
         vector v = flat_children(rp, 1,0);
-        // CAREFUL: RP HAS BEEN FREED
-        for(int i = 0; i<v.size; i++)  {
+        for(size_t i = 0; i<v.size; i++)  {
             ast_ptr ch = *(ast_ptr*)get(&(v), i);
             if(ch->node_type == VarSpec) {
                 vector w = ch->children;
-                for(int i = 0; i<w.size; i++) {push_back(&(node->children), get(&w, i));}
+                for(size_t i = 0; i<w.size; i++) {
+                    ast_ptr s = *(ast_ptr*) get(&w, i);
+                    push_back(&(node->children), &s);
+                }
                 free_ast_ptr(ch);
             }
-            else push_back(&(node->children), &ch);
-            printf("%s;\n", ch->str);
-            printf("no_children: %ld\n", ch->children.size);
+            else{ 
+                push_back(&(node->children), &ch);
+            }
         }
-        // printf("\n");
-
-        node->children = v;
         push_back(&stack, &node);
     }
-    // handle_rep(FuncBody, "FuncBody", 1);
 }
-#line 2180 "y.tab.c"
+#line 2125 "y.tab.c"
     break;
 
   case 24:
-#line 602 "gocompiler.y"
+#line 541 "gocompiler.y"
                                                                 {push_with_children(Vars_Statements, "", 2);}
-#line 2186 "y.tab.c"
+#line 2131 "y.tab.c"
     break;
 
   case 25:
-#line 603 "gocompiler.y"
+#line 542 "gocompiler.y"
                                                              {push_with_children(Vars_Statements, "", 2);}
-#line 2192 "y.tab.c"
+#line 2137 "y.tab.c"
     break;
 
   case 26:
-#line 604 "gocompiler.y"
+#line 543 "gocompiler.y"
                       {push_node(Vars_Statements, "", "");}
-#line 2198 "y.tab.c"
+#line 2143 "y.tab.c"
     break;
 
   case 28:
-#line 607 "gocompiler.y"
+#line 546 "gocompiler.y"
                                {
-    // handle_rep(Block, "Block", 1, 0);
     ast_ptr rp = pop_node();
     vector ch = flat_children(rp, 1,0);
     ast_ptr n = new_node_ptr(Block, "Block");
     n->children = ch;
     push_back(&stack, &n);
 }
-#line 2211 "y.tab.c"
+#line 2155 "y.tab.c"
     break;
 
   case 29:
-#line 615 "gocompiler.y"
+#line 553 "gocompiler.y"
                                                                      {push_with_children(Rep_Statement_Semicolon, "", 2);}
-#line 2217 "y.tab.c"
+#line 2161 "y.tab.c"
     break;
 
   case 30:
-#line 616 "gocompiler.y"
+#line 554 "gocompiler.y"
                            {push_node(Rep_Statement_Semicolon, "", "");}
-#line 2223 "y.tab.c"
+#line 2167 "y.tab.c"
     break;
 
   case 31:
-#line 618 "gocompiler.y"
+#line 556 "gocompiler.y"
                                      {/*printf("Assign\n");*/ push_with_children(Assign, "Assign", 2);}
-#line 2229 "y.tab.c"
+#line 2173 "y.tab.c"
     break;
 
   case 33:
-#line 620 "gocompiler.y"
+#line 558 "gocompiler.y"
                                               {
                     ast_ptr bl = pop_node();
                     ast_ptr expr = pop_node();
@@ -2241,103 +2185,96 @@ yyreduce:
                     n->children = v;
                     push_back(&stack, &n);
                 }
-#line 2245 "y.tab.c"
+#line 2189 "y.tab.c"
     break;
 
   case 34:
-#line 631 "gocompiler.y"
+#line 569 "gocompiler.y"
                                                                        {/*printf("If\n");*/ push_with_children(If, "If", 3);}
-#line 2251 "y.tab.c"
+#line 2195 "y.tab.c"
     break;
 
   case 35:
-#line 632 "gocompiler.y"
+#line 570 "gocompiler.y"
                                           {/*printf("For\n");*/ push_with_children(For, "For", 1);}
-#line 2257 "y.tab.c"
+#line 2201 "y.tab.c"
     break;
 
   case 36:
-#line 633 "gocompiler.y"
+#line 571 "gocompiler.y"
                                                {/*printf("For\n");*/ push_with_children(For, "For", 2);}
-#line 2263 "y.tab.c"
+#line 2207 "y.tab.c"
     break;
 
   case 37:
-#line 634 "gocompiler.y"
+#line 572 "gocompiler.y"
                          {/*printf("Return\n");*/push_node(Return, "Return", "");}
-#line 2269 "y.tab.c"
+#line 2213 "y.tab.c"
     break;
 
   case 38:
-#line 635 "gocompiler.y"
+#line 573 "gocompiler.y"
                               {/*printf("Return\n");*/push_with_children(Return, "Return", 1);}
-#line 2275 "y.tab.c"
+#line 2219 "y.tab.c"
     break;
 
   case 41:
-#line 638 "gocompiler.y"
+#line 576 "gocompiler.y"
                                        {/*printf("Print\n");*/push_with_children(Print, "Print", 1);}
-#line 2281 "y.tab.c"
+#line 2225 "y.tab.c"
     break;
 
   case 42:
-#line 639 "gocompiler.y"
+#line 577 "gocompiler.y"
                                                {/*printf("Print\n");*/push_with_children(Print, "Print", 1);}
-#line 2287 "y.tab.c"
+#line 2231 "y.tab.c"
     break;
 
   case 43:
-#line 640 "gocompiler.y"
+#line 578 "gocompiler.y"
                             {/* yyerrok; yyclearin; yyerror("syntax error");*/}
-#line 2293 "y.tab.c"
+#line 2237 "y.tab.c"
     break;
 
   case 44:
-#line 641 "gocompiler.y"
+#line 579 "gocompiler.y"
                                                                                   {/*printf("Parseargs\n");*/ push_with_children(ParseArgs, "ParseArgs", 2);}
-#line 2299 "y.tab.c"
+#line 2243 "y.tab.c"
     break;
 
   case 45:
-#line 642 "gocompiler.y"
+#line 580 "gocompiler.y"
                                                                                           {/*yyerror("syntax error");*/}
-#line 2305 "y.tab.c"
+#line 2249 "y.tab.c"
     break;
 
   case 46:
-#line 643 "gocompiler.y"
+#line 581 "gocompiler.y"
                                           {push_with_children(Rep_Comma_Expr, "", 2);}
-#line 2311 "y.tab.c"
+#line 2255 "y.tab.c"
     break;
 
   case 47:
-#line 644 "gocompiler.y"
+#line 582 "gocompiler.y"
                   {push_node(Rep_Comma_Expr, "", "");}
-#line 2317 "y.tab.c"
+#line 2261 "y.tab.c"
     break;
 
   case 48:
-#line 646 "gocompiler.y"
+#line 584 "gocompiler.y"
                                                         {
-                    // printf("Call\n");
                     ast_ptr rp = *(ast_ptr*)get(&stack, stack.size-1);
-                    // printf("CALLL\n");
                     if(rp->children.size > 0) {
-                        // handle_rep(Call, "Call",1, 0);
                         rp = pop_node();
                         vector ch = flat_children(rp, 1, false); //! rp was freed
                         rp = new_node_ptr(Call, "Call");
                         vector new_children = new_vector(sizeof(ast_ptr));
-                        // rp->children = ch;
                         ast_ptr expr = pop_node();
                         ast_ptr id = pop_node();
                         push_back(&new_children, &id);
                         push_back(&new_children, &expr);
-                        // printf("All: %s\n", rp->str);
-                        for(int i = 0; i<ch.size; i++) {
+                        for(size_t i = 0; i<ch.size; i++) {
                             push_back(&new_children, get(&ch, i));
-                            // ast_ptr a = *(ast_ptr*)get(&ch, i);
-                            // printf("Child: %s\n", a->str);
                         } 
                         free(ch.array);
                         rp->children = new_children;
@@ -2349,167 +2286,163 @@ yyreduce:
                         push_with_children(Call, "Call", 2);
                     }
                 }
-#line 2353 "y.tab.c"
+#line 2290 "y.tab.c"
     break;
 
   case 49:
-#line 677 "gocompiler.y"
+#line 608 "gocompiler.y"
                                      {/*printf("Call\n");*/push_with_children(Call,"Call", 1);}
-#line 2359 "y.tab.c"
+#line 2296 "y.tab.c"
     break;
 
   case 50:
-#line 678 "gocompiler.y"
+#line 609 "gocompiler.y"
                                                { }
-#line 2365 "y.tab.c"
+#line 2302 "y.tab.c"
     break;
 
   case 51:
-#line 680 "gocompiler.y"
+#line 611 "gocompiler.y"
                {
-            // printf("IntLit(%s)\n", yytext);
             push_node(IntLit, "IntLit(%s)", yytext);
         }
-#line 2374 "y.tab.c"
+#line 2310 "y.tab.c"
     break;
 
   case 52:
-#line 684 "gocompiler.y"
+#line 614 "gocompiler.y"
                   {
-            // printf("RealLit(%s)\n", yytext);
             push_node(RealLit, "RealLit(%s)", yytext);
             }
-#line 2383 "y.tab.c"
+#line 2318 "y.tab.c"
     break;
 
   case 55:
-#line 690 "gocompiler.y"
+#line 619 "gocompiler.y"
                         {/*yyerror("syntax error");*/}
-#line 2389 "y.tab.c"
+#line 2324 "y.tab.c"
     break;
 
   case 56:
-#line 691 "gocompiler.y"
+#line 620 "gocompiler.y"
                     {/*printf("Not\n");*/push_with_children(Not, "Not",1);}
-#line 2395 "y.tab.c"
+#line 2330 "y.tab.c"
     break;
 
   case 57:
-#line 692 "gocompiler.y"
+#line 621 "gocompiler.y"
                       {/*printf("Minus\n");*/push_with_children(Minus, "Minus",1);}
-#line 2401 "y.tab.c"
+#line 2336 "y.tab.c"
     break;
 
   case 58:
-#line 693 "gocompiler.y"
+#line 622 "gocompiler.y"
                      {/*printf("Plus\n");*/push_with_children(Plus, "Plus",1);}
-#line 2407 "y.tab.c"
+#line 2342 "y.tab.c"
     break;
 
   case 60:
-#line 695 "gocompiler.y"
+#line 624 "gocompiler.y"
                          {/*printf("Mul\n");*/push_with_children(Mul, "Mul",2);}
-#line 2413 "y.tab.c"
+#line 2348 "y.tab.c"
     break;
 
   case 61:
-#line 696 "gocompiler.y"
+#line 625 "gocompiler.y"
                           {/*printf("Div\n");*/push_with_children(Div, "Div",2);}
-#line 2419 "y.tab.c"
+#line 2354 "y.tab.c"
     break;
 
   case 62:
-#line 697 "gocompiler.y"
+#line 626 "gocompiler.y"
                           {/*printf("Mod\n");*/push_with_children(Mod, "Mod",2);}
-#line 2425 "y.tab.c"
+#line 2360 "y.tab.c"
     break;
 
   case 64:
-#line 699 "gocompiler.y"
+#line 628 "gocompiler.y"
                          {/*printf("Plus\n");*/ push_with_children(Add, "Add",2);}
-#line 2431 "y.tab.c"
+#line 2366 "y.tab.c"
     break;
 
   case 65:
-#line 700 "gocompiler.y"
+#line 629 "gocompiler.y"
                             {/*printf("Minus\n");*/push_with_children(Sub, "Sub",2);}
-#line 2437 "y.tab.c"
+#line 2372 "y.tab.c"
     break;
 
   case 67:
-#line 702 "gocompiler.y"
+#line 631 "gocompiler.y"
                        {/*printf("Lt\n");*/push_with_children(Lt, "Lt",2);}
-#line 2443 "y.tab.c"
+#line 2378 "y.tab.c"
     break;
 
   case 68:
-#line 703 "gocompiler.y"
+#line 632 "gocompiler.y"
                          {/*printf("Gt\n");*/push_with_children(Gt, "Gt",2);}
-#line 2449 "y.tab.c"
+#line 2384 "y.tab.c"
     break;
 
   case 69:
-#line 704 "gocompiler.y"
+#line 633 "gocompiler.y"
                          {/*printf("Eq\n");*/push_with_children(Eq, "Eq",2);}
-#line 2455 "y.tab.c"
+#line 2390 "y.tab.c"
     break;
 
   case 70:
-#line 705 "gocompiler.y"
+#line 634 "gocompiler.y"
                           {/*printf("Ne\n");*/push_with_children(Ne, "Ne",2);}
-#line 2461 "y.tab.c"
+#line 2396 "y.tab.c"
     break;
 
   case 71:
-#line 706 "gocompiler.y"
+#line 635 "gocompiler.y"
                           {/*printf("Le\n");*/push_with_children(Le, "Le",2);}
-#line 2467 "y.tab.c"
+#line 2402 "y.tab.c"
     break;
 
   case 72:
-#line 707 "gocompiler.y"
+#line 636 "gocompiler.y"
                          {/*printf("Ge\n");*/push_with_children(Ge, "Ge",2);}
-#line 2473 "y.tab.c"
+#line 2408 "y.tab.c"
     break;
 
   case 74:
-#line 709 "gocompiler.y"
+#line 638 "gocompiler.y"
                         {/*printf("And\n");*/push_with_children(And, "And",2);}
-#line 2479 "y.tab.c"
+#line 2414 "y.tab.c"
     break;
 
   case 76:
-#line 711 "gocompiler.y"
+#line 640 "gocompiler.y"
                       {/*printf("Or\n");*/push_with_children(Or, "Or",2);}
-#line 2485 "y.tab.c"
+#line 2420 "y.tab.c"
     break;
 
   case 78:
-#line 714 "gocompiler.y"
+#line 643 "gocompiler.y"
              {
-    // printf("Id(%s)", yytext);
     push_node(Id, "Id(%s)", yytext);
 }
-#line 2494 "y.tab.c"
+#line 2428 "y.tab.c"
     break;
 
   case 79:
-#line 718 "gocompiler.y"
+#line 646 "gocompiler.y"
                      {
-    //printf("StrLit(%s)", yytext);
     push_node(StrLit, "StrLit(%s)", yytext);
 }
-#line 2503 "y.tab.c"
+#line 2436 "y.tab.c"
     break;
 
   case 80:
-#line 722 "gocompiler.y"
+#line 649 "gocompiler.y"
                  {}
-#line 2509 "y.tab.c"
+#line 2442 "y.tab.c"
     break;
 
 
-#line 2513 "y.tab.c"
+#line 2446 "y.tab.c"
 
       default: break;
     }
@@ -2741,19 +2674,16 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 723 "gocompiler.y"
+#line 650 "gocompiler.y"
 
 int main()
 {
     stack = new_vector(sizeof(ast_ptr));
-    // printf("Boo1\n");
     yyparse();
-    // printf("Boo2\n");
     if(stack.size == 1 && ! syn_error){
         ast_ptr root = *(ast_ptr*)get(&stack,0);
         handle_blocks(root);
         print_ast_tree(root, 0);
     }
-
     return 0;
 }
