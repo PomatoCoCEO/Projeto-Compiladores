@@ -70,8 +70,8 @@ int contains(hash_table* h, hashable* d, int (*comp)(void*, void*)) {
     return 0;
 }
 
-size_t hash_int(int a) {
-    return a%MOD;
+size_t hash_int(void* a) {
+    return (*(int*)a)%MOD;
 }
 
 int comp_int(void* a, void*b) {
@@ -80,19 +80,28 @@ int comp_int(void* a, void*b) {
     return c == d;
 }
 
-hashable hashable_int(int* g) {
+hashable new_hashable(void* object, size_t(*hash)(void*)) {
+    size_t h = hash(object);
     hashable ans;
-    ans.object = g;
-    ans.hash = hash_int(*g);
-    // printf("Hashable_int---\n");
+    ans.object = object;
+    ans.hash = h;
     return ans;
 }
 
-size_t hash_string(char* str) {
+/*
+hashable hashable_int(void* g) {
+    hashable ans;
+    ans.object = g;
+    ans.hash = hash_int(*(int*)g);
+    // printf("Hashable_int---\n");
+    return ans;
+}*/
+
+size_t hash_string(void* st) {
+    char* str = (char*) st;
     size_t p = 257, ans = 0;
     for(int i = 0; str[i]; i++) {
-        ans *= p;
-        ans += str[i];
+        ans = (ans*p)%MOD;
     }
     return ans;
 }
@@ -104,25 +113,45 @@ int comp_string(void* a, void* b) {
     return strcmp(c,d);
 }
 
-hashable hashable_string(char* str) {
+/*hashable hashable_string(char* str) {
     hashable ans;
     ans.hash = hash_string(str);
     ans.object = str;
-}
+    return ans;
+}*/
 
 int main() {
+
+    // TESTING WITH INTS
     int g[] = {1,2,3,4,5,6,7,8,9};
     hash_table ht = new_hash_table();
     for(int i = 0; i<(sizeof(g)/sizeof(int)); i++) {
-        hashable h = hashable_int(&g[i]);
+        hashable h = new_hashable(&g[i], hash_int);// hashable_int(&g[i]);
         insert(&ht, &h);
     }
     for(int i = 0; i<(sizeof(g)/sizeof(int)); i++) {
-        hashable h = hashable_int(&g[i]);
+        hashable h = new_hashable(&g[i], hash_int);
         printf("%d\n", contains(&ht, &h, comp_int));
     }
     int k=1000;
-    hashable j = hashable_int(&k);
+    hashable j = new_hashable(&k, hash_int);
     printf("%d\n", contains(&ht, &j, comp_int));
+    // tesint with strings
+    char* strs[]={"asdf", "wertegr", "werter", "gfvdfg", "dsfg", "ethb"};
+    hash_table ht_string = new_hash_table();
+    for(int i =0; i<sizeof(strs)/sizeof(const char*); i++) {
+        hashable h = new_hashable(strs[i], hash_string); // hashable_string(strs[i]);
+        insert(&ht_string, &h);
+    }
+
+    for(int i =0; i<sizeof(strs)/sizeof(const char*); i++) {
+        hashable h = new_hashable(strs[i], hash_string);
+        printf("%d\n", contains(&ht_string, &h, comp_string));
+    }
+
+    char* out = "out";
+    hashable ot = new_hashable(out, hash_string);
+    printf("%d\n", contains(&ht, &ot, comp_string));
+
     return 0;
 }
