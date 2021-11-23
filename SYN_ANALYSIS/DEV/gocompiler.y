@@ -1,5 +1,5 @@
 %{
-    #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 typedef struct
@@ -436,13 +436,15 @@ Type :          INT {
                 }
                 ;
 FuncDeclaration : FuncHeader FuncBody {
-                    ast_ptr body, header;
-                    body = pop_node();
+                    // ast_ptr body, header;
+                    /*body = pop_node();
                     header = pop_node();
                     ast_ptr n = new_node_ptr(FuncDecl, "FuncDecl");
                     push_back(&(n->children), &header);
-                    push_back(&(n->children), &body);
-                    push_back(&stack, &n);
+                    push_back(&(n->children), &body);*/
+                    // P_NODE(FuncDecl, 2);
+                    push_with_children(FuncDecl, "FuncDecl", 2);
+                    // push_back(&stack, &n);
                 }
                 ;
 FuncHeader      : FUNC ID_NTERM FuncParams Type {
@@ -464,7 +466,6 @@ FuncHeader      : FUNC ID_NTERM FuncParams Type {
                     push_back(&(n->children), &id);
                     push_back(&(n->children), &params);
                     push_back(&stack,&n);
-                
                 }
                 ;
 FuncParams      : LPAR Parameters RPAR {
@@ -605,7 +606,7 @@ FuncInvocation : ID_NTERM LPAR Expr REP_COMMA_EXPR RPAR {
                         push_with_children(Call, "Call", 2);
                     }
                 }
-                | ID_NTERM LPAR RPAR {/*printf("Call\n");*/push_with_children(Call,"Call", 1);}
+                | ID_NTERM LPAR RPAR {push_with_children(Call,"Call", 1);}
                 | ID_NTERM LPAR ERR_NTERM RPAR { }
                 ;
 Pred5 : INTLIT {
@@ -616,7 +617,7 @@ Pred5 : INTLIT {
             }
         | ID_NTERM
         | FuncInvocation
-        | LPAR Expr RPAR{/*yyerror("syntax error");*/}
+        | LPAR Expr RPAR{;}
         | NOT Pred5 {/*printf("Not\n");*/push_with_children(Not, "Not",1);}
         | MINUS Pred5 {/*printf("Minus\n");*/push_with_children(Minus, "Minus",1);}
         | PLUS Pred5 {/*printf("Plus\n");*/push_with_children(Plus, "Plus",1);}
@@ -648,14 +649,3 @@ STRLIT_NTERM: STRLIT {
 }
 ERR_NTERM: error {}
 %%
-int main()
-{
-    stack = new_vector(sizeof(ast_ptr));
-    yyparse();
-    if(stack.size == 1 && ! syn_error){
-        ast_ptr root = *(ast_ptr*)get(&stack,0);
-        handle_blocks(root);
-        print_ast_tree(root, 0);
-    }
-    return 0;
-}

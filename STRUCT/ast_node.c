@@ -2,11 +2,11 @@
 typedef struct _node
 {
     int node_type;
+    int type_expr;
     char *str;
     vector children;
 } ast_node;
 typedef ast_node *ast_ptr;
-
 
 ast_node new_node(int node_type, char *name)
 {
