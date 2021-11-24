@@ -41,7 +41,7 @@ fi
 
 if [[ $3 == "meta3" ]]
 then
-    flag="-t"
+    flag="-s"
 fi
 
 echo -e "${LIGHT_CYAN}[⏲️ ] ${ORANGE}Compiling $codeFile..."

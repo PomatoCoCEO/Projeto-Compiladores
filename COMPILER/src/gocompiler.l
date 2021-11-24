@@ -10,6 +10,7 @@
 
 %X COMMENT_LINE COMMENT_MULTILINE STR INVALID_STRING
 %{
+    #include "semantic.h"
     #include "y.tab.h"
     #include "tok_type.h"
     #include "ast_tree.h"
@@ -173,15 +174,21 @@ int main(int argc, char** argv) {
         print=1;
         while(yylex());
     }
-    else {
-        if(argc>=2 && strcmp(argv[1], "-t")==0) {
-            stack = new_vector(sizeof(ast_ptr));
-            yyparse();
-            if(stack.size == 1 && ! syn_error){
-                ast_ptr root = *(ast_ptr*)get(&stack,0);
-                handle_blocks(root);
-                print_ast_tree(root, 0);
-            }
+    else if(argc>=2 && strcmp(argv[1], "-t")==0) {
+        stack = new_vector(sizeof(ast_ptr));
+        yyparse();
+        if(stack.size == 1 && ! syn_error){
+            ast_ptr root = *(ast_ptr*)get(&stack,0);
+            handle_blocks(root);
+            print_ast_tree(root, 0);
+        }
+    } else if(argc >= 2 && strcmp(argv[1], "-s")==0) {
+        stack = new_vector(sizeof(ast_ptr));
+        yyparse();
+        if(stack.size == 1 && ! syn_error){
+            ast_ptr root = *(ast_ptr*)get(&stack,0);
+            handle_blocks(root);
+            semantic(root);
         }
     }
 }

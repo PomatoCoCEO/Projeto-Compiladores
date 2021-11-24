@@ -1,18 +1,4 @@
-#include "../STRUCT/vector.c"
-#include<stdio.h>
-#include<string.h>
-
-#define MOD (1000000007)
-typedef struct {
-    size_t hash;
-    void* object;
-} hashable;
-typedef struct {
-    vector vec;
-    size_t size;
-    size_t vec_size;
-    size_t vec_size_pos;
-} hash_table;
+#include "hash_table.h"
 
 int nos[]={5,11,23,47,97,197,397,797,1597,3203,6421,12853,25717,51437,102877};
 
@@ -71,7 +57,7 @@ int contains(hash_table* h, hashable* d, int (*comp)(void*, void*)) {
 }
 
 size_t hash_int(void* a) {
-    return (*(int*)a)%MOD;
+    return (*(int*)a)%HASH_MOD;
 }
 
 int comp_int(void* a, void*b) {
@@ -101,7 +87,7 @@ size_t hash_string(void* st) {
     char* str = (char*) st;
     size_t p = 257, ans = 0;
     for(int i = 0; str[i]; i++) {
-        ans = (ans*p)%MOD;
+        ans = (ans*p)%HASH_MOD;
     }
     return ans;
 }
@@ -119,39 +105,3 @@ int comp_string(void* a, void* b) {
     ans.object = str;
     return ans;
 }*/
-
-int main() {
-
-    // TESTING WITH INTS
-    int g[] = {1,2,3,4,5,6,7,8,9};
-    hash_table ht = new_hash_table();
-    for(int i = 0; i<(sizeof(g)/sizeof(int)); i++) {
-        hashable h = new_hashable(&g[i], hash_int);// hashable_int(&g[i]);
-        insert(&ht, &h);
-    }
-    for(int i = 0; i<(sizeof(g)/sizeof(int)); i++) {
-        hashable h = new_hashable(&g[i], hash_int);
-        printf("%d\n", contains(&ht, &h, comp_int));
-    }
-    int k=1000;
-    hashable j = new_hashable(&k, hash_int);
-    printf("%d\n", contains(&ht, &j, comp_int));
-    // tesint with strings
-    char* strs[]={"asdf", "wertegr", "werter", "gfvdfg", "dsfg", "ethb"};
-    hash_table ht_string = new_hash_table();
-    for(int i =0; i<sizeof(strs)/sizeof(const char*); i++) {
-        hashable h = new_hashable(strs[i], hash_string); // hashable_string(strs[i]);
-        insert(&ht_string, &h);
-    }
-
-    for(int i =0; i<sizeof(strs)/sizeof(const char*); i++) {
-        hashable h = new_hashable(strs[i], hash_string);
-        printf("%d\n", contains(&ht_string, &h, comp_string));
-    }
-
-    char* out = "out";
-    hashable ot = new_hashable(out, hash_string);
-    printf("%d\n", contains(&ht, &ot, comp_string));
-
-    return 0;
-}
