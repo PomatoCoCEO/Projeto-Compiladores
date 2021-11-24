@@ -7,12 +7,15 @@
 
 #define HASH_MOD (1000000007)
 
-typedef struct {
+typedef struct
+{
     size_t hash;
-    void* object;
+    size_t pos;
+    void *object;
 } hashable;
 
-typedef struct {
+typedef struct
+{
     vector vec;
     size_t size;
     size_t vec_size;
@@ -22,15 +25,15 @@ typedef struct {
 extern int nos[];
 
 hash_table new_hash_table();
-hashable new_hashable(void* object, size_t(*hash)(void*));
+hashable new_hashable(void *object, size_t (*hash)(void *));
 
-int contains(hash_table* h, hashable* d, int (*comp)(void*, void*));
-int comp_string(void* a, void* b);
-int comp_int(void* a, void* b);
+int contains(hash_table *h, hashable *d, int (*comp)(void *, void *));
+int comp_string(void *a, void *b);
+int comp_int(void *a, void *b);
 
-size_t hash_string(void* st);
-size_t hash_int(void* a);
+size_t hash_string(void *st);
+size_t hash_int(void *a);
 
-void insert(hash_table* ht, hashable* elem);
+void insert(hash_table *ht, hashable *elem);
 
 #endif
