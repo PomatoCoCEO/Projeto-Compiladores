@@ -12,8 +12,14 @@
 %{
     #include "y.tab.h"
     #include "tok_type.h"
+    #include "ast_tree_2.h"
     extern vector stack;
     int semicolon = 0, column = 1, line = 1, saved_line, saved_column, prev_col=1, prev_line=1; 
+    void yyerror(const char *s)
+    {
+        printf("Line %d, column %d: %s: %s\n", prev_line, prev_col, s, yytext);
+        syn_error = 1;
+    }
     void act_prev() {prev_col = column, prev_line= line;}
     int print=0;
     void print_tok(tok_type tok) {
@@ -28,6 +34,7 @@
     void handle_tok(tok_type tok) {
         if(print) print_tok(tok);
     }
+    int yylex();
 %}
 COMMENT                                                 "//"
 OPEN_COMMENT                                            "/*"
@@ -167,13 +174,13 @@ int main(int argc, char** argv) {
     }
     else {
         if(argc>=2 && strcmp(argv[1], "-t")==0) {
-        stack = new_vector(sizeof(ast_ptr));
-        yyparse();
-        if(stack.size == 1 && ! syn_error){
-        ast_ptr root = *(ast_ptr*)get(&stack,0);
-        handle_blocks(root);
-        print_ast_tree(root, 0);
-    }
-    }
+            stack = new_vector(sizeof(ast_ptr));
+            yyparse();
+            if(stack.size == 1 && ! syn_error){
+                ast_ptr root = *(ast_ptr*)get(&stack,0);
+                handle_blocks(root);
+                print_ast_tree(root, 0);
+            }
+        }
     }
 }
