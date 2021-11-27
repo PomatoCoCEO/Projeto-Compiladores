@@ -11,9 +11,11 @@
 %X COMMENT_LINE COMMENT_MULTILINE STR INVALID_STRING
 %{
     #include "semantic.h"
+    #include "tokens.h"
     #include "y.tab.h"
     #include "tok_type.h"
     #include "ast_tree.h"
+
     int syn_error;
     extern vector stack;
     int semicolon = 0, column = 1, line = 1, saved_line, saved_column, prev_col=1, prev_line=1; 
@@ -107,51 +109,51 @@ NEWLINE                                                 "\n"
 <COMMENT_MULTILINE><<EOF>>                              { semicolon = 0; printf("Line %d, column %d: unterminated comment\n", saved_line, saved_column); BEGIN 0; }
 <COMMENT_MULTILINE>.                                    { act_prev(); column += yyleng; }
 <COMMENT_MULTILINE>\n                                   { act_prev();  line ++; column = 1; } 
-{SEMICOLON}                                             { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(SEMICOLON_T); return SEMICOLON; }
-{COMMA}                                                 { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(COMMA_T); return COMMA; }
-{BLANKID}                                               { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(BLANKID_T); return BLANKID; }
-{ASSIGN}                                                { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(ASSIGN_T); return ASSIGN; }
-{STAR}                                                  { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(STAR_T); return STAR; }
-{DIV}                                                   { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(DIV_T); return DIV; }
-{MINUS}                                                 { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(MINUS_T); return MINUS; }
-{PLUS}                                                  { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(PLUS_T); return PLUS; }
-{EQ}                                                    { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(EQ_T); return EQ; }
-{GE}                                                    { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(GE_T); return GE; }
-{GT}                                                    { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(GT_T); return GT; }
-{LBRACE}                                                { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(LBRACE_T); return LBRACE; }
-{LE}                                                    { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(LE_T); return LE; }
-{LPAR}                                                  { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(LPAR_T); return LPAR; }
-{LSQ}                                                   { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(LSQ_T); return LSQ; }
-{LT}                                                    { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(LT_T); return LT; }
-{MOD}                                                   { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(MOD_T); return MOD; }
-{NE}                                                    { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(NE_T); return NE; }
-{NOT}                                                   { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(NOT_T); return NOT; }
-{AND}                                                   { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(AND_T); return AND; }
-{OR}                                                    { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(OR_T); return OR; }
-{RBRACE}                                                { semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(RBRACE_T); return RBRACE; }
-{RPAR}                                                  { semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(RPAR_T); return RPAR; }
-{RSQ}                                                   { semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(RSQ_T); return RSQ; }
-{PACKAGE}                                               { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(PACKAGE_T); return PACKAGE; }
-{RETURN}                                                { semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(RETURN_T); return RETURN; }
-{ELSE}                                                  { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(ELSE_T); return ELSE; }
-{FOR}                                                   { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(FOR_T); return FOR; }
-{IF}                                                    { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(IF_T); return IF; }
-{VAR}                                                   { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(VAR_T); return VAR; }
-{INT}                                                   { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(INT_T); return INT; }
-{FLOAT32}                                               { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(FLOAT32_T); return FLOAT32; }
-{BOOL}                                                  { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(BOOL_T); return BOOL; }
-{STRING}                                                { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(STRING_T); return STRING; }
-{PRINT}                                                 { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(PRINT_T); return PRINT; }
-{PARSEINT}                                              { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(PARSEINT_T); return PARSEINT; }
-{FUNC}                                                  { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(FUNC_T); return FUNC; }
-{CMDARGS}                                               { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(CMDARGS_T); return CMDARGS; }
-{RESERVED}                                              { semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(RESERVED_T); return RESERVED; }
-{ID}                                                    { semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(ID_T); return ID; }
-{INTLIT}                                                { semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(INTLIT_T); return INTLIT; }
-{INVALID_OCTAL}                                         { printf("Line %d, column %d: invalid octal constant (%s)\n", line, column, yytext); act_prev(); column += yyleng; }
-{REALLIT}                                               { semicolon = 1; act_prev(); column += yyleng;  if(print) print_tok(REALLIT_T);return REALLIT; }
-{EMPTY_STRING}                                          { semicolon = 1; act_prev(); column += yyleng;  if(print) print_tok(STRLIT_T);return STRLIT; }
-{STRLIT}                                                { semicolon = 1; act_prev(); column += yyleng; BEGIN 0;  if(print) print_tok(STRLIT_T);return STRLIT; }
+{SEMICOLON}                                             { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(SEMICOLON_T); return SEMICOLON; }
+{COMMA}                                                 { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(COMMA_T); return COMMA; }
+{BLANKID}                                               { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(BLANKID_T); return BLANKID; }
+{ASSIGN}                                                { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(ASSIGN_T); return ASSIGN; }
+{STAR}                                                  { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(STAR_T); return STAR; }
+{DIV}                                                   { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(DIV_T); return DIV; }
+{MINUS}                                                 { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(MINUS_T); return MINUS; }
+{PLUS}                                                  { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(PLUS_T); return PLUS; }
+{EQ}                                                    { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(EQ_T); return EQ; }
+{GE}                                                    { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(GE_T); return GE; }
+{GT}                                                    { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(GT_T); return GT; }
+{LBRACE}                                                { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(LBRACE_T); return LBRACE; }
+{LE}                                                    { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(LE_T); return LE; }
+{LPAR}                                                  { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(LPAR_T); return LPAR; }
+{LSQ}                                                   { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(LSQ_T); return LSQ; }
+{LT}                                                    { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(LT_T); return LT; }
+{MOD}                                                   { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(MOD_T); return MOD; }
+{NE}                                                    { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(NE_T); return NE; }
+{NOT}                                                   { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(NOT_T); return NOT; }
+{AND}                                                   { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(AND_T); return AND; }
+{OR}                                                    { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(OR_T); return OR; }
+{RBRACE}                                                { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(RBRACE_T); return RBRACE; }
+{RPAR}                                                  { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(RPAR_T); return RPAR; }
+{RSQ}                                                   { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(RSQ_T); return RSQ; }
+{PACKAGE}                                               { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(PACKAGE_T); return PACKAGE; }
+{RETURN}                                                { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(RETURN_T); return RETURN; }
+{ELSE}                                                  { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(ELSE_T); return ELSE; }
+{FOR}                                                   { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(FOR_T); return FOR; }
+{IF}                                                    { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(IF_T); return IF; }
+{VAR}                                                   { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(VAR_T); return VAR; }
+{INT}                                                   { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(INT_T); return INT; }
+{FLOAT32}                                               { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(FLOAT32_T); return FLOAT32; }
+{BOOL}                                                  { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(BOOL_T); return BOOL; }
+{STRING}                                                { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(STRING_T); return STRING; }
+{PRINT}                                                 { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(PRINT_T); return PRINT; }
+{PARSEINT}                                              { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(PARSEINT_T); return PARSEINT; }
+{FUNC}                                                  { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(FUNC_T); return FUNC; }
+{CMDARGS}                                               { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(CMDARGS_T); return CMDARGS; }
+{RESERVED}                                              { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(RESERVED_T); return RESERVED; }
+{ID}                                                    { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(ID_T); return ID; }
+{INTLIT}                                                { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(INTLIT_T); return INTLIT; }
+{INVALID_OCTAL}                                         { yylval.token_id = new_token(yytext, line, column); printf("Line %d, column %d: invalid octal constant (%s)\n", line, column, yytext); act_prev(); column += yyleng; }
+{REALLIT}                                               { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng;  if(print) print_tok(REALLIT_T);return REALLIT; }
+{EMPTY_STRING}                                          { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng;  if(print) print_tok(STRLIT_T);return STRLIT; }
+{STRLIT}                                                { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; BEGIN 0;  if(print) print_tok(STRLIT_T);return STRLIT; }
 {QUOTE}                                                 { BEGIN INVALID_STRING; saved_line = line, saved_column = column; semicolon = 0; act_prev(); column += yyleng; } 
 <INVALID_STRING>{QUOTE}                                 { BEGIN 0;  semicolon = 0; act_prev(); column += yyleng; }
 <INVALID_STRING>{VALID_ESCAPE}                          { semicolon = 0; act_prev(); column += yyleng; }
@@ -188,7 +190,7 @@ int main(int argc, char** argv) {
         if(stack.size == 1 && ! syn_error){
             ast_ptr root = *(ast_ptr*)get(&stack,0);
             handle_blocks(root);
-            semantic(root);
+            semantic_analysis(root);
         }
     }
 }

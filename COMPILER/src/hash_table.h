@@ -2,9 +2,10 @@
 #define HASH_TABLE_H
 
 #include "vector.h"
+#include "ast_node.h"
 #include <stdio.h>
 #include <string.h>
-
+#include <stdlib.h>
 #define HASH_MOD (1000000007)
 
 typedef struct
@@ -20,11 +21,13 @@ typedef struct
     size_t size;
     size_t vec_size;
     size_t vec_size_pos;
+    char *name;
+    ast_ptr ref;
 } hash_table;
 
 extern int nos[];
 
-hash_table new_hash_table();
+hash_table new_hash_table(char *name, ast_ptr ref);
 hashable new_hashable(void *object, size_t (*hash)(void *));
 
 int contains(hash_table *h, hashable *d, int (*comp)(void *, void *));

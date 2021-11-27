@@ -1,17 +1,23 @@
 %{
 #include "ast_tree.h"
+#include "tokens.h"
 
 int yylex();
 void yyerror(char *);
 extern vector stack;
 
-
 %}
-%token AND ASSIGN BLANKID BOOL CMDARGS COMMA DIV ELSE EQ FLOAT32 FOR FUNC GE GT ID IF INT INTLIT LBRACE LE LPAR LSQ LT MINUS MOD NE NOT OR PACKAGE PARSEINT PLUS PRINT RBRACE REALLIT RESERVED RETURN RPAR RSQ SEMICOLON STAR STRING STRLIT VAR 
+
+%union {
+    token_t * token_id;
+}
+
+%token <token_id> AND ASSIGN BLANKID BOOL CMDARGS COMMA DIV ELSE EQ FLOAT32 FOR FUNC GE GT ID IF INT INTLIT LBRACE LE LPAR LSQ LT MINUS MOD NE NOT OR PACKAGE PARSEINT PLUS PRINT RBRACE REALLIT RESERVED RETURN RPAR RSQ SEMICOLON STAR STRING STRLIT VAR 
+
 
 %%
 Program :       PACKAGE ID SEMICOLON Declarations {
-                    push_with_children(Program, "Program", stack.size);
+                    push_with_children(Program, "Program", stack.size, 0, 0);
                     ast_ptr n = *(ast_ptr*)get(&stack,0);
                     vector d = new_vector(sizeof(ast_ptr));
                     for(size_t i = 0; i<n->children.size; i++) {
@@ -44,35 +50,28 @@ Declarations :  VarDeclaration SEMICOLON Declarations
                 | FuncDeclaration SEMICOLON Declarations
                 | 
                 ;
-VarDeclaration  : VAR VarSpec {/*printf("VarDecl\n");push_with_children(VarDecl, "VarDecl",1);*/}
-                | VAR LPAR VarSpec SEMICOLON RPAR {/*printf("VarDecl\n");push_with_children(VarDecl, "VarDecl",1);*/}
+VarDeclaration  : VAR VarSpec {/*printf("VarDecl\n");push_with_children(VarDecl, "VarDecl", 1, $1->line, $1->column);*/}
+                | VAR LPAR VarSpec SEMICOLON RPAR {/*printf("VarDecl\n");push_with_children(VarDecl, "VarDecl",1, $1->line, $1->column);*/}
                 ;
 VarSpec : ID_NTERM REP_COMMA_ID Type {
-    // ast_ptr n = new_node_ptr(VarDecl, "VarDecl");
-    // printf("VarSpec\n");
     ast_ptr type = pop_node();
-    // printf("Type: %s\n", type->str);
     ast_ptr rep = pop_node();
     ast_ptr id = pop_node();
-    // printf("Id:%s\n", id->str);
-    ast_ptr v_spec = new_node_ptr(VarSpec, "");
-    ast_ptr n = new_node_ptr(VarDecl, "VarDecl");
-    
-    // if(rep->children.size ==0) {
-        push_back(&(n->children), &type);
-        push_back(&(n->children), &id);
-        push_back(&(v_spec->children), &n);
-    // }
-        // push_back(&stack, &n);
+    ast_ptr v_spec = new_node_ptr(VarSpec, "", id->line, id->column);
+    ast_ptr n = new_node_ptr(VarDecl, "VarDecl", id->line, id->column);
+
+    push_back(&(n->children), &type);
+    push_back(&(n->children), &id);
+    push_back(&(v_spec->children), &n);
    
-    
     if(rep->children.size >0) {
         vector to_free = new_vector(sizeof(ast_ptr));
         ast_ptr aid = rep;
         push_back(&to_free, &aid);
         while(aid->children.size > 1) {
-            ast_ptr ch = new_node_ptr(VarDecl, "VarDecl");
-            ast_ptr t = new_node_ptr(type->node_type, type->str);
+            ast_ptr _id = *(ast_ptr*)get(&(aid->children), 0);
+            ast_ptr ch = new_node_ptr(VarDecl, "VarDecl", _id->line, _id->column );
+            ast_ptr t = new_node_ptr(type->node_type, type->str, 0, 0);
             // printf("Boo1\n");
             push_back(&(ch->children), &t);
             push_back(&(ch->children), get(&(aid->children), 0));
@@ -86,47 +85,21 @@ VarSpec : ID_NTERM REP_COMMA_ID Type {
         free(to_free.array);
     }
     push_back(&stack, &v_spec);
-    // handle_rep(VarDecl, "VarDecl", 1);
-    // ast_ptr tot = pop_node();
-    // push_back(&(n->children), )
-
 }; 
-REP_COMMA_ID: COMMA ID_NTERM REP_COMMA_ID {push_with_children(Rep_Comma_Id, "", 2);} | {push_node(Rep_Comma_Id, "", "");};
-Type :          INT {
-                    // printf("Int\n");
-                    P_NODE(Int, "");
-                } 
-                | FLOAT32 {
-                    // printf("Float32\n");
-                    P_NODE(Float32, "");
-                } 
-                | BOOL {
-                    //printf("Bool\n");
-                    P_NODE(Bool, "");
-                }
-                | STRING {
-                    //printf("String\n");
-                    P_NODE(String, "");
-                }
+REP_COMMA_ID: COMMA ID_NTERM REP_COMMA_ID {push_with_children(Rep_Comma_Id, "", 2, 0, 0);} | {push_node(Rep_Comma_Id, "", "", 0, 0);};
+Type :            INT                   { P_NODE(Int, "", $1->line, $1->column); } 
+                | FLOAT32               { P_NODE(Float32, "", $1->line, $1->column); } 
+                | BOOL                  { P_NODE(Bool, "", $1->line, $1->column); }
+                | STRING                { P_NODE(String, "", $1->line, $1->column); }
                 ;
-FuncDeclaration : FuncHeader FuncBody {
-                    // ast_ptr body, header;
-                    /*body = pop_node();
-                    header = pop_node();
-                    ast_ptr n = new_node_ptr(FuncDecl, "FuncDecl");
-                    push_back(&(n->children), &header);
-                    push_back(&(n->children), &body);*/
-                    // P_NODE(FuncDecl, 2);
-                    push_with_children(FuncDecl, "FuncDecl", 2);
-                    // push_back(&stack, &n);
-                }
+FuncDeclaration : FuncHeader FuncBody { push_with_children(FuncDecl, "FuncDecl", 2, 0, 0); }
                 ;
 FuncHeader      : FUNC ID_NTERM FuncParams Type {
                     ast_ptr type, id , params;
                     type = pop_node();
                     params = pop_node();
                     id = pop_node();
-                    ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader");
+                    ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader", 0, 0);
                     push_back(&(n->children), &id);
                     push_back(&(n->children), &type);
                     push_back(&(n->children), &params);
@@ -136,17 +109,16 @@ FuncHeader      : FUNC ID_NTERM FuncParams Type {
                     ast_ptr id , params;
                     params = pop_node();
                     id = pop_node();
-                    ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader");
+                    ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader", 0, 0);
                     push_back(&(n->children), &id);
                     push_back(&(n->children), &params);
                     push_back(&stack,&n);
                 }
                 ;
 FuncParams      : LPAR Parameters RPAR {
-                        // push_with_children(FuncParams, "FuncParams", 1);
-                        ast_ptr par = pop_node(), funcPar = new_node_ptr(FuncParams, "FuncParams");
+                        ast_ptr par = pop_node(), funcPar = new_node_ptr(FuncParams, "FuncParams", 0, 0);
                         for(size_t i = 0; i< par->children.size/2; i++) {
-                            ast_ptr p = new_node_ptr(ParamDecl, "ParamDecl");
+                            ast_ptr p = new_node_ptr(ParamDecl, "ParamDecl", 0, 0);
                             push_back(&(p->children), get(&(par->children), 2*i));
                             push_back(&(p->children), get(&(par->children), 2*i+1));
                             push_back(&(funcPar->children), &p);
@@ -154,16 +126,16 @@ FuncParams      : LPAR Parameters RPAR {
                         free_ast_ptr(par);
                         push_back(&stack, &funcPar);
                     }
-                | LPAR RPAR {/*printf("FuncParams\n");*/push_node(FuncParams, "FuncParams", "");}
+                | LPAR RPAR {push_node(FuncParams, "FuncParams", "", 0, 0);}
 
-REP_COMMA_ID_TYPE:  COMMA ID_NTERM Type REP_COMMA_ID_TYPE {/* printf("Rep_Comma_id here!!!\n"); */push_with_children(Rep_Comma_Id, "", 3);}
-                    | {push_node(Rep_Comma_Id, "", "");};
+REP_COMMA_ID_TYPE:  COMMA ID_NTERM Type REP_COMMA_ID_TYPE {push_with_children(Rep_Comma_Id, "", 3, 0, 0);}
+                    | {push_node(Rep_Comma_Id, "", "", 0, 0);};
                     ;
 Parameters : ID_NTERM Type REP_COMMA_ID_TYPE {
     ast_ptr rp = pop_node();
     if(rp->children.size > 0) {
         vector ch = flat_children(rp, 2, true);
-        rp = new_node_ptr(ParamDecl, "ParamDecl");
+        rp = new_node_ptr(ParamDecl, "ParamDecl", 0, 0);
         vector new_children = new_vector(sizeof(ast_ptr));
         ast_ptr type = pop_node();
         ast_ptr id = pop_node();
@@ -182,7 +154,7 @@ Parameters : ID_NTERM Type REP_COMMA_ID_TYPE {
         vector new_children = new_vector(sizeof(ast_ptr));
         push_back(&new_children, &type);
         push_back(&new_children, &id);
-        ast_ptr n = new_node_ptr(ParamDecl, "ParamDecl");
+        ast_ptr n = new_node_ptr(ParamDecl, "ParamDecl", 0, 0);
         n->children = new_children;
         push_back(&stack, &n);
     }
@@ -191,10 +163,10 @@ FuncBody : LBRACE VarsAndStatements RBRACE {
     ast_ptr rp = pop_node();
     if(rp->children.size == 0) {
         free(rp);
-        P_NODE(FuncBody, "");
+        P_NODE(FuncBody, "", 0, 0);
     }
     else {
-        ast_ptr node = new_node_ptr(FuncBody, "FuncBody");
+        ast_ptr node = new_node_ptr(FuncBody, "FuncBody", 0, 0);
         vector v = flat_children(rp, 1,0);
         for(size_t i = 0; i<v.size; i++)  {
             ast_ptr ch = *(ast_ptr*)get(&(v), i);
@@ -213,27 +185,28 @@ FuncBody : LBRACE VarsAndStatements RBRACE {
         push_back(&stack, &node);
     }
 }
-VarsAndStatements : VarDeclaration SEMICOLON VarsAndStatements  {push_with_children(Vars_Statements, "", 2);}
-                    | Statement SEMICOLON VarsAndStatements  {push_with_children(Vars_Statements, "", 2);}
-                    | {push_node(Vars_Statements, "", "");}
+VarsAndStatements : VarDeclaration SEMICOLON VarsAndStatements  {push_with_children(Vars_Statements, "", 2, 0, 0);}
+                    | Statement SEMICOLON VarsAndStatements  {push_with_children(Vars_Statements, "", 2, 0, 0);}
+                    | {push_node(Vars_Statements, "", "", 0, 0);}
                     | SEMICOLON VarsAndStatements
                     ;
 BLOCK: REP_STATEMENT_SEMICOLON {
     ast_ptr rp = pop_node();
     vector ch = flat_children(rp, 1,0);
-    ast_ptr n = new_node_ptr(Block, "Block");
+    ast_ptr n = new_node_ptr(Block, "Block", 0, 0);
     n->children = ch;
     push_back(&stack, &n);
 }
-REP_STATEMENT_SEMICOLON: Statement SEMICOLON REP_STATEMENT_SEMICOLON {push_with_children(Rep_Statement_Semicolon, "", 2);} 
-                        |  {push_node(Rep_Statement_Semicolon, "", "");}
+REP_STATEMENT_SEMICOLON: Statement SEMICOLON REP_STATEMENT_SEMICOLON {push_with_children(Rep_Statement_Semicolon, "", 2, 0, 0);} 
+                        |  {push_node(Rep_Statement_Semicolon, "", "", 0, 0);}
                         ;
-Statement :     ID_NTERM ASSIGN Expr {/*printf("Assign\n");*/ push_with_children(Assign, "Assign", 2);};
+Statement :     ID_NTERM ASSIGN Expr {push_with_children(Assign, "Assign", 2, $2->line, $2->column);};
                 | LBRACE BLOCK RBRACE ;
                 | IF Expr LBRACE BLOCK RBRACE {
                     ast_ptr bl = pop_node();
                     ast_ptr expr = pop_node();
-                    ast_ptr n = new_node_ptr(If, "If"), b = new_node_ptr(Block, "Block");
+                    ast_ptr n = new_node_ptr(If, "If", $1->line, $1->column);
+                    ast_ptr b = new_node_ptr(Block, "Block", 0, 0);
                     vector v = new_vector(sizeof(ast_ptr));
                     push_back(&v, &expr);
                     push_back(&v, &bl);
@@ -241,27 +214,27 @@ Statement :     ID_NTERM ASSIGN Expr {/*printf("Assign\n");*/ push_with_children
                     n->children = v;
                     push_back(&stack, &n);
                 }
-                | IF Expr LBRACE BLOCK RBRACE ELSE LBRACE BLOCK RBRACE {/*printf("If\n");*/ push_with_children(If, "If", 3);};
-                | FOR LBRACE BLOCK RBRACE {/*printf("For\n");*/ push_with_children(For, "For", 1);}
-                | FOR Expr LBRACE BLOCK RBRACE {/*printf("For\n");*/ push_with_children(For, "For", 2);}
-                | RETURN {/*printf("Return\n");*/push_node(Return, "Return", "");}
-                | RETURN Expr {/*printf("Return\n");*/push_with_children(Return, "Return", 1);} 
+                | IF Expr LBRACE BLOCK RBRACE ELSE LBRACE BLOCK RBRACE {/*printf("If\n");*/ push_with_children(If, "If", 3, $1->line, $1->column);};
+                | FOR LBRACE BLOCK RBRACE {/*printf("For\n");*/ push_with_children(For, "For", 1, $1->line, $1->column);}
+                | FOR Expr LBRACE BLOCK RBRACE {/*printf("For\n");*/ push_with_children(For, "For", 2, $1->line, $1->column);}
+                | RETURN {/*printf("Return\n");*/push_node(Return, "Return", "", $1->line, $1->column);}
+                | RETURN Expr {/*printf("Return\n");*/push_with_children(Return, "Return", 1, $1->line, $1->column);} 
                 | FuncInvocation  // calling a function? 
                 | ParseArgs
-                | PRINT LPAR Expr RPAR {/*printf("Print\n");*/push_with_children(Print, "Print", 1);}
-                | PRINT LPAR STRLIT_NTERM RPAR {/*printf("Print\n");*/push_with_children(Print, "Print", 1);}
+                | PRINT LPAR Expr RPAR {/*printf("Print\n");*/push_with_children(Print, "Print", 1, 0, 0);}
+                | PRINT LPAR STRLIT_NTERM RPAR {/*printf("Print\n");*/push_with_children(Print, "Print", 1, 0, 0);}
                 | ERR_NTERM {/* yyerrok; yyclearin; yyerror("syntax error");*/}
-ParseArgs : ID_NTERM COMMA BLANKID ASSIGN PARSEINT LPAR CMDARGS LSQ Expr RSQ RPAR {/*printf("Parseargs\n");*/ push_with_children(ParseArgs, "ParseArgs", 2);}
+ParseArgs : ID_NTERM COMMA BLANKID ASSIGN PARSEINT LPAR CMDARGS LSQ Expr RSQ RPAR {/*printf("Parseargs\n");*/ push_with_children(ParseArgs, "ParseArgs", 2, 0, 0);}
             |  ID_NTERM COMMA BLANKID ASSIGN PARSEINT LPAR CMDARGS LSQ ERR_NTERM RSQ RPAR {/*yyerror("syntax error");*/}
-REP_COMMA_EXPR: COMMA Expr REP_COMMA_EXPR {push_with_children(Rep_Comma_Expr, "", 2);}
-                | {push_node(Rep_Comma_Expr, "", "");}
+REP_COMMA_EXPR: COMMA Expr REP_COMMA_EXPR {push_with_children(Rep_Comma_Expr, "", 2, 0, 0);}
+                | {push_node(Rep_Comma_Expr, "", "", 0, 0);}
                 ;
 FuncInvocation : ID_NTERM LPAR Expr REP_COMMA_EXPR RPAR {
                     ast_ptr rp = *(ast_ptr*)get(&stack, stack.size-1);
                     if(rp->children.size > 0) {
                         rp = pop_node();
                         vector ch = flat_children(rp, 1, false); //! rp was freed
-                        rp = new_node_ptr(Call, "Call");
+                        rp = new_node_ptr(Call, "Call", 0, 0);
                         vector new_children = new_vector(sizeof(ast_ptr));
                         ast_ptr expr = pop_node();
                         ast_ptr id = pop_node();
@@ -277,49 +250,49 @@ FuncInvocation : ID_NTERM LPAR Expr REP_COMMA_EXPR RPAR {
                     else {
                         pop_node();
                         free_ast_ptr(rp);
-                        push_with_children(Call, "Call", 2);
+                        push_with_children(Call, "Call", 2, 0, 0);
                     }
                 }
-                | ID_NTERM LPAR RPAR {push_with_children(Call,"Call", 1);}
+                | ID_NTERM LPAR RPAR {push_with_children(Call,"Call", 1, 0, 0);}
                 | ID_NTERM LPAR ERR_NTERM RPAR { }
                 ;
 Pred5 : INTLIT {
-            push_node(IntLit, "IntLit(%s)", yytext);
+            push_node(IntLit, "IntLit(%s)", yytext, 0, 0);
         } 
         | REALLIT {
-            push_node(RealLit, "RealLit(%s)", yytext);
+            push_node(RealLit, "RealLit(%s)", yytext, 0, 0);
             }
         | ID_NTERM
         | FuncInvocation
         | LPAR Expr RPAR{;}
-        | NOT Pred5 {/*printf("Not\n");*/push_with_children(Not, "Not",1);}
-        | MINUS Pred5 {/*printf("Minus\n");*/push_with_children(Minus, "Minus",1);}
-        | PLUS Pred5 {/*printf("Plus\n");*/push_with_children(Plus, "Plus",1);}
+        | NOT Pred5 {/*printf("Not\n");*/push_with_children(Not, "Not",1, $1->line, $1->column);}
+        | MINUS Pred5 {/*printf("Minus\n");*/push_with_children(Minus, "Minus",1, $1->line, $1->column);}
+        | PLUS Pred5 {/*printf("Plus\n");*/push_with_children(Plus, "Plus",1, $1->line, $1->column);}
         | LPAR ERR_NTERM RPAR 
-Pred4:  Pred4 STAR Pred5 {/*printf("Mul\n");*/push_with_children(Mul, "Mul",2);}
-        | Pred4 DIV Pred5 {/*printf("Div\n");*/push_with_children(Div, "Div",2);}
-        | Pred4 MOD Pred5 {/*printf("Mod\n");*/push_with_children(Mod, "Mod",2);}
+Pred4:  Pred4 STAR Pred5 {/*printf("Mul\n");*/push_with_children(Mul, "Mul",2, $2->line, $2->column);}
+        | Pred4 DIV Pred5 {/*printf("Div\n");*/push_with_children(Div, "Div",2, $2->line, $2->column);}
+        | Pred4 MOD Pred5 {/*printf("Mod\n");*/push_with_children(Mod, "Mod",2, $2->line, $2->column);}
         | Pred5 ;
-Pred3 : Pred3 PLUS Pred4 {/*printf("Plus\n");*/ push_with_children(Add, "Add",2);}
-        | Pred3 MINUS Pred4 {/*printf("Minus\n");*/push_with_children(Sub, "Sub",2);}
+Pred3 : Pred3 PLUS Pred4 {/*printf("Plus\n");*/ push_with_children(Add, "Add",2, $2->line, $2->column);}
+        | Pred3 MINUS Pred4 {/*printf("Minus\n");*/push_with_children(Sub, "Sub",2, $2->line, $2->column);}
         | Pred4 ;
-Pred2 : Pred2 LT Pred3 {/*printf("Lt\n");*/push_with_children(Lt, "Lt",2);}
-        | Pred2 GT Pred3 {/*printf("Gt\n");*/push_with_children(Gt, "Gt",2);}
-        | Pred2 EQ Pred3 {/*printf("Eq\n");*/push_with_children(Eq, "Eq",2);}
-        | Pred2 NE  Pred3 {/*printf("Ne\n");*/push_with_children(Ne, "Ne",2);}
-        | Pred2  LE Pred3 {/*printf("Le\n");*/push_with_children(Le, "Le",2);}
-        | Pred2 GE Pred3 {/*printf("Ge\n");*/push_with_children(Ge, "Ge",2);}
+Pred2 : Pred2 LT Pred3 {/*printf("Lt\n");*/push_with_children(Lt, "Lt",2, $2->line, $2->column);}
+        | Pred2 GT Pred3 {/*printf("Gt\n");*/push_with_children(Gt, "Gt",2, $2->line, $2->column);}
+        | Pred2 EQ Pred3 {/*printf("Eq\n");*/push_with_children(Eq, "Eq",2, $2->line, $2->column);}
+        | Pred2 NE  Pred3 {/*printf("Ne\n");*/push_with_children(Ne, "Ne",2, $2->line, $2->column);}
+        | Pred2  LE Pred3 {/*printf("Le\n");*/push_with_children(Le, "Le",2, $2->line, $2->column);}
+        | Pred2 GE Pred3 {/*printf("Ge\n");*/push_with_children(Ge, "Ge",2, $2->line, $2->column);}
         | Pred3;
-Pred1:  Pred1 AND Pred2 {/*printf("And\n");*/push_with_children(And, "And",2);}
+Pred1:  Pred1 AND Pred2 {/*printf("And\n");*/push_with_children(And, "And",2, $2->line, $2->column);}
         | Pred2;
-Expr :  Expr OR Pred1 {/*printf("Or\n");*/push_with_children(Or, "Or",2);}
+Expr :  Expr OR Pred1 {/*printf("Or\n");*/push_with_children(Or, "Or",2, $2->line, $2->column);}
         | Pred1
         ;
 ID_NTERM: ID {
-    push_node(Id, "Id(%s)", yytext);
+    push_node(Id, "Id(%s)", yytext, $1->line, $1->column);
 }
 STRLIT_NTERM: STRLIT {
-    push_node(StrLit, "StrLit(%s)", yytext);
+    push_node(StrLit, "StrLit(%s)", yytext, 0, 0);
 }
 ERR_NTERM: error {}
 %%

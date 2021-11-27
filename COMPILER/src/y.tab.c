@@ -69,11 +69,11 @@
 #line 1 "gocompiler.y"
 
 #include "ast_tree.h"
+#include "tokens.h"
 
 int yylex();
 void yyerror(char *);
 extern vector stack;
-
 
 
 #line 80 "y.tab.c"
@@ -216,7 +216,16 @@ extern int yydebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 11 "gocompiler.y"
+
+    token_t * token_id;
+
+#line 226 "y.tab.c"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -593,15 +602,15 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    13,    13,    43,    44,    45,    47,    48,    50,    94,
-      94,    95,    99,   103,   107,   112,   124,   135,   145,   157,
-     159,   160,   162,   190,   216,   217,   218,   219,   221,   228,
-     229,   231,   232,   233,   244,   245,   246,   247,   248,   249,
-     250,   251,   252,   253,   254,   255,   256,   257,   259,   283,
-     284,   286,   289,   292,   293,   294,   295,   296,   297,   298,
-     299,   300,   301,   302,   303,   304,   305,   306,   307,   308,
-     309,   310,   311,   312,   313,   314,   315,   316,   318,   321,
-     324
+       0,    19,    19,    49,    50,    51,    53,    54,    56,    89,
+      89,    90,    91,    92,    93,    95,    97,   108,   118,   129,
+     131,   132,   134,   162,   188,   189,   190,   191,   193,   200,
+     201,   203,   204,   205,   217,   218,   219,   220,   221,   222,
+     223,   224,   225,   226,   227,   228,   229,   230,   232,   256,
+     257,   259,   262,   265,   266,   267,   268,   269,   270,   271,
+     272,   273,   274,   275,   276,   277,   278,   279,   280,   281,
+     282,   283,   284,   285,   286,   287,   288,   289,   291,   294,
+     297
 };
 #endif
 
@@ -1512,9 +1521,9 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 13 "gocompiler.y"
+#line 19 "gocompiler.y"
                                                   {
-                    push_with_children(Program, "Program", stack.size);
+                    push_with_children(Program, "Program", stack.size, 0, 0);
                     ast_ptr n = *(ast_ptr*)get(&stack,0);
                     vector d = new_vector(sizeof(ast_ptr));
                     for(size_t i = 0; i<n->children.size; i++) {
@@ -1542,49 +1551,42 @@ yyreduce:
                         ()
                     */
                 }
-#line 1546 "y.tab.c"
+#line 1555 "y.tab.c"
     break;
 
   case 6:
-#line 47 "gocompiler.y"
-                              {/*printf("VarDecl\n");push_with_children(VarDecl, "VarDecl",1);*/}
-#line 1552 "y.tab.c"
+#line 53 "gocompiler.y"
+                              {/*printf("VarDecl\n");push_with_children(VarDecl, "VarDecl", 1, $1->line, $1->column);*/}
+#line 1561 "y.tab.c"
     break;
 
   case 7:
-#line 48 "gocompiler.y"
-                                                  {/*printf("VarDecl\n");push_with_children(VarDecl, "VarDecl",1);*/}
-#line 1558 "y.tab.c"
+#line 54 "gocompiler.y"
+                                                  {/*printf("VarDecl\n");push_with_children(VarDecl, "VarDecl",1, $1->line, $1->column);*/}
+#line 1567 "y.tab.c"
     break;
 
   case 8:
-#line 50 "gocompiler.y"
+#line 56 "gocompiler.y"
                                      {
-    // ast_ptr n = new_node_ptr(VarDecl, "VarDecl");
-    // printf("VarSpec\n");
     ast_ptr type = pop_node();
-    // printf("Type: %s\n", type->str);
     ast_ptr rep = pop_node();
     ast_ptr id = pop_node();
-    // printf("Id:%s\n", id->str);
-    ast_ptr v_spec = new_node_ptr(VarSpec, "");
-    ast_ptr n = new_node_ptr(VarDecl, "VarDecl");
-    
-    // if(rep->children.size ==0) {
-        push_back(&(n->children), &type);
-        push_back(&(n->children), &id);
-        push_back(&(v_spec->children), &n);
-    // }
-        // push_back(&stack, &n);
+    ast_ptr v_spec = new_node_ptr(VarSpec, "", id->line, id->column);
+    ast_ptr n = new_node_ptr(VarDecl, "VarDecl", id->line, id->column);
+
+    push_back(&(n->children), &type);
+    push_back(&(n->children), &id);
+    push_back(&(v_spec->children), &n);
    
-    
     if(rep->children.size >0) {
         vector to_free = new_vector(sizeof(ast_ptr));
         ast_ptr aid = rep;
         push_back(&to_free, &aid);
         while(aid->children.size > 1) {
-            ast_ptr ch = new_node_ptr(VarDecl, "VarDecl");
-            ast_ptr t = new_node_ptr(type->node_type, type->str);
+            ast_ptr _id = *(ast_ptr*)get(&(aid->children), 0);
+            ast_ptr ch = new_node_ptr(VarDecl, "VarDecl", _id->line, _id->column );
+            ast_ptr t = new_node_ptr(type->node_type, type->str, 0, 0);
             // printf("Boo1\n");
             push_back(&(ch->children), &t);
             push_back(&(ch->children), get(&(aid->children), 0));
@@ -1598,115 +1600,88 @@ yyreduce:
         free(to_free.array);
     }
     push_back(&stack, &v_spec);
-    // handle_rep(VarDecl, "VarDecl", 1);
-    // ast_ptr tot = pop_node();
-    // push_back(&(n->children), )
-
 }
-#line 1607 "y.tab.c"
+#line 1605 "y.tab.c"
     break;
 
   case 9:
-#line 94 "gocompiler.y"
-                                          {push_with_children(Rep_Comma_Id, "", 2);}
-#line 1613 "y.tab.c"
+#line 89 "gocompiler.y"
+                                          {push_with_children(Rep_Comma_Id, "", 2, 0, 0);}
+#line 1611 "y.tab.c"
     break;
 
   case 10:
-#line 94 "gocompiler.y"
-                                                                                       {push_node(Rep_Comma_Id, "", "");}
-#line 1619 "y.tab.c"
+#line 89 "gocompiler.y"
+                                                                                             {push_node(Rep_Comma_Id, "", "", 0, 0);}
+#line 1617 "y.tab.c"
     break;
 
   case 11:
-#line 95 "gocompiler.y"
-                    {
-                    // printf("Int\n");
-                    P_NODE(Int, "");
-                }
-#line 1628 "y.tab.c"
+#line 90 "gocompiler.y"
+                                        { P_NODE(Int, "", (yyvsp[0].token_id)->line, (yyvsp[0].token_id)->column); }
+#line 1623 "y.tab.c"
     break;
 
   case 12:
-#line 99 "gocompiler.y"
-                          {
-                    // printf("Float32\n");
-                    P_NODE(Float32, "");
-                }
-#line 1637 "y.tab.c"
+#line 91 "gocompiler.y"
+                                        { P_NODE(Float32, "", (yyvsp[0].token_id)->line, (yyvsp[0].token_id)->column); }
+#line 1629 "y.tab.c"
     break;
 
   case 13:
-#line 103 "gocompiler.y"
-                       {
-                    //printf("Bool\n");
-                    P_NODE(Bool, "");
-                }
-#line 1646 "y.tab.c"
+#line 92 "gocompiler.y"
+                                        { P_NODE(Bool, "", (yyvsp[0].token_id)->line, (yyvsp[0].token_id)->column); }
+#line 1635 "y.tab.c"
     break;
 
   case 14:
-#line 107 "gocompiler.y"
-                         {
-                    //printf("String\n");
-                    P_NODE(String, "");
-                }
-#line 1655 "y.tab.c"
+#line 93 "gocompiler.y"
+                                        { P_NODE(String, "", (yyvsp[0].token_id)->line, (yyvsp[0].token_id)->column); }
+#line 1641 "y.tab.c"
     break;
 
   case 15:
-#line 112 "gocompiler.y"
-                                      {
-                    // ast_ptr body, header;
-                    /*body = pop_node();
-                    header = pop_node();
-                    ast_ptr n = new_node_ptr(FuncDecl, "FuncDecl");
-                    push_back(&(n->children), &header);
-                    push_back(&(n->children), &body);*/
-                    // P_NODE(FuncDecl, 2);
-                    push_with_children(FuncDecl, "FuncDecl", 2);
-                    // push_back(&stack, &n);
-                }
-#line 1671 "y.tab.c"
+#line 95 "gocompiler.y"
+                                      { push_with_children(FuncDecl, "FuncDecl", 2, 0, 0); }
+#line 1647 "y.tab.c"
     break;
 
   case 16:
-#line 124 "gocompiler.y"
+#line 97 "gocompiler.y"
                                                 {
                     ast_ptr type, id , params;
                     type = pop_node();
                     params = pop_node();
                     id = pop_node();
-                    ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader");
+                    ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader", 0, 0);
                     push_back(&(n->children), &id);
                     push_back(&(n->children), &type);
                     push_back(&(n->children), &params);
                     push_back(&stack,&n);
                 }
-#line 1687 "y.tab.c"
+#line 1663 "y.tab.c"
     break;
 
   case 17:
-#line 135 "gocompiler.y"
+#line 108 "gocompiler.y"
                                            {
                     ast_ptr id , params;
                     params = pop_node();
                     id = pop_node();
-                    ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader");
+                    ast_ptr n = new_node_ptr(FuncHeader, "FuncHeader", 0, 0);
                     push_back(&(n->children), &id);
                     push_back(&(n->children), &params);
                     push_back(&stack,&n);
                 }
-#line 1701 "y.tab.c"
+#line 1677 "y.tab.c"
     break;
 
   case 18:
-#line 145 "gocompiler.y"
+#line 118 "gocompiler.y"
                                        {
-                        // push_with_children(FuncParams, "FuncParams", 1);
-                        ast_ptr par = pop_node(), funcPar = new_node_ptr(FuncParams, "FuncParams");
+                        ast_ptr par = pop_node(), funcPar = new_node_ptr(FuncParams, "FuncParams", 0, 0);
                         for(size_t i = 0; i< par->children.size/2; i++) {
-                            ast_ptr p = new_node_ptr(ParamDecl, "ParamDecl");
+                            ast_ptr p = new_node_ptr(ParamDecl, "ParamDecl", 0, 0);
                             push_back(&(p->children), get(&(par->children), 2*i));
                             push_back(&(p->children), get(&(par->children), 2*i+1));
                             push_back(&(funcPar->children), &p);
@@ -1714,34 +1689,34 @@ yyreduce:
                         free_ast_ptr(par);
                         push_back(&stack, &funcPar);
                     }
-#line 1718 "y.tab.c"
+#line 1693 "y.tab.c"
     break;
 
   case 19:
-#line 157 "gocompiler.y"
-                            {/*printf("FuncParams\n");*/push_node(FuncParams, "FuncParams", "");}
-#line 1724 "y.tab.c"
+#line 129 "gocompiler.y"
+                            {push_node(FuncParams, "FuncParams", "", 0, 0);}
+#line 1699 "y.tab.c"
     break;
 
   case 20:
-#line 159 "gocompiler.y"
-                                                          {/* printf("Rep_Comma_id here!!!\n"); */push_with_children(Rep_Comma_Id, "", 3);}
-#line 1730 "y.tab.c"
+#line 131 "gocompiler.y"
+                                                          {push_with_children(Rep_Comma_Id, "", 3, 0, 0);}
+#line 1705 "y.tab.c"
     break;
 
   case 21:
-#line 160 "gocompiler.y"
-                      {push_node(Rep_Comma_Id, "", "");}
-#line 1736 "y.tab.c"
+#line 132 "gocompiler.y"
+                      {push_node(Rep_Comma_Id, "", "", 0, 0);}
+#line 1711 "y.tab.c"
     break;
 
   case 22:
-#line 162 "gocompiler.y"
+#line 134 "gocompiler.y"
                                              {
     ast_ptr rp = pop_node();
     if(rp->children.size > 0) {
         vector ch = flat_children(rp, 2, true);
-        rp = new_node_ptr(ParamDecl, "ParamDecl");
+        rp = new_node_ptr(ParamDecl, "ParamDecl", 0, 0);
         vector new_children = new_vector(sizeof(ast_ptr));
         ast_ptr type = pop_node();
         ast_ptr id = pop_node();
@@ -1760,24 +1735,24 @@ yyreduce:
         vector new_children = new_vector(sizeof(ast_ptr));
         push_back(&new_children, &type);
         push_back(&new_children, &id);
-        ast_ptr n = new_node_ptr(ParamDecl, "ParamDecl");
+        ast_ptr n = new_node_ptr(ParamDecl, "ParamDecl", 0, 0);
         n->children = new_children;
         push_back(&stack, &n);
     }
 }
-#line 1769 "y.tab.c"
+#line 1744 "y.tab.c"
     break;
 
   case 23:
-#line 190 "gocompiler.y"
+#line 162 "gocompiler.y"
                                            {
     ast_ptr rp = pop_node();
     if(rp->children.size == 0) {
         free(rp);
-        P_NODE(FuncBody, "");
+        P_NODE(FuncBody, "", 0, 0);
     }
     else {
-        ast_ptr node = new_node_ptr(FuncBody, "FuncBody");
+        ast_ptr node = new_node_ptr(FuncBody, "FuncBody", 0, 0);
         vector v = flat_children(rp, 1,0);
         for(size_t i = 0; i<v.size; i++)  {
             ast_ptr ch = *(ast_ptr*)get(&(v), i);
@@ -1796,63 +1771,64 @@ yyreduce:
         push_back(&stack, &node);
     }
 }
-#line 1800 "y.tab.c"
+#line 1775 "y.tab.c"
     break;
 
   case 24:
-#line 216 "gocompiler.y"
-                                                                {push_with_children(Vars_Statements, "", 2);}
-#line 1806 "y.tab.c"
+#line 188 "gocompiler.y"
+                                                                {push_with_children(Vars_Statements, "", 2, 0, 0);}
+#line 1781 "y.tab.c"
     break;
 
   case 25:
-#line 217 "gocompiler.y"
-                                                             {push_with_children(Vars_Statements, "", 2);}
-#line 1812 "y.tab.c"
+#line 189 "gocompiler.y"
+                                                             {push_with_children(Vars_Statements, "", 2, 0, 0);}
+#line 1787 "y.tab.c"
     break;
 
   case 26:
-#line 218 "gocompiler.y"
-                      {push_node(Vars_Statements, "", "");}
-#line 1818 "y.tab.c"
+#line 190 "gocompiler.y"
+                      {push_node(Vars_Statements, "", "", 0, 0);}
+#line 1793 "y.tab.c"
     break;
 
   case 28:
-#line 221 "gocompiler.y"
+#line 193 "gocompiler.y"
                                {
     ast_ptr rp = pop_node();
     vector ch = flat_children(rp, 1,0);
-    ast_ptr n = new_node_ptr(Block, "Block");
+    ast_ptr n = new_node_ptr(Block, "Block", 0, 0);
     n->children = ch;
     push_back(&stack, &n);
 }
-#line 1830 "y.tab.c"
+#line 1805 "y.tab.c"
     break;
 
   case 29:
-#line 228 "gocompiler.y"
-                                                                     {push_with_children(Rep_Statement_Semicolon, "", 2);}
-#line 1836 "y.tab.c"
+#line 200 "gocompiler.y"
+                                                                     {push_with_children(Rep_Statement_Semicolon, "", 2, 0, 0);}
+#line 1811 "y.tab.c"
     break;
 
   case 30:
-#line 229 "gocompiler.y"
-                           {push_node(Rep_Statement_Semicolon, "", "");}
-#line 1842 "y.tab.c"
+#line 201 "gocompiler.y"
+                           {push_node(Rep_Statement_Semicolon, "", "", 0, 0);}
+#line 1817 "y.tab.c"
     break;
 
   case 31:
-#line 231 "gocompiler.y"
-                                     {/*printf("Assign\n");*/ push_with_children(Assign, "Assign", 2);}
-#line 1848 "y.tab.c"
+#line 203 "gocompiler.y"
+                                     {push_with_children(Assign, "Assign", 2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 1823 "y.tab.c"
     break;
 
   case 33:
-#line 233 "gocompiler.y"
+#line 205 "gocompiler.y"
                                               {
                     ast_ptr bl = pop_node();
                     ast_ptr expr = pop_node();
-                    ast_ptr n = new_node_ptr(If, "If"), b = new_node_ptr(Block, "Block");
+                    ast_ptr n = new_node_ptr(If, "If", (yyvsp[-4].token_id)->line, (yyvsp[-4].token_id)->column);
+                    ast_ptr b = new_node_ptr(Block, "Block", 0, 0);
                     vector v = new_vector(sizeof(ast_ptr));
                     push_back(&v, &expr);
                     push_back(&v, &bl);
@@ -1860,89 +1836,89 @@ yyreduce:
                     n->children = v;
                     push_back(&stack, &n);
                 }
-#line 1864 "y.tab.c"
+#line 1840 "y.tab.c"
     break;
 
   case 34:
-#line 244 "gocompiler.y"
-                                                                       {/*printf("If\n");*/ push_with_children(If, "If", 3);}
-#line 1870 "y.tab.c"
+#line 217 "gocompiler.y"
+                                                                       {/*printf("If\n");*/ push_with_children(If, "If", 3, (yyvsp[-8].token_id)->line, (yyvsp[-8].token_id)->column);}
+#line 1846 "y.tab.c"
     break;
 
   case 35:
-#line 245 "gocompiler.y"
-                                          {/*printf("For\n");*/ push_with_children(For, "For", 1);}
-#line 1876 "y.tab.c"
+#line 218 "gocompiler.y"
+                                          {/*printf("For\n");*/ push_with_children(For, "For", 1, (yyvsp[-3].token_id)->line, (yyvsp[-3].token_id)->column);}
+#line 1852 "y.tab.c"
     break;
 
   case 36:
-#line 246 "gocompiler.y"
-                                               {/*printf("For\n");*/ push_with_children(For, "For", 2);}
-#line 1882 "y.tab.c"
+#line 219 "gocompiler.y"
+                                               {/*printf("For\n");*/ push_with_children(For, "For", 2, (yyvsp[-4].token_id)->line, (yyvsp[-4].token_id)->column);}
+#line 1858 "y.tab.c"
     break;
 
   case 37:
-#line 247 "gocompiler.y"
-                         {/*printf("Return\n");*/push_node(Return, "Return", "");}
-#line 1888 "y.tab.c"
+#line 220 "gocompiler.y"
+                         {/*printf("Return\n");*/push_node(Return, "Return", "", (yyvsp[0].token_id)->line, (yyvsp[0].token_id)->column);}
+#line 1864 "y.tab.c"
     break;
 
   case 38:
-#line 248 "gocompiler.y"
-                              {/*printf("Return\n");*/push_with_children(Return, "Return", 1);}
-#line 1894 "y.tab.c"
+#line 221 "gocompiler.y"
+                              {/*printf("Return\n");*/push_with_children(Return, "Return", 1, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 1870 "y.tab.c"
     break;
 
   case 41:
-#line 251 "gocompiler.y"
-                                       {/*printf("Print\n");*/push_with_children(Print, "Print", 1);}
-#line 1900 "y.tab.c"
+#line 224 "gocompiler.y"
+                                       {/*printf("Print\n");*/push_with_children(Print, "Print", 1, 0, 0);}
+#line 1876 "y.tab.c"
     break;
 
   case 42:
-#line 252 "gocompiler.y"
-                                               {/*printf("Print\n");*/push_with_children(Print, "Print", 1);}
-#line 1906 "y.tab.c"
+#line 225 "gocompiler.y"
+                                               {/*printf("Print\n");*/push_with_children(Print, "Print", 1, 0, 0);}
+#line 1882 "y.tab.c"
     break;
 
   case 43:
-#line 253 "gocompiler.y"
+#line 226 "gocompiler.y"
                             {/* yyerrok; yyclearin; yyerror("syntax error");*/}
-#line 1912 "y.tab.c"
+#line 1888 "y.tab.c"
     break;
 
   case 44:
-#line 254 "gocompiler.y"
-                                                                                  {/*printf("Parseargs\n");*/ push_with_children(ParseArgs, "ParseArgs", 2);}
-#line 1918 "y.tab.c"
+#line 227 "gocompiler.y"
+                                                                                  {/*printf("Parseargs\n");*/ push_with_children(ParseArgs, "ParseArgs", 2, 0, 0);}
+#line 1894 "y.tab.c"
     break;
 
   case 45:
-#line 255 "gocompiler.y"
+#line 228 "gocompiler.y"
                                                                                           {/*yyerror("syntax error");*/}
-#line 1924 "y.tab.c"
+#line 1900 "y.tab.c"
     break;
 
   case 46:
-#line 256 "gocompiler.y"
-                                          {push_with_children(Rep_Comma_Expr, "", 2);}
-#line 1930 "y.tab.c"
+#line 229 "gocompiler.y"
+                                          {push_with_children(Rep_Comma_Expr, "", 2, 0, 0);}
+#line 1906 "y.tab.c"
     break;
 
   case 47:
-#line 257 "gocompiler.y"
-                  {push_node(Rep_Comma_Expr, "", "");}
-#line 1936 "y.tab.c"
+#line 230 "gocompiler.y"
+                  {push_node(Rep_Comma_Expr, "", "", 0, 0);}
+#line 1912 "y.tab.c"
     break;
 
   case 48:
-#line 259 "gocompiler.y"
+#line 232 "gocompiler.y"
                                                         {
                     ast_ptr rp = *(ast_ptr*)get(&stack, stack.size-1);
                     if(rp->children.size > 0) {
                         rp = pop_node();
                         vector ch = flat_children(rp, 1, false); //! rp was freed
-                        rp = new_node_ptr(Call, "Call");
+                        rp = new_node_ptr(Call, "Call", 0, 0);
                         vector new_children = new_vector(sizeof(ast_ptr));
                         ast_ptr expr = pop_node();
                         ast_ptr id = pop_node();
@@ -1958,166 +1934,166 @@ yyreduce:
                     else {
                         pop_node();
                         free_ast_ptr(rp);
-                        push_with_children(Call, "Call", 2);
+                        push_with_children(Call, "Call", 2, 0, 0);
                     }
                 }
-#line 1965 "y.tab.c"
+#line 1941 "y.tab.c"
     break;
 
   case 49:
-#line 283 "gocompiler.y"
-                                     {push_with_children(Call,"Call", 1);}
-#line 1971 "y.tab.c"
+#line 256 "gocompiler.y"
+                                     {push_with_children(Call,"Call", 1, 0, 0);}
+#line 1947 "y.tab.c"
     break;
 
   case 50:
-#line 284 "gocompiler.y"
+#line 257 "gocompiler.y"
                                                { }
-#line 1977 "y.tab.c"
+#line 1953 "y.tab.c"
     break;
 
   case 51:
-#line 286 "gocompiler.y"
+#line 259 "gocompiler.y"
                {
-            push_node(IntLit, "IntLit(%s)", yytext);
+            push_node(IntLit, "IntLit(%s)", yytext, 0, 0);
         }
-#line 1985 "y.tab.c"
+#line 1961 "y.tab.c"
     break;
 
   case 52:
-#line 289 "gocompiler.y"
+#line 262 "gocompiler.y"
                   {
-            push_node(RealLit, "RealLit(%s)", yytext);
+            push_node(RealLit, "RealLit(%s)", yytext, 0, 0);
             }
-#line 1993 "y.tab.c"
+#line 1969 "y.tab.c"
     break;
 
   case 55:
-#line 294 "gocompiler.y"
+#line 267 "gocompiler.y"
                         {;}
-#line 1999 "y.tab.c"
+#line 1975 "y.tab.c"
     break;
 
   case 56:
-#line 295 "gocompiler.y"
-                    {/*printf("Not\n");*/push_with_children(Not, "Not",1);}
-#line 2005 "y.tab.c"
+#line 268 "gocompiler.y"
+                    {/*printf("Not\n");*/push_with_children(Not, "Not",1, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 1981 "y.tab.c"
     break;
 
   case 57:
-#line 296 "gocompiler.y"
-                      {/*printf("Minus\n");*/push_with_children(Minus, "Minus",1);}
-#line 2011 "y.tab.c"
+#line 269 "gocompiler.y"
+                      {/*printf("Minus\n");*/push_with_children(Minus, "Minus",1, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 1987 "y.tab.c"
     break;
 
   case 58:
-#line 297 "gocompiler.y"
-                     {/*printf("Plus\n");*/push_with_children(Plus, "Plus",1);}
-#line 2017 "y.tab.c"
+#line 270 "gocompiler.y"
+                     {/*printf("Plus\n");*/push_with_children(Plus, "Plus",1, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 1993 "y.tab.c"
     break;
 
   case 60:
-#line 299 "gocompiler.y"
-                         {/*printf("Mul\n");*/push_with_children(Mul, "Mul",2);}
-#line 2023 "y.tab.c"
+#line 272 "gocompiler.y"
+                         {/*printf("Mul\n");*/push_with_children(Mul, "Mul",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 1999 "y.tab.c"
     break;
 
   case 61:
-#line 300 "gocompiler.y"
-                          {/*printf("Div\n");*/push_with_children(Div, "Div",2);}
-#line 2029 "y.tab.c"
+#line 273 "gocompiler.y"
+                          {/*printf("Div\n");*/push_with_children(Div, "Div",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 2005 "y.tab.c"
     break;
 
   case 62:
-#line 301 "gocompiler.y"
-                          {/*printf("Mod\n");*/push_with_children(Mod, "Mod",2);}
-#line 2035 "y.tab.c"
+#line 274 "gocompiler.y"
+                          {/*printf("Mod\n");*/push_with_children(Mod, "Mod",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 2011 "y.tab.c"
     break;
 
   case 64:
-#line 303 "gocompiler.y"
-                         {/*printf("Plus\n");*/ push_with_children(Add, "Add",2);}
-#line 2041 "y.tab.c"
+#line 276 "gocompiler.y"
+                         {/*printf("Plus\n");*/ push_with_children(Add, "Add",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 2017 "y.tab.c"
     break;
 
   case 65:
-#line 304 "gocompiler.y"
-                            {/*printf("Minus\n");*/push_with_children(Sub, "Sub",2);}
-#line 2047 "y.tab.c"
+#line 277 "gocompiler.y"
+                            {/*printf("Minus\n");*/push_with_children(Sub, "Sub",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 2023 "y.tab.c"
     break;
 
   case 67:
-#line 306 "gocompiler.y"
-                       {/*printf("Lt\n");*/push_with_children(Lt, "Lt",2);}
-#line 2053 "y.tab.c"
+#line 279 "gocompiler.y"
+                       {/*printf("Lt\n");*/push_with_children(Lt, "Lt",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 2029 "y.tab.c"
     break;
 
   case 68:
-#line 307 "gocompiler.y"
-                         {/*printf("Gt\n");*/push_with_children(Gt, "Gt",2);}
-#line 2059 "y.tab.c"
+#line 280 "gocompiler.y"
+                         {/*printf("Gt\n");*/push_with_children(Gt, "Gt",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 2035 "y.tab.c"
     break;
 
   case 69:
-#line 308 "gocompiler.y"
-                         {/*printf("Eq\n");*/push_with_children(Eq, "Eq",2);}
-#line 2065 "y.tab.c"
+#line 281 "gocompiler.y"
+                         {/*printf("Eq\n");*/push_with_children(Eq, "Eq",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 2041 "y.tab.c"
     break;
 
   case 70:
-#line 309 "gocompiler.y"
-                          {/*printf("Ne\n");*/push_with_children(Ne, "Ne",2);}
-#line 2071 "y.tab.c"
+#line 282 "gocompiler.y"
+                          {/*printf("Ne\n");*/push_with_children(Ne, "Ne",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 2047 "y.tab.c"
     break;
 
   case 71:
-#line 310 "gocompiler.y"
-                          {/*printf("Le\n");*/push_with_children(Le, "Le",2);}
-#line 2077 "y.tab.c"
+#line 283 "gocompiler.y"
+                          {/*printf("Le\n");*/push_with_children(Le, "Le",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 2053 "y.tab.c"
     break;
 
   case 72:
-#line 311 "gocompiler.y"
-                         {/*printf("Ge\n");*/push_with_children(Ge, "Ge",2);}
-#line 2083 "y.tab.c"
+#line 284 "gocompiler.y"
+                         {/*printf("Ge\n");*/push_with_children(Ge, "Ge",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 2059 "y.tab.c"
     break;
 
   case 74:
-#line 313 "gocompiler.y"
-                        {/*printf("And\n");*/push_with_children(And, "And",2);}
-#line 2089 "y.tab.c"
+#line 286 "gocompiler.y"
+                        {/*printf("And\n");*/push_with_children(And, "And",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 2065 "y.tab.c"
     break;
 
   case 76:
-#line 315 "gocompiler.y"
-                      {/*printf("Or\n");*/push_with_children(Or, "Or",2);}
-#line 2095 "y.tab.c"
+#line 288 "gocompiler.y"
+                      {/*printf("Or\n");*/push_with_children(Or, "Or",2, (yyvsp[-1].token_id)->line, (yyvsp[-1].token_id)->column);}
+#line 2071 "y.tab.c"
     break;
 
   case 78:
-#line 318 "gocompiler.y"
+#line 291 "gocompiler.y"
              {
-    push_node(Id, "Id(%s)", yytext);
+    push_node(Id, "Id(%s)", yytext, (yyvsp[0].token_id)->line, (yyvsp[0].token_id)->column);
 }
-#line 2103 "y.tab.c"
+#line 2079 "y.tab.c"
     break;
 
   case 79:
-#line 321 "gocompiler.y"
+#line 294 "gocompiler.y"
                      {
-    push_node(StrLit, "StrLit(%s)", yytext);
+    push_node(StrLit, "StrLit(%s)", yytext, 0, 0);
 }
-#line 2111 "y.tab.c"
+#line 2087 "y.tab.c"
     break;
 
   case 80:
-#line 324 "gocompiler.y"
+#line 297 "gocompiler.y"
                  {}
-#line 2117 "y.tab.c"
+#line 2093 "y.tab.c"
     break;
 
 
-#line 2121 "y.tab.c"
+#line 2097 "y.tab.c"
 
       default: break;
     }
@@ -2349,4 +2325,4 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 325 "gocompiler.y"
+#line 298 "gocompiler.y"

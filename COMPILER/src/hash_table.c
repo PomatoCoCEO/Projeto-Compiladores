@@ -2,13 +2,15 @@
 
 int nos[] = {5, 11, 23, 47, 97, 197, 397, 797, 1597, 3203, 6421, 12853, 25717, 51437, 102877};
 
-hash_table new_hash_table()
+hash_table new_hash_table(char *name, ast_ptr ref)
 { // new hash table
     hash_table ans;
     ans.size = 0;
     ans.vec_size_pos = 0;
     ans.vec_size = nos[ans.vec_size_pos];
     ans.vec = new_vector(sizeof(vector));
+    ans.name = strdup(name);
+    ans.ref = ref;
     for (int i = 0; i < 5; i++)
     { // initial size: 5
         vector v = new_vector(sizeof(hashable));
@@ -24,8 +26,8 @@ void insert(hash_table *ht, hashable *elem)
     // printf("pos=%ld, size=%ld\n", pos, ht->vec.size);
     vector *v = get(&(ht->vec), pos);
     // printf("boo\n");
-    push_back(v, elem);     // simply  push it back
     elem->pos = ht->size++; // and increment size,
+    push_back(v, elem);     // simply  push it back
     if (ht->size >= ht->vec_size / 2 && ht->vec_size_pos < 14)
     {                                                // reallocate
         vector new_vec = new_vector(sizeof(vector)); // new hash table

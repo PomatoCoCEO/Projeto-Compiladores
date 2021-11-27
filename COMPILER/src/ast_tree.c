@@ -2,7 +2,7 @@
 
 vector stack;
 
-void push_node(int node_type, char *format, char *val)
+void push_node(int node_type, char *format, char *val, int line, int column)
 {
     char *name;
     if (node_type == IntLit || node_type == RealLit || node_type == StrLit || node_type == Id)
@@ -15,14 +15,14 @@ void push_node(int node_type, char *format, char *val)
         name = malloc(strlen(format) + 2);
         strcpy(name, format);
     }
-    ast_ptr n = new_node_ptr(node_type, name);
+    ast_ptr n = new_node_ptr(node_type, name, line, column);
     push_back(&stack, &n);
     free(name);
 }
 
-void push_with_children(int node_type, char *name, int no_children)
+void push_with_children(int node_type, char *name, int no_children, int line, int column)
 {
-    ast_ptr n = new_node_ptr(node_type, name);
+    ast_ptr n = new_node_ptr(node_type, name, line, column);
     for (size_t i = stack.size - no_children; i < stack.size; i++)
     {
         ast_ptr ch = *(ast_ptr *)get(&stack, i);
@@ -53,7 +53,7 @@ void print_top()
     print_ast_tree(*ans, 0);
 }
 
-void handle_rep(int node_type, char *name, int no_children, int reverse)
+void handle_rep(int node_type, char *name, int no_children, int reverse, int line, int column)
 {
     ast_ptr n = pop_node(), aid = n;
     vector nodes = new_vector(sizeof(ast_ptr));
@@ -82,7 +82,7 @@ void handle_rep(int node_type, char *name, int no_children, int reverse)
     }
     if (nodes.size > 1 /*no_children*/)
     {
-        ast_ptr block_node = new_node_ptr(node_type, name);
+        ast_ptr block_node = new_node_ptr(node_type, name, line, column);
         for (size_t i = 0; i < nodes.size; i++)
         {
             push_back(&(block_node->children), get(&nodes, i));

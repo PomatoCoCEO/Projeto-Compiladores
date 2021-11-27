@@ -2,4 +2,4 @@
 
 lex gocompiler.l
 yacc -d gocompiler.y
-clang lex.yy.c y.tab.c ast_tree.c ast_node.c vector.c semantic.c hash_table.c -o ../executable/gocompiler
+cc lex.yy.c y.tab.c ast_tree.c ast_node.c vector.c hash_table.c semantic.c tokens.c node_hash.c -o ../executable/gocompiler

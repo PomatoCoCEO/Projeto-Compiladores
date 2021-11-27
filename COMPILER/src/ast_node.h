@@ -5,10 +5,11 @@
 
 #define true 1
 #define false 0
-#define P_NODE(a, b) push_node(a, #a, b)
+#define P_NODE(a, b, l, c) push_node(a, #a, b, l, c)
 
-typedef struct _node {
-    int node_type;
+typedef struct _node
+{
+    int node_type, line, column;
     char *str;
     vector children;
 } ast_node;
@@ -18,7 +19,8 @@ extern char *yytext;
 extern int prev_line, prev_col, yyleng;
 extern int syn_error;
 
-typedef enum {
+typedef enum
+{
     Program,
     VarDecl,
     Int,
@@ -66,7 +68,7 @@ typedef enum {
 } ast_node_type;
 
 ast_node new_node(int node_type, char *name);
-ast_node *new_node_ptr(int node_type, char *name);
+ast_node *new_node_ptr(int node_type, char *name, int line, int column);
 
 void add_child(ast_node *node, ast_node **child);
 

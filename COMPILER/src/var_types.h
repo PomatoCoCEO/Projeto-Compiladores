@@ -1,3 +1,6 @@
+#ifndef VAR_TYPES_H
+#define VAR_TYPES_h
+
 typedef enum
 {
     INT_A,
@@ -6,5 +9,7 @@ typedef enum
     BOOL_A,
     UNDEF_A
 } var_type;
-const char *var_types[] = {
-    "int", "float32", "string", "bool", "none", "undef"};
+
+extern char *var_types[];
+
+#endif
