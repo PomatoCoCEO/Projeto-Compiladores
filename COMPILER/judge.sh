@@ -27,6 +27,7 @@ fileCreated=""
 command=""
 language=""
 flag=""
+extra=""
 meta=$3
 
 if [[ $3 == "meta1" ]]
@@ -42,6 +43,7 @@ fi
 if [[ $3 == "meta3" ]]
 then
     flag="-s"
+	extra=" | sort"
 fi
 
 echo -e "${LIGHT_CYAN}[⏲️ ] ${ORANGE}Compiling $codeFile..."
@@ -80,7 +82,7 @@ do
 	start=`date +%s%N`
 	result="${ORANGE}[⊗] Time Limit Exceeded"
 	prefix="${LIGHT_CYAN}[${YELLOW}$i${LIGHT_CYAN}] ${NO_COLOR}Running test case: ${ORANGE}${file#./dataset/}\t ${LIGHT_RED}$language ${DARK_GRAY}|"
-	timeout $2 $command < $file > sol.out && {
+	timeout $2 $command $extra < $file > sol.out && {
 	end=`date +%s%N`
 	elapsed=$((end-start))
 	conversion=1000000000

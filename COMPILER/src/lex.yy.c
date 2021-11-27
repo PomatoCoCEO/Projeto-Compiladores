@@ -2281,6 +2281,8 @@ int main(int argc, char** argv) {
             ast_ptr root = *(ast_ptr*)get(&stack,0);
             handle_blocks(root);
             semantic_analysis(root);
+            if(semantic_errors == 0)
+                print_ast_tree(root, 0);
         }
     }
 }
