@@ -227,12 +227,21 @@ void sem_analysis_program(ast_ptr program)
     for (int i = 0; i < program->children.size; i++)
     {
         ast_ptr ch = *(ast_ptr *)get(&program->children, i);
-        semantic_analysis(ch);
+        if (ch->node_type == FuncDecl)
+            add_global_function(ch);
+        else
+            semantic_analysis(ch);
+    }
+    for (int i = 0; i < program->children.size; i++)
+    {
+        ast_ptr ch = *(ast_ptr *)get(&program->children, i);
+        if (ch->node_type == FuncDecl)
+            semantic_analysis(ch);
     }
     hash_table *top = get(&stack_tables, 0);
 
-    if (semantic_errors == 0)
-        print_st_program(top);
+    // if (semantic_errors == 0)
+    print_st_program(top);
 }
 
 void sem_analysis_vardecl(ast_ptr vardecl) // can also be used for paramdecl
@@ -252,9 +261,9 @@ void sem_analysis_vardecl(ast_ptr vardecl) // can also be used for paramdecl
     }
 }
 
-void sem_analysis_funcdecl(ast_ptr funcdecl)
+void add_global_function(ast_ptr funcdecl)
 {
-    current_func = funcdecl;
+    // adds the function in the first passage by the program node
     hash_table *ht = get(&stack_tables, stack_tables.size - 1);
     hashable d = new_hashable(funcdecl, hash_ast_ptr);
     if (contains(ht, &d, equals_decl))
@@ -266,9 +275,14 @@ void sem_analysis_funcdecl(ast_ptr funcdecl)
     }
     else
     {
-
         insert(ht, &d);
     }
+}
+
+void sem_analysis_funcdecl(ast_ptr funcdecl)
+{
+    current_func = funcdecl;
+
     hash_table ht_new = new_hash_table(funcdecl->str, funcdecl);
     push_back(&stack_tables, &ht_new);
     ast_ptr header = *(ast_ptr *)get(&funcdecl->children, 0);
@@ -576,7 +590,6 @@ void sem_analysis_call(ast_ptr node)
 
         pos--;
     }
-
     char *args = malloc(11 * node->children.size);
     args[0] = 0;
 
@@ -608,6 +621,12 @@ void sem_analysis_call(ast_ptr node)
             copy[0] = tolower(copy[0]);
             node->annotate = copy;
         }
+        else
+        {
+            char *copy = strdup("none");
+            copy[0] = tolower(copy[0]);
+            node->annotate = copy;
+        }
 
         char *current_args = malloc(11 * node->children.size);
         current_args[0] = 0;
@@ -629,6 +648,7 @@ void sem_analysis_call(ast_ptr node)
         if (strcmp(args, current_args) != 0)
             pos = -1;
     }
+
     if (pos < 0)
     {
         printf("Line %d, column %d: Cannot find symbol %s%s\n", id->line, id->column, id->str, args);

@@ -11,6 +11,7 @@ void print_st_program(hash_table *h);
 void print_st_funcdecl(hash_table *fd);
 void print_entry(ast_ptr decl);
 void sem_analysis_program(ast_ptr program);
+void add_global_function(ast_ptr funcdecl);
 void sem_analysis_vardecl(ast_ptr vardecl);
 void sem_analysis_funcdecl(ast_ptr funcdecl);
 void sem_analysis_if(ast_ptr ifnode);

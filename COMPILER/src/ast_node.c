@@ -123,7 +123,7 @@ void print_ast_tree(ast_node *node, int depth)
         printf("%s", node->str);
         break;
     }
-    if (node->annotate != NULL)
+    if (node->annotate != NULL && !(node->node_type == Call && strcmp(node->annotate, "none") == 0))
         printf(" - %s", node->annotate);
     printf("\n");
     for (size_t i = 0; i < node->children.size; i++)
