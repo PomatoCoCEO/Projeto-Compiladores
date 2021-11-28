@@ -240,8 +240,8 @@ void sem_analysis_program(ast_ptr program)
     }
     hash_table *top = get(&stack_tables, 0);
 
-    // if (semantic_errors == 0)
-    print_st_program(top);
+    if (semantic_errors == 0)
+        print_st_program(top);
 }
 
 void sem_analysis_vardecl(ast_ptr vardecl) // can also be used for paramdecl
@@ -517,7 +517,7 @@ void sem_analysis_add(ast_ptr node)
 
 void sem_analysis_unary_math(ast_ptr node)
 {
-    ast_ptr ch1, ch2;
+    ast_ptr ch1;
     ch1 = *(ast_ptr *)get(&node->children, 0);
     semantic_analysis(ch1);
 

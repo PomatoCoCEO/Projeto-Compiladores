@@ -80,7 +80,7 @@ void destroy_string(string a)
     free(a.str.array);
 }
 // print is the same as printf
-int main()
+/*int main()
 {
     char *d = "wser";
     string s = new_string_const(d);
@@ -92,4 +92,4 @@ int main()
     printf("Sum: %s\n", (char *)sum.str.array);
     string r = new_str_range(f + 1, f + 4);
     printf("Range string: %s\n", (char *)r.str.array);
-}
+}*/
