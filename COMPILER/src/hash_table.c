@@ -11,6 +11,7 @@ hash_table new_hash_table(char *name, ast_ptr ref)
     ans.vec = new_vector(sizeof(vector));
     ans.name = strdup(name);
     ans.ref = ref;
+    ans.valid = 1;
     for (int i = 0; i < 5; i++)
     { // initial size: 5
         vector v = new_vector(sizeof(hashable));

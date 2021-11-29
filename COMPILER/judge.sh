@@ -48,7 +48,7 @@ fi
 
 echo -e "${LIGHT_CYAN}[⏲️ ] ${ORANGE}Compiling $codeFile..."
 
-clang ./src/lex.yy.c ./src/y.tab.c ./src/ast_tree.c ./src/ast_node.c ./src/vector.c -o ./executable/$1
+#clang ./src/lex.yy.c ./src/y.tab.c ./src/ast_tree.c ./src/ast_node.c ./src/vector.c -o ./executable/$1
 command="./executable/$1 $flag"
 
 echo -e "${LIGHT_CYAN}[✅] ${LIGHT_GREEN}$codeFile Compiled.${CYAN}"
@@ -82,7 +82,7 @@ do
 	start=`date +%s%N`
 	result="${ORANGE}[⊗] Time Limit Exceeded"
 	prefix="${LIGHT_CYAN}[${YELLOW}$i${LIGHT_CYAN}] ${NO_COLOR}Running test case: ${ORANGE}${file#./dataset/}\t ${LIGHT_RED}$language ${DARK_GRAY}|"
-	timeout $2 $command $extra < $file > sol.out && {
+	timeout $2 $command < $file | sort > sol.out && {
 	end=`date +%s%N`
 	elapsed=$((end-start))
 	conversion=1000000000

@@ -10,6 +10,7 @@ ast_node new_node(int node_type, char *name)
     ans.children = new_vector(sizeof(ast_node *));
     ans.annotate = NULL;
     ans.uses = 0;
+    ans.valid = 1;
     return ans;
 }
 
@@ -25,6 +26,7 @@ ast_node *new_node_ptr(int node_type, char *name, int line, int column)
     ans->column = column;
     ans->annotate = NULL;
     ans->uses = 0;
+    ans->valid = 1;
     return ans;
 }
 

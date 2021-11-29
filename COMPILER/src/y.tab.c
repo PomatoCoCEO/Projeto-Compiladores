@@ -1955,7 +1955,7 @@ yyreduce:
   case 51:
 #line 259 "gocompiler.y"
                {
-            push_node(IntLit, yytext,"", 0, 0);
+            push_node(IntLit, yytext,"", (yyvsp[0].token_id)->line, (yyvsp[0].token_id)->column);
         }
 #line 1961 "y.tab.c"
     break;
@@ -1963,7 +1963,7 @@ yyreduce:
   case 52:
 #line 262 "gocompiler.y"
                   {
-            push_node(RealLit, yytext,"", 0, 0);
+            push_node(RealLit, yytext,"", (yyvsp[0].token_id)->line, (yyvsp[0].token_id)->column);
             }
 #line 1969 "y.tab.c"
     break;
@@ -2081,7 +2081,7 @@ yyreduce:
   case 79:
 #line 294 "gocompiler.y"
                      {
-    push_node(StrLit, yytext,"", 0, 0);
+    push_node(StrLit, yytext,"", (yyvsp[0].token_id)->line, (yyvsp[0].token_id)->column);
 }
 #line 2087 "y.tab.c"
     break;

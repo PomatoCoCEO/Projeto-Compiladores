@@ -150,7 +150,7 @@ NEWLINE                                                 "\n"
 {RESERVED}                                              { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(RESERVED_T); return RESERVED; }
 {ID}                                                    { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(ID_T); return ID; }
 {INTLIT}                                                { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(INTLIT_T); return INTLIT; }
-{INVALID_OCTAL}                                         { yylval.token_id = new_token(yytext, line, column); printf("Line %d, column %d: invalid octal constant (%s)\n", line, column, yytext); act_prev(); column += yyleng; }
+{INVALID_OCTAL}                                         { yylval.token_id = new_token(yytext, line, column); printf("Line %d, column %d: invalid octal constant (%s)\n", line, column, yytext); act_prev(); semicolon = 1; column += yyleng; return INTLIT; }
 {REALLIT}                                               { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng;  if(print) print_tok(REALLIT_T);return REALLIT; }
 {EMPTY_STRING}                                          { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng;  if(print) print_tok(STRLIT_T);return STRLIT; }
 {STRLIT}                                                { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; BEGIN 0;  if(print) print_tok(STRLIT_T);return STRLIT; }
@@ -191,8 +191,8 @@ int main(int argc, char** argv) {
             ast_ptr root = *(ast_ptr*)get(&stack,0);
             handle_blocks(root);
             semantic_analysis(root);
-            // if(semantic_errors == 0)
-            print_ast_tree(root, 0);
+            if(semantic_errors == 0)
+                print_ast_tree(root, 0);
         }
     } else {
         stack = new_vector(sizeof(ast_ptr));

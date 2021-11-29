@@ -24,34 +24,34 @@ func main() {
     a = 1
     a = 1.0
     a = 0x09
-    a = 007
+    a = 009
     a = -1
     a = -1.0
     a = -0x09
-    a = -007
+    a = -009
 
 
     //Direct bssigns to 'b'
     b = 1
     b = 1.0
     b = 0x09
-    b = 007
+    b = 009
     b = -1
     b = -1.0
     b = -0x09
-    b = -007
+    b = -009
 
     //Direct cssigns to 'c'
     c = 1
     c = 1.0
     c = 0x09
-    c = 007
+    c = 009
 
     //Direct dssigns to 'd'
     d = 1
     d = 1.0
     b = 0x09
-    b = 007
+    b = 009
 
     //Unary assigned to 'a'
     a = !a;

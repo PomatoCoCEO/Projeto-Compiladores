@@ -1,4 +1,3 @@
-Line 100, column 7: Operator = cannot be applied to types bool, int
 Line 1002, column 11: Operator - cannot be applied to types string, string
 Line 1002, column 7: Operator = cannot be applied to types string, undef
 Line 1003, column 11: Operator * cannot be applied to types string, string
@@ -2285,7 +2284,7 @@ Line 2698, column 20: Operator * cannot be applied to types float32, int
 Line 2698, column 5: Cannot find symbol float32func1(undef)
 Line 2699, column 20: Operator / cannot be applied to types float32, int
 Line 2699, column 5: Cannot find symbol float32func1(undef)
-Line 27, column 9: invalid octal constant (009)
+Line 27, column 9: Invalid octal constant: 009
 Line 270, column 7: Operator = cannot be applied to types float32, bool
 Line 2700, column 20: Operator % cannot be applied to types float32, int
 Line 2700, column 5: Cannot find symbol float32func1(undef)
@@ -2902,7 +2901,7 @@ Line 3098, column 11: Operator strconv.Atoi cannot be applied to types int, bool
 Line 3098, column 34: Operator && cannot be applied to types int, bool
 Line 3099, column 11: Operator strconv.Atoi cannot be applied to types int, bool
 Line 3099, column 34: Operator || cannot be applied to types int, bool
-Line 31, column 10: invalid octal constant (009)
+Line 31, column 10: Invalid octal constant: 009
 Line 310, column 7: Operator = cannot be applied to types float32, bool
 Line 3100, column 11: Operator strconv.Atoi cannot be applied to types int, bool
 Line 3100, column 34: Operator == cannot be applied to types int, bool
@@ -3600,7 +3599,6 @@ Line 3498, column 11: Operator strconv.Atoi cannot be applied to types string, b
 Line 3498, column 34: Operator && cannot be applied to types bool, string
 Line 3499, column 11: Operator strconv.Atoi cannot be applied to types string, bool
 Line 3499, column 34: Operator || cannot be applied to types bool, string
-Line 35, column 7: Operator = cannot be applied to types float32, int
 Line 350, column 11: Operator && cannot be applied to types string, float32
 Line 350, column 7: Operator = cannot be applied to types float32, bool
 Line 3500, column 11: Operator strconv.Atoi cannot be applied to types string, bool
@@ -3927,7 +3925,6 @@ Line 3697, column 11: Operator strconv.Atoi cannot be applied to types int, floa
 Line 3698, column 11: Operator strconv.Atoi cannot be applied to types int, float32
 Line 3699, column 11: Operator strconv.Atoi cannot be applied to types int, undef
 Line 3699, column 34: Operator % cannot be applied to types float32, float32
-Line 37, column 7: Operator = cannot be applied to types float32, int
 Line 370, column 11: Operator == cannot be applied to types string, bool
 Line 370, column 7: Operator = cannot be applied to types float32, bool
 Line 3701, column 11: Operator strconv.Atoi cannot be applied to types int, undef
@@ -4089,8 +4086,7 @@ Line 3796, column 34: Operator / cannot be applied to types float32, int
 Line 3797, column 11: Operator strconv.Atoi cannot be applied to types float32, undef
 Line 3797, column 34: Operator % cannot be applied to types float32, int
 Line 3799, column 11: Operator strconv.Atoi cannot be applied to types float32, float32
-Line 38, column 7: Operator = cannot be applied to types float32, int
-Line 38, column 9: invalid octal constant (009)
+Line 38, column 9: Invalid octal constant: 009
 Line 380, column 11: Operator == cannot be applied to types bool, int
 Line 380, column 7: Operator = cannot be applied to types float32, bool
 Line 3800, column 11: Operator strconv.Atoi cannot be applied to types float32, float32
@@ -4254,7 +4250,6 @@ Line 3898, column 11: Operator strconv.Atoi cannot be applied to types string, u
 Line 3898, column 34: Operator - cannot be applied to types float32, int
 Line 3899, column 11: Operator strconv.Atoi cannot be applied to types string, undef
 Line 3899, column 34: Operator * cannot be applied to types float32, int
-Line 39, column 7: Operator = cannot be applied to types float32, int
 Line 390, column 11: Operator != cannot be applied to types bool, float32
 Line 390, column 7: Operator = cannot be applied to types float32, bool
 Line 3900, column 11: Operator strconv.Atoi cannot be applied to types string, undef
@@ -4553,7 +4548,6 @@ Line 4089, column 17: Operator + cannot be applied to type bool
 Line 4090, column 17: Operator - cannot be applied to type bool
 Line 4098, column 19: Operator && cannot be applied to types int, int
 Line 4099, column 19: Operator || cannot be applied to types int, int
-Line 41, column 7: Operator = cannot be applied to types float32, int
 Line 4103, column 19: Operator < cannot be applied to types int, float32
 Line 4104, column 19: Operator > cannot be applied to types int, float32
 Line 4105, column 19: Operator <= cannot be applied to types int, float32
@@ -4637,8 +4631,7 @@ Line 4196, column 19: Operator > cannot be applied to types string, bool
 Line 4197, column 19: Operator <= cannot be applied to types string, bool
 Line 4198, column 19: Operator >= cannot be applied to types string, bool
 Line 4199, column 19: Operator && cannot be applied to types string, bool
-Line 42, column 10: invalid octal constant (009)
-Line 42, column 7: Operator = cannot be applied to types float32, int
+Line 42, column 10: Invalid octal constant: 009
 Line 4200, column 19: Operator || cannot be applied to types string, bool
 Line 4201, column 19: Operator == cannot be applied to types string, bool
 Line 4202, column 19: Operator != cannot be applied to types string, bool
@@ -5450,7 +5443,7 @@ Line 4794, column 40: Operator != cannot be applied to types int, bool
 Line 4799, column 40: Incompatible type bool in return statement
 Line 4799, column 40: Operator < cannot be applied to types float32, int
 Line 48, column 7: Operator = cannot be applied to types string, int
-Line 48, column 9: invalid octal constant (009)
+Line 48, column 9: Invalid octal constant: 009
 Line 480, column 11: Operator && cannot be applied to types float32, bool
 Line 480, column 7: Operator = cannot be applied to types string, bool
 Line 4800, column 40: Incompatible type bool in return statement
@@ -5824,7 +5817,6 @@ Line 528, column 11: Operator || cannot be applied to types bool, int
 Line 528, column 7: Operator = cannot be applied to types string, bool
 Line 529, column 11: Operator == cannot be applied to types bool, int
 Line 529, column 7: Operator = cannot be applied to types string, bool
-Line 53, column 7: Operator = cannot be applied to types float32, int
 Line 530, column 11: Operator != cannot be applied to types bool, int
 Line 530, column 7: Operator = cannot be applied to types string, bool
 Line 532, column 11: Operator < cannot be applied to types bool, float32
@@ -5843,8 +5835,7 @@ Line 538, column 11: Operator == cannot be applied to types bool, float32
 Line 538, column 7: Operator = cannot be applied to types string, bool
 Line 539, column 11: Operator != cannot be applied to types bool, float32
 Line 539, column 7: Operator = cannot be applied to types string, bool
-Line 54, column 7: Operator = cannot be applied to types float32, int
-Line 54, column 9: invalid octal constant (009)
+Line 54, column 9: Invalid octal constant: 009
 Line 541, column 11: Operator < cannot be applied to types bool, string
 Line 541, column 7: Operator = cannot be applied to types string, bool
 Line 542, column 11: Operator > cannot be applied to types bool, string

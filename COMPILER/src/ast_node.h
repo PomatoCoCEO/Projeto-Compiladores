@@ -3,13 +3,15 @@
 
 #include "vector.h"
 
+extern int semantic_errors;
+
 #define true 1
 #define false 0
 #define P_NODE(a, b, l, c) push_node(a, #a, b, l, c)
 
 typedef struct _node
 {
-    int node_type, line, column, uses;
+    int node_type, line, column, uses, valid;
     char *str, *annotate;
     vector children;
 } ast_node;

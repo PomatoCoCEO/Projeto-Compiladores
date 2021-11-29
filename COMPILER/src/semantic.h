@@ -3,7 +3,6 @@
 
 #include "hash_table.h"
 #include "ast_tree.h"
-#include "str.h"
 #include "node_hash.h"
 #include <ctype.h>
 void semantic_analysis(ast_ptr node);

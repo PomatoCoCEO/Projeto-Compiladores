@@ -23,6 +23,7 @@ typedef struct
     size_t vec_size_pos;
     char *name;
     ast_ptr ref;
+    int valid;
 } hash_table;
 
 extern int nos[];

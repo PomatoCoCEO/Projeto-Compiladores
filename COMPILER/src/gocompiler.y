@@ -257,10 +257,10 @@ FuncInvocation : ID_NTERM LPAR Expr REP_COMMA_EXPR RPAR {
                 | ID_NTERM LPAR ERR_NTERM RPAR { }
                 ;
 Pred5 : INTLIT {
-            push_node(IntLit, yytext,"", 0, 0);
+            push_node(IntLit, yytext,"", $1->line, $1->column);
         } 
         | REALLIT {
-            push_node(RealLit, yytext,"", 0, 0);
+            push_node(RealLit, yytext,"", $1->line, $1->column);
             }
         | ID_NTERM
         | FuncInvocation
@@ -292,7 +292,7 @@ ID_NTERM: ID {
     push_node(Id, yytext,"", $1->line, $1->column);
 }
 STRLIT_NTERM: STRLIT {
-    push_node(StrLit, yytext,"", 0, 0);
+    push_node(StrLit, yytext,"", $1->line, $1->column);
 }
 ERR_NTERM: error {}
 %%
