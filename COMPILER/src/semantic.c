@@ -683,7 +683,7 @@ void sem_analysis_call(ast_ptr node)
 
         pos--;
     }
-    char *args = malloc(11 * node->children.size);
+    char *args = malloc(11 * node->children.size+10);
     args[0] = 0;
 
     strcat(args, "(");
@@ -721,11 +721,11 @@ void sem_analysis_call(ast_ptr node)
             node->annotate = copy;
         }
 
-        char *current_args = malloc(11 * node->children.size);
+        ast_ptr params = *(ast_ptr *)get(&header->children, header->children.size - 1);
+        char *current_args = malloc(11 * params->children.size+10);
         current_args[0] = 0;
 
         strcat(current_args, "(");
-        ast_ptr params = *(ast_ptr *)get(&header->children, header->children.size - 1);
         for (int i = 0; i < params->children.size; i++)
         {
             ast_ptr paramdecl = *(ast_ptr *)get(&params->children, i);

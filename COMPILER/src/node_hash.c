@@ -13,25 +13,6 @@ char *name_decl(ast_ptr node)
         ast_ptr header = *(ast_ptr *)get(&node->children, 0);
         ast_ptr name = *(ast_ptr *)get(&header->children, 0);
 
-        char *args = malloc(strlen(name->str) + 11 * node->children.size);
-        args[0] = 0;
-
-        strcat(args, "(");
-        ast_ptr params = *(ast_ptr *)get(&header->children, header->children.size - 1);
-        for(int i = 0; i < params->children.size; i++) {
-            ast_ptr paramdecl = *(ast_ptr *)get(&params->children, i);
-            ast_ptr paramtype = *(ast_ptr *)get(&paramdecl->children, 0);
-            char copy[strlen(paramtype->str) + 1];
-            strcpy(copy, paramtype->str);
-            copy[0] = tolower(copy[0]);
-            strcat(args, copy);
-            if (i < params->children.size - 1)
-                strcat(args, ",");
-        }
-        strcat(args, ")");
-
-        strcat(args, name->str);
-
         return name->str;
     }
     else if (node->node_type == Id)
