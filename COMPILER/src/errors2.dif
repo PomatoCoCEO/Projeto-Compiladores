@@ -1,0 +1,37 @@
+2446c2446
+< Line 27, column 9: invalid octal constant (009)
+---
+> Line 27, column 9: Invalid octal constant: 009
+3077c3077
+< Line 31, column 10: invalid octal constant (009)
+---
+> Line 31, column 10: Invalid octal constant: 009
+3770d3769
+< Line 35, column 7: Operator = cannot be applied to types float32, int
+4090d4088
+< Line 37, column 7: Operator = cannot be applied to types float32, int
+4254,4255c4252
+< Line 38, column 7: Operator = cannot be applied to types float32, int
+< Line 38, column 9: invalid octal constant (009)
+---
+> Line 38, column 9: Invalid octal constant: 009
+4418d4414
+< Line 39, column 7: Operator = cannot be applied to types float32, int
+4638d4633
+< Line 41, column 7: Operator = cannot be applied to types float32, int
+4720,4721c4715
+< Line 42, column 10: invalid octal constant (009)
+< Line 42, column 7: Operator = cannot be applied to types float32, int
+---
+> Line 42, column 10: Invalid octal constant: 009
+5624c5618
+< Line 48, column 9: invalid octal constant (009)
+---
+> Line 48, column 9: Invalid octal constant: 009
+5844d5837
+< Line 53, column 7: Operator = cannot be applied to types float32, int
+5861,5862c5854
+< Line 54, column 7: Operator = cannot be applied to types float32, int
+< Line 54, column 9: invalid octal constant (009)
+---
+> Line 54, column 9: Invalid octal constant: 009

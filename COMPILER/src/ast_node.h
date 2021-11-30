@@ -2,21 +2,48 @@
 #define AST_NODE_H
 
 #include "vector.h"
-
 extern int semantic_errors;
 
 #define true 1
 #define false 0
 #define P_NODE(a, b, l, c) push_node(a, #a, b, l, c)
 
+typedef struct
+{
+    int isVec;
+    union
+    {
+        vector vec;
+        int type;
+    } u;
+} var_type;
+typedef enum
+{
+    INVALID_TP,
+    INT_TP,
+    FLOAT32_TP,
+    BOOL_TP,
+    STRING_TP,
+    UNDEF_TP,
+    NONE_TP
+} v_type;
+
 typedef struct _node
 {
     int node_type, line, column, uses, valid;
     char *str, *annotate;
     vector children;
+    var_type type;
 } ast_node;
-
 typedef ast_node *ast_ptr;
+
+var_type new_var_type(ast_ptr node);
+var_type new_var_type_t(int type);
+var_type copy_var_type_t(var_type type);
+int equals_var_type(void *a, void *b);
+int equals_var_int(var_type a, int b);
+char *var_type_str(var_type type);
+
 extern char *yytext;
 extern int prev_line, prev_col, yyleng;
 extern int syn_error;

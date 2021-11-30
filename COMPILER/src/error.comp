@@ -1,0 +1,6 @@
+lex.yy.c:1634:16: warning: ‘input’ defined but not used [-Wunused-function]
+ 1634 |     static int input  (void)
+      |                ^~~~~
+lex.yy.c:1591:17: warning: ‘yyunput’ defined but not used [-Wunused-function]
+ 1591 |     static void yyunput (int c, char * yy_bp )
+      |                 ^~~~~~~

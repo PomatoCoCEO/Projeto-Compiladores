@@ -25,31 +25,13 @@ void print_st_funcdecl(hash_table *fd)
     current_func = funcdecl;
     ast_ptr header = *(ast_ptr *)get(&funcdecl->children, 0);
     ast_ptr id = *(ast_ptr *)get(&header->children, 0);
-    printf("===== Function %s(", id->str);
     ast_ptr params = *(ast_ptr *)get(&header->children, header->children.size - 1);
-    for (int i = 0; i < params->children.size; i++)
-    {
-        ast_ptr paramdecl = *(ast_ptr *)get(&params->children, i);
-        ast_ptr paramtype = *(ast_ptr *)get(&paramdecl->children, 0);
-        char copy[strlen(paramtype->str) + 1];
-        strcpy(copy, paramtype->str);
-        copy[0] = tolower(copy[0]);
-        printf("%s", copy);
-        if (i < params->children.size - 1)
-            printf(",");
-    }
-    printf(") Symbol Table =====\n");
-
-    if (header->children.size == 2)
-        printf("return\t\tnone\n");
-    else
-    {
-        ast_ptr ret_type = *(ast_ptr *)get(&header->children, 1);
-        char copy[strlen(ret_type->str) + 1];
-        strcpy(copy, ret_type->str);
-        copy[0] = tolower(copy[0]);
-        printf("return\t\t%s\n", copy);
-    }
+    var_type param_types = new_var_type(params);
+    char *param_string = var_type_str(param_types);
+    printf("===== Function %s%s Symbol Table =====\n", id->str, param_string);
+    free(param_string);
+    var_type f_type = new_var_type(funcdecl);
+    printf("return\t\t%s\n", var_type_str(f_type));
     vector nds = nodes(fd);
     for (int i = 0; i < nds.size; i++)
     {
@@ -65,48 +47,37 @@ void print_entry(ast_ptr decl)
     {
         ast_ptr decl_type = *(ast_ptr *)get(&decl->children, 0);
         ast_ptr id = *(ast_ptr *)get(&decl->children, 1);
-        char copy[strlen(decl_type->str) + 1];
-        strcpy(copy, decl_type->str);
-        copy[0] = tolower(copy[0]);
-        printf("%s\t\t%s\n", id->str, copy);
+        var_type dt = new_var_type(decl_type);
+        printf("%s\t\t%s\n", id->str, var_type_str(dt));
     }
     if (decl->node_type == ParamDecl)
     {
         ast_ptr decl_type = *(ast_ptr *)get(&decl->children, 0);
         ast_ptr id = *(ast_ptr *)get(&decl->children, 1);
-        char copy[strlen(decl_type->str) + 1];
+        var_type dt = new_var_type(decl_type);
+        printf("%s\t\t%s\tparam\n", id->str, var_type_str(dt));
+        /* char copy[strlen(decl_type->str) + 1];
         strcpy(copy, decl_type->str);
         copy[0] = tolower(copy[0]);
-        printf("%s\t\t%s\tparam\n", id->str, copy);
+        printf("%s\t\t%s\tparam\n", id->str, copy); */
     }
     if (decl->node_type == FuncDecl)
     {
         ast_ptr header = *(ast_ptr *)get(&decl->children, 0);
         ast_ptr id = *(ast_ptr *)get(&header->children, 0);
-        printf("%s\t(", id->str);
         ast_ptr params = *(ast_ptr *)get(&header->children, header->children.size - 1);
-        for (int i = 0; i < params->children.size; i++)
-        {
-            ast_ptr paramdecl = *(ast_ptr *)get(&params->children, i);
-            ast_ptr paramtype = *(ast_ptr *)get(&paramdecl->children, 0);
-            char copy[strlen(paramtype->str) + 1];
-            strcpy(copy, paramtype->str);
-            copy[0] = tolower(copy[0]);
-            printf("%s", copy);
-            if (i < params->children.size - 1)
-                printf(",");
-        }
-        printf(")\t");
+        var_type param_type = new_var_type(params);
+        char *param_string = var_type_str(param_type);
+        printf("%s\t%s\t", id->str, param_string);
         if (header->children.size == 2)
             printf("none\n");
         else
         {
             ast_ptr ret_type = *(ast_ptr *)get(&header->children, 1);
-            char *copy = strdup(ret_type->str);
-            copy[0] = tolower(copy[0]);
-            printf("%s\n", copy);
-            free(copy);
+            var_type ret = new_var_type(ret_type);
+            printf("%s\n", var_type_str(ret));
         }
+        free(param_string);
     }
 }
 
@@ -126,7 +97,7 @@ vector nodes(hash_table *h)
         {
             hashable *p = get(v, j);
             ast_ptr ob = p->object;
-            // printf("Update %ld to %s\n", p->pos, name_decl(ob));
+            // printf("Update %ld to %s\n", p->pos, name_decl(ob));a
             set(&ans, p->pos, &ob);
         }
     }
@@ -149,22 +120,14 @@ void semantic_analysis(ast_ptr node)
         sem_analysis_funcdecl(node);
         break;
     case IntLit:
-        node->uses++;
-        node->annotate = strdup("int");
-        break;
     case RealLit:
-        node->uses++;
-        node->annotate = strdup("float32"); // malloc(4);
-        break;
     case Bool:
-        node->uses++;
-        node->annotate = strdup("bool"); // malloc(4);
-        break;
     case StrLit:
         node->uses++;
-        node->annotate = strdup("string");
+        node->type = new_var_type(node);
+        node->annotate = var_type_str(node->type);
+        // node->annotate = strdup("int");
         break;
-
     case Ne:
     case Eq:
         node->uses++;
@@ -233,8 +196,9 @@ void semantic_analysis(ast_ptr node)
         sem_analysis_unary_math(node);
         break;
     default:
-        return;
+        break;
     }
+    // printf("Finished analysing node %s: type %s\n", node->str, node->annotate ? node->annotate : "");
 }
 
 void sem_analysis_program(ast_ptr program)
@@ -273,7 +237,7 @@ void sem_analysis_vardecl(ast_ptr vardecl) // can also be used for paramdecl
         // ERROR: ALREADY DECLARED
         ast_ptr id = *(ast_ptr *)get(&vardecl->children, 1);
         vardecl->uses++;
-        if(ht->ref->valid)
+        if (ht->ref->valid)
             printf("Line %d, column %d: Symbol %s already defined\n", id->line, id->column, id->str);
         semantic_errors++;
     }
@@ -293,7 +257,7 @@ void add_global_function(ast_ptr funcdecl)
         ast_ptr header = *(ast_ptr *)get(&funcdecl->children, 0);
         ast_ptr id = *(ast_ptr *)get(&header->children, 0);
         funcdecl->uses++;
-        
+
         printf("Line %d, column %d: Symbol %s already defined\n", id->line, id->column, id->str);
         funcdecl->valid = 0;
         semantic_errors++;
@@ -313,6 +277,7 @@ void sem_analysis_funcdecl(ast_ptr funcdecl)
     push_back(&stack_tables, &ht_new);
     ast_ptr header = *(ast_ptr *)get(&funcdecl->children, 0);
     ast_ptr params = *(ast_ptr *)get(&header->children, header->children.size - 1);
+    // params->type = new_var_type(params);
     for (int i = 0; i < params->children.size; i++)
     {
         sem_analysis_vardecl(*(ast_ptr *)get(&params->children, i)); // other symbols added to table
@@ -325,20 +290,20 @@ void sem_analysis_funcdecl(ast_ptr funcdecl)
     hash_table func = *(hash_table *)get(&stack_tables, stack_tables.size - 1);
     push_back(&vec_tables, &func);
 
-
     vector nds = nodes(&func);
 
     for (int i = 0; i < nds.size; i++)
     {
         ast_ptr ch = *(ast_ptr *)get(&nds, i);
-        //printf("%s: %s %d\n", name_decl(ch), ch->str, ch->uses);
-        if(ch->uses == 0 && ch->node_type == VarDecl) {
-            if(func.ref->valid)
+        // printf("%s: %s %d\n", name_decl(ch), ch->str, ch->uses);
+        if (ch->uses == 0 && ch->node_type == VarDecl)
+        {
+            if (func.ref->valid)
                 printf("Line %d, column %d: Symbol %s declared but never used\n", ch->line, ch->column, name_decl(ch));
             semantic_errors++;
         }
     }
-    
+
     pop_back(&stack_tables);
 }
 
@@ -351,10 +316,10 @@ void sem_analysis_if(ast_ptr ifnode)
         semantic_analysis(child);
     }
     ast_ptr b = *(ast_ptr *)get(&ifnode->children, 0);
-    if (strcmp(b->annotate, "bool") != 0)
+    if (/*strcmp(b->annotate, "bool") != 0*/ !equals_var_int(b->type, BOOL_TP))
     {
         ast_ptr first_child = *(ast_ptr *)get(&ifnode->children, 0);
-        if(ht->ref->valid)
+        if (ht->ref->valid)
             printf("Line %d, column %d: Incompatible type %s in if statement\n", first_child->line, first_child->column, b->annotate);
         semantic_errors++;
     }
@@ -369,12 +334,15 @@ void sem_analysis_print(ast_ptr print_node)
         semantic_analysis(child);
     }
     ast_ptr first_child = *(ast_ptr *)get(&print_node->children, 0);
-    if(ht->ref->valid && strcmp(first_child->annotate, "undef") == 0) {
+    if (ht->ref->valid && first_child->type.u.type == UNDEF_TP)
+    {
         ast_ptr ref = first_child;
-        if(first_child->node_type == VarDecl) {
+        if (first_child->node_type == VarDecl)
+        {
             ref = *(ast_ptr *)get(&first_child->children, 1);
         }
-        if(first_child->node_type == Call) {
+        if (first_child->node_type == Call)
+        {
             ref = *(ast_ptr *)get(&first_child->children, 0);
         }
         printf("Line %d, column %d: Incompatible type %s in fmt.Println statement\n", ref->line, ref->column, first_child->annotate);
@@ -393,10 +361,10 @@ void sem_analysis_for(ast_ptr fornode)
     if (fornode->children.size == 2)
     {
         ast_ptr condition = *(ast_ptr *)get(&fornode->children, 0);
-        if (strcmp(condition->annotate, "bool") != 0)
+        if (condition->type.u.type != BOOL_TP)
         {
             ast_ptr first_child = *(ast_ptr *)get(&fornode->children, 0);
-            if(ht->ref->valid)
+            if (ht->ref->valid)
                 printf("Line %d, column %d: Incompatible type %s in for statement\n", first_child->line, first_child->column, condition->annotate);
             semantic_errors++;
         }
@@ -411,16 +379,17 @@ void sem_analysis_or_and(ast_ptr propnode)
     semantic_analysis(ch1);
     semantic_analysis(ch2);
 
-    if (strcmp(ch1->annotate, ch2->annotate) != 0 || strcmp(ch1->annotate, "bool") != 0)
+    if (!equals_var_type(&ch1->type, &ch2->type) || !equals_var_int(ch1->type, BOOL_TP) /*strcmp(ch1->annotate, ch2->annotate) != 0 || strcmp(ch1->annotate, "bool") != 0*/)
     {
-        if(ht->ref->valid)
+        if (ht->ref->valid)
             printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", propnode->line, propnode->column, propnode->str, ch1->annotate, ch2->annotate);
         semantic_errors++;
-        propnode->annotate = strdup("bool");
+        propnode->type = new_var_type_t(UNDEF_TP);
+        propnode->annotate = var_type_str(propnode->type);
         return;
     }
-    else
-        propnode->annotate = strdup("bool");
+    propnode->type = new_var_type_t(BOOL_TP);
+    propnode->annotate = var_type_str(propnode->type);
 }
 
 void sem_analysis_comp(ast_ptr propnode)
@@ -432,16 +401,22 @@ void sem_analysis_comp(ast_ptr propnode)
     semantic_analysis(ch1);
     semantic_analysis(ch2);
 
-    if (strcmp(ch1->annotate, ch2->annotate) != 0 || strcmp(ch1->annotate, "undef") == 0 || strcmp(ch1->annotate, "bool") == 0)
+    if (!equals_var_type(&ch1->type, &ch2->type) || ch1->type.u.type == UNDEF_TP || ch1->type.u.type == BOOL_TP)
     {
-        if(ht->ref->valid)
-            printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", propnode->line, propnode->column, propnode->str, ch1->annotate, ch2->annotate);
+        if (ht->ref->valid)
+        {
+            printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", propnode->line, propnode->column,
+                   propnode->str, ch1->annotate, ch2->annotate);
+        }
         semantic_errors++;
-        propnode->annotate = strdup("bool");
-        return;
+        // propnode->annotate = strdup("bool");
+        propnode->type = new_var_type_t(UNDEF_TP);
     }
-
-    propnode->annotate = strdup("bool");
+    else
+    {
+        propnode->type = new_var_type_t(BOOL_TP);
+    }
+    propnode->annotate = var_type_str(propnode->type);
 }
 
 void sem_analysis_equality(ast_ptr propnode)
@@ -453,19 +428,23 @@ void sem_analysis_equality(ast_ptr propnode)
     semantic_analysis(ch1);
     semantic_analysis(ch2);
 
-    if (strcmp(ch1->annotate, ch2->annotate) != 0 || strcmp(ch1->annotate, "undef") == 0)
+    if (!equals_var_type(&ch1->type, &ch2->type) || equals_var_int(ch1->type, UNDEF_TP))
     {
-        if(ht->ref->valid)
+        if (ht->ref->valid)
             printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", propnode->line, propnode->column, propnode->str, ch1->annotate, ch2->annotate);
         semantic_errors++;
-        propnode->annotate = strdup("bool");
-        return;
+        // propnode->annotate = strdup("bool");
+        propnode->type = new_var_type_t(UNDEF_TP);
+    }
+    else
+    {
+        propnode->type = new_var_type_t(BOOL_TP);
     }
 
-    propnode->annotate = strdup("bool");
+    propnode->annotate = var_type_str(propnode->type);
 }
 
-void sem_analysis_id(ast_ptr id)
+void sem_analysis_id(ast_ptr id) // only used in var declarations
 {
     hash_table *ht = get(&stack_tables, stack_tables.size - 1);
     int pos = stack_tables.size - 1;
@@ -477,17 +456,21 @@ void sem_analysis_id(ast_ptr id)
         if (f != NULL)
         {
             ast_ptr decl = f->object;
-            if(decl->node_type == FuncDecl) {
-                if(ht->ref->valid)
+            if (decl->node_type == FuncDecl)
+            {
+                if (ht->ref->valid)
                     printf("Line %d, column %d: Cannot find symbol %s\n", id->line, id->column, id->str);
                 semantic_errors++;
-                id->annotate = strdup("undef");
+                id->type = new_var_type_t(UNDEF_TP);
+                id->annotate = var_type_str(id->type);
                 return;
             }
             ast_ptr type = *(ast_ptr *)get(&decl->children, 0);
-            char *copy = strdup(type->str);
-            copy[0] = tolower(copy[0]);
-            id->annotate = copy;
+            printf("id string of type: %s\n", type->str);
+            id->type = new_var_type(type);
+            printf("Id Type: %d\n", id->type.u.type);
+            id->annotate = var_type_str(id->type);
+            printf("Id annotate: %s\n", id->annotate);
             decl->uses++;
             break;
         }
@@ -495,10 +478,11 @@ void sem_analysis_id(ast_ptr id)
     }
     if (pos < 0)
     {
-        if(ht->ref->valid)
+        if (ht->ref->valid)
             printf("Line %d, column %d: Cannot find symbol %s\n", id->line, id->column, id->str);
         semantic_errors++;
-        id->annotate = strdup("undef");
+        id->type = new_var_type_t(UNDEF_TP);
+        id->annotate = var_type_str(id->type);
         return;
     }
 }
@@ -514,73 +498,94 @@ void sem_analysis_propagate(ast_ptr node)
 
     if (node->node_type == Return)
     {
-        // float32\0
-        char copy[10];
+        // printf("Analysing Return\n");
+        //  float32\0
+        //  char copy[10];
         ast_ptr header = *(ast_ptr *)get(&current_func->children, 0);
+        // printf("Analysing Return\n");
         if (header->children.size == 3)
         {
             ast_ptr type = *(ast_ptr *)get(&header->children, 1);
-            strcpy(copy, type->str);
-            copy[0] = tolower(copy[0]);
+            // printf("Type:%sn\n", type->str);
+            node->type = new_var_type(type);
         }
         else
         {
-            strcpy(copy, "none");
+            node->type = new_var_type_t(NONE_TP);
         }
-        char current[10];
-
+        // printf("Node type: %s\n", var_type_str(node->type));
+        // node->annotate = var_type_str(node->type);
+        var_type current;
         if (node->children.size > 0)
         {
             ast_ptr ch = *(ast_ptr *)get(&node->children, 0);
-            strcpy(current, ch->annotate);
+            // strcpy(current, ch->annotate);
+            current = copy_var_type_t(ch->type); // ch->type;
         }
         else
         {
-            strcpy(current, "none");
+            // strcpy(current, "none");
+            current = new_var_type_t(NONE_TP);
         }
-        if (strcmp(copy, current) != 0)
+        printf("Ret2\n");
+        if (!equals_var_type(&node->type, &current) /*strcmp(copy, current) != 0*/)
         {
             semantic_errors++;
-            if(node->children.size > 0) {
+            if (node->children.size > 0)
+            {
+                // printf("My child?\n");
                 ast_ptr first_child = *(ast_ptr *)get(&node->children, 0);
-                if(ht->ref->valid)
-                    printf("Line %d, column %d: Incompatible type %s in return statement\n", first_child->line, first_child->column, current);
-            } else {
-                if(ht->ref->valid)
-                    printf("Line %d, column %d: Incompatible type %s in return statement\n", node->line, node->column, current);
+                if (ht->ref->valid)
+                    printf("Line %d, column %d: Incompatible type %s in return statement\n", first_child->line, first_child->column, var_type_str(current));
+            }
+            else
+            {
+                if (ht->ref->valid)
+                    printf("Line %d, column %d: Incompatible type %s in return statement\n", node->line, node->column, var_type_str(current));
             }
         }
+        // printf("Boo\n");
     }
 }
 
 void sem_analysis_binary_math(ast_ptr node)
 {
+    // printf("Binary math\n");
     hash_table *ht = get(&stack_tables, stack_tables.size - 1);
     ast_ptr ch1, ch2;
     ch1 = *(ast_ptr *)get(&node->children, 0);
     ch2 = *(ast_ptr *)get(&node->children, 1);
     semantic_analysis(ch1);
     semantic_analysis(ch2);
-
-    if(node->node_type == Mod) {
-        if(strcmp(ch1->annotate, ch2->annotate) == 0 && strcmp(ch1->annotate, "int") != 0) {
-            if(ht->ref->valid)
+    // printf("Analysing %s\n", node->str);
+    // printf("Type1: %d, type2: %d", new_var_type(ch1).u.type, new_var_type(ch1).u.type);
+    if (node->node_type == Mod)
+    {
+        if (/* strcmp(ch1->annotate, ch2->annotate) == 0 */ equals_var_type(&ch1->type, &ch2->type) && !equals_var_int(ch1->type, INT_TP) /*strcmp(ch1->annotate, "int") != 0*/)
+        {
+            if (ht->ref->valid)
                 printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", node->line, node->column, node->str, ch1->annotate, ch2->annotate);
             semantic_errors++;
-            node->annotate = strdup("undef");
+            node->type = new_var_type_t(UNDEF_TP);
+            node->annotate = var_type_str(node->type);
             return;
         }
     }
 
-    if (strcmp(ch1->annotate, ch2->annotate) != 0 || strcmp(ch1->annotate, "bool") == 0 || strcmp(ch1->annotate, "string") == 0 || strcmp(ch1->annotate, "undef") == 0)
+    if (!equals_var_type(&ch1->type, &ch2->type) || equals_var_int(ch1->type, BOOL_TP) || equals_var_int(ch1->type, STRING_TP) || equals_var_int(ch1->type, UNDEF_TP) || equals_var_int(ch1->type, NONE_TP))
     {
-        if(ht->ref->valid)
+        // printf("Boo\n");
+        if (ht->ref->valid)
             printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", node->line, node->column, node->str, ch1->annotate, ch2->annotate);
         semantic_errors++;
-        node->annotate = strdup("undef");
+        node->type = new_var_type_t(UNDEF_TP);
+        node->annotate = var_type_str(node->type);
+        // printf("Boo2\n");
         return;
     }
-    node->annotate = strdup(ch1->annotate);
+    node->type = copy_var_type_t(ch1->type);
+    node->annotate = var_type_str(node->type);
+    // node->annotate = strdup(ch1->annotate);
 }
 
 void sem_analysis_assign(ast_ptr node)
@@ -592,17 +597,18 @@ void sem_analysis_assign(ast_ptr node)
     semantic_analysis(ch1);
     semantic_analysis(ch2);
 
-    
-
-    if (strcmp(ch1->annotate, ch2->annotate) != 0 || strcmp(ch1->annotate, "undef") == 0)
+    if (!equals_var_type(&ch1->type, &ch2->type) || equals_var_int(ch1->type, UNDEF_TP) || equals_var_int(ch2->type, NONE_TP) /*strcmp(ch1->annotate, ch2->annotate) != 0 || strcmp(ch1->annotate, "undef") == 0*/)
     {
-        if(ht->ref->valid)
+        if (ht->ref->valid)
             printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", node->line, node->column, node->str, ch1->annotate, ch2->annotate);
         semantic_errors++;
-        node->annotate = strdup("undef");
+        node->type = new_var_type_t(UNDEF_TP);
+        node->annotate = var_type_str(node->type);
         return;
     }
-    node->annotate = strdup(ch1->annotate);
+    // node->annotate = strdup(ch1->annotate);
+    node->type = copy_var_type_t(ch1->type);
+    node->annotate = var_type_str(node->type);
 }
 
 void sem_analysis_add(ast_ptr node)
@@ -614,15 +620,17 @@ void sem_analysis_add(ast_ptr node)
     semantic_analysis(ch1);
     semantic_analysis(ch2);
 
-    if (strcmp(ch1->annotate, ch2->annotate) != 0 || strcmp(ch1->annotate, "bool") == 0 || strcmp(ch1->annotate, "undef") == 0)
+    if (!equals_var_type(&ch1->type, &ch2->type) || equals_var_int(ch1->type, BOOL_TP) || equals_var_int(ch1->type, UNDEF_TP) || equals_var_int(ch2->type, NONE_TP))
     {
-        if(ht->ref->valid)
+        if (ht->ref->valid)
             printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", node->line, node->column, node->str, ch1->annotate, ch2->annotate);
         semantic_errors++;
-        node->annotate = strdup("undef");
+        node->type = new_var_type_t(UNDEF_TP);
+        node->annotate = var_type_str(node->type);
         return;
     }
-    node->annotate = strdup(ch1->annotate);
+    node->type = copy_var_type_t(ch1->type);
+    node->annotate = var_type_str(node->type);
 }
 
 void sem_analysis_unary_math(ast_ptr node)
@@ -635,29 +643,33 @@ void sem_analysis_unary_math(ast_ptr node)
     switch (node->node_type)
     {
     case Not:
-        if (strcmp(ch1->annotate, "bool") != 0)
+        if (!equals_var_int(ch1->type, BOOL_TP) /*strcmp(ch1->annotate, "bool") != 0*/)
         {
-            if(ht->ref->valid)
+            if (ht->ref->valid)
                 printf("Line %d, column %d: Operator %s cannot be applied to type %s\n", node->line, node->column, node->str, ch1->annotate);
             semantic_errors++;
-            node->annotate = strdup("bool");
+            // node->annotate = strdup("bool");
+            node->type = new_var_type_t(BOOL_TP);
+            node->annotate = var_type_str(node->type);
             return;
         }
         break;
     case Minus:
     case Plus:
-        
-        if (strcmp(ch1->annotate, "int") != 0 && strcmp(ch1->annotate, "float32") != 0)
+
+        if (!equals_var_int(ch1->type, INT_TP) && !equals_var_int(ch1->type, FLOAT32_TP) /* strcmp(ch1->annotate, "int") != 0 && strcmp(ch1->annotate, "float32") != 0 */)
         {
-            if(ht->ref->valid)
+            if (ht->ref->valid)
                 printf("Line %d, column %d: Operator %s cannot be applied to type %s\n", node->line, node->column, node->str, ch1->annotate);
             semantic_errors++;
-            node->annotate = strdup("undef");
+            node->type = new_var_type_t(UNDEF_TP);
+            node->annotate = var_type_str(node->type);
             return;
         }
         break;
     }
-    node->annotate = strdup(ch1->annotate);
+    node->type = copy_var_type_t(ch1->type);
+    node->annotate = var_type_str(node->type);
 }
 
 void sem_analysis_parseargs(ast_ptr node)
@@ -666,28 +678,30 @@ void sem_analysis_parseargs(ast_ptr node)
     sem_analysis_propagate(node);
     ast_ptr ch1 = *(ast_ptr *)get(&node->children, 0);
     ast_ptr ch2 = *(ast_ptr *)get(&node->children, 1);
-    if (strcmp(ch1->annotate, "int") != 0 || strcmp(ch2->annotate, "int") != 0)
+    if (!equals_var_int(ch1->type, INT_TP) || !equals_var_int(ch2->type, INT_TP) /* strcmp(ch1->annotate, "int") != 0 || strcmp(ch2->annotate, "int") != 0 */)
     {
-        if(ht->ref->valid)
+        if (ht->ref->valid)
             printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", node->line, node->column, node->str, ch1->annotate, ch2->annotate);
         semantic_errors++;
-        node->annotate = strdup("undef");
+        node->type = new_var_type_t(UNDEF_TP);
+        node->annotate = var_type_str(node->type);
         return;
     }
-    node->annotate = strdup(ch1->annotate);
+    node->type = copy_var_type_t(ch1->type);
+    node->annotate = var_type_str(node->type);
 }
 
 void sem_analysis_call(ast_ptr node)
 {
-    hash_table *ht = get(&stack_tables, stack_tables.size - 1);
+    hash_table *ht = get(&stack_tables, stack_tables.size - 1); // check outermost table
     for (int i = 1; i < node->children.size; i++)
     {
         ast_ptr c = *(ast_ptr *)get(&node->children, i);
-        semantic_analysis(c);
+        semantic_analysis(c); // see children
     }
     ast_ptr id = *(ast_ptr *)get(&node->children, 0);
     ast_ptr func_ref;
-    hashable d = new_hashable(id, hash_ast_ptr);
+    hashable d = new_hashable(id, hash_ast_ptr); // hashing the id to see if we find it
     int pos = stack_tables.size - 1;
     while (pos >= 0)
     {
@@ -697,8 +711,10 @@ void sem_analysis_call(ast_ptr node)
         if (f != NULL)
         {
             func_ref = f->object;
+            printf("func_ref: %s\n", func_ref->str);
             if (func_ref->node_type != FuncDecl)
             {
+                printf("not funcdecl\n");
                 pos = -1;
                 break;
             }
@@ -708,25 +724,33 @@ void sem_analysis_call(ast_ptr node)
 
         pos--;
     }
-    char *args = malloc(11 * node->children.size+10);
-    args[0] = 0;
+    var_type args;
+    args.isVec = 1;
+    args.u.vec = new_vector(sizeof(int));
+    // char *args = malloc(11 * node->children.size + 10);
+    // args[0] = 0;
 
-    strcat(args, "(");
+    // strcat(args, "(");
     for (int i = 1; i < node->children.size; i++)
     {
         ast_ptr child = *(ast_ptr *)get(&node->children, i);
+        printf("Pushing type %s or %d\n", child->annotate, child->type.u.type);
+        var_type v = copy_var_type_t(child->type); // new_var_type(child);
+        push_back(&(args.u.vec), &(v.u.type));
+        printf("Args size: %ld\n", args.u.vec.size);
         // char *copy = strdup(child->annotate);
-        char copy[strlen(child->annotate) + 1];
-        strcpy(copy, child->annotate);
-        copy[0] = tolower(copy[0]);
-        strcat(args, copy);
+        // char copy[strlen(child->annotate) + 1];
+        // strcpy(copy, child->annotate);
+        // copy[0] = tolower(copy[0]);
+        // strcat(args, copy);
         // free(copy);
-        if (i < node->children.size - 1)
-            strcat(args, ",");
+        // if (i < node->children.size - 1)
+        //     strcat(args, ",");
     }
-    strcat(args, ")");
-
-    id->annotate = args;
+    // strcat(args, ")");
+    id->type = args;
+    id->annotate = var_type_str(id->type);
+    // id->annotate = args;
 
     if (pos >= 0)
     {
@@ -735,19 +759,39 @@ void sem_analysis_call(ast_ptr node)
         if (header->children.size == 3)
         {
             ast_ptr type = *(ast_ptr *)get(&header->children, 1);
-            char *copy = strdup(type->str);
+            var_type v = new_var_type(type);
+            node->type = v;
+            node->annotate = var_type_str(node->type);
+            /* char *copy = strdup(type->str);
             copy[0] = tolower(copy[0]);
-            node->annotate = copy;
+            node->annotate = copy; */
         }
         else
         {
-            char *copy = strdup("none");
+            node->type = new_var_type_t(NONE_TP);
+            node->annotate = var_type_str(node->type);
+            /* char *copy = strdup("none");
             copy[0] = tolower(copy[0]);
-            node->annotate = copy;
+            node->annotate = copy; */
         }
 
         ast_ptr params = *(ast_ptr *)get(&header->children, header->children.size - 1);
-        char *current_args = malloc(11 * params->children.size+10);
+        // printf("params type: %s %d\n", params->str, params->node_type);
+        var_type func_args = new_var_type(params);
+        /* printf("func args has vector?\n");
+        printf("%d\n", func_args.isVec);
+        printf("args type is vector? %d\n", args.isVec);
+        printf("sizes: %ld and %ld\n", func_args.u.vec.size, args.u.vec.size);
+        f */
+        for (int i = 0; i < args.u.vec.size; i++)
+        {
+            int f1, f2;
+            f1 = *(int *)get(&(args.u.vec), i);
+            f2 = *(int *)get(&(func_args.u.vec), i);
+            printf("f1=%d, f2=%d\n", f1, f2);
+        }
+        // printf("func args is a vector? %s\n", func_args.isVec);
+        /*char *current_args = malloc(11 * params->children.size + 10);
         current_args[0] = 0;
 
         strcat(current_args, "(");
@@ -762,17 +806,23 @@ void sem_analysis_call(ast_ptr node)
             if (i < params->children.size - 1)
                 strcat(current_args, ",");
         }
-        strcat(current_args, ")");
-        if (strcmp(args, current_args) != 0)
+        strcat(current_args, ")");*/
+        // if (strcmp(args, current_args) != 0)
+        if (!equals_var_type(&args, &func_args))
+        {
             pos = -1;
+            printf("Not equal: %s and %s\n", var_type_str(args), var_type_str(func_args));
+        }
     }
 
     if (pos < 0)
     {
-        if(ht->ref->valid)
-            printf("Line %d, column %d: Cannot find symbol %s%s\n", id->line, id->column, id->str, args);
+        if (ht->ref->valid)
+            printf("Line %d, column %d: Cannot find symbol %s%s\n", id->line, id->column, id->str, var_type_str(args));
         semantic_errors++;
-        node->annotate = strdup("undef");
+        // node->annotate = strdup("undef");
+        node->type = new_var_type_t(UNDEF_TP);
+        node->annotate = var_type_str(node->type);
         return;
     }
 }

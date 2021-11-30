@@ -1,0 +1,2180 @@
+14a15
+> Line 101, column 7: Operator = cannot be applied to types bool, int
+27c28
+< Line 101, column 7: Operator = cannot be applied to types bool, int
+---
+> Line 102, column 9: Operator ! cannot be applied to type float32
+44c45
+< Line 102, column 9: Operator ! cannot be applied to type float32
+---
+> Line 103, column 7: Operator = cannot be applied to types bool, float32
+61c62
+< Line 103, column 7: Operator = cannot be applied to types bool, float32
+---
+> Line 104, column 7: Operator = cannot be applied to types bool, float32
+69c70
+< Line 104, column 7: Operator = cannot be applied to types bool, float32
+---
+> Line 105, column 9: Operator ! cannot be applied to type string
+88c89,90
+< Line 105, column 9: Operator ! cannot be applied to type string
+---
+> Line 106, column 7: Operator = cannot be applied to types bool, undef
+> Line 106, column 9: Operator + cannot be applied to type string
+99,100c101,102
+< Line 106, column 7: Operator = cannot be applied to types bool, undef
+< Line 106, column 9: Operator + cannot be applied to type string
+---
+> Line 107, column 7: Operator = cannot be applied to types bool, undef
+> Line 107, column 9: Operator - cannot be applied to type string
+115,116d116
+< Line 107, column 7: Operator = cannot be applied to types bool, undef
+< Line 107, column 9: Operator - cannot be applied to type string
+144a145,146
+> Line 110, column 7: Operator = cannot be applied to types bool, undef
+> Line 110, column 9: Operator + cannot be applied to type bool
+160,161c162,163
+< Line 110, column 7: Operator = cannot be applied to types bool, undef
+< Line 110, column 9: Operator + cannot be applied to type bool
+---
+> Line 111, column 7: Operator = cannot be applied to types bool, undef
+> Line 111, column 9: Operator - cannot be applied to type bool
+180,181d181
+< Line 111, column 7: Operator = cannot be applied to types bool, undef
+< Line 111, column 9: Operator - cannot be applied to type bool
+209a210
+> Line 114, column 7: Operator = cannot be applied to types int, bool
+222c223
+< Line 114, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 115, column 7: Operator = cannot be applied to types int, bool
+234c235
+< Line 115, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 116, column 7: Operator = cannot be applied to types int, bool
+240c241
+< Line 116, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 117, column 7: Operator = cannot be applied to types int, bool
+248c249,250
+< Line 117, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 118, column 11: Operator && cannot be applied to types int, int
+> Line 118, column 7: Operator = cannot be applied to types int, bool
+258,259c260,261
+< Line 118, column 11: Operator && cannot be applied to types int, int
+< Line 118, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 119, column 11: Operator || cannot be applied to types int, int
+> Line 119, column 7: Operator = cannot be applied to types int, bool
+269,270c271
+< Line 119, column 11: Operator || cannot be applied to types int, int
+< Line 119, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 120, column 7: Operator = cannot be applied to types int, bool
+279c280
+< Line 120, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 121, column 7: Operator = cannot be applied to types int, bool
+282d282
+< Line 121, column 7: Operator = cannot be applied to types int, bool
+291a292,293
+> Line 123, column 11: Operator < cannot be applied to types int, float32
+> Line 123, column 7: Operator = cannot be applied to types int, bool
+300,301c302,303
+< Line 123, column 11: Operator < cannot be applied to types int, float32
+< Line 123, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 124, column 11: Operator > cannot be applied to types int, float32
+> Line 124, column 7: Operator = cannot be applied to types int, bool
+311,312c313,314
+< Line 124, column 11: Operator > cannot be applied to types int, float32
+< Line 124, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 125, column 11: Operator <= cannot be applied to types int, float32
+> Line 125, column 7: Operator = cannot be applied to types int, bool
+319,320c321,322
+< Line 125, column 11: Operator <= cannot be applied to types int, float32
+< Line 125, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 126, column 11: Operator >= cannot be applied to types int, float32
+> Line 126, column 7: Operator = cannot be applied to types int, bool
+327,328c329,330
+< Line 126, column 11: Operator >= cannot be applied to types int, float32
+< Line 126, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 127, column 11: Operator && cannot be applied to types int, float32
+> Line 127, column 7: Operator = cannot be applied to types int, bool
+337,338c339,340
+< Line 127, column 11: Operator && cannot be applied to types int, float32
+< Line 127, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 128, column 11: Operator || cannot be applied to types int, float32
+> Line 128, column 7: Operator = cannot be applied to types int, bool
+348,349c350,351
+< Line 128, column 11: Operator || cannot be applied to types int, float32
+< Line 128, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 129, column 11: Operator == cannot be applied to types int, float32
+> Line 129, column 7: Operator = cannot be applied to types int, bool
+359,360c361,362
+< Line 129, column 11: Operator == cannot be applied to types int, float32
+< Line 129, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 130, column 11: Operator != cannot be applied to types int, float32
+> Line 130, column 7: Operator = cannot be applied to types int, bool
+367,368d368
+< Line 130, column 11: Operator != cannot be applied to types int, float32
+< Line 130, column 7: Operator = cannot be applied to types int, bool
+373a374,375
+> Line 132, column 11: Operator < cannot be applied to types int, string
+> Line 132, column 7: Operator = cannot be applied to types int, bool
+392,393c394,395
+< Line 132, column 11: Operator < cannot be applied to types int, string
+< Line 132, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 133, column 11: Operator > cannot be applied to types int, string
+> Line 133, column 7: Operator = cannot be applied to types int, bool
+406,407c408,409
+< Line 133, column 11: Operator > cannot be applied to types int, string
+< Line 133, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 134, column 11: Operator <= cannot be applied to types int, string
+> Line 134, column 7: Operator = cannot be applied to types int, bool
+422,423c424,425
+< Line 134, column 11: Operator <= cannot be applied to types int, string
+< Line 134, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 135, column 11: Operator >= cannot be applied to types int, string
+> Line 135, column 7: Operator = cannot be applied to types int, bool
+440,441c442,443
+< Line 135, column 11: Operator >= cannot be applied to types int, string
+< Line 135, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 136, column 11: Operator && cannot be applied to types int, string
+> Line 136, column 7: Operator = cannot be applied to types int, bool
+456,457c458,459
+< Line 136, column 11: Operator && cannot be applied to types int, string
+< Line 136, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 137, column 11: Operator || cannot be applied to types int, string
+> Line 137, column 7: Operator = cannot be applied to types int, bool
+473,474c475,476
+< Line 137, column 11: Operator || cannot be applied to types int, string
+< Line 137, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 138, column 11: Operator == cannot be applied to types int, string
+> Line 138, column 7: Operator = cannot be applied to types int, bool
+491,492c493,494
+< Line 138, column 11: Operator == cannot be applied to types int, string
+< Line 138, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 139, column 11: Operator != cannot be applied to types int, string
+> Line 139, column 7: Operator = cannot be applied to types int, bool
+507,508d508
+< Line 139, column 11: Operator != cannot be applied to types int, string
+< Line 139, column 7: Operator = cannot be applied to types int, bool
+524a525,526
+> Line 141, column 11: Operator < cannot be applied to types int, bool
+> Line 141, column 7: Operator = cannot be applied to types int, bool
+537,538c539,540
+< Line 141, column 11: Operator < cannot be applied to types int, bool
+< Line 141, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 142, column 11: Operator > cannot be applied to types int, bool
+> Line 142, column 7: Operator = cannot be applied to types int, bool
+552,555d553
+< Line 142, column 11: Operator > cannot be applied to types int, bool
+< Line 142, column 7: Operator = cannot be applied to types int, bool
+< Line 1437, column 10: Operator && cannot be applied to types int, int
+< Line 1438, column 10: Operator || cannot be applied to types int, int
+557a556,559
+> Line 1437, column 10: Operator && cannot be applied to types int, int
+> Line 1438, column 10: Operator || cannot be applied to types int, int
+> Line 144, column 11: Operator >= cannot be applied to types int, bool
+> Line 144, column 7: Operator = cannot be applied to types int, bool
+566,567c568,569
+< Line 144, column 11: Operator >= cannot be applied to types int, bool
+< Line 144, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 145, column 11: Operator && cannot be applied to types int, bool
+> Line 145, column 7: Operator = cannot be applied to types int, bool
+576,577c578,579
+< Line 145, column 11: Operator && cannot be applied to types int, bool
+< Line 145, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 146, column 11: Operator || cannot be applied to types int, bool
+> Line 146, column 7: Operator = cannot be applied to types int, bool
+586,587c588,589
+< Line 146, column 11: Operator || cannot be applied to types int, bool
+< Line 146, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 147, column 11: Operator == cannot be applied to types int, bool
+> Line 147, column 7: Operator = cannot be applied to types int, bool
+596,597c598,599
+< Line 147, column 11: Operator == cannot be applied to types int, bool
+< Line 147, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 148, column 11: Operator != cannot be applied to types int, bool
+> Line 148, column 7: Operator = cannot be applied to types int, bool
+602,603d603
+< Line 148, column 11: Operator != cannot be applied to types int, bool
+< Line 148, column 7: Operator = cannot be applied to types int, bool
+620a621,622
+> Line 151, column 11: Operator < cannot be applied to types float32, int
+> Line 151, column 7: Operator = cannot be applied to types int, bool
+630,631c632,633
+< Line 151, column 11: Operator < cannot be applied to types float32, int
+< Line 151, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 152, column 11: Operator > cannot be applied to types float32, int
+> Line 152, column 7: Operator = cannot be applied to types int, bool
+637,638c639,640
+< Line 152, column 11: Operator > cannot be applied to types float32, int
+< Line 152, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 153, column 11: Operator <= cannot be applied to types float32, int
+> Line 153, column 7: Operator = cannot be applied to types int, bool
+646,647c648,649
+< Line 153, column 11: Operator <= cannot be applied to types float32, int
+< Line 153, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 154, column 11: Operator >= cannot be applied to types float32, int
+> Line 154, column 7: Operator = cannot be applied to types int, bool
+656,657c658,659
+< Line 154, column 11: Operator >= cannot be applied to types float32, int
+< Line 154, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 155, column 11: Operator && cannot be applied to types float32, int
+> Line 155, column 7: Operator = cannot be applied to types int, bool
+667,668c669,670
+< Line 155, column 11: Operator && cannot be applied to types float32, int
+< Line 155, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 156, column 11: Operator || cannot be applied to types float32, int
+> Line 156, column 7: Operator = cannot be applied to types int, bool
+678,679c680,681
+< Line 156, column 11: Operator || cannot be applied to types float32, int
+< Line 156, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 157, column 11: Operator == cannot be applied to types float32, int
+> Line 157, column 7: Operator = cannot be applied to types int, bool
+684,685c686,687
+< Line 157, column 11: Operator == cannot be applied to types float32, int
+< Line 157, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 158, column 11: Operator != cannot be applied to types float32, int
+> Line 158, column 7: Operator = cannot be applied to types int, bool
+695,696d696
+< Line 158, column 11: Operator != cannot be applied to types float32, int
+< Line 158, column 7: Operator = cannot be applied to types int, bool
+712a713
+> Line 160, column 7: Operator = cannot be applied to types int, bool
+727c728
+< Line 160, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 161, column 7: Operator = cannot be applied to types int, bool
+740c741
+< Line 161, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 162, column 7: Operator = cannot be applied to types int, bool
+759c760
+< Line 162, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 163, column 7: Operator = cannot be applied to types int, bool
+772c773,774
+< Line 163, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 164, column 11: Operator && cannot be applied to types float32, float32
+> Line 164, column 7: Operator = cannot be applied to types int, bool
+790,791c792,793
+< Line 164, column 11: Operator && cannot be applied to types float32, float32
+< Line 164, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 165, column 11: Operator || cannot be applied to types float32, float32
+> Line 165, column 7: Operator = cannot be applied to types int, bool
+804,805c806
+< Line 165, column 11: Operator || cannot be applied to types float32, float32
+< Line 165, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 166, column 7: Operator = cannot be applied to types int, bool
+824c825
+< Line 166, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 167, column 7: Operator = cannot be applied to types int, bool
+841d841
+< Line 167, column 7: Operator = cannot be applied to types int, bool
+849a850,851
+> Line 169, column 11: Operator < cannot be applied to types float32, string
+> Line 169, column 7: Operator = cannot be applied to types int, bool
+865,866c867,868
+< Line 169, column 11: Operator < cannot be applied to types float32, string
+< Line 169, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 170, column 11: Operator > cannot be applied to types float32, string
+> Line 170, column 7: Operator = cannot be applied to types int, bool
+875,876c877,878
+< Line 170, column 11: Operator > cannot be applied to types float32, string
+< Line 170, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 171, column 11: Operator <= cannot be applied to types float32, string
+> Line 171, column 7: Operator = cannot be applied to types int, bool
+888,889c890,891
+< Line 171, column 11: Operator <= cannot be applied to types float32, string
+< Line 171, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 172, column 11: Operator >= cannot be applied to types float32, string
+> Line 172, column 7: Operator = cannot be applied to types int, bool
+903,904c905,906
+< Line 172, column 11: Operator >= cannot be applied to types float32, string
+< Line 172, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 173, column 11: Operator && cannot be applied to types float32, string
+> Line 173, column 7: Operator = cannot be applied to types int, bool
+912,913c914,915
+< Line 173, column 11: Operator && cannot be applied to types float32, string
+< Line 173, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 174, column 11: Operator || cannot be applied to types float32, string
+> Line 174, column 7: Operator = cannot be applied to types int, bool
+926,927c928,929
+< Line 174, column 11: Operator || cannot be applied to types float32, string
+< Line 174, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 175, column 11: Operator == cannot be applied to types float32, string
+> Line 175, column 7: Operator = cannot be applied to types int, bool
+942,943c944,945
+< Line 175, column 11: Operator == cannot be applied to types float32, string
+< Line 175, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 176, column 11: Operator != cannot be applied to types float32, string
+> Line 176, column 7: Operator = cannot be applied to types int, bool
+953,954d954
+< Line 176, column 11: Operator != cannot be applied to types float32, string
+< Line 176, column 7: Operator = cannot be applied to types int, bool
+969a970,971
+> Line 178, column 11: Operator < cannot be applied to types float32, bool
+> Line 178, column 7: Operator = cannot be applied to types int, bool
+980,981c982,983
+< Line 178, column 11: Operator < cannot be applied to types float32, bool
+< Line 178, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 179, column 11: Operator > cannot be applied to types float32, bool
+> Line 179, column 7: Operator = cannot be applied to types int, bool
+993,994c995,996
+< Line 179, column 11: Operator > cannot be applied to types float32, bool
+< Line 179, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 180, column 11: Operator <= cannot be applied to types float32, bool
+> Line 180, column 7: Operator = cannot be applied to types int, bool
+1010,1011c1012,1013
+< Line 180, column 11: Operator <= cannot be applied to types float32, bool
+< Line 180, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 181, column 11: Operator >= cannot be applied to types float32, bool
+> Line 181, column 7: Operator = cannot be applied to types int, bool
+1021,1022c1023,1024
+< Line 181, column 11: Operator >= cannot be applied to types float32, bool
+< Line 181, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 182, column 11: Operator && cannot be applied to types float32, bool
+> Line 182, column 7: Operator = cannot be applied to types int, bool
+1035,1036c1037,1038
+< Line 182, column 11: Operator && cannot be applied to types float32, bool
+< Line 182, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 183, column 11: Operator || cannot be applied to types float32, bool
+> Line 183, column 7: Operator = cannot be applied to types int, bool
+1051,1052c1053,1054
+< Line 183, column 11: Operator || cannot be applied to types float32, bool
+< Line 183, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 184, column 11: Operator == cannot be applied to types float32, bool
+> Line 184, column 7: Operator = cannot be applied to types int, bool
+1062,1063c1064,1065
+< Line 184, column 11: Operator == cannot be applied to types float32, bool
+< Line 184, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 185, column 11: Operator != cannot be applied to types float32, bool
+> Line 185, column 7: Operator = cannot be applied to types int, bool
+1079,1080d1080
+< Line 185, column 11: Operator != cannot be applied to types float32, bool
+< Line 185, column 7: Operator = cannot be applied to types int, bool
+1100a1101,1102
+> Line 188, column 11: Operator < cannot be applied to types string, int
+> Line 188, column 7: Operator = cannot be applied to types int, bool
+1113,1114c1115,1116
+< Line 188, column 11: Operator < cannot be applied to types string, int
+< Line 188, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 189, column 11: Operator > cannot be applied to types string, int
+> Line 189, column 7: Operator = cannot be applied to types int, bool
+1122,1123c1124,1125
+< Line 189, column 11: Operator > cannot be applied to types string, int
+< Line 189, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 190, column 11: Operator <= cannot be applied to types string, int
+> Line 190, column 7: Operator = cannot be applied to types int, bool
+1134,1135c1136,1137
+< Line 190, column 11: Operator <= cannot be applied to types string, int
+< Line 190, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 191, column 11: Operator >= cannot be applied to types string, int
+> Line 191, column 7: Operator = cannot be applied to types int, bool
+1147,1148c1149,1150
+< Line 191, column 11: Operator >= cannot be applied to types string, int
+< Line 191, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 192, column 11: Operator && cannot be applied to types string, int
+> Line 192, column 7: Operator = cannot be applied to types int, bool
+1156,1157c1158,1159
+< Line 192, column 11: Operator && cannot be applied to types string, int
+< Line 192, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 193, column 11: Operator || cannot be applied to types string, int
+> Line 193, column 7: Operator = cannot be applied to types int, bool
+1170,1171c1172,1173
+< Line 193, column 11: Operator || cannot be applied to types string, int
+< Line 193, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 194, column 11: Operator == cannot be applied to types string, int
+> Line 194, column 7: Operator = cannot be applied to types int, bool
+1181,1182c1183,1184
+< Line 194, column 11: Operator == cannot be applied to types string, int
+< Line 194, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 195, column 11: Operator != cannot be applied to types string, int
+> Line 195, column 7: Operator = cannot be applied to types int, bool
+1200,1201d1201
+< Line 195, column 11: Operator != cannot be applied to types string, int
+< Line 195, column 7: Operator = cannot be applied to types int, bool
+1217a1218,1219
+> Line 197, column 11: Operator < cannot be applied to types string, float32
+> Line 197, column 7: Operator = cannot be applied to types int, bool
+1234,1235c1236,1237
+< Line 197, column 11: Operator < cannot be applied to types string, float32
+< Line 197, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 198, column 11: Operator > cannot be applied to types string, float32
+> Line 198, column 7: Operator = cannot be applied to types int, bool
+1252,1253c1254,1255
+< Line 198, column 11: Operator > cannot be applied to types string, float32
+< Line 198, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 199, column 11: Operator <= cannot be applied to types string, float32
+> Line 199, column 7: Operator = cannot be applied to types int, bool
+1264,1265c1266,1267
+< Line 199, column 11: Operator <= cannot be applied to types string, float32
+< Line 199, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 200, column 11: Operator >= cannot be applied to types string, float32
+> Line 200, column 7: Operator = cannot be applied to types int, bool
+1284,1285c1286,1287
+< Line 200, column 11: Operator >= cannot be applied to types string, float32
+< Line 200, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 201, column 11: Operator && cannot be applied to types string, float32
+> Line 201, column 7: Operator = cannot be applied to types int, bool
+1300,1301c1302,1303
+< Line 201, column 11: Operator && cannot be applied to types string, float32
+< Line 201, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 202, column 11: Operator || cannot be applied to types string, float32
+> Line 202, column 7: Operator = cannot be applied to types int, bool
+1318,1319c1320,1321
+< Line 202, column 11: Operator || cannot be applied to types string, float32
+< Line 202, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 203, column 11: Operator == cannot be applied to types string, float32
+> Line 203, column 7: Operator = cannot be applied to types int, bool
+1337,1338c1339,1340
+< Line 203, column 11: Operator == cannot be applied to types string, float32
+< Line 203, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 204, column 11: Operator != cannot be applied to types string, float32
+> Line 204, column 7: Operator = cannot be applied to types int, bool
+1352,1353d1353
+< Line 204, column 11: Operator != cannot be applied to types string, float32
+< Line 204, column 7: Operator = cannot be applied to types int, bool
+1365a1366
+> Line 206, column 7: Operator = cannot be applied to types int, bool
+1384c1385
+< Line 206, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 207, column 7: Operator = cannot be applied to types int, bool
+1403c1404
+< Line 207, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 208, column 7: Operator = cannot be applied to types int, bool
+1422c1423
+< Line 208, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 209, column 7: Operator = cannot be applied to types int, bool
+1430c1431,1435
+< Line 209, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 21, column 11: Operator + cannot be applied to types int, string
+> Line 21, column 15: Operator + cannot be applied to types undef, string
+> Line 21, column 7: Operator = cannot be applied to types int, undef
+> Line 210, column 11: Operator && cannot be applied to types string, string
+> Line 210, column 7: Operator = cannot be applied to types int, bool
+1444,1445c1449,1450
+< Line 210, column 11: Operator && cannot be applied to types string, string
+< Line 210, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 211, column 11: Operator || cannot be applied to types string, string
+> Line 211, column 7: Operator = cannot be applied to types int, bool
+1464,1465c1469
+< Line 211, column 11: Operator || cannot be applied to types string, string
+< Line 211, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 212, column 7: Operator = cannot be applied to types int, bool
+1484c1488
+< Line 212, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 213, column 7: Operator = cannot be applied to types int, bool
+1497d1500
+< Line 213, column 7: Operator = cannot be applied to types int, bool
+1512a1516,1517
+> Line 215, column 11: Operator < cannot be applied to types string, bool
+> Line 215, column 7: Operator = cannot be applied to types int, bool
+1528,1529c1533,1534
+< Line 215, column 11: Operator < cannot be applied to types string, bool
+< Line 215, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 216, column 11: Operator > cannot be applied to types string, bool
+> Line 216, column 7: Operator = cannot be applied to types int, bool
+1548,1549c1553,1554
+< Line 216, column 11: Operator > cannot be applied to types string, bool
+< Line 216, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 217, column 11: Operator <= cannot be applied to types string, bool
+> Line 217, column 7: Operator = cannot be applied to types int, bool
+1562,1563c1567,1568
+< Line 217, column 11: Operator <= cannot be applied to types string, bool
+< Line 217, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 218, column 11: Operator >= cannot be applied to types string, bool
+> Line 218, column 7: Operator = cannot be applied to types int, bool
+1582,1583c1587,1588
+< Line 218, column 11: Operator >= cannot be applied to types string, bool
+< Line 218, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 219, column 11: Operator && cannot be applied to types string, bool
+> Line 219, column 7: Operator = cannot be applied to types int, bool
+1598,1602c1603,1604
+< Line 219, column 11: Operator && cannot be applied to types string, bool
+< Line 219, column 7: Operator = cannot be applied to types int, bool
+< Line 21, column 11: Operator + cannot be applied to types int, string
+< Line 21, column 15: Operator + cannot be applied to types undef, string
+< Line 21, column 7: Operator = cannot be applied to types int, undef
+---
+> Line 220, column 11: Operator || cannot be applied to types string, bool
+> Line 220, column 7: Operator = cannot be applied to types int, bool
+1619,1620c1621,1622
+< Line 220, column 11: Operator || cannot be applied to types string, bool
+< Line 220, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 221, column 11: Operator == cannot be applied to types string, bool
+> Line 221, column 7: Operator = cannot be applied to types int, bool
+1633,1634c1635,1636
+< Line 221, column 11: Operator == cannot be applied to types string, bool
+< Line 221, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 222, column 11: Operator != cannot be applied to types string, bool
+> Line 222, column 7: Operator = cannot be applied to types int, bool
+1653,1654d1654
+< Line 222, column 11: Operator != cannot be applied to types string, bool
+< Line 222, column 7: Operator = cannot be applied to types int, bool
+1687a1688,1689
+> Line 225, column 11: Operator < cannot be applied to types bool, int
+> Line 225, column 7: Operator = cannot be applied to types int, bool
+1695,1696c1697,1698
+< Line 225, column 11: Operator < cannot be applied to types bool, int
+< Line 225, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 226, column 11: Operator > cannot be applied to types bool, int
+> Line 226, column 7: Operator = cannot be applied to types int, bool
+1713,1714c1715,1716
+< Line 226, column 11: Operator > cannot be applied to types bool, int
+< Line 226, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 227, column 11: Operator <= cannot be applied to types bool, int
+> Line 227, column 7: Operator = cannot be applied to types int, bool
+1733,1734c1735,1736
+< Line 227, column 11: Operator <= cannot be applied to types bool, int
+< Line 227, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 228, column 11: Operator >= cannot be applied to types bool, int
+> Line 228, column 7: Operator = cannot be applied to types int, bool
+1753,1754c1755,1756
+< Line 228, column 11: Operator >= cannot be applied to types bool, int
+< Line 228, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 229, column 11: Operator && cannot be applied to types bool, int
+> Line 229, column 7: Operator = cannot be applied to types int, bool
+1767,1768c1769,1770
+< Line 229, column 11: Operator && cannot be applied to types bool, int
+< Line 229, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 230, column 11: Operator || cannot be applied to types bool, int
+> Line 230, column 7: Operator = cannot be applied to types int, bool
+1782,1783c1784,1785
+< Line 230, column 11: Operator || cannot be applied to types bool, int
+< Line 230, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 231, column 11: Operator == cannot be applied to types bool, int
+> Line 231, column 7: Operator = cannot be applied to types int, bool
+1801,1802c1803,1804
+< Line 231, column 11: Operator == cannot be applied to types bool, int
+< Line 231, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 232, column 11: Operator != cannot be applied to types bool, int
+> Line 232, column 7: Operator = cannot be applied to types int, bool
+1819,1820d1820
+< Line 232, column 11: Operator != cannot be applied to types bool, int
+< Line 232, column 7: Operator = cannot be applied to types int, bool
+1834a1835,1836
+> Line 234, column 11: Operator < cannot be applied to types bool, float32
+> Line 234, column 7: Operator = cannot be applied to types int, bool
+1853,1854c1855,1856
+< Line 234, column 11: Operator < cannot be applied to types bool, float32
+< Line 234, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 235, column 11: Operator > cannot be applied to types bool, float32
+> Line 235, column 7: Operator = cannot be applied to types int, bool
+1865,1866c1867,1868
+< Line 235, column 11: Operator > cannot be applied to types bool, float32
+< Line 235, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 236, column 11: Operator <= cannot be applied to types bool, float32
+> Line 236, column 7: Operator = cannot be applied to types int, bool
+1883,1884c1885,1886
+< Line 236, column 11: Operator <= cannot be applied to types bool, float32
+< Line 236, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 237, column 11: Operator >= cannot be applied to types bool, float32
+> Line 237, column 7: Operator = cannot be applied to types int, bool
+1901,1902c1903,1904
+< Line 237, column 11: Operator >= cannot be applied to types bool, float32
+< Line 237, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 238, column 11: Operator && cannot be applied to types bool, float32
+> Line 238, column 7: Operator = cannot be applied to types int, bool
+1919,1920c1921,1922
+< Line 238, column 11: Operator && cannot be applied to types bool, float32
+< Line 238, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 239, column 11: Operator || cannot be applied to types bool, float32
+> Line 239, column 7: Operator = cannot be applied to types int, bool
+1939,1940c1941,1942
+< Line 239, column 11: Operator || cannot be applied to types bool, float32
+< Line 239, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 240, column 11: Operator == cannot be applied to types bool, float32
+> Line 240, column 7: Operator = cannot be applied to types int, bool
+1951,1954d1952
+< Line 240, column 11: Operator == cannot be applied to types bool, float32
+< Line 240, column 7: Operator = cannot be applied to types int, bool
+< Line 2415, column 17: Operator && cannot be applied to types int, int
+< Line 2416, column 17: Operator || cannot be applied to types int, int
+1956a1955,1956
+> Line 2415, column 17: Operator && cannot be applied to types int, int
+> Line 2416, column 17: Operator || cannot be applied to types int, int
+1965a1966,1967
+> Line 243, column 11: Operator < cannot be applied to types bool, string
+> Line 243, column 7: Operator = cannot be applied to types int, bool
+1975,1976c1977,1978
+< Line 243, column 11: Operator < cannot be applied to types bool, string
+< Line 243, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 244, column 11: Operator > cannot be applied to types bool, string
+> Line 244, column 7: Operator = cannot be applied to types int, bool
+1983,1984c1985,1986
+< Line 244, column 11: Operator > cannot be applied to types bool, string
+< Line 244, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 245, column 11: Operator <= cannot be applied to types bool, string
+> Line 245, column 7: Operator = cannot be applied to types int, bool
+1993,1994c1995,1996
+< Line 245, column 11: Operator <= cannot be applied to types bool, string
+< Line 245, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 246, column 11: Operator >= cannot be applied to types bool, string
+> Line 246, column 7: Operator = cannot be applied to types int, bool
+1999,2000c2001,2002
+< Line 246, column 11: Operator >= cannot be applied to types bool, string
+< Line 246, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 247, column 11: Operator && cannot be applied to types bool, string
+> Line 247, column 7: Operator = cannot be applied to types int, bool
+2010,2011c2012,2013
+< Line 247, column 11: Operator && cannot be applied to types bool, string
+< Line 247, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 248, column 11: Operator || cannot be applied to types bool, string
+> Line 248, column 7: Operator = cannot be applied to types int, bool
+2018,2019c2020,2021
+< Line 248, column 11: Operator || cannot be applied to types bool, string
+< Line 248, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 249, column 11: Operator == cannot be applied to types bool, string
+> Line 249, column 7: Operator = cannot be applied to types int, bool
+2029,2030c2031,2033
+< Line 249, column 11: Operator == cannot be applied to types bool, string
+< Line 249, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 25, column 7: Operator = cannot be applied to types int, float32
+> Line 250, column 11: Operator != cannot be applied to types bool, string
+> Line 250, column 7: Operator = cannot be applied to types int, bool
+2037,2038d2039
+< Line 250, column 11: Operator != cannot be applied to types bool, string
+< Line 250, column 7: Operator = cannot be applied to types int, bool
+2044a2046,2047
+> Line 252, column 11: Operator < cannot be applied to types bool, bool
+> Line 252, column 7: Operator = cannot be applied to types int, bool
+2051,2052c2054,2055
+< Line 252, column 11: Operator < cannot be applied to types bool, bool
+< Line 252, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 253, column 11: Operator > cannot be applied to types bool, bool
+> Line 253, column 7: Operator = cannot be applied to types int, bool
+2062,2063c2065,2066
+< Line 253, column 11: Operator > cannot be applied to types bool, bool
+< Line 253, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 254, column 11: Operator <= cannot be applied to types bool, bool
+> Line 254, column 7: Operator = cannot be applied to types int, bool
+2073,2074c2076,2077
+< Line 254, column 11: Operator <= cannot be applied to types bool, bool
+< Line 254, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 255, column 11: Operator >= cannot be applied to types bool, bool
+> Line 255, column 7: Operator = cannot be applied to types int, bool
+2083,2084d2085
+< Line 255, column 11: Operator >= cannot be applied to types bool, bool
+< Line 255, column 7: Operator = cannot be applied to types int, bool
+2085a2087
+> Line 257, column 7: Operator = cannot be applied to types int, bool
+2100c2102
+< Line 257, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 258, column 7: Operator = cannot be applied to types int, bool
+2117c2119
+< Line 258, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 259, column 7: Operator = cannot be applied to types int, bool
+2130,2131d2131
+< Line 259, column 7: Operator = cannot be applied to types int, bool
+< Line 25, column 7: Operator = cannot be applied to types int, float32
+2175a2176
+> Line 263, column 7: Operator = cannot be applied to types float32, bool
+2193c2194
+< Line 263, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 264, column 7: Operator = cannot be applied to types float32, bool
+2206c2207
+< Line 264, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 265, column 7: Operator = cannot be applied to types float32, bool
+2225c2226
+< Line 265, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 266, column 7: Operator = cannot be applied to types float32, bool
+2238c2239,2240
+< Line 266, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 267, column 11: Operator && cannot be applied to types int, int
+> Line 267, column 7: Operator = cannot be applied to types float32, bool
+2252,2253c2254,2255
+< Line 267, column 11: Operator && cannot be applied to types int, int
+< Line 267, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 268, column 11: Operator || cannot be applied to types int, int
+> Line 268, column 7: Operator = cannot be applied to types float32, bool
+2270,2271c2272
+< Line 268, column 11: Operator || cannot be applied to types int, int
+< Line 268, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 269, column 7: Operator = cannot be applied to types float32, bool
+2286c2287,2288
+< Line 269, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 27, column 9: Invalid octal constant: 009
+> Line 270, column 7: Operator = cannot be applied to types float32, bool
+2299d2300
+< Line 270, column 7: Operator = cannot be applied to types float32, bool
+2315a2317,2318
+> Line 272, column 11: Operator < cannot be applied to types int, float32
+> Line 272, column 7: Operator = cannot be applied to types float32, bool
+2330,2331c2333,2334
+< Line 272, column 11: Operator < cannot be applied to types int, float32
+< Line 272, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 273, column 11: Operator > cannot be applied to types int, float32
+> Line 273, column 7: Operator = cannot be applied to types float32, bool
+2347,2348c2350,2351
+< Line 273, column 11: Operator > cannot be applied to types int, float32
+< Line 273, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 274, column 11: Operator <= cannot be applied to types int, float32
+> Line 274, column 7: Operator = cannot be applied to types float32, bool
+2363,2364c2366,2367
+< Line 274, column 11: Operator <= cannot be applied to types int, float32
+< Line 274, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 275, column 11: Operator >= cannot be applied to types int, float32
+> Line 275, column 7: Operator = cannot be applied to types float32, bool
+2381,2382c2384,2385
+< Line 275, column 11: Operator >= cannot be applied to types int, float32
+< Line 275, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 276, column 11: Operator && cannot be applied to types int, float32
+> Line 276, column 7: Operator = cannot be applied to types float32, bool
+2401,2402c2404,2405
+< Line 276, column 11: Operator && cannot be applied to types int, float32
+< Line 276, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 277, column 11: Operator || cannot be applied to types int, float32
+> Line 277, column 7: Operator = cannot be applied to types float32, bool
+2410,2411c2413,2414
+< Line 277, column 11: Operator || cannot be applied to types int, float32
+< Line 277, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 278, column 11: Operator == cannot be applied to types int, float32
+> Line 278, column 7: Operator = cannot be applied to types float32, bool
+2430,2431c2433,2434
+< Line 278, column 11: Operator == cannot be applied to types int, float32
+< Line 278, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 279, column 11: Operator != cannot be applied to types int, float32
+> Line 279, column 7: Operator = cannot be applied to types float32, bool
+2444,2446d2446
+< Line 279, column 11: Operator != cannot be applied to types int, float32
+< Line 279, column 7: Operator = cannot be applied to types float32, bool
+< Line 27, column 9: invalid octal constant (009)
+2460a2461,2462
+> Line 281, column 11: Operator < cannot be applied to types int, string
+> Line 281, column 7: Operator = cannot be applied to types float32, bool
+2477,2478c2479,2480
+< Line 281, column 11: Operator < cannot be applied to types int, string
+< Line 281, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 282, column 11: Operator > cannot be applied to types int, string
+> Line 282, column 7: Operator = cannot be applied to types float32, bool
+2493,2494c2495,2496
+< Line 282, column 11: Operator > cannot be applied to types int, string
+< Line 282, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 283, column 11: Operator <= cannot be applied to types int, string
+> Line 283, column 7: Operator = cannot be applied to types float32, bool
+2509,2510c2511,2512
+< Line 283, column 11: Operator <= cannot be applied to types int, string
+< Line 283, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 284, column 11: Operator >= cannot be applied to types int, string
+> Line 284, column 7: Operator = cannot be applied to types float32, bool
+2527,2528c2529,2530
+< Line 284, column 11: Operator >= cannot be applied to types int, string
+< Line 284, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 285, column 11: Operator && cannot be applied to types int, string
+> Line 285, column 7: Operator = cannot be applied to types float32, bool
+2543,2544c2545,2546
+< Line 285, column 11: Operator && cannot be applied to types int, string
+< Line 285, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 286, column 11: Operator || cannot be applied to types int, string
+> Line 286, column 7: Operator = cannot be applied to types float32, bool
+2561,2562c2563,2564
+< Line 286, column 11: Operator || cannot be applied to types int, string
+< Line 286, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 287, column 11: Operator == cannot be applied to types int, string
+> Line 287, column 7: Operator = cannot be applied to types float32, bool
+2575,2576c2577,2578
+< Line 287, column 11: Operator == cannot be applied to types int, string
+< Line 287, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 288, column 11: Operator != cannot be applied to types int, string
+> Line 288, column 7: Operator = cannot be applied to types float32, bool
+2590,2591d2591
+< Line 288, column 11: Operator != cannot be applied to types int, string
+< Line 288, column 7: Operator = cannot be applied to types float32, bool
+2609a2610,2612
+> Line 29, column 7: Operator = cannot be applied to types int, float32
+> Line 290, column 11: Operator < cannot be applied to types int, bool
+> Line 290, column 7: Operator = cannot be applied to types float32, bool
+2622,2623c2625,2626
+< Line 290, column 11: Operator < cannot be applied to types int, bool
+< Line 290, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 291, column 11: Operator > cannot be applied to types int, bool
+> Line 291, column 7: Operator = cannot be applied to types float32, bool
+2638,2639c2641,2642
+< Line 291, column 11: Operator > cannot be applied to types int, bool
+< Line 291, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 292, column 11: Operator <= cannot be applied to types int, bool
+> Line 292, column 7: Operator = cannot be applied to types float32, bool
+2652,2653c2655,2656
+< Line 292, column 11: Operator <= cannot be applied to types int, bool
+< Line 292, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 293, column 11: Operator >= cannot be applied to types int, bool
+> Line 293, column 7: Operator = cannot be applied to types float32, bool
+2672,2673c2675,2676
+< Line 293, column 11: Operator >= cannot be applied to types int, bool
+< Line 293, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 294, column 11: Operator && cannot be applied to types int, bool
+> Line 294, column 7: Operator = cannot be applied to types float32, bool
+2689,2690c2692,2693
+< Line 294, column 11: Operator && cannot be applied to types int, bool
+< Line 294, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 295, column 11: Operator || cannot be applied to types int, bool
+> Line 295, column 7: Operator = cannot be applied to types float32, bool
+2705,2706c2708,2709
+< Line 295, column 11: Operator || cannot be applied to types int, bool
+< Line 295, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 296, column 11: Operator == cannot be applied to types int, bool
+> Line 296, column 7: Operator = cannot be applied to types float32, bool
+2723,2724c2726,2727
+< Line 296, column 11: Operator == cannot be applied to types int, bool
+< Line 296, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 297, column 11: Operator != cannot be applied to types int, bool
+> Line 297, column 7: Operator = cannot be applied to types float32, bool
+2741,2742d2743
+< Line 297, column 11: Operator != cannot be applied to types int, bool
+< Line 297, column 7: Operator = cannot be applied to types float32, bool
+2754c2755,2756
+< Line 29, column 7: Operator = cannot be applied to types int, float32
+---
+> Line 300, column 11: Operator < cannot be applied to types float32, int
+> Line 300, column 7: Operator = cannot be applied to types float32, bool
+2761,2762c2763,2764
+< Line 300, column 11: Operator < cannot be applied to types float32, int
+< Line 300, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 301, column 11: Operator > cannot be applied to types float32, int
+> Line 301, column 7: Operator = cannot be applied to types float32, bool
+2778,2779c2780,2781
+< Line 301, column 11: Operator > cannot be applied to types float32, int
+< Line 301, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 302, column 11: Operator <= cannot be applied to types float32, int
+> Line 302, column 7: Operator = cannot be applied to types float32, bool
+2792,2793c2794,2795
+< Line 302, column 11: Operator <= cannot be applied to types float32, int
+< Line 302, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 303, column 11: Operator >= cannot be applied to types float32, int
+> Line 303, column 7: Operator = cannot be applied to types float32, bool
+2805,2806c2807,2808
+< Line 303, column 11: Operator >= cannot be applied to types float32, int
+< Line 303, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 304, column 11: Operator && cannot be applied to types float32, int
+> Line 304, column 7: Operator = cannot be applied to types float32, bool
+2822,2823c2824,2825
+< Line 304, column 11: Operator && cannot be applied to types float32, int
+< Line 304, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 305, column 11: Operator || cannot be applied to types float32, int
+> Line 305, column 7: Operator = cannot be applied to types float32, bool
+2836,2837c2838,2839
+< Line 305, column 11: Operator || cannot be applied to types float32, int
+< Line 305, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 306, column 11: Operator == cannot be applied to types float32, int
+> Line 306, column 7: Operator = cannot be applied to types float32, bool
+2848,2849c2850,2851
+< Line 306, column 11: Operator == cannot be applied to types float32, int
+< Line 306, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 307, column 11: Operator != cannot be applied to types float32, int
+> Line 307, column 7: Operator = cannot be applied to types float32, bool
+2865,2866d2866
+< Line 307, column 11: Operator != cannot be applied to types float32, int
+< Line 307, column 7: Operator = cannot be applied to types float32, bool
+2884a2885
+> Line 309, column 7: Operator = cannot be applied to types float32, bool
+2903c2904,2905
+< Line 309, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 31, column 10: Invalid octal constant: 009
+> Line 310, column 7: Operator = cannot be applied to types float32, bool
+2920c2922
+< Line 310, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 311, column 7: Operator = cannot be applied to types float32, bool
+2934c2936
+< Line 311, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 312, column 7: Operator = cannot be applied to types float32, bool
+2952c2954,2955
+< Line 312, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 313, column 11: Operator && cannot be applied to types float32, float32
+> Line 313, column 7: Operator = cannot be applied to types float32, bool
+2969,2970c2972,2973
+< Line 313, column 11: Operator && cannot be applied to types float32, float32
+< Line 313, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 314, column 11: Operator || cannot be applied to types float32, float32
+> Line 314, column 7: Operator = cannot be applied to types float32, bool
+2987,2988c2990
+< Line 314, column 11: Operator || cannot be applied to types float32, float32
+< Line 314, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 315, column 7: Operator = cannot be applied to types float32, bool
+3006c3008
+< Line 315, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 316, column 7: Operator = cannot be applied to types float32, bool
+3020d3021
+< Line 316, column 7: Operator = cannot be applied to types float32, bool
+3036a3038,3039
+> Line 318, column 11: Operator < cannot be applied to types float32, string
+> Line 318, column 7: Operator = cannot be applied to types float32, bool
+3055,3056c3058,3059
+< Line 318, column 11: Operator < cannot be applied to types float32, string
+< Line 318, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 319, column 11: Operator > cannot be applied to types float32, string
+> Line 319, column 7: Operator = cannot be applied to types float32, bool
+3075,3077c3078,3079
+< Line 319, column 11: Operator > cannot be applied to types float32, string
+< Line 319, column 7: Operator = cannot be applied to types float32, bool
+< Line 31, column 10: invalid octal constant (009)
+---
+> Line 320, column 11: Operator <= cannot be applied to types float32, string
+> Line 320, column 7: Operator = cannot be applied to types float32, bool
+3095,3096c3097,3098
+< Line 320, column 11: Operator <= cannot be applied to types float32, string
+< Line 320, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 321, column 11: Operator >= cannot be applied to types float32, string
+> Line 321, column 7: Operator = cannot be applied to types float32, bool
+3104,3105c3106,3107
+< Line 321, column 11: Operator >= cannot be applied to types float32, string
+< Line 321, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 322, column 11: Operator && cannot be applied to types float32, string
+> Line 322, column 7: Operator = cannot be applied to types float32, bool
+3122,3123c3124,3125
+< Line 322, column 11: Operator && cannot be applied to types float32, string
+< Line 322, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 323, column 11: Operator || cannot be applied to types float32, string
+> Line 323, column 7: Operator = cannot be applied to types float32, bool
+3142,3143c3144,3145
+< Line 323, column 11: Operator || cannot be applied to types float32, string
+< Line 323, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 324, column 11: Operator == cannot be applied to types float32, string
+> Line 324, column 7: Operator = cannot be applied to types float32, bool
+3162,3163c3164,3165
+< Line 324, column 11: Operator == cannot be applied to types float32, string
+< Line 324, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 325, column 11: Operator != cannot be applied to types float32, string
+> Line 325, column 7: Operator = cannot be applied to types float32, bool
+3180,3181d3181
+< Line 325, column 11: Operator != cannot be applied to types float32, string
+< Line 325, column 7: Operator = cannot be applied to types float32, bool
+3193a3194,3195
+> Line 327, column 11: Operator < cannot be applied to types float32, bool
+> Line 327, column 7: Operator = cannot be applied to types float32, bool
+3210,3211c3212,3213
+< Line 327, column 11: Operator < cannot be applied to types float32, bool
+< Line 327, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 328, column 11: Operator > cannot be applied to types float32, bool
+> Line 328, column 7: Operator = cannot be applied to types float32, bool
+3228,3229c3230,3231
+< Line 328, column 11: Operator > cannot be applied to types float32, bool
+< Line 328, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 329, column 11: Operator <= cannot be applied to types float32, bool
+> Line 329, column 7: Operator = cannot be applied to types float32, bool
+3248,3249c3250,3251
+< Line 329, column 11: Operator <= cannot be applied to types float32, bool
+< Line 329, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 330, column 11: Operator >= cannot be applied to types float32, bool
+> Line 330, column 7: Operator = cannot be applied to types float32, bool
+3266,3267c3268,3269
+< Line 330, column 11: Operator >= cannot be applied to types float32, bool
+< Line 330, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 331, column 11: Operator && cannot be applied to types float32, bool
+> Line 331, column 7: Operator = cannot be applied to types float32, bool
+3282,3283c3284,3285
+< Line 331, column 11: Operator && cannot be applied to types float32, bool
+< Line 331, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 332, column 11: Operator || cannot be applied to types float32, bool
+> Line 332, column 7: Operator = cannot be applied to types float32, bool
+3300,3301c3302,3303
+< Line 332, column 11: Operator || cannot be applied to types float32, bool
+< Line 332, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 333, column 11: Operator == cannot be applied to types float32, bool
+> Line 333, column 7: Operator = cannot be applied to types float32, bool
+3320,3321c3322,3323
+< Line 333, column 11: Operator == cannot be applied to types float32, bool
+< Line 333, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 334, column 11: Operator != cannot be applied to types float32, bool
+> Line 334, column 7: Operator = cannot be applied to types float32, bool
+3340,3341d3341
+< Line 334, column 11: Operator != cannot be applied to types float32, bool
+< Line 334, column 7: Operator = cannot be applied to types float32, bool
+3365a3366,3367
+> Line 337, column 11: Operator < cannot be applied to types string, int
+> Line 337, column 7: Operator = cannot be applied to types float32, bool
+3382,3383c3384,3385
+< Line 337, column 11: Operator < cannot be applied to types string, int
+< Line 337, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 338, column 11: Operator > cannot be applied to types string, int
+> Line 338, column 7: Operator = cannot be applied to types float32, bool
+3402,3403c3404,3405
+< Line 338, column 11: Operator > cannot be applied to types string, int
+< Line 338, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 339, column 11: Operator <= cannot be applied to types string, int
+> Line 339, column 7: Operator = cannot be applied to types float32, bool
+3422,3423c3424,3425
+< Line 339, column 11: Operator <= cannot be applied to types string, int
+< Line 339, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 340, column 11: Operator >= cannot be applied to types string, int
+> Line 340, column 7: Operator = cannot be applied to types float32, bool
+3440,3441c3442,3443
+< Line 340, column 11: Operator >= cannot be applied to types string, int
+< Line 340, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 341, column 11: Operator && cannot be applied to types string, int
+> Line 341, column 7: Operator = cannot be applied to types float32, bool
+3452,3453c3454,3455
+< Line 341, column 11: Operator && cannot be applied to types string, int
+< Line 341, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 342, column 11: Operator || cannot be applied to types string, int
+> Line 342, column 7: Operator = cannot be applied to types float32, bool
+3472,3473c3474,3475
+< Line 342, column 11: Operator || cannot be applied to types string, int
+< Line 342, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 343, column 11: Operator == cannot be applied to types string, int
+> Line 343, column 7: Operator = cannot be applied to types float32, bool
+3490,3491c3492,3493
+< Line 343, column 11: Operator == cannot be applied to types string, int
+< Line 343, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 344, column 11: Operator != cannot be applied to types string, int
+> Line 344, column 7: Operator = cannot be applied to types float32, bool
+3510,3511d3511
+< Line 344, column 11: Operator != cannot be applied to types string, int
+< Line 344, column 7: Operator = cannot be applied to types float32, bool
+3526a3527,3528
+> Line 346, column 11: Operator < cannot be applied to types string, float32
+> Line 346, column 7: Operator = cannot be applied to types float32, bool
+3542,3543c3544,3545
+< Line 346, column 11: Operator < cannot be applied to types string, float32
+< Line 346, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 347, column 11: Operator > cannot be applied to types string, float32
+> Line 347, column 7: Operator = cannot be applied to types float32, bool
+3560,3561c3562,3563
+< Line 347, column 11: Operator > cannot be applied to types string, float32
+< Line 347, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 348, column 11: Operator <= cannot be applied to types string, float32
+> Line 348, column 7: Operator = cannot be applied to types float32, bool
+3580,3581c3582,3583
+< Line 348, column 11: Operator <= cannot be applied to types string, float32
+< Line 348, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 349, column 11: Operator >= cannot be applied to types string, float32
+> Line 349, column 7: Operator = cannot be applied to types float32, bool
+3600,3601c3602,3603
+< Line 349, column 11: Operator >= cannot be applied to types string, float32
+< Line 349, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 350, column 11: Operator && cannot be applied to types string, float32
+> Line 350, column 7: Operator = cannot be applied to types float32, bool
+3617,3618c3619,3620
+< Line 350, column 11: Operator && cannot be applied to types string, float32
+< Line 350, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 351, column 11: Operator || cannot be applied to types string, float32
+> Line 351, column 7: Operator = cannot be applied to types float32, bool
+3628,3629c3630,3631
+< Line 351, column 11: Operator || cannot be applied to types string, float32
+< Line 351, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 352, column 11: Operator == cannot be applied to types string, float32
+> Line 352, column 7: Operator = cannot be applied to types float32, bool
+3646,3647c3648,3649
+< Line 352, column 11: Operator == cannot be applied to types string, float32
+< Line 352, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 353, column 11: Operator != cannot be applied to types string, float32
+> Line 353, column 7: Operator = cannot be applied to types float32, bool
+3666,3667d3667
+< Line 353, column 11: Operator != cannot be applied to types string, float32
+< Line 353, column 7: Operator = cannot be applied to types float32, bool
+3683a3684
+> Line 355, column 7: Operator = cannot be applied to types float32, bool
+3700c3701
+< Line 355, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 356, column 7: Operator = cannot be applied to types float32, bool
+3713c3714
+< Line 356, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 357, column 7: Operator = cannot be applied to types float32, bool
+3732c3733
+< Line 357, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 358, column 7: Operator = cannot be applied to types float32, bool
+3749c3750,3751
+< Line 358, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 359, column 11: Operator && cannot be applied to types string, string
+> Line 359, column 7: Operator = cannot be applied to types float32, bool
+3768,3770c3770,3771
+< Line 359, column 11: Operator && cannot be applied to types string, string
+< Line 359, column 7: Operator = cannot be applied to types float32, bool
+< Line 35, column 7: Operator = cannot be applied to types float32, int
+---
+> Line 360, column 11: Operator || cannot be applied to types string, string
+> Line 360, column 7: Operator = cannot be applied to types float32, bool
+3785,3786c3786
+< Line 360, column 11: Operator || cannot be applied to types string, string
+< Line 360, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 361, column 7: Operator = cannot be applied to types float32, bool
+3803c3803
+< Line 361, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 362, column 7: Operator = cannot be applied to types float32, bool
+3820d3819
+< Line 362, column 7: Operator = cannot be applied to types float32, bool
+3838a3838,3839
+> Line 364, column 11: Operator < cannot be applied to types string, bool
+> Line 364, column 7: Operator = cannot be applied to types float32, bool
+3857,3858c3858,3859
+< Line 364, column 11: Operator < cannot be applied to types string, bool
+< Line 364, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 365, column 11: Operator > cannot be applied to types string, bool
+> Line 365, column 7: Operator = cannot be applied to types float32, bool
+3873,3876d3873
+< Line 365, column 11: Operator > cannot be applied to types string, bool
+< Line 365, column 7: Operator = cannot be applied to types float32, bool
+< Line 3669, column 11: Operator strconv.Atoi cannot be applied to types int, undef
+< Line 3669, column 34: Operator + cannot be applied to types int, float32
+3878a3876,3879
+> Line 3669, column 11: Operator strconv.Atoi cannot be applied to types int, undef
+> Line 3669, column 34: Operator + cannot be applied to types int, float32
+> Line 367, column 11: Operator >= cannot be applied to types string, bool
+> Line 367, column 7: Operator = cannot be applied to types float32, bool
+3897,3898c3898,3899
+< Line 367, column 11: Operator >= cannot be applied to types string, bool
+< Line 367, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 368, column 11: Operator && cannot be applied to types string, bool
+> Line 368, column 7: Operator = cannot be applied to types float32, bool
+3911,3912c3912,3913
+< Line 368, column 11: Operator && cannot be applied to types string, bool
+< Line 368, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 369, column 11: Operator || cannot be applied to types string, bool
+> Line 369, column 7: Operator = cannot be applied to types float32, bool
+3927,3928c3928,3929
+< Line 369, column 11: Operator || cannot be applied to types string, bool
+< Line 369, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 370, column 11: Operator == cannot be applied to types string, bool
+> Line 370, column 7: Operator = cannot be applied to types float32, bool
+3945,3946c3946,3947
+< Line 370, column 11: Operator == cannot be applied to types string, bool
+< Line 370, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 371, column 11: Operator != cannot be applied to types string, bool
+> Line 371, column 7: Operator = cannot be applied to types float32, bool
+3961,3962d3961
+< Line 371, column 11: Operator != cannot be applied to types string, bool
+< Line 371, column 7: Operator = cannot be applied to types float32, bool
+3991a3991,3992
+> Line 374, column 11: Operator < cannot be applied to types bool, int
+> Line 374, column 7: Operator = cannot be applied to types float32, bool
+4008,4009c4009,4010
+< Line 374, column 11: Operator < cannot be applied to types bool, int
+< Line 374, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 375, column 11: Operator > cannot be applied to types bool, int
+> Line 375, column 7: Operator = cannot be applied to types float32, bool
+4026,4027c4027,4028
+< Line 375, column 11: Operator > cannot be applied to types bool, int
+< Line 375, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 376, column 11: Operator <= cannot be applied to types bool, int
+> Line 376, column 7: Operator = cannot be applied to types float32, bool
+4039,4040c4040,4041
+< Line 376, column 11: Operator <= cannot be applied to types bool, int
+< Line 376, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 377, column 11: Operator >= cannot be applied to types bool, int
+> Line 377, column 7: Operator = cannot be applied to types float32, bool
+4055,4056c4056,4057
+< Line 377, column 11: Operator >= cannot be applied to types bool, int
+< Line 377, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 378, column 11: Operator && cannot be applied to types bool, int
+> Line 378, column 7: Operator = cannot be applied to types float32, bool
+4075,4076c4076,4077
+< Line 378, column 11: Operator && cannot be applied to types bool, int
+< Line 378, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 379, column 11: Operator || cannot be applied to types bool, int
+> Line 379, column 7: Operator = cannot be applied to types float32, bool
+4088,4090c4089,4091
+< Line 379, column 11: Operator || cannot be applied to types bool, int
+< Line 379, column 7: Operator = cannot be applied to types float32, bool
+< Line 37, column 7: Operator = cannot be applied to types float32, int
+---
+> Line 38, column 9: Invalid octal constant: 009
+> Line 380, column 11: Operator == cannot be applied to types bool, int
+> Line 380, column 7: Operator = cannot be applied to types float32, bool
+4106,4107c4107,4108
+< Line 380, column 11: Operator == cannot be applied to types bool, int
+< Line 380, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 381, column 11: Operator != cannot be applied to types bool, int
+> Line 381, column 7: Operator = cannot be applied to types float32, bool
+4120,4121d4120
+< Line 381, column 11: Operator != cannot be applied to types bool, int
+< Line 381, column 7: Operator = cannot be applied to types float32, bool
+4139a4139,4140
+> Line 383, column 11: Operator < cannot be applied to types bool, float32
+> Line 383, column 7: Operator = cannot be applied to types float32, bool
+4155,4156c4156,4157
+< Line 383, column 11: Operator < cannot be applied to types bool, float32
+< Line 383, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 384, column 11: Operator > cannot be applied to types bool, float32
+> Line 384, column 7: Operator = cannot be applied to types float32, bool
+4171,4172c4172,4173
+< Line 384, column 11: Operator > cannot be applied to types bool, float32
+< Line 384, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 385, column 11: Operator <= cannot be applied to types bool, float32
+> Line 385, column 7: Operator = cannot be applied to types float32, bool
+4189,4190c4190,4191
+< Line 385, column 11: Operator <= cannot be applied to types bool, float32
+< Line 385, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 386, column 11: Operator >= cannot be applied to types bool, float32
+> Line 386, column 7: Operator = cannot be applied to types float32, bool
+4205,4206c4206,4207
+< Line 386, column 11: Operator >= cannot be applied to types bool, float32
+< Line 386, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 387, column 11: Operator && cannot be applied to types bool, float32
+> Line 387, column 7: Operator = cannot be applied to types float32, bool
+4218,4219c4219,4220
+< Line 387, column 11: Operator && cannot be applied to types bool, float32
+< Line 387, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 388, column 11: Operator || cannot be applied to types bool, float32
+> Line 388, column 7: Operator = cannot be applied to types float32, bool
+4236,4237c4237,4238
+< Line 388, column 11: Operator || cannot be applied to types bool, float32
+< Line 388, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 389, column 11: Operator == cannot be applied to types bool, float32
+> Line 389, column 7: Operator = cannot be applied to types float32, bool
+4252,4255c4253,4254
+< Line 389, column 11: Operator == cannot be applied to types bool, float32
+< Line 389, column 7: Operator = cannot be applied to types float32, bool
+< Line 38, column 7: Operator = cannot be applied to types float32, int
+< Line 38, column 9: invalid octal constant (009)
+---
+> Line 390, column 11: Operator != cannot be applied to types bool, float32
+> Line 390, column 7: Operator = cannot be applied to types float32, bool
+4268,4269d4266
+< Line 390, column 11: Operator != cannot be applied to types bool, float32
+< Line 390, column 7: Operator = cannot be applied to types float32, bool
+4287a4285,4286
+> Line 392, column 11: Operator < cannot be applied to types bool, string
+> Line 392, column 7: Operator = cannot be applied to types float32, bool
+4300,4301c4299,4300
+< Line 392, column 11: Operator < cannot be applied to types bool, string
+< Line 392, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 393, column 11: Operator > cannot be applied to types bool, string
+> Line 393, column 7: Operator = cannot be applied to types float32, bool
+4319,4320c4318,4319
+< Line 393, column 11: Operator > cannot be applied to types bool, string
+< Line 393, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 394, column 11: Operator <= cannot be applied to types bool, string
+> Line 394, column 7: Operator = cannot be applied to types float32, bool
+4333,4334c4332,4333
+< Line 394, column 11: Operator <= cannot be applied to types bool, string
+< Line 394, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 395, column 11: Operator >= cannot be applied to types bool, string
+> Line 395, column 7: Operator = cannot be applied to types float32, bool
+4353,4354c4352,4353
+< Line 395, column 11: Operator >= cannot be applied to types bool, string
+< Line 395, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 396, column 11: Operator && cannot be applied to types bool, string
+> Line 396, column 7: Operator = cannot be applied to types float32, bool
+4371,4372c4370,4371
+< Line 396, column 11: Operator && cannot be applied to types bool, string
+< Line 396, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 397, column 11: Operator || cannot be applied to types bool, string
+> Line 397, column 7: Operator = cannot be applied to types float32, bool
+4382,4383c4381,4382
+< Line 397, column 11: Operator || cannot be applied to types bool, string
+< Line 397, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 398, column 11: Operator == cannot be applied to types bool, string
+> Line 398, column 7: Operator = cannot be applied to types float32, bool
+4400,4401c4399,4400
+< Line 398, column 11: Operator == cannot be applied to types bool, string
+< Line 398, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 399, column 11: Operator != cannot be applied to types bool, string
+> Line 399, column 7: Operator = cannot be applied to types float32, bool
+4416,4418d4414
+< Line 399, column 11: Operator != cannot be applied to types bool, string
+< Line 399, column 7: Operator = cannot be applied to types float32, bool
+< Line 39, column 7: Operator = cannot be applied to types float32, int
+4431a4428,4429
+> Line 401, column 11: Operator < cannot be applied to types bool, bool
+> Line 401, column 7: Operator = cannot be applied to types float32, bool
+4447,4448c4445,4446
+< Line 401, column 11: Operator < cannot be applied to types bool, bool
+< Line 401, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 402, column 11: Operator > cannot be applied to types bool, bool
+> Line 402, column 7: Operator = cannot be applied to types float32, bool
+4463,4464c4461,4462
+< Line 402, column 11: Operator > cannot be applied to types bool, bool
+< Line 402, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 403, column 11: Operator <= cannot be applied to types bool, bool
+> Line 403, column 7: Operator = cannot be applied to types float32, bool
+4480,4481c4478,4479
+< Line 403, column 11: Operator <= cannot be applied to types bool, bool
+< Line 403, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 404, column 11: Operator >= cannot be applied to types bool, bool
+> Line 404, column 7: Operator = cannot be applied to types float32, bool
+4500,4501c4498
+< Line 404, column 11: Operator >= cannot be applied to types bool, bool
+< Line 404, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 405, column 7: Operator = cannot be applied to types float32, bool
+4514c4511
+< Line 405, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 406, column 7: Operator = cannot be applied to types float32, bool
+4533c4530
+< Line 406, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 407, column 7: Operator = cannot be applied to types float32, bool
+4545c4542
+< Line 407, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 408, column 7: Operator = cannot be applied to types float32, bool
+4551d4547
+< Line 408, column 7: Operator = cannot be applied to types float32, bool
+4570a4567
+> Line 412, column 7: Operator = cannot be applied to types string, bool
+4579c4576
+< Line 412, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 413, column 7: Operator = cannot be applied to types string, bool
+4588c4585
+< Line 413, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 414, column 7: Operator = cannot be applied to types string, bool
+4592c4589
+< Line 414, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 415, column 7: Operator = cannot be applied to types string, bool
+4602c4599,4600
+< Line 415, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 416, column 11: Operator && cannot be applied to types int, int
+> Line 416, column 7: Operator = cannot be applied to types string, bool
+4611,4612c4609,4610
+< Line 416, column 11: Operator && cannot be applied to types int, int
+< Line 416, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 417, column 11: Operator || cannot be applied to types int, int
+> Line 417, column 7: Operator = cannot be applied to types string, bool
+4622,4623c4620
+< Line 417, column 11: Operator || cannot be applied to types int, int
+< Line 417, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 418, column 7: Operator = cannot be applied to types string, bool
+4629c4626
+< Line 418, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 419, column 7: Operator = cannot be applied to types string, bool
+4637,4638c4634
+< Line 419, column 7: Operator = cannot be applied to types string, bool
+< Line 41, column 7: Operator = cannot be applied to types float32, int
+---
+> Line 42, column 10: Invalid octal constant: 009
+4646a4643,4644
+> Line 421, column 11: Operator < cannot be applied to types int, float32
+> Line 421, column 7: Operator = cannot be applied to types string, bool
+4656,4657c4654,4655
+< Line 421, column 11: Operator < cannot be applied to types int, float32
+< Line 421, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 422, column 11: Operator > cannot be applied to types int, float32
+> Line 422, column 7: Operator = cannot be applied to types string, bool
+4667,4668c4665,4666
+< Line 422, column 11: Operator > cannot be applied to types int, float32
+< Line 422, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 423, column 11: Operator <= cannot be applied to types int, float32
+> Line 423, column 7: Operator = cannot be applied to types string, bool
+4674,4676d4671
+< Line 423, column 11: Operator <= cannot be applied to types int, float32
+< Line 423, column 7: Operator = cannot be applied to types string, bool
+< Line 4249, column 19: Operator + cannot be applied to types int, float32
+4678a4674,4676
+> Line 4249, column 19: Operator + cannot be applied to types int, float32
+> Line 425, column 11: Operator && cannot be applied to types int, float32
+> Line 425, column 7: Operator = cannot be applied to types string, bool
+4688,4689c4686,4687
+< Line 425, column 11: Operator && cannot be applied to types int, float32
+< Line 425, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 426, column 11: Operator || cannot be applied to types int, float32
+> Line 426, column 7: Operator = cannot be applied to types string, bool
+4695,4696c4693,4694
+< Line 426, column 11: Operator || cannot be applied to types int, float32
+< Line 426, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 427, column 11: Operator == cannot be applied to types int, float32
+> Line 427, column 7: Operator = cannot be applied to types string, bool
+4702,4703c4700,4701
+< Line 427, column 11: Operator == cannot be applied to types int, float32
+< Line 427, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 428, column 11: Operator != cannot be applied to types int, float32
+> Line 428, column 7: Operator = cannot be applied to types string, bool
+4712,4713d4709
+< Line 428, column 11: Operator != cannot be applied to types int, float32
+< Line 428, column 7: Operator = cannot be applied to types string, bool
+4720,4721c4716,4717
+< Line 42, column 10: invalid octal constant (009)
+< Line 42, column 7: Operator = cannot be applied to types float32, int
+---
+> Line 430, column 11: Operator < cannot be applied to types int, string
+> Line 430, column 7: Operator = cannot be applied to types string, bool
+4729,4730c4725,4726
+< Line 430, column 11: Operator < cannot be applied to types int, string
+< Line 430, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 431, column 11: Operator > cannot be applied to types int, string
+> Line 431, column 7: Operator = cannot be applied to types string, bool
+4740,4741c4736,4737
+< Line 431, column 11: Operator > cannot be applied to types int, string
+< Line 431, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 432, column 11: Operator <= cannot be applied to types int, string
+> Line 432, column 7: Operator = cannot be applied to types string, bool
+4747,4748c4743,4744
+< Line 432, column 11: Operator <= cannot be applied to types int, string
+< Line 432, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 433, column 11: Operator >= cannot be applied to types int, string
+> Line 433, column 7: Operator = cannot be applied to types string, bool
+4758,4759c4754,4755
+< Line 433, column 11: Operator >= cannot be applied to types int, string
+< Line 433, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 434, column 11: Operator && cannot be applied to types int, string
+> Line 434, column 7: Operator = cannot be applied to types string, bool
+4766,4767c4762,4763
+< Line 434, column 11: Operator && cannot be applied to types int, string
+< Line 434, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 435, column 11: Operator || cannot be applied to types int, string
+> Line 435, column 7: Operator = cannot be applied to types string, bool
+4771,4772c4767,4768
+< Line 435, column 11: Operator || cannot be applied to types int, string
+< Line 435, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 436, column 11: Operator == cannot be applied to types int, string
+> Line 436, column 7: Operator = cannot be applied to types string, bool
+4778,4779c4774,4775
+< Line 436, column 11: Operator == cannot be applied to types int, string
+< Line 436, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 437, column 11: Operator != cannot be applied to types int, string
+> Line 437, column 7: Operator = cannot be applied to types string, bool
+4784,4785d4779
+< Line 437, column 11: Operator != cannot be applied to types int, string
+< Line 437, column 7: Operator = cannot be applied to types string, bool
+4791a4786,4787
+> Line 439, column 11: Operator < cannot be applied to types int, bool
+> Line 439, column 7: Operator = cannot be applied to types string, bool
+4803,4804c4799,4800
+< Line 439, column 11: Operator < cannot be applied to types int, bool
+< Line 439, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 440, column 11: Operator > cannot be applied to types int, bool
+> Line 440, column 7: Operator = cannot be applied to types string, bool
+4818,4819c4814,4815
+< Line 440, column 11: Operator > cannot be applied to types int, bool
+< Line 440, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 441, column 11: Operator <= cannot be applied to types int, bool
+> Line 441, column 7: Operator = cannot be applied to types string, bool
+4830,4831c4826,4827
+< Line 441, column 11: Operator <= cannot be applied to types int, bool
+< Line 441, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 442, column 11: Operator >= cannot be applied to types int, bool
+> Line 442, column 7: Operator = cannot be applied to types string, bool
+4845,4846c4841,4842
+< Line 442, column 11: Operator >= cannot be applied to types int, bool
+< Line 442, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 443, column 11: Operator && cannot be applied to types int, bool
+> Line 443, column 7: Operator = cannot be applied to types string, bool
+4856,4857c4852,4853
+< Line 443, column 11: Operator && cannot be applied to types int, bool
+< Line 443, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 444, column 11: Operator || cannot be applied to types int, bool
+> Line 444, column 7: Operator = cannot be applied to types string, bool
+4866,4867c4862,4863
+< Line 444, column 11: Operator || cannot be applied to types int, bool
+< Line 444, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 445, column 11: Operator == cannot be applied to types int, bool
+> Line 445, column 7: Operator = cannot be applied to types string, bool
+4882,4883c4878,4879
+< Line 445, column 11: Operator == cannot be applied to types int, bool
+< Line 445, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 446, column 11: Operator != cannot be applied to types int, bool
+> Line 446, column 7: Operator = cannot be applied to types string, bool
+4902,4903d4897
+< Line 446, column 11: Operator != cannot be applied to types int, bool
+< Line 446, column 7: Operator = cannot be applied to types string, bool
+4933a4928,4929
+> Line 449, column 11: Operator < cannot be applied to types float32, int
+> Line 449, column 7: Operator = cannot be applied to types string, bool
+4948,4949c4944,4946
+< Line 449, column 11: Operator < cannot be applied to types float32, int
+< Line 449, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 45, column 7: Operator = cannot be applied to types string, int
+> Line 450, column 11: Operator > cannot be applied to types float32, int
+> Line 450, column 7: Operator = cannot be applied to types string, bool
+4966,4967c4963,4964
+< Line 450, column 11: Operator > cannot be applied to types float32, int
+< Line 450, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 451, column 11: Operator <= cannot be applied to types float32, int
+> Line 451, column 7: Operator = cannot be applied to types string, bool
+4986,4987c4983,4984
+< Line 451, column 11: Operator <= cannot be applied to types float32, int
+< Line 451, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 452, column 11: Operator >= cannot be applied to types float32, int
+> Line 452, column 7: Operator = cannot be applied to types string, bool
+5000,5001c4997,4998
+< Line 452, column 11: Operator >= cannot be applied to types float32, int
+< Line 452, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 453, column 11: Operator && cannot be applied to types float32, int
+> Line 453, column 7: Operator = cannot be applied to types string, bool
+5020,5021c5017,5018
+< Line 453, column 11: Operator && cannot be applied to types float32, int
+< Line 453, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 454, column 11: Operator || cannot be applied to types float32, int
+> Line 454, column 7: Operator = cannot be applied to types string, bool
+5036,5037c5033,5034
+< Line 454, column 11: Operator || cannot be applied to types float32, int
+< Line 454, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 455, column 11: Operator == cannot be applied to types float32, int
+> Line 455, column 7: Operator = cannot be applied to types string, bool
+5054,5055c5051,5052
+< Line 455, column 11: Operator == cannot be applied to types float32, int
+< Line 455, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 456, column 11: Operator != cannot be applied to types float32, int
+> Line 456, column 7: Operator = cannot be applied to types string, bool
+5068,5069d5064
+< Line 456, column 11: Operator != cannot be applied to types float32, int
+< Line 456, column 7: Operator = cannot be applied to types string, bool
+5087a5083
+> Line 458, column 7: Operator = cannot be applied to types string, bool
+5106c5102
+< Line 458, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 459, column 7: Operator = cannot be applied to types string, bool
+5121,5122c5117,5118
+< Line 459, column 7: Operator = cannot be applied to types string, bool
+< Line 45, column 7: Operator = cannot be applied to types string, int
+---
+> Line 46, column 7: Operator = cannot be applied to types string, float32
+> Line 460, column 7: Operator = cannot be applied to types string, bool
+5131c5127
+< Line 460, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 461, column 7: Operator = cannot be applied to types string, bool
+5148c5144,5145
+< Line 461, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 462, column 11: Operator && cannot be applied to types float32, float32
+> Line 462, column 7: Operator = cannot be applied to types string, bool
+5167,5168c5164,5165
+< Line 462, column 11: Operator && cannot be applied to types float32, float32
+< Line 462, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 463, column 11: Operator || cannot be applied to types float32, float32
+> Line 463, column 7: Operator = cannot be applied to types string, bool
+5185,5186c5182
+< Line 463, column 11: Operator || cannot be applied to types float32, float32
+< Line 463, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 464, column 7: Operator = cannot be applied to types string, bool
+5201c5197
+< Line 464, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 465, column 7: Operator = cannot be applied to types string, bool
+5214d5209
+< Line 465, column 7: Operator = cannot be applied to types string, bool
+5230a5226,5227
+> Line 467, column 11: Operator < cannot be applied to types float32, string
+> Line 467, column 7: Operator = cannot be applied to types string, bool
+5247,5248c5244,5245
+< Line 467, column 11: Operator < cannot be applied to types float32, string
+< Line 467, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 468, column 11: Operator > cannot be applied to types float32, string
+> Line 468, column 7: Operator = cannot be applied to types string, bool
+5265,5266c5262,5263
+< Line 468, column 11: Operator > cannot be applied to types float32, string
+< Line 468, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 469, column 11: Operator <= cannot be applied to types float32, string
+> Line 469, column 7: Operator = cannot be applied to types string, bool
+5283,5285c5280,5282
+< Line 469, column 11: Operator <= cannot be applied to types float32, string
+< Line 469, column 7: Operator = cannot be applied to types string, bool
+< Line 46, column 7: Operator = cannot be applied to types string, float32
+---
+> Line 47, column 7: Operator = cannot be applied to types string, int
+> Line 470, column 11: Operator >= cannot be applied to types float32, string
+> Line 470, column 7: Operator = cannot be applied to types string, bool
+5298,5299c5295,5296
+< Line 470, column 11: Operator >= cannot be applied to types float32, string
+< Line 470, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 471, column 11: Operator && cannot be applied to types float32, string
+> Line 471, column 7: Operator = cannot be applied to types string, bool
+5314,5315c5311,5312
+< Line 471, column 11: Operator && cannot be applied to types float32, string
+< Line 471, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 472, column 11: Operator || cannot be applied to types float32, string
+> Line 472, column 7: Operator = cannot be applied to types string, bool
+5332,5333c5329,5330
+< Line 472, column 11: Operator || cannot be applied to types float32, string
+< Line 472, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 473, column 11: Operator == cannot be applied to types float32, string
+> Line 473, column 7: Operator = cannot be applied to types string, bool
+5352,5353c5349,5350
+< Line 473, column 11: Operator == cannot be applied to types float32, string
+< Line 473, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 474, column 11: Operator != cannot be applied to types float32, string
+> Line 474, column 7: Operator = cannot be applied to types string, bool
+5372,5373d5368
+< Line 474, column 11: Operator != cannot be applied to types float32, string
+< Line 474, column 7: Operator = cannot be applied to types string, bool
+5381a5377,5378
+> Line 476, column 11: Operator < cannot be applied to types float32, bool
+> Line 476, column 7: Operator = cannot be applied to types string, bool
+5394,5395c5391,5392
+< Line 476, column 11: Operator < cannot be applied to types float32, bool
+< Line 476, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 477, column 11: Operator > cannot be applied to types float32, bool
+> Line 477, column 7: Operator = cannot be applied to types string, bool
+5414,5415c5411,5412
+< Line 477, column 11: Operator > cannot be applied to types float32, bool
+< Line 477, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 478, column 11: Operator <= cannot be applied to types float32, bool
+> Line 478, column 7: Operator = cannot be applied to types string, bool
+5434,5435c5431,5432
+< Line 478, column 11: Operator <= cannot be applied to types float32, bool
+< Line 478, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 479, column 11: Operator >= cannot be applied to types float32, bool
+> Line 479, column 7: Operator = cannot be applied to types string, bool
+5448,5450c5445,5448
+< Line 479, column 11: Operator >= cannot be applied to types float32, bool
+< Line 479, column 7: Operator = cannot be applied to types string, bool
+< Line 47, column 7: Operator = cannot be applied to types string, int
+---
+> Line 48, column 7: Operator = cannot be applied to types string, int
+> Line 48, column 9: Invalid octal constant: 009
+> Line 480, column 11: Operator && cannot be applied to types float32, bool
+> Line 480, column 7: Operator = cannot be applied to types string, bool
+5467,5468c5465,5466
+< Line 480, column 11: Operator && cannot be applied to types float32, bool
+< Line 480, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 481, column 11: Operator || cannot be applied to types float32, bool
+> Line 481, column 7: Operator = cannot be applied to types string, bool
+5483,5484c5481,5482
+< Line 481, column 11: Operator || cannot be applied to types float32, bool
+< Line 481, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 482, column 11: Operator == cannot be applied to types float32, bool
+> Line 482, column 7: Operator = cannot be applied to types string, bool
+5503,5504c5501,5502
+< Line 482, column 11: Operator == cannot be applied to types float32, bool
+< Line 482, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 483, column 11: Operator != cannot be applied to types float32, bool
+> Line 483, column 7: Operator = cannot be applied to types string, bool
+5517,5518d5514
+< Line 483, column 11: Operator != cannot be applied to types float32, bool
+< Line 483, column 7: Operator = cannot be applied to types string, bool
+5550a5547,5548
+> Line 486, column 11: Operator < cannot be applied to types string, int
+> Line 486, column 7: Operator = cannot be applied to types string, bool
+5567,5568c5565,5566
+< Line 486, column 11: Operator < cannot be applied to types string, int
+< Line 486, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 487, column 11: Operator > cannot be applied to types string, int
+> Line 487, column 7: Operator = cannot be applied to types string, bool
+5581,5582c5579,5580
+< Line 487, column 11: Operator > cannot be applied to types string, int
+< Line 487, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 488, column 11: Operator <= cannot be applied to types string, int
+> Line 488, column 7: Operator = cannot be applied to types string, bool
+5601,5602c5599,5600
+< Line 488, column 11: Operator <= cannot be applied to types string, int
+< Line 488, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 489, column 11: Operator >= cannot be applied to types string, int
+> Line 489, column 7: Operator = cannot be applied to types string, bool
+5621,5624c5619,5620
+< Line 489, column 11: Operator >= cannot be applied to types string, int
+< Line 489, column 7: Operator = cannot be applied to types string, bool
+< Line 48, column 7: Operator = cannot be applied to types string, int
+< Line 48, column 9: invalid octal constant (009)
+---
+> Line 490, column 11: Operator && cannot be applied to types string, int
+> Line 490, column 7: Operator = cannot be applied to types string, bool
+5641,5644d5636
+< Line 490, column 11: Operator && cannot be applied to types string, int
+< Line 490, column 7: Operator = cannot be applied to types string, bool
+< Line 4910, column 40: Incompatible type bool in return statement
+< Line 4911, column 40: Incompatible type bool in return statement
+5646a5639,5642
+> Line 4910, column 40: Incompatible type bool in return statement
+> Line 4911, column 40: Incompatible type bool in return statement
+> Line 492, column 11: Operator == cannot be applied to types string, int
+> Line 492, column 7: Operator = cannot be applied to types string, bool
+5654,5655c5650,5651
+< Line 492, column 11: Operator == cannot be applied to types string, int
+< Line 492, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 493, column 11: Operator != cannot be applied to types string, int
+> Line 493, column 7: Operator = cannot be applied to types string, bool
+5665,5666d5660
+< Line 493, column 11: Operator != cannot be applied to types string, int
+< Line 493, column 7: Operator = cannot be applied to types string, bool
+5675a5670,5671
+> Line 495, column 11: Operator < cannot be applied to types string, float32
+> Line 495, column 7: Operator = cannot be applied to types string, bool
+5682,5683c5678,5679
+< Line 495, column 11: Operator < cannot be applied to types string, float32
+< Line 495, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 496, column 11: Operator > cannot be applied to types string, float32
+> Line 496, column 7: Operator = cannot be applied to types string, bool
+5689,5690c5685,5686
+< Line 496, column 11: Operator > cannot be applied to types string, float32
+< Line 496, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 497, column 11: Operator <= cannot be applied to types string, float32
+> Line 497, column 7: Operator = cannot be applied to types string, bool
+5698,5699c5694,5695
+< Line 497, column 11: Operator <= cannot be applied to types string, float32
+< Line 497, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 498, column 11: Operator >= cannot be applied to types string, float32
+> Line 498, column 7: Operator = cannot be applied to types string, bool
+5709,5710c5705,5706
+< Line 498, column 11: Operator >= cannot be applied to types string, float32
+< Line 498, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 499, column 11: Operator && cannot be applied to types string, float32
+> Line 499, column 7: Operator = cannot be applied to types string, bool
+5717,5718c5713,5714
+< Line 499, column 11: Operator && cannot be applied to types string, float32
+< Line 499, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 500, column 11: Operator || cannot be applied to types string, float32
+> Line 500, column 7: Operator = cannot be applied to types string, bool
+5728,5729c5724,5725
+< Line 500, column 11: Operator || cannot be applied to types string, float32
+< Line 500, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 501, column 11: Operator == cannot be applied to types string, float32
+> Line 501, column 7: Operator = cannot be applied to types string, bool
+5733,5734c5729,5730
+< Line 501, column 11: Operator == cannot be applied to types string, float32
+< Line 501, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 502, column 11: Operator != cannot be applied to types string, float32
+> Line 502, column 7: Operator = cannot be applied to types string, bool
+5743,5744d5738
+< Line 502, column 11: Operator != cannot be applied to types string, float32
+< Line 502, column 7: Operator = cannot be applied to types string, bool
+5751a5746
+> Line 504, column 7: Operator = cannot be applied to types string, bool
+5761c5756
+< Line 504, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 505, column 7: Operator = cannot be applied to types string, bool
+5770c5765
+< Line 505, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 506, column 7: Operator = cannot be applied to types string, bool
+5775c5770
+< Line 506, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 507, column 7: Operator = cannot be applied to types string, bool
+5785,5787d5779
+< Line 507, column 7: Operator = cannot be applied to types string, bool
+< Line 5082, column 6: Symbol define already defined
+< Line 5089, column 9: Symbol notdefined already defined
+5789a5782,5783
+> Line 5082, column 6: Symbol define already defined
+> Line 5089, column 9: Symbol notdefined already defined
+5791a5786
+> Line 51, column 7: Operator = cannot be applied to types bool, int
+5808c5803
+< Line 51, column 7: Operator = cannot be applied to types bool, int
+---
+> Line 52, column 7: Operator = cannot be applied to types bool, float32
+5825d5819
+< Line 52, column 7: Operator = cannot be applied to types bool, float32
+5844c5838
+< Line 53, column 7: Operator = cannot be applied to types float32, int
+---
+> Line 54, column 9: Invalid octal constant: 009
+5861,5862d5854
+< Line 54, column 7: Operator = cannot be applied to types float32, int
+< Line 54, column 9: invalid octal constant (009)
+5876a5869,5870
+> Line 57, column 7: Operator = cannot be applied to types int, bool
+> Line 57, column 9: Operator ! cannot be applied to type int
+5886,5887d5879
+< Line 57, column 7: Operator = cannot be applied to types int, bool
+< Line 57, column 9: Operator ! cannot be applied to type int
+5904a5897,5898
+> Line 60, column 7: Operator = cannot be applied to types int, bool
+> Line 60, column 9: Operator ! cannot be applied to type float32
+5911,5912c5905
+< Line 60, column 7: Operator = cannot be applied to types int, bool
+< Line 60, column 9: Operator ! cannot be applied to type float32
+---
+> Line 61, column 7: Operator = cannot be applied to types int, float32
+5919c5912
+< Line 61, column 7: Operator = cannot be applied to types int, float32
+---
+> Line 62, column 7: Operator = cannot be applied to types int, float32
+5929c5922,5923
+< Line 62, column 7: Operator = cannot be applied to types int, float32
+---
+> Line 63, column 7: Operator = cannot be applied to types int, bool
+> Line 63, column 9: Operator ! cannot be applied to type string
+5938,5939c5932,5933
+< Line 63, column 7: Operator = cannot be applied to types int, bool
+< Line 63, column 9: Operator ! cannot be applied to type string
+---
+> Line 64, column 7: Operator = cannot be applied to types int, undef
+> Line 64, column 9: Operator + cannot be applied to type string
+5949,5950c5943,5944
+< Line 64, column 7: Operator = cannot be applied to types int, undef
+< Line 64, column 9: Operator + cannot be applied to type string
+---
+> Line 65, column 7: Operator = cannot be applied to types int, undef
+> Line 65, column 9: Operator - cannot be applied to type string
+5955,5956c5949
+< Line 65, column 7: Operator = cannot be applied to types int, undef
+< Line 65, column 9: Operator - cannot be applied to type string
+---
+> Line 66, column 7: Operator = cannot be applied to types int, bool
+5965c5958,5959
+< Line 66, column 7: Operator = cannot be applied to types int, bool
+---
+> Line 67, column 7: Operator = cannot be applied to types int, undef
+> Line 67, column 9: Operator + cannot be applied to type bool
+5974,5975c5968,5969
+< Line 67, column 7: Operator = cannot be applied to types int, undef
+< Line 67, column 9: Operator + cannot be applied to type bool
+---
+> Line 68, column 7: Operator = cannot be applied to types int, undef
+> Line 68, column 9: Operator - cannot be applied to type bool
+5984,5985d5977
+< Line 68, column 7: Operator = cannot be applied to types int, undef
+< Line 68, column 9: Operator - cannot be applied to type bool
+5997a5990,5991
+> Line 71, column 7: Operator = cannot be applied to types float32, bool
+> Line 71, column 9: Operator ! cannot be applied to type int
+6008,6009c6002
+< Line 71, column 7: Operator = cannot be applied to types float32, bool
+< Line 71, column 9: Operator ! cannot be applied to type int
+---
+> Line 72, column 7: Operator = cannot be applied to types float32, int
+6020c6013
+< Line 72, column 7: Operator = cannot be applied to types float32, int
+---
+> Line 73, column 7: Operator = cannot be applied to types float32, int
+6037c6030,6031
+< Line 73, column 7: Operator = cannot be applied to types float32, int
+---
+> Line 74, column 7: Operator = cannot be applied to types float32, bool
+> Line 74, column 9: Operator ! cannot be applied to type float32
+6050,6051d6043
+< Line 74, column 7: Operator = cannot be applied to types float32, bool
+< Line 74, column 9: Operator ! cannot be applied to type float32
+6079a6072,6073
+> Line 77, column 7: Operator = cannot be applied to types float32, bool
+> Line 77, column 9: Operator ! cannot be applied to type string
+6092,6093c6086,6087
+< Line 77, column 7: Operator = cannot be applied to types float32, bool
+< Line 77, column 9: Operator ! cannot be applied to type string
+---
+> Line 78, column 7: Operator = cannot be applied to types float32, undef
+> Line 78, column 9: Operator + cannot be applied to type string
+6111,6112c6105,6106
+< Line 78, column 7: Operator = cannot be applied to types float32, undef
+< Line 78, column 9: Operator + cannot be applied to type string
+---
+> Line 79, column 7: Operator = cannot be applied to types float32, undef
+> Line 79, column 9: Operator - cannot be applied to type string
+6123,6124c6117
+< Line 79, column 7: Operator = cannot be applied to types float32, undef
+< Line 79, column 9: Operator - cannot be applied to type string
+---
+> Line 80, column 7: Operator = cannot be applied to types float32, bool
+6143c6136,6137
+< Line 80, column 7: Operator = cannot be applied to types float32, bool
+---
+> Line 81, column 7: Operator = cannot be applied to types float32, undef
+> Line 81, column 9: Operator + cannot be applied to type bool
+6160,6161c6154,6155
+< Line 81, column 7: Operator = cannot be applied to types float32, undef
+< Line 81, column 9: Operator + cannot be applied to type bool
+---
+> Line 82, column 7: Operator = cannot be applied to types float32, undef
+> Line 82, column 9: Operator - cannot be applied to type bool
+6171,6172d6164
+< Line 82, column 7: Operator = cannot be applied to types float32, undef
+< Line 82, column 9: Operator - cannot be applied to type bool
+6204a6197,6198
+> Line 85, column 7: Operator = cannot be applied to types string, bool
+> Line 85, column 9: Operator ! cannot be applied to type int
+6215,6216c6209
+< Line 85, column 7: Operator = cannot be applied to types string, bool
+< Line 85, column 9: Operator ! cannot be applied to type int
+---
+> Line 86, column 7: Operator = cannot be applied to types string, int
+6227c6220
+< Line 86, column 7: Operator = cannot be applied to types string, int
+---
+> Line 87, column 7: Operator = cannot be applied to types string, int
+6240c6233,6234
+< Line 87, column 7: Operator = cannot be applied to types string, int
+---
+> Line 88, column 7: Operator = cannot be applied to types string, bool
+> Line 88, column 9: Operator ! cannot be applied to type float32
+6257,6258c6251
+< Line 88, column 7: Operator = cannot be applied to types string, bool
+< Line 88, column 9: Operator ! cannot be applied to type float32
+---
+> Line 89, column 7: Operator = cannot be applied to types string, float32
+6274c6267
+< Line 89, column 7: Operator = cannot be applied to types string, float32
+---
+> Line 90, column 7: Operator = cannot be applied to types string, float32
+6287c6280,6281
+< Line 90, column 7: Operator = cannot be applied to types string, float32
+---
+> Line 91, column 7: Operator = cannot be applied to types string, bool
+> Line 91, column 9: Operator ! cannot be applied to type string
+6304,6305c6298,6299
+< Line 91, column 7: Operator = cannot be applied to types string, bool
+< Line 91, column 9: Operator ! cannot be applied to type string
+---
+> Line 92, column 7: Operator = cannot be applied to types string, undef
+> Line 92, column 9: Operator + cannot be applied to type string
+6324,6325c6318,6319
+< Line 92, column 7: Operator = cannot be applied to types string, undef
+< Line 92, column 9: Operator + cannot be applied to type string
+---
+> Line 93, column 7: Operator = cannot be applied to types string, undef
+> Line 93, column 9: Operator - cannot be applied to type string
+6333,6334c6327
+< Line 93, column 7: Operator = cannot be applied to types string, undef
+< Line 93, column 9: Operator - cannot be applied to type string
+---
+> Line 94, column 7: Operator = cannot be applied to types string, bool
+6351c6344,6345
+< Line 94, column 7: Operator = cannot be applied to types string, bool
+---
+> Line 95, column 7: Operator = cannot be applied to types string, undef
+> Line 95, column 9: Operator + cannot be applied to type bool
+6366,6367c6360,6361
+< Line 95, column 7: Operator = cannot be applied to types string, undef
+< Line 95, column 9: Operator + cannot be applied to type bool
+---
+> Line 96, column 7: Operator = cannot be applied to types string, undef
+> Line 96, column 9: Operator - cannot be applied to type bool
+6380,6381d6373
+< Line 96, column 7: Operator = cannot be applied to types string, undef
+< Line 96, column 9: Operator - cannot be applied to type bool
+6407a6400
+> Line 99, column 9: Operator ! cannot be applied to type int
+6426d6418
+< Line 99, column 9: Operator ! cannot be applied to type int
