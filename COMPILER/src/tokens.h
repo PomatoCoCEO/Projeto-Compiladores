@@ -4,6 +4,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+extern int print_syn;
+
 typedef struct token
 {
     char *id;

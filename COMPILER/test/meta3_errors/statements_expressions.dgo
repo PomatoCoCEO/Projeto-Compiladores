@@ -1,9 +1,9 @@
-// ./gocompiler < Comp2019/meta3/statements_expressions.dgo | sort
+// ./gocompiler < Comp2021/meta3/statements_expressions.dgo | sort
 package main;
 
 func func__(a int, b float32) {return 1;}
 
-func func_(a int, a int, b float32) string { return;}
+//func func_(a int, a int, b float32) string { return;}
 
 func func1(a int, b int, c float32, d float32) float32 {
 	var integer int;
@@ -14,7 +14,7 @@ func func2(a string) int {
 }
 
 func func3(a bool) int {
-	return;
+	return 1;
 }
 
 func func4(a int, b float32, c bool) float32 {
@@ -74,6 +74,7 @@ func main() {
 				}
 			}
 			noWhereToBeFound = noWhereToBeFound(a == b, c, d >= f);
+			fmt.Println("noWhereToBeFound");
 		}
 	}
 }

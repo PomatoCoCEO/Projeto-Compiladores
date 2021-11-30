@@ -26,6 +26,7 @@ void sem_analysis_parseargs(ast_ptr node);
 void sem_analysis_call(ast_ptr node);
 void sem_analysis_unary_math(ast_ptr node);
 void sem_analysis_add(ast_ptr node);
+void sem_analysis_print(ast_ptr node);
 vector nodes(hash_table *h);
 
 extern int semantic_errors;

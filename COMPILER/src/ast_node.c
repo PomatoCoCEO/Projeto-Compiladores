@@ -121,6 +121,9 @@ void print_ast_tree(ast_node *node, int depth)
     case ParseArgs:
         printf("ParseArgs");
         break;
+    case Print:
+        printf("Print");
+        break;
     default:
         printf("%s", node->str);
         break;

@@ -16,12 +16,15 @@
     #include "tok_type.h"
     #include "ast_tree.h"
 
+    int print_syn;
+
     int syn_error;
     extern vector stack;
     int semicolon = 0, column = 1, line = 1, saved_line, saved_column, prev_col=1, prev_line=1; 
     void yyerror(const char *s)
     {
-        printf("Line %d, column %d: %s: %s\n", prev_line, prev_col, s, yytext);
+        if(print_syn)
+            printf("Line %d, column %d: %s: %s\n", prev_line, prev_col, s, yytext);
         syn_error = 1;
     }
     void act_prev() {prev_col = column, prev_line= line;}
@@ -150,21 +153,21 @@ NEWLINE                                                 "\n"
 {RESERVED}                                              { yylval.token_id = new_token(yytext, line, column); semicolon = 0; act_prev(); column += yyleng; if(print) print_tok(RESERVED_T); return RESERVED; }
 {ID}                                                    { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(ID_T); return ID; }
 {INTLIT}                                                { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; if(print) print_tok(INTLIT_T); return INTLIT; }
-{INVALID_OCTAL}                                         { yylval.token_id = new_token(yytext, line, column); printf("Line %d, column %d: invalid octal constant (%s)\n", line, column, yytext); act_prev(); semicolon = 1; column += yyleng; return INTLIT; }
+{INVALID_OCTAL}                                         { yylval.token_id = new_token(yytext, line, column); if(print || print_syn) printf("Line %d, column %d: invalid octal constant (%s)\n", line, column, yytext); act_prev(); semicolon = 1; column += yyleng; }
 {REALLIT}                                               { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng;  if(print) print_tok(REALLIT_T);return REALLIT; }
 {EMPTY_STRING}                                          { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng;  if(print) print_tok(STRLIT_T);return STRLIT; }
 {STRLIT}                                                { yylval.token_id = new_token(yytext, line, column); semicolon = 1; act_prev(); column += yyleng; BEGIN 0;  if(print) print_tok(STRLIT_T);return STRLIT; }
 {QUOTE}                                                 { BEGIN INVALID_STRING; saved_line = line, saved_column = column; semicolon = 0; act_prev(); column += yyleng; } 
 <INVALID_STRING>{QUOTE}                                 { BEGIN 0;  semicolon = 0; act_prev(); column += yyleng; }
 <INVALID_STRING>{VALID_ESCAPE}                          { semicolon = 0; act_prev(); column += yyleng; }
-<INVALID_STRING>{INVALID_ESCAPE}                        { printf("Line %d, column %d: invalid escape sequence (%s)\n", line, column, yytext); act_prev(); column += yyleng; }
-<INVALID_STRING><<EOF>>                                 { BEGIN 0; printf("Line %d, column %d: unterminated string literal\n", saved_line, saved_column); column += yyleng; semicolon = 0;}
-<INVALID_STRING>\n                                      { semicolon = 0; act_prev(); BEGIN 0; printf("Line %d, column %d: unterminated string literal\n", saved_line, saved_column); column = 1; line++; }
+<INVALID_STRING>{INVALID_ESCAPE}                        { if(print || print_syn) printf("Line %d, column %d: invalid escape sequence (%s)\n", line, column, yytext); act_prev(); column += yyleng; }
+<INVALID_STRING><<EOF>>                                 { BEGIN 0; if(print || print_syn) printf("Line %d, column %d: unterminated string literal\n", saved_line, saved_column); column += yyleng; semicolon = 0;}
+<INVALID_STRING>\n                                      { semicolon = 0; act_prev(); BEGIN 0; if(print || print_syn) printf("Line %d, column %d: unterminated string literal\n", saved_line, saved_column); column = 1; line++; }
 <INVALID_STRING>.                                       { act_prev();  column += yyleng; semicolon = 0; }
 \n                                                      { act_prev(); column = 1; line++; if(semicolon) {semicolon = 0;  if(print) print_tok(SEMICOLON_T); return SEMICOLON;} }
 <<EOF>>                                                 { if(semicolon) { semicolon=0; if(print) print_tok(SEMICOLON_T); return SEMICOLON;} return 0; }
 " "|"\t"|"\r"                                           { act_prev(); column += yyleng; }
-.                                                       { act_prev(); printf("Line %d, column %d: illegal character (%s)\n", line, column, yytext); act_prev(); column += yyleng; }
+.                                                       { act_prev(); if(print || print_syn) printf("Line %d, column %d: illegal character (%s)\n", line, column, yytext); act_prev(); column += yyleng; }
 %%
 
 int yywrap() {
@@ -174,9 +177,12 @@ int yywrap() {
 int main(int argc, char** argv) {
     if(argc>=2 && strcmp(argv[1], "-l")==0) {
         print=1;
+        print_syn = 0;
         while(yylex());
     }
     else if(argc>=2 && strcmp(argv[1], "-t")==0) {
+        print_syn = 1;
+        print = 0;
         stack = new_vector(sizeof(ast_ptr));
         yyparse();
         if(stack.size == 1 && ! syn_error){
@@ -185,6 +191,8 @@ int main(int argc, char** argv) {
             print_ast_tree(root, 0);
         }
     } else if(argc >= 2 && strcmp(argv[1], "-s")==0) {
+        print_syn = 0;
+        print = 0;
         stack = new_vector(sizeof(ast_ptr));
         yyparse();
         if(stack.size == 1 && ! syn_error){
@@ -195,6 +203,8 @@ int main(int argc, char** argv) {
                 print_ast_tree(root, 0);
         }
     } else {
+        print_syn = 0;
+        print = 0;
         stack = new_vector(sizeof(ast_ptr));
         yyparse();
         if(stack.size == 1 && ! syn_error){

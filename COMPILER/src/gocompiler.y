@@ -221,8 +221,8 @@ Statement :     ID_NTERM ASSIGN Expr {push_with_children(Assign, $2->id, 2, $2->
                 | RETURN Expr {/*printf("Return\n");*/push_with_children(Return, "Return", 1, $1->line, $1->column);} 
                 | FuncInvocation  // calling a function? 
                 | ParseArgs
-                | PRINT LPAR Expr RPAR {/*printf("Print\n");*/push_with_children(Print, "Print", 1, 0, 0);}
-                | PRINT LPAR STRLIT_NTERM RPAR {/*printf("Print\n");*/push_with_children(Print, "Print", 1, 0, 0);}
+                | PRINT LPAR Expr RPAR {/*printf("Print\n");*/push_with_children(Print, yytext, 1, $1->line, $1->line);}
+                | PRINT LPAR STRLIT_NTERM RPAR {/*printf("Print\n");*/push_with_children(Print, yytext, 1, $1->line, $1->column);}
                 | ERR_NTERM {/* yyerrok; yyclearin; yyerror("syntax error");*/}
 ParseArgs : ID_NTERM COMMA BLANKID ASSIGN PARSEINT LPAR CMDARGS LSQ Expr RSQ RPAR {/*printf("Parseargs\n");*/ push_with_children(ParseArgs, $5->id, 2, $5->line, $5->column);}
             |  ID_NTERM COMMA BLANKID ASSIGN PARSEINT LPAR CMDARGS LSQ ERR_NTERM RSQ RPAR {/*yyerror("syntax error");*/}

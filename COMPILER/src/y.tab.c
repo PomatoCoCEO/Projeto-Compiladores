@@ -1871,13 +1871,13 @@ yyreduce:
 
   case 41:
 #line 224 "gocompiler.y"
-                                       {/*printf("Print\n");*/push_with_children(Print, "Print", 1, 0, 0);}
+                                       {/*printf("Print\n");*/push_with_children(Print, yytext, 1, (yyvsp[-3].token_id)->line, (yyvsp[-3].token_id)->line);}
 #line 1876 "y.tab.c"
     break;
 
   case 42:
 #line 225 "gocompiler.y"
-                                               {/*printf("Print\n");*/push_with_children(Print, "Print", 1, 0, 0);}
+                                               {/*printf("Print\n");*/push_with_children(Print, yytext, 1, (yyvsp[-3].token_id)->line, (yyvsp[-3].token_id)->column);}
 #line 1882 "y.tab.c"
     break;
 

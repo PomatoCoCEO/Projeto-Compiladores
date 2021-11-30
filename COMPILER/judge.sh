@@ -43,7 +43,12 @@ fi
 if [[ $3 == "meta3" ]]
 then
     flag="-s"
-	extra=" | sort"
+fi
+
+if [[ $3 == "meta3_errors" ]]
+then
+    flag="-s"
+	extra="sort"
 fi
 
 echo -e "${LIGHT_CYAN}[⏲️ ] ${ORANGE}Compiling $codeFile..."
@@ -82,32 +87,62 @@ do
 	start=`date +%s%N`
 	result="${ORANGE}[⊗] Time Limit Exceeded"
 	prefix="${LIGHT_CYAN}[${YELLOW}$i${LIGHT_CYAN}] ${NO_COLOR}Running test case: ${ORANGE}${file#./dataset/}\t ${LIGHT_RED}$language ${DARK_GRAY}|"
-	timeout $2 $command < $file | sort > sol.out && {
-	end=`date +%s%N`
-	elapsed=$((end-start))
-	conversion=1000000000
-	runtime=$(bc <<< "scale=3 ; $elapsed / $conversion")
-	second="output"
-	outputFile="${file/input/$second}"
-	second=".out"
-	outputFile="${outputFile/.dgo/$second}"
-	result="${LIGHT_GREEN}[✓] Accepted"
-	cmp --silent $outputFile sol.out || result="${LIGHT_RED}[✗] Wrong Answer"
-	echo -e "$prefix $result ${NO_COLOR}[${runtime}s]"
-	cmp --silent $outputFile sol.out
-	t=$?
-	if [[ $t == 1 ]]
+	if [[ $3 == "meta3_errors" ]]
 	then
-		if [[ $4 == "-debug" ]]
+		timeout $2 $command < $file | sort > sol.out && {
+		end=`date +%s%N`
+		elapsed=$((end-start))
+		conversion=1000000000
+		runtime=$(bc <<< "scale=3 ; $elapsed / $conversion")
+		second="output"
+		outputFile="${file/input/$second}"
+		second=".out"
+		outputFile="${outputFile/.dgo/$second}"
+		result="${LIGHT_GREEN}[✓] Accepted"
+		cmp --silent $outputFile sol.out || result="${LIGHT_RED}[✗] Wrong Answer"
+		echo -e "$prefix $result ${NO_COLOR}[${runtime}s]"
+		cmp --silent $outputFile sol.out
+		t=$?
+		if [[ $t == 1 ]]
 		then
-			echo -e "${LIGHT_GRAY}Expected Output:"
-			cat $outputFile
-			echo -e "${DARK_GRAY}----------------"
-			echo -e "${LIGHT_GRAY}Given Output:"
-			cat sol.out
+			if [[ $4 == "-debug" ]]
+			then
+				echo -e "${LIGHT_GRAY}Expected Output:"
+				cat $outputFile
+				echo -e "${DARK_GRAY}----------------"
+				echo -e "${LIGHT_GRAY}Given Output:"
+				cat sol.out
+			fi
 		fi
+		} || echo -e "$prefix $result ${NO_COLOR}[$2s]"
+	else
+		timeout $2 $command < $file > sol.out && {
+		end=`date +%s%N`
+		elapsed=$((end-start))
+		conversion=1000000000
+		runtime=$(bc <<< "scale=3 ; $elapsed / $conversion")
+		second="output"
+		outputFile="${file/input/$second}"
+		second=".out"
+		outputFile="${outputFile/.dgo/$second}"
+		result="${LIGHT_GREEN}[✓] Accepted"
+		cmp --silent $outputFile sol.out || result="${LIGHT_RED}[✗] Wrong Answer"
+		echo -e "$prefix $result ${NO_COLOR}[${runtime}s]"
+		cmp --silent $outputFile sol.out
+		t=$?
+		if [[ $t == 1 ]]
+		then
+			if [[ $4 == "-debug" ]]
+			then
+				echo -e "${LIGHT_GRAY}Expected Output:"
+				cat $outputFile
+				echo -e "${DARK_GRAY}----------------"
+				echo -e "${LIGHT_GRAY}Given Output:"
+				cat sol.out
+			fi
+		fi
+		} || echo -e "$prefix $result ${NO_COLOR}[$2s]"
 	fi
-	} || echo -e "$prefix $result ${NO_COLOR}[$2s]"
 done
 
 

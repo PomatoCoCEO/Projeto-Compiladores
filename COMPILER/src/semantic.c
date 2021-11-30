@@ -194,8 +194,11 @@ void semantic_analysis(ast_ptr node)
         node->uses++;
         sem_analysis_id(node);
         break;
-    case Block:
     case Print:
+        node->uses++;
+        sem_analysis_print(node);
+        break;
+    case Block:
     case Return:
         node->uses++;
         sem_analysis_propagate(node);
@@ -353,6 +356,28 @@ void sem_analysis_if(ast_ptr ifnode)
         ast_ptr first_child = *(ast_ptr *)get(&ifnode->children, 0);
         if(ht->ref->valid)
             printf("Line %d, column %d: Incompatible type %s in if statement\n", first_child->line, first_child->column, b->annotate);
+        semantic_errors++;
+    }
+}
+
+void sem_analysis_print(ast_ptr print_node)
+{
+    hash_table *ht = get(&stack_tables, stack_tables.size - 1);
+    for (int i = 0; i < print_node->children.size; i++)
+    {
+        ast_ptr child = *(ast_ptr *)get(&print_node->children, i);
+        semantic_analysis(child);
+    }
+    ast_ptr first_child = *(ast_ptr *)get(&print_node->children, 0);
+    if(ht->ref->valid && strcmp(first_child->annotate, "undef") == 0) {
+        ast_ptr ref = first_child;
+        if(first_child->node_type == VarDecl) {
+            ref = *(ast_ptr *)get(&first_child->children, 1);
+        }
+        if(first_child->node_type == Call) {
+            ref = *(ast_ptr *)get(&first_child->children, 0);
+        }
+        printf("Line %d, column %d: Incompatible type %s in fmt.Println statement\n", ref->line, ref->column, first_child->annotate);
         semantic_errors++;
     }
 }
@@ -547,7 +572,7 @@ void sem_analysis_binary_math(ast_ptr node)
         }
     }
 
-    if (strcmp(ch1->annotate, ch2->annotate) != 0 || strcmp(ch1->annotate, "bool") == 0 || strcmp(ch1->annotate, "string") == 0)
+    if (strcmp(ch1->annotate, ch2->annotate) != 0 || strcmp(ch1->annotate, "bool") == 0 || strcmp(ch1->annotate, "string") == 0 || strcmp(ch1->annotate, "undef") == 0)
     {
         if(ht->ref->valid)
             printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", node->line, node->column, node->str, ch1->annotate, ch2->annotate);
@@ -589,7 +614,7 @@ void sem_analysis_add(ast_ptr node)
     semantic_analysis(ch1);
     semantic_analysis(ch2);
 
-    if (strcmp(ch1->annotate, ch2->annotate) != 0 || strcmp(ch1->annotate, "bool") == 0)
+    if (strcmp(ch1->annotate, ch2->annotate) != 0 || strcmp(ch1->annotate, "bool") == 0 || strcmp(ch1->annotate, "undef") == 0)
     {
         if(ht->ref->valid)
             printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", node->line, node->column, node->str, ch1->annotate, ch2->annotate);
