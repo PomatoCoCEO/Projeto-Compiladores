@@ -466,11 +466,11 @@ void sem_analysis_id(ast_ptr id) // only used in var declarations
                 return;
             }
             ast_ptr type = *(ast_ptr *)get(&decl->children, 0);
-            printf("id string of type: %s\n", type->str);
+            // printf("id string of type: %s\n", type->str);
             id->type = new_var_type(type);
-            printf("Id Type: %d\n", id->type.u.type);
+            // printf("Id Type: %d\n", id->type.u.type);
             id->annotate = var_type_str(id->type);
-            printf("Id annotate: %s\n", id->annotate);
+            // printf("Id annotate: %s\n", id->annotate);
             decl->uses++;
             break;
         }
@@ -527,7 +527,7 @@ void sem_analysis_propagate(ast_ptr node)
             // strcpy(current, "none");
             current = new_var_type_t(NONE_TP);
         }
-        printf("Ret2\n");
+        // printf("Ret2\n");
         if (!equals_var_type(&node->type, &current) /*strcmp(copy, current) != 0*/)
         {
             semantic_errors++;
@@ -711,10 +711,10 @@ void sem_analysis_call(ast_ptr node)
         if (f != NULL)
         {
             func_ref = f->object;
-            printf("func_ref: %s\n", func_ref->str);
+            // printf("func_ref: %s\n", func_ref->str);
             if (func_ref->node_type != FuncDecl)
             {
-                printf("not funcdecl\n");
+                // printf("not funcdecl\n");
                 pos = -1;
                 break;
             }
@@ -734,24 +734,24 @@ void sem_analysis_call(ast_ptr node)
     for (int i = 1; i < node->children.size; i++)
     {
         ast_ptr child = *(ast_ptr *)get(&node->children, i);
-        printf("Pushing type %s or %d\n", child->annotate, child->type.u.type);
+        // printf("Pushing type %s or %d\n", child->annotate, child->type.u.type);
         var_type v = copy_var_type_t(child->type); // new_var_type(child);
         push_back(&(args.u.vec), &(v.u.type));
-        printf("Args size: %ld\n", args.u.vec.size);
-        // char *copy = strdup(child->annotate);
-        // char copy[strlen(child->annotate) + 1];
-        // strcpy(copy, child->annotate);
-        // copy[0] = tolower(copy[0]);
-        // strcat(args, copy);
-        // free(copy);
-        // if (i < node->children.size - 1)
-        //     strcat(args, ",");
+        // printf("Args size: %ld\n", args.u.vec.size);
+        //  char *copy = strdup(child->annotate);
+        //  char copy[strlen(child->annotate) + 1];
+        //  strcpy(copy, child->annotate);
+        //  copy[0] = tolower(copy[0]);
+        //  strcat(args, copy);
+        //  free(copy);
+        //  if (i < node->children.size - 1)
+        //      strcat(args, ",");
     }
     // strcat(args, ")");
     id->type = args;
     id->annotate = var_type_str(id->type);
     // id->annotate = args;
-
+    // printf("Call1\n");
     if (pos >= 0)
     {
         ast_ptr header = *(ast_ptr *)get(&func_ref->children, 0);
@@ -783,13 +783,14 @@ void sem_analysis_call(ast_ptr node)
         printf("args type is vector? %d\n", args.isVec);
         printf("sizes: %ld and %ld\n", func_args.u.vec.size, args.u.vec.size);
         f */
-        for (int i = 0; i < args.u.vec.size; i++)
+        // printf("Call1.1\n");
+        /*for (int i = 0; i < args.u.vec.size; i++)
         {
             int f1, f2;
             f1 = *(int *)get(&(args.u.vec), i);
             f2 = *(int *)get(&(func_args.u.vec), i);
             printf("f1=%d, f2=%d\n", f1, f2);
-        }
+        }*/
         // printf("func args is a vector? %s\n", func_args.isVec);
         /*char *current_args = malloc(11 * params->children.size + 10);
         current_args[0] = 0;
@@ -811,9 +812,10 @@ void sem_analysis_call(ast_ptr node)
         if (!equals_var_type(&args, &func_args))
         {
             pos = -1;
-            printf("Not equal: %s and %s\n", var_type_str(args), var_type_str(func_args));
+            // printf("Not equal: %s and %s\n", var_type_str(args), var_type_str(func_args));
         }
     }
+    // printf("Call2\n");
 
     if (pos < 0)
     {
