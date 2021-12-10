@@ -112,6 +112,8 @@ do
 				echo -e "${DARK_GRAY}----------------"
 				echo -e "${LIGHT_GRAY}Given Output:"
 				cat sol.out
+				echo "DIFF"
+				diff sol.out $outputFile
 			fi
 		fi
 		} || echo -e "$prefix $result ${NO_COLOR}[$2s]"
