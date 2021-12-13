@@ -224,8 +224,8 @@ void sem_analysis_program(ast_ptr program)
     }
     hash_table *top = get(&stack_tables, 0);
 
-    if (semantic_errors == 0 && print_sem)
-        print_st_program(top);
+    /*if (semantic_errors == 0)
+        print_st_program(top);*/
 }
 
 void sem_analysis_vardecl(ast_ptr vardecl) // can also be used for paramdecl
@@ -434,7 +434,7 @@ void sem_analysis_equality(ast_ptr propnode)
             printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", propnode->line, propnode->column, propnode->str, ch1->annotate, ch2->annotate);
         semantic_errors++;
         // propnode->annotate = strdup("bool");
-        propnode->type = new_var_type_t(UNDEF_TP);
+        propnode->type = new_var_type_t(BOOL_TP);
     }
     else
     {
