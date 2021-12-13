@@ -1,7 +1,7 @@
 #include "semantic.h"
 
 int semantic_errors = 0;
-
+extern int print_sem;
 vector stack_tables; // to be constructed as new_vector(sizeof(hash_table)) stores the hash tables in execution time
 vector vec_tables;
 ast_ptr current_func = NULL;
@@ -224,7 +224,7 @@ void sem_analysis_program(ast_ptr program)
     }
     hash_table *top = get(&stack_tables, 0);
 
-    if (semantic_errors == 0)
+    if (semantic_errors == 0 && print_sem)
         print_st_program(top);
 }
 
@@ -384,7 +384,7 @@ void sem_analysis_or_and(ast_ptr propnode)
         if (ht->ref->valid)
             printf("Line %d, column %d: Operator %s cannot be applied to types %s, %s\n", propnode->line, propnode->column, propnode->str, ch1->annotate, ch2->annotate);
         semantic_errors++;
-        propnode->type = new_var_type_t(UNDEF_TP);
+        propnode->type = new_var_type_t(BOOL_TP);
         propnode->annotate = var_type_str(propnode->type);
         return;
     }
@@ -410,7 +410,7 @@ void sem_analysis_comp(ast_ptr propnode)
         }
         semantic_errors++;
         // propnode->annotate = strdup("bool");
-        propnode->type = new_var_type_t(UNDEF_TP);
+        propnode->type = new_var_type_t(BOOL_TP);
     }
     else
     {

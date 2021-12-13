@@ -15,8 +15,9 @@
     #include "y.tab.h"
     #include "tok_type.h"
     #include "ast_tree.h"
+    #include "code_gen.h"
 
-    int print_syn;
+    int print_syn, print_sem;
 
     int syn_error;
     extern vector stack;
@@ -191,6 +192,7 @@ int main(int argc, char** argv) {
             print_ast_tree(root, 0);
         }
     } else if(argc >= 2 && strcmp(argv[1], "-s")==0) {
+        print_sem = 1;
         print_syn = 0;
         print = 0;
         stack = new_vector(sizeof(ast_ptr));
@@ -203,6 +205,7 @@ int main(int argc, char** argv) {
                 print_ast_tree(root, 0);
         }
     } else {
+        print_sem = 0;
         print_syn = 0;
         print = 0;
         stack = new_vector(sizeof(ast_ptr));
@@ -211,8 +214,10 @@ int main(int argc, char** argv) {
             ast_ptr root = *(ast_ptr*)get(&stack,0);
             handle_blocks(root);
             semantic_analysis(root);
-            if(semantic_errors == 0)
-                print_ast_tree(root, 0);
+            if(semantic_errors == 0) {
+                generate_code(root);
+            }
+                // print_ast_tree(root, 0);
         }
     }
 }
