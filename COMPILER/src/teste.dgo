@@ -2,7 +2,5 @@ package main;
 
 func main() {
 
-    var a int;
-    a = 009;
-  
+    fmt.Println(1+2+3);
 };

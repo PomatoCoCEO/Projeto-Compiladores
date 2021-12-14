@@ -41,6 +41,7 @@ void generate_code_assign(ast_ptr node);
 void generate_code_call(ast_ptr node);
 void generate_code_return(ast_ptr node);
 void generate_code_if(ast_ptr node);
+void generate_code_print(ast_ptr node);
 void print_return(var_type v);
 int type_node_id(ast_ptr node);
 #endif

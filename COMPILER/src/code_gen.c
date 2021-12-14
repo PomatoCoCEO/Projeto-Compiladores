@@ -30,8 +30,10 @@ void print_init()
     // boolean values
     printf("@.false = %s [7 x i8] c%s%s\n", attr1, bools[0], attr2);
     printf("@.true = %s [6 x i8] c%s%s\n", attr1, bools[1], attr2);
+    printf("@program.args = global i8** null\n");
     // printf
-    printf("declare i32 @printf(i8*, ...) #1\n");
+    printf("declare i32 @atoi(i8*)\n");
+    printf("declare i32 @printf(i8*, ...)\n");
 }
 
 void generate_code(ast_ptr node)
@@ -126,6 +128,9 @@ void generate_code(ast_ptr node)
     case Return:
         generate_code_return(node); // DONE
         break;
+    case Print:
+        generate_code_print(node);
+        break;
     default:
         for (int i = 0; i < node->children.size; i++)
         {
@@ -164,7 +169,10 @@ void generate_code_funcdecl(ast_ptr node)
     }
     if (strcmp(func_name->str, "main") == 0)
     {
-        printf("define %s @%s(", ll_type_str(v), func_name->str);
+        printf("define %s @%s(i32 %%local_nargs, i8** %%local_args", ll_type_str(v), func_name->str);
+        if(params->children.size > 0) {
+            printf(", ");
+        }
     }
     else
         printf("define %s @func.%s(", ll_type_str(v), func_name->str);
@@ -179,6 +187,10 @@ void generate_code_funcdecl(ast_ptr node)
             printf(", ");
     }
     printf(") {\n");
+    if (strcmp(func_name->str, "main") == 0)
+    {
+        printf("store i8** %%local_args, i8*** @program.args\n");
+    }
     for (int i = 0; i < params->children.size; i++)
     {
         ast_ptr p = *(ast_ptr *)get(&params->children, i);
@@ -209,7 +221,11 @@ void generate_code_vardecl_global(ast_ptr node)
     ast_ptr id = *(ast_ptr *)get(&node->children, 1);
     var_type v = new_var_type(tp);
 
-    printf("@.%s = global %s %s\n", id->str, ll_type_str(v), zero(v));
+    if(strcmp(ll_type_str(v), "i8*") == 0) {
+        printf("@.%s = global %s null\n", id->str, ll_type_str(v));
+    } else {
+        printf("@.%s = global %s %s\n", id->str, ll_type_str(v), zero(v));
+    }
 }
 
 void generate_code_add(ast_ptr node)
@@ -376,7 +392,15 @@ void generate_code_parseargs(ast_ptr node)
     generate_code(first_child);
     generate_code(second_child);
 
-    printf("%%%d = sub %s 1, %%%d\n", current_function_var_id, ll_type_str(node->type), first_child->code_gen_id);
+    printf("%%%d = load i8**, i8*** @program.args\n", current_function_var_id);
+    current_function_var_id++;
+    printf("%%%d = getelementptr i8*, i8** %%%d, i32 %s\n", current_function_var_id, current_function_var_id-1, second_child->str);
+    current_function_var_id++;
+    printf("%%%d = load i8*, i8** %%%d\n", current_function_var_id, current_function_var_id-1);
+    current_function_var_id++;
+    printf("%%%d = call i32 @atoi(i8* %%%d)\n", current_function_var_id, current_function_var_id-1);
+
+    printf("store i32 %%%d, i32* %%%s\n", current_function_var_id, first_child->str);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -441,13 +465,13 @@ void generate_code_assign(ast_ptr node)
     switch (t)
     {
     case LOCAL_VARIABLE:
-        printf("store %s, %%%d, %s* %%%s\n", ll_type_str(node->type), current_function_var_id, ll_type_str(node->type), node->str);
+        printf("store %s %%%d, %s* %%%s\n", ll_type_str(node->type), current_function_var_id, ll_type_str(node->type), ch1->str);
         break;
     case PARAM_VARIABLE:
-        printf("store %s, %%%d, %s* %%%s\n", ll_type_str(node->type), current_function_var_id, ll_type_str(node->type), node->str);
+        printf("store %s %%%d, %s* %%var.%s\n", ll_type_str(node->type), current_function_var_id, ll_type_str(node->type), ch1->str);
         break;
     case GLOBAL_VARIABBLE:
-        printf("store %s, %%%d, %s* %%%s\n", ll_type_str(node->type), current_function_var_id, ll_type_str(node->type), node->str);
+        printf("store %s %%%d, %s* @%s\n", ll_type_str(node->type), current_function_var_id, ll_type_str(node->type), ch1->str);
         break;
     }
 }
@@ -461,7 +485,7 @@ void generate_code_intlit(ast_ptr node)
 
 void generate_code_reallit(ast_ptr node)
 {
-    printf("%%%d = add double %s, 0.0\n", current_function_var_id, node->str);
+    printf("%%%d = fadd double %s, 0.0\n", current_function_var_id, node->str);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -553,19 +577,11 @@ void generate_code_if(ast_ptr node)
 void generate_code_print(ast_ptr node)
 {
     ast_ptr ch1 = *(ast_ptr *)get(&node->children, 0);
-    switch (ch1->node_type)
-    {
-    case IntLit:
-    case Int:
-        generate_code(ch1);
+    generate_code(ch1);
+    if(strcmp(ll_type_str(ch1->type), "i32") == 0) {
         printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str_int, i64 0, i64 0), i32 %%%d)\n", ch1->code_gen_id);
-        break;
-
-    case RealLit:
-    case Float32:
-        generate_code(ch1);
+    } else if(strcmp(ll_type_str(ch1->type), "double") == 0) {
         printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str_double, i64 0, i64 0), i32 %%%d)\n", ch1->code_gen_id);
-        break;
     }
 }
 
