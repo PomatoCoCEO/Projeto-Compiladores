@@ -1,0 +1,38 @@
+@.str_int = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
+@.str_float = private unnamed_addr constant [7 x i8] c"%.08f\0A\00", align 1
+@.str_string = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
+@.false = private unnamed_addr constant [7 x i8] c"false\0A\00", align 1
+@.true = private unnamed_addr constant [6 x i8] c"true\0A\00", align 1
+declare i32 @printf(i8*, ...) #1
+@.arg = global i32 0
+define i32 @func.factorial(i32 %ar.n) {
+%arg.n = alloca i32
+store i32 %ar.n, i32* %arg.n
+%1 = load i32, i32* %arg.n
+%2 = add i32 0, 0
+%3 = icmp eq i32 %1, %2
+br i1 %3, label %then_0, label %else_0
+then_0:
+%4 = add i32 1, 0
+ret i32 %4
+br label %end_if_0
+else_0:
+br label %end_if_0
+end_if_0:
+%6 = load i32, i32* %arg.n
+%7 = load i32, i32* %arg.n
+%8 = add i32 1, 0
+%9 = sub i32 %7, %8
+%10 = call i32 @func.factorial(i32 %9)
+%11 = mul i32 %6, %10
+ret i32 %11
+ret i32 0
+}
+define dso_local i32 @main(i32 %argn, i8** %args) #0 {
+%argument = alloca i32
+store i32 10, i32* %argument
+%1 = load i32, i32* %argument
+%2 = call i32 @func.factorial(i32 %1)
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str_int, i64 0, i64 0), i32 %2)
+ret i32 0
+}

@@ -11,6 +11,7 @@ ast_node new_node(int node_type, char *name)
     ans.annotate = NULL;
     ans.uses = 0;
     ans.valid = 1;
+    ans.code_gen_id = 0;
     ans.type = new_var_type_t(INVALID_TP);
     return ans;
 }
@@ -28,6 +29,7 @@ ast_node *new_node_ptr(int node_type, char *name, int line, int column)
     ans->annotate = NULL;
     ans->uses = 0;
     ans->valid = 1;
+    ans->code_gen_id = 0;
     ans->type = new_var_type_t(INVALID_TP);
     return ans;
 }

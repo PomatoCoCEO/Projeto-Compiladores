@@ -30,7 +30,7 @@ typedef enum
 
 typedef struct _node
 {
-    int node_type, line, column, uses, valid;
+    int node_type, line, column, uses, valid, code_gen_id;
     char *str, *annotate;
     vector children;
     var_type type;
