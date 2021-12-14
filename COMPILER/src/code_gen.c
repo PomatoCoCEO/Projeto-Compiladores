@@ -331,6 +331,7 @@ void generate_code_ne(ast_ptr node)
 
     generate_code(first_child);
     generate_code(second_child);
+
     char c = type_arith(first_child);
     char *op = (c == 'f' ? "o" : "");
     printf("%%%d = %ccmp %sne %s %%%d, %%%d\n", current_function_var_id, c, op, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
@@ -546,7 +547,19 @@ void generate_code_assign(ast_ptr node)
 
 void generate_code_intlit(ast_ptr node)
 {
-    printf("%%%d = add i32 %s, 0\n", current_function_var_id, node->str);
+
+    size_t str_len = strlen(node->str);
+    int value;
+
+    if(str_len > 0 && node->str[0] == '0' && (node->str[1] == 'x' || node->str[1] == 'X')) {
+        sscanf(node->str, "%x", &value);
+    } else if(node->str[0] == '0') {
+        sscanf(node->str, "%o", &value);
+    } else {
+        sscanf(node->str, "%d", &value);
+    }
+
+    printf("%%%d = add i32 %d, 0\n", current_function_var_id, value);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -657,7 +670,7 @@ void generate_code_print(ast_ptr node)
         printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str_int, i64 0, i64 0), i32 %%%d)\n", ch1->code_gen_id);
         current_function_var_id++;
     }
-    else if (ch1->node_type == Id && ch1->type.u.type == STRING_TP)
+    else if ((ch1->node_type == Id || ch1->node_type == Call) && ch1->type.u.type == STRING_TP)
     {
         printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.new_line, i64 0, i64 0))\n");
 
@@ -746,6 +759,12 @@ void print_return(var_type v)
         break;
     case FLOAT32_TP:
         printf("ret double 0.0\n");
+        break;
+    case BOOL_TP:
+        printf("ret i1 0\n");
+        break;
+    case STRING_TP:
+        printf("ret i8* null\n");
         break;
     }
 }
