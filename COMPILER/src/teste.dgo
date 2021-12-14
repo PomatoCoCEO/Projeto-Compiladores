@@ -1,5 +1,56 @@
 package main;
 
+func d() bool {
+    var j int;
+    var loop bool;
+
+    loop = 1 == 1;
+	if 1==1 {
+        fmt.Println("This will work");
+        {
+
+            if !(1==1) {
+                fmt.Println("This won't work");
+            } else {
+                for loop {
+                    fmt.Println(j);
+                    j = j + 1;
+                    if j >= 10 {
+                        loop = !loop;
+                    } else {
+                        j = j + 10;
+                    }
+                }
+            }
+        }
+    }
+}
+
 func main() {
-    fmt.Println("Print123%d%f");
-};
+
+    if 7%2 == 0 {
+        fmt.Println("7 is even");
+    } else {
+        fmt.Println("7 is odd");
+    }
+
+       if 8%4 == 0 {
+        fmt.Println("8 is divisible by 4");
+    }
+
+    var num int;
+    num = 10;
+
+    if num < 0 {
+        fmt.Println(num);
+        fmt.Println("is negative");
+    } else {
+        if num < 10 {
+            fmt.Println(num);
+            fmt.Println("has 1 digit");
+        } else {
+            fmt.Println(num);
+            fmt.Println("has multiple digits");
+        }
+    } 
+}

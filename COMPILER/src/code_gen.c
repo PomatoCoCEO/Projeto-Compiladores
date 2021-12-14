@@ -13,7 +13,7 @@ int if_counter = 0, for_counter = 0;
 int current_function = 0;
 
 static char *ll_types[] = {"", "i32", "double", "i1", "i8*", "", "void"};
-static char *zeros[] = {"0", "0.00000000001"};
+static char *zeros[] = {"0", "0.0"};
 static char *formats[] = {
     "\"%d\\0A\\00\"",
     "\"%.08f\\0A\\00\"",
@@ -232,7 +232,7 @@ void generate_code_vardecl_local(ast_ptr node)
     {
         if (strcmp(ll_type_str(v), "double") == 0)
         {
-            printf("store %s 0.0000000001, %s* %%%s\n", ll_type_str(v), ll_type_str(v), id->str);
+            printf("store %s 0.0, %s* %%%s\n", ll_type_str(v), ll_type_str(v), id->str);
         }
         else
         {
@@ -557,7 +557,7 @@ void generate_code_reallit(ast_ptr node)
     char *str_aid;
     // sscanf(node->str, "%Lf", &aid);
     aid = strtod(node->str, &str_aid);
-    printf("%%%d = fadd double %.8lf, 0.0000000001\n", current_function_var_id, aid);
+    printf("%%%d = fadd double %.8lf, 0.0\n", current_function_var_id, aid);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -657,7 +657,7 @@ void generate_code_print(ast_ptr node)
         printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str_int, i64 0, i64 0), i32 %%%d)\n", ch1->code_gen_id);
         current_function_var_id++;
     }
-    else if (ch1->node_type == Id && ch1->type.u.type == STRING_TP)
+    else if ((ch1->node_type == Id || ch1->node_type == Call) && ch1->type.u.type == STRING_TP)
     {
         printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.new_line, i64 0, i64 0))\n");
 
@@ -746,6 +746,9 @@ void print_return(var_type v)
         break;
     case FLOAT32_TP:
         printf("ret double 0.0\n");
+        break;
+    case BOOL_TP:
+        printf("ret i1 0");
         break;
     }
 }

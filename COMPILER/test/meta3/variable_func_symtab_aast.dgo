@@ -99,3 +99,7 @@ func variable_func_declarations() {
 
     tenFunc(1);
 }
+
+func main() {
+    variable_func_declarations();
+}
