@@ -1,0 +1,18 @@
+package main;
+
+/*var i float32;
+var f int;
+var s bool;
+var b string;*/
+
+func main () {
+    var i int;
+    var f float32;
+    var s string;
+    
+    f = -f;
+    f = +f;
+
+    fmt.Println(s);
+    i,_ = strconv.Atoi(os.Args[1]);
+}

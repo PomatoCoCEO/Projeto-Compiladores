@@ -8,21 +8,27 @@ enum
 };
 
 int current_function_var_id;
+int code_str = 0;
 int if_counter = 0, for_counter = 0;
 int current_function = 0;
+
+static char *ll_types[] = {"", "i32", "double", "i1", "i8*", "", "void"};
+static char *zeros[] = {"0", "0.00000000001"};
+static char *formats[] = {
+    "\"%d\\0A\\00\"",
+    "\"%.08f\\0A\\00\"",
+    "\"%s\\0A\\00\"",
+    "\"\\0A\\00\""};
+static char *bools[] = {
+    "\"false\\0A\\00\"",
+    "\"true\\0A\\00\""};
+static char *attr1 = "private unnamed_addr constant";
+static char *attr2 = ", align 1";
+
 extern vector vec_tables, stack_tables;
 void print_init()
 {
-    const char *formats[] = {
-        "\"%d\\0A\\00\"",
-        "\"%.08f\\0A\\00\"",
-        "\"%s\\0A\\00\"",
-    };
-    const char *bools[] = {
-        "\"false\\0A\\00\"",
-        "\"true\\0A\\00\""};
-    const char *attr1 = "private unnamed_addr constant";
-    const char *attr2 = ", align 1";
+
     // formatting strings
     printf("@.str_int = %s [4 x i8] c%s%s\n", attr1, formats[0], attr2);
     printf("@.str_float = %s [7 x i8] c%s%s\n", attr1, formats[1], attr2);
@@ -30,6 +36,7 @@ void print_init()
     // boolean values
     printf("@.false = %s [7 x i8] c%s%s\n", attr1, bools[0], attr2);
     printf("@.true = %s [6 x i8] c%s%s\n", attr1, bools[1], attr2);
+    printf("@.new_line = %s [2 x i8] c%s%s\n", attr1, formats[3], attr2);
     printf("@program.args = global i8** null\n");
     // printf
     printf("declare i32 @atoi(i8*)\n");
@@ -160,6 +167,7 @@ void generate_code_funcdecl(ast_ptr node)
     ast_ptr params = *(ast_ptr *)get(&header->children, header->children.size - 1);
     ast_ptr func_name = *(ast_ptr *)get(&header->children, 0);
     var_type v;
+    assign_strlit(node);
     if (header->children.size == 2)
         v = new_var_type_t(NONE_TP);
     else
@@ -169,8 +177,9 @@ void generate_code_funcdecl(ast_ptr node)
     }
     if (strcmp(func_name->str, "main") == 0)
     {
-        printf("define %s @%s(i32 %%local_nargs, i8** %%local_args", ll_type_str(v), func_name->str);
-        if(params->children.size > 0) {
+        printf("define i32 @%s(i32 %%local_nargs, i8** %%local_args", func_name->str);
+        if (params->children.size > 0)
+        {
             printf(", ");
         }
     }
@@ -202,17 +211,34 @@ void generate_code_funcdecl(ast_ptr node)
     }
     ast_ptr body = *(ast_ptr *)get(&node->children, 1);
     generate_code(body);
-    print_return(v);
+    if (strcmp(func_name->str, "main") == 0)
+    {
+        printf("ret i32 0\n");
+    }
+    else
+    {
+        print_return(v);
+    }
     printf("}\n");
     current_function++;
 }
 
 void generate_code_vardecl_local(ast_ptr node)
 {
-    ast_ptr tp = *(ast_ptr *)get(&node->children, 0);
     ast_ptr id = *(ast_ptr *)get(&node->children, 1);
-    var_type v = new_var_type(tp);
+    var_type v = new_var_type(node);
     printf("%%%s = alloca %s\n", id->str, ll_type_str(v));
+    if (strcmp(ll_type_str(v), "i8*") != 0)
+    {
+        if (strcmp(ll_type_str(v), "double") == 0)
+        {
+            printf("store %s 0.0000000001, %s* %%%s\n", ll_type_str(v), ll_type_str(v), id->str);
+        }
+        else
+        {
+            printf("store %s 0, %s* %%%s\n", ll_type_str(v), ll_type_str(v), id->str);
+        }
+    }
 }
 
 void generate_code_vardecl_global(ast_ptr node)
@@ -221,9 +247,12 @@ void generate_code_vardecl_global(ast_ptr node)
     ast_ptr id = *(ast_ptr *)get(&node->children, 1);
     var_type v = new_var_type(tp);
 
-    if(strcmp(ll_type_str(v), "i8*") == 0) {
+    if (strcmp(ll_type_str(v), "i8*") == 0)
+    {
         printf("@.%s = global %s null\n", id->str, ll_type_str(v));
-    } else {
+    }
+    else
+    {
         printf("@.%s = global %s %s\n", id->str, ll_type_str(v), zero(v));
     }
 }
@@ -235,8 +264,9 @@ void generate_code_add(ast_ptr node)
 
     generate_code(first_child);
     generate_code(second_child);
-
-    printf("%%%d = add %s %%%d, %%%d\n", current_function_var_id, ll_type_str(node->type), first_child->code_gen_id, second_child->code_gen_id);
+    char c = type_arith(first_child);
+    char *op = (c == 'f' ? "f" : "");
+    printf("%%%d = %sadd %s %%%d, %%%d\n", current_function_var_id, op, ll_type_str(node->type), first_child->code_gen_id, second_child->code_gen_id);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -261,8 +291,9 @@ void generate_code_div(ast_ptr node)
 
     generate_code(first_child);
     generate_code(second_child);
-
-    printf("%%%d = div %s %%%d, %%%d\n", current_function_var_id, ll_type_str(node->type), first_child->code_gen_id, second_child->code_gen_id);
+    char c = type_arith(first_child);
+    char *op = (c == 'f' ? "f" : "s");
+    printf("%%%d = %sdiv %s %%%d, %%%d\n", current_function_var_id, op, ll_type_str(node->type), first_child->code_gen_id, second_child->code_gen_id);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -274,8 +305,9 @@ void generate_code_plus(ast_ptr node)
 
     generate_code(first_child);
     // generate_code(second_child);
-
-    printf("%%%d = add %s %%%d, 0\n", current_function_var_id, ll_type_str(node->type), first_child->code_gen_id);
+    char c = type_arith(first_child);
+    char *op = (c == 'f' ? "f" : "");
+    printf("%%%d = %sadd %s %%%d, %s\n", current_function_var_id, op, ll_type_str(node->type), first_child->code_gen_id, zero(first_child->type));
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -285,8 +317,9 @@ void generate_code_minus(ast_ptr node)
     ast_ptr first_child = *(ast_ptr *)get(&node->children, 0);
 
     generate_code(first_child);
-
-    printf("%%%d = sub %s 0, %%%d\n", current_function_var_id, ll_type_str(node->type), first_child->code_gen_id);
+    char c = type_arith(first_child);
+    char *op = (c == 'f' ? "f" : "");
+    printf("%%%d = %ssub %s %s, %%%d\n", current_function_var_id, op, ll_type_str(node->type), zero(first_child->type), first_child->code_gen_id);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -298,8 +331,9 @@ void generate_code_ne(ast_ptr node)
 
     generate_code(first_child);
     generate_code(second_child);
-
-    printf("%%%d = icmp ne %s %%%d, %%%d\n", current_function_var_id, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
+    char c = type_arith(first_child);
+    char *op = (c == 'f' ? "o" : "");
+    printf("%%%d = %ccmp %sne %s %%%d, %%%d\n", current_function_var_id, c, op, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -311,8 +345,9 @@ void generate_code_eq(ast_ptr node)
 
     generate_code(first_child);
     generate_code(second_child);
-
-    printf("%%%d = icmp eq %s %%%d, %%%d\n", current_function_var_id, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
+    char c = type_arith(first_child);
+    char *op = (c == 'f' ? "o" : "");
+    printf("%%%d = %ccmp %seq %s %%%d, %%%d\n", current_function_var_id, c, op, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -324,8 +359,9 @@ void generate_code_gt(ast_ptr node)
 
     generate_code(first_child);
     generate_code(second_child);
-
-    printf("%%%d = icmp sgt %s %%%d, %%%d\n", current_function_var_id, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
+    char c = type_arith(first_child);
+    char *op = (c == 'f' ? "o" : "s");
+    printf("%%%d = %ccmp %sgt %s %%%d, %%%d\n", current_function_var_id, c, op, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -337,8 +373,9 @@ void generate_code_lt(ast_ptr node)
 
     generate_code(first_child);
     generate_code(second_child);
-
-    printf("%%%d = icmp slt %s %%%d, %%%d\n", current_function_var_id, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
+    char c = type_arith(first_child);
+    char *op = (c == 'f' ? "o" : "s");
+    printf("%%%d = %ccmp %slt %s %%%d, %%%d\n", current_function_var_id, c, op, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -350,8 +387,9 @@ void generate_code_ge(ast_ptr node)
 
     generate_code(first_child);
     generate_code(second_child);
-
-    printf("%%%d = icmp sge %s %%%d, %%%d\n", current_function_var_id, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
+    char c = type_arith(first_child);
+    char *op = (c == 'f' ? "o" : "s");
+    printf("%%%d = %ccmp %sge %s %%%d, %%%d\n", current_function_var_id, c, op, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -363,14 +401,41 @@ void generate_code_le(ast_ptr node)
 
     generate_code(first_child);
     generate_code(second_child);
-
-    printf("%%%d = icmp sle %s %%%d, %%%d\n", current_function_var_id, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
+    char c = type_arith(first_child);
+    char *op = (c == 'f' ? "o" : "s");
+    printf("%%%d = %ccmp %sle %s %%%d, %%%d\n", current_function_var_id, c, op, ll_type_str(first_child->type), first_child->code_gen_id, second_child->code_gen_id);
 
     node->code_gen_id = current_function_var_id++;
 }
 
 void generate_code_for(ast_ptr node)
 {
+    if (node->children.size == 2)
+    {
+        node->code_gen_id = for_counter;
+        for_counter++;
+        printf("br label %%cond_for_%d\n", node->code_gen_id);
+        printf("cond_for_%d:\n", node->code_gen_id);
+        ast_ptr cond = *(ast_ptr *)get(&node->children, 0);
+        ast_ptr body = *(ast_ptr *)get(&node->children, 1);
+        generate_code(cond);
+        printf("br i1 %%%d, label %%for_body_%d, label %%for_end_%d\n", cond->code_gen_id, node->code_gen_id, node->code_gen_id);
+        printf("for_body_%d:\n", node->code_gen_id);
+        generate_code(body);
+        printf("br label %%cond_for_%d\n", node->code_gen_id);
+        printf("for_end_%d:\n", node->code_gen_id);
+    }
+    else
+    {
+        node->code_gen_id = for_counter;
+        for_counter++;
+        ast_ptr body = *(ast_ptr *)get(&node->children, 1);
+        printf("br label %%for_body_%d:\n", node->code_gen_id);
+        printf("for_body_%d:\n", node->code_gen_id);
+        generate_code(body);
+        printf("br label %%for_body_%d\n", node->code_gen_id);
+        printf("for_end_%d:\n", node->code_gen_id);
+    }
 }
 
 void generate_code_not(ast_ptr node)
@@ -394,11 +459,11 @@ void generate_code_parseargs(ast_ptr node)
 
     printf("%%%d = load i8**, i8*** @program.args\n", current_function_var_id);
     current_function_var_id++;
-    printf("%%%d = getelementptr i8*, i8** %%%d, i32 %s\n", current_function_var_id, current_function_var_id-1, second_child->str);
+    printf("%%%d = getelementptr i8*, i8** %%%d, i32 %%%d\n", current_function_var_id, current_function_var_id - 1, second_child->code_gen_id);
     current_function_var_id++;
-    printf("%%%d = load i8*, i8** %%%d\n", current_function_var_id, current_function_var_id-1);
+    printf("%%%d = load i8*, i8** %%%d\n", current_function_var_id, current_function_var_id - 1);
     current_function_var_id++;
-    printf("%%%d = call i32 @atoi(i8* %%%d)\n", current_function_var_id, current_function_var_id-1);
+    printf("%%%d = call i32 @atoi(i8* %%%d)\n", current_function_var_id, current_function_var_id - 1);
 
     printf("store i32 %%%d, i32* %%%s\n", current_function_var_id, first_child->str);
 
@@ -412,8 +477,10 @@ void generate_code_sub(ast_ptr node)
 
     generate_code(first_child);
     generate_code(second_child);
+    char c = type_arith(first_child);
+    char *op = (c == 'f' ? "f" : "");
 
-    printf("%%%d = sub %s %%%d, %%%d\n", current_function_var_id, ll_type_str(node->type), first_child->code_gen_id, second_child->code_gen_id);
+    printf("%%%d = %ssub %s %%%d, %%%d\n", current_function_var_id, op, ll_type_str(node->type), first_child->code_gen_id, second_child->code_gen_id);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -450,8 +517,9 @@ void generate_code_mul(ast_ptr node)
 
     generate_code(first_child);
     generate_code(second_child);
-
-    printf("%%%d = mul %s %%%d, %%%d\n", current_function_var_id, ll_type_str(node->type), first_child->code_gen_id, second_child->code_gen_id);
+    char c = type_arith(first_child);
+    char *op = (c == 'f' ? "f" : "");
+    printf("%%%d = %smul %s %%%d, %%%d\n", current_function_var_id, op, ll_type_str(node->type), first_child->code_gen_id, second_child->code_gen_id);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -465,13 +533,13 @@ void generate_code_assign(ast_ptr node)
     switch (t)
     {
     case LOCAL_VARIABLE:
-        printf("store %s %%%d, %s* %%%s\n", ll_type_str(node->type), current_function_var_id, ll_type_str(node->type), ch1->str);
+        printf("store %s %%%d, %s* %%%s\n", ll_type_str(node->type), ch2->code_gen_id, ll_type_str(node->type), ch1->str);
         break;
     case PARAM_VARIABLE:
-        printf("store %s %%%d, %s* %%var.%s\n", ll_type_str(node->type), current_function_var_id, ll_type_str(node->type), ch1->str);
+        printf("store %s %%%d, %s* %%arg.%s\n", ll_type_str(node->type), ch2->code_gen_id, ll_type_str(node->type), ch1->str);
         break;
     case GLOBAL_VARIABBLE:
-        printf("store %s %%%d, %s* @%s\n", ll_type_str(node->type), current_function_var_id, ll_type_str(node->type), ch1->str);
+        printf("store %s %%%d, %s* @.%s\n", ll_type_str(node->type), ch2->code_gen_id, ll_type_str(node->type), ch1->str);
         break;
     }
 }
@@ -485,15 +553,17 @@ void generate_code_intlit(ast_ptr node)
 
 void generate_code_reallit(ast_ptr node)
 {
-    printf("%%%d = fadd double %s, 0.0\n", current_function_var_id, node->str);
+    double aid;
+    char *str_aid;
+    // sscanf(node->str, "%Lf", &aid);
+    aid = strtod(node->str, &str_aid);
+    printf("%%%d = fadd double %.8lf, 0.0000000001\n", current_function_var_id, aid);
 
     node->code_gen_id = current_function_var_id++;
 }
 
 void generate_code_strlit(ast_ptr node)
 {
-
-    // TODO
 }
 
 void generate_code_id(ast_ptr node)
@@ -528,7 +598,13 @@ void generate_code_call(ast_ptr node)
         generate_code(child);
     }
 
-    printf("%%%d = call %s @func.%s(", current_function_var_id, ll_type_str(node->type), func->str);
+    if (node->type.u.type != NONE_TP)
+    {
+        printf("%%%d = call %s @func.%s(", current_function_var_id, ll_type_str(node->type), func->str);
+        node->code_gen_id = current_function_var_id++;
+    }
+    else
+        printf("call void @func.%s(", func->str);
     for (size_t i = 1; i < node->children.size; i++)
     {
         ast_ptr child = *(ast_ptr *)get(&node->children, i);
@@ -538,8 +614,6 @@ void generate_code_call(ast_ptr node)
             printf(", ");
     }
     printf(")\n");
-
-    node->code_gen_id = current_function_var_id++;
 }
 
 void generate_code_return(ast_ptr node)
@@ -559,6 +633,7 @@ void generate_code_if(ast_ptr node)
     ast_ptr then = *(ast_ptr *)get(&node->children, 1);
     generate_code(cond);
     node->code_gen_id = if_counter;
+    if_counter++;
     printf("br i1 %%%d, label %%then_%d, label %%else_%d\n", cond->code_gen_id, node->code_gen_id, node->code_gen_id);
     printf("then_%d:\n", node->code_gen_id);
     generate_code(then);
@@ -571,17 +646,65 @@ void generate_code_if(ast_ptr node)
     }
     printf("br label %%end_if_%d\n", node->code_gen_id);
     printf("end_if_%d:\n", node->code_gen_id);
-    if_counter++;
 }
 
 void generate_code_print(ast_ptr node)
 {
     ast_ptr ch1 = *(ast_ptr *)get(&node->children, 0);
     generate_code(ch1);
-    if(strcmp(ll_type_str(ch1->type), "i32") == 0) {
+    if (strcmp(ll_type_str(ch1->type), "i32") == 0)
+    {
         printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str_int, i64 0, i64 0), i32 %%%d)\n", ch1->code_gen_id);
-    } else if(strcmp(ll_type_str(ch1->type), "double") == 0) {
-        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str_double, i64 0, i64 0), i32 %%%d)\n", ch1->code_gen_id);
+        current_function_var_id++;
+    }
+    else if (ch1->node_type == Id && ch1->type.u.type == STRING_TP)
+    {
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.new_line, i64 0, i64 0))\n");
+
+        current_function_var_id++;
+    }
+    else if (strcmp(ll_type_str(ch1->type), "i8*") == 0)
+    {
+        size_t str_len = strlen(ch1->str);
+        int percent_count = 0, slash = 0;
+        int escape = 0;
+        for (size_t i = 0; ch1->str[i]; i++)
+        {
+            if (ch1->str[i] == '%')
+                percent_count++;
+            if (ch1->str[i] == '\\' && !escape)
+            {
+                slash++;
+                escape = 1;
+            }
+            else
+            {
+                escape = 0;
+            }
+        }
+
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([%ld x i8], [%ld x i8]* @.str_%d, i64 0, i64 0))\n", str_len + percent_count - slash, str_len + percent_count - slash, ch1->code_gen_id);
+        current_function_var_id++;
+    }
+    else if (strcmp(ll_type_str(ch1->type), "i1") == 0)
+    {
+        int c = if_counter;
+        printf("br i1 %%%d, label %%then_%d, label %%else_%d\n", ch1->code_gen_id, c, c);
+        printf("then_%d:\n", c);
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.true, i64 0, i64 0))\n");
+        printf("br label %%if_end_%d\n", c);
+        printf("else_%d:\n", c);
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.false, i64 0, i64 0))\n");
+        printf("br label %%if_end_%d\n", c);
+        printf("if_end_%d:\n", c);
+        if_counter++;
+        current_function_var_id += 2;
+    }
+    else if (strcmp(ll_type_str(ch1->type), "double") == 0)
+    {
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %%%d)\n", ch1->code_gen_id);
+
+        current_function_var_id++;
     }
 }
 
@@ -636,10 +759,12 @@ int type_node_id(ast_ptr node)
     ast_ptr decl;
     if (h != NULL)
     {
-        ast_ptr decl = (ast_ptr)h->object;
+        decl = (ast_ptr)h->object;
         switch (decl->node_type)
         {
         case VarDecl:
+            if (decl->line > node->line || (decl->line == node->line && decl->column > node->column))
+                break;
             return LOCAL_VARIABLE; // local function variable
         case ParamDecl:
             return PARAM_VARIABLE; // param variable
@@ -647,17 +772,124 @@ int type_node_id(ast_ptr node)
             break;
         }
     }
+    hash_table ht_main = *(hash_table *)get(&stack_tables, 0);
+    hashable *h2 = find(&ht_main, &comp, equals_decl);
+    if (h2 != NULL)
+        return GLOBAL_VARIABBLE; // global variable
     else
     {
-        hash_table ht_main = *(hash_table *)get(&stack_tables, 0);
-        hashable *h2 = find(&ht_main, &comp, equals_decl);
-        if (h2 != NULL)
-            return GLOBAL_VARIABBLE; // global variable
-        else
-        {
-            printf("PROBLEMSSSS - VARIABLE %s NOT DEFINED\n", node->str);
-            exit(1);
-        }
+        printf("PROBLEMSSSS - VARIABLE %s NOT DEFINED\n", node->str);
+        exit(1);
     }
+
     return -1;
+}
+
+char type_arith(ast_ptr node)
+{
+    switch (node->type.u.type)
+    {
+    case INT_TP:
+    case BOOL_TP:
+        return 'i';
+    case FLOAT32_TP:
+        return 'f';
+    }
+    return '\0';
+}
+
+/*
+    \b 08
+    \t 09
+    \n 0A
+    \f 0C
+    \r 0D
+    \\ 5C
+*/
+
+void assign_strlit(ast_ptr node)
+{
+    for (int i = 0; i < node->children.size; i++)
+    {
+        ast_ptr ch = *(ast_ptr *)get(&node->children, i);
+        assign_strlit(ch);
+    }
+    if (node->node_type == StrLit)
+    {
+        // printf("Boo\n");
+        // char *str = strdup(node->str + 1);
+        // str[strlen(str) - 1] = '\0';
+        int no_extra = 0;
+        int escape = 0;
+        for (size_t i = 0; node->str[i]; i++)
+        {
+            if (node->str[i] == '%')
+                no_extra++;
+            if (node->str[i] == '\\' && !escape)
+            {
+                escape = 1;
+                no_extra--;
+            }
+            else
+            {
+                escape = 0;
+            }
+        }
+        printf("@.str_%d = %s [%ld x i8] c\"", code_str, attr1, strlen(node->str) + no_extra);
+        int prev_slash = 0;
+        for (size_t i = 1; node->str[i + 1]; i++)
+        {
+            if (node->str[i] == '%')
+                printf("%%");
+            if (node->str[i] == '\\')
+            {
+                if (prev_slash)
+                {
+                    printf("5C");
+                    prev_slash = 0;
+                }
+                else
+                {
+                    printf("\\");
+                    prev_slash = 1;
+                }
+            }
+            else
+            {
+                if (prev_slash)
+                {
+                    switch (node->str[i])
+                    {
+                    case 'b':
+                        printf("08");
+                        break;
+                    case 't':
+                        printf("09");
+                        break;
+                    case 'n':
+                        printf("0A");
+                        break;
+                    case 'f':
+                        printf("0C");
+                        break;
+                    case 'r':
+                        printf("0D");
+                        break;
+                    case '\"':
+                        printf("22");
+                        break;
+                    default:
+                        break;
+                    }
+                }
+                else
+                {
+                    printf("%c", node->str[i]);
+                }
+                prev_slash = 0;
+            }
+        }
+        printf("\\0A\\00\"%s\n", attr2);
+        node->code_gen_id = code_str++;
+    }
 }

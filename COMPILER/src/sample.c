@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char ** arg;
+char **arg;
 
-int main(int argn, char * args[]) {
-    arg = args;
-    int i = atoi(arg[1]);
-    printf("%d\n", i);
+int main(int argn, char *args[])
+{
+    printf("\t tab\n");
 }

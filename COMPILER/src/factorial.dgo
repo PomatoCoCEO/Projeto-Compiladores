@@ -8,8 +8,21 @@ func factorial(n int) int {
     return n * factorial(n-1);
 };
 
+func factorial2(n int) int {
+    var i int;
+    var ans int;
+    i = 1;
+    ans = 1;
+    for(i <= n) {
+        ans = ans * i;
+        i = i + 1;
+    }
+    return ans;
+}
+
 func main() {
     var argument int;
     argument,_ = strconv.Atoi(os.Args[1]);
     fmt.Println(factorial(argument));
+    fmt.Println(factorial2(argument));
 };

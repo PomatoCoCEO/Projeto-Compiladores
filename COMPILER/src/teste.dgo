@@ -1,6 +1,5 @@
 package main;
 
 func main() {
-
-    fmt.Println(1+2+3);
+    fmt.Println("Print123%d%f");
 };

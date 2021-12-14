@@ -4,8 +4,7 @@
 #include "ast_node.h"
 #include "var_str.h"
 #include "hash_table.h"
-static char *ll_types[] = {"", "i32", "double", "i1", "i8*", "", "void"};
-static char *zeros[] = {"0", "0.0"};
+
 char *zero(var_type v);
 char *ll_type_str(var_type type);
 void print_init();
@@ -44,4 +43,6 @@ void generate_code_if(ast_ptr node);
 void generate_code_print(ast_ptr node);
 void print_return(var_type v);
 int type_node_id(ast_ptr node);
+char type_arith(ast_ptr node);
+void assign_strlit(ast_ptr node);
 #endif

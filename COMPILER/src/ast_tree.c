@@ -5,10 +5,11 @@ vector stack;
 void push_node(int node_type, char *format, char *val, int line, int column)
 {
     char *name;
-    if (node_type == IntLit || node_type == RealLit || node_type == StrLit || node_type == Id)
+    if (node_type == IntLit || node_type == RealLit || node_type == Id)
     {
         name = malloc(strlen(format) + strlen(val) + 2);
         sprintf(name, format, val);
+        // (IntLit, "IntLit(%s)", )
     }
     else
     {

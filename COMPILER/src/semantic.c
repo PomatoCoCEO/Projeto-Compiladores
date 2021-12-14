@@ -222,7 +222,7 @@ void sem_analysis_program(ast_ptr program)
         if (ch->node_type == FuncDecl)
             semantic_analysis(ch);
     }
-    hash_table *top = get(&stack_tables, 0);
+    // hash_table *top = get(&stack_tables, 0);
 
     /*if (semantic_errors == 0)
         print_st_program(top);*/
