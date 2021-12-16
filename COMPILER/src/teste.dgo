@@ -1,101 +1,16 @@
 package main;
 
-var a float32;
-var b int;
-var c bool;
-
-func teste2(q bool) bool {
-    return q == (1 > 2 && 2 != 3 || 2 + 1 > 3);
-}
-
-func bruh(x int) int {
-    return (x + 1) % 10;
-}
-
-func teste() float32 {
-    b,_ = strconv.Atoi(os.Args[bruh(0)]);
-    b = 0xFFA1;
-    b = 0712;
-    b = 0x12;
-    fmt.Println(b + 1);
-    fmt.Println(b - 1);
-    fmt.Println(b % 1);
-    fmt.Println(b / 1);
-    fmt.Println(b * 1);
-    fmt.Println(+ b);
-    fmt.Println(- b);
-    fmt.Println(b != 1);
-    fmt.Println(b == 1);
-    fmt.Println(b > 1);
-    fmt.Println(b < 1);
-    fmt.Println(b >= 1);
-    fmt.Println(!(b <= 1));
-    fmt.Println(b != 1 && b > 1);
-    fmt.Println(b != 1 || b > 1);
-
-    a = .1e-15;
-    fmt.Println(a + .1e10);
-    fmt.Println(a - .1e10);
-    fmt.Println(a / .1e10);
-    fmt.Println(a * .1e10);
-    fmt.Println(+ a);
-    fmt.Println(- a);
-    fmt.Println(a != .1e10);
-    fmt.Println(a == .1e10);
-    fmt.Println(a > .1e10);
-    fmt.Println(a < .1e10);
-    fmt.Println(a >= .1e10);
-    fmt.Println(!(a <= .1e10));
-    fmt.Println(a != .1e10 && a > .1e10);
-    fmt.Println(a != .1e10 || a > .1e10);
-
-    c = 1 == 1;
-    fmt.Println(c && (!c || c == (1 == 1) || 1 < 3 || -1 == + - + b));
-
-    {
-        {
-            fmt.Println(teste2(2!=2));
-        }
-    }
-
-    return a;
-}
-
-func teste3() {
-    fmt.Println((1 == 1) && (2 == 2));
-    fmt.Println((1 != 1) && (2 != 2));
-    fmt.Println(130 % 85);
-    fmt.Println(2 != 3);
-    fmt.Println(2 == 3);
-    fmt.Println(2 < 3);
-    fmt.Println(2 > 3);
-    fmt.Println(2 <= 3);
-    fmt.Println(2 >= 3);
-    fmt.Println(2 >= 2);
-    fmt.Println((+(-2)));
-    fmt.Println((-(-2)));
-    fmt.Println(!(1 != 1));
-    fmt.Println(5+2);
-    fmt.Println(5.2+1.3);
-    fmt.Println(5-1);
-    fmt.Println(5.2-1.3);
-    fmt.Println(5*3);
-    fmt.Println(5.2*1.3);
-    fmt.Println(15/5);
-    fmt.Println(5.2/1.3);
-}
-
-var true bool;
-func teste4() {
-    true = 3 * 42 >= 84;
-
-    fmt.Println(true);
-}
-
 func main() {
-    teste();
-    teste3();
-    teste4();
+    var a, b, c bool;
+    a = 1 == 1;
+    b = 1 == 1;
+    c = 1 != 1;
 
-    fmt.Println(-0.0 == 0.0);
+    fmt.Println(!a || !b || !c);
+    fmt.Println(!a);
+    fmt.Println(!b);
+    fmt.Println(!b || !a);
+    fmt.Println((!a || !b || !c) && 1 == 1);
+    fmt.Println((!a || !b || !c) && 1 == 1 && (!b || !a));
+    fmt.Println(!((!a || !b || !c) && 1 == 1 && (!b || !a)));
 }

@@ -30,13 +30,13 @@ void print_init()
 {
 
     // formatting strings
-    printf("@.str_int = %s [4 x i8] c%s%s\n", attr1, formats[0], attr2);
-    printf("@.str_float = %s [8 x i8] c%s%s\n", attr1, formats[1], attr2);
-    printf("@.str_string = %s [4 x i8] c%s%s\n", attr1, formats[2], attr2);
+    printf("@_.str_int = %s [4 x i8] c%s%s\n", attr1, formats[0], attr2);
+    printf("@_.str_float = %s [8 x i8] c%s%s\n", attr1, formats[1], attr2);
+    printf("@_.str_string = %s [4 x i8] c%s%s\n", attr1, formats[2], attr2);
     // boolean values
-    printf("@._false = %s [7 x i8] c%s%s\n", attr1, bools[0], attr2);
-    printf("@._true = %s [6 x i8] c%s%s\n", attr1, bools[1], attr2);
-    printf("@.new_line = %s [2 x i8] c%s%s\n", attr1, formats[3], attr2);
+    printf("@_.false = %s [7 x i8] c%s%s\n", attr1, bools[0], attr2);
+    printf("@_.true = %s [6 x i8] c%s%s\n", attr1, bools[1], attr2);
+    printf("@_.new_line = %s [2 x i8] c%s%s\n", attr1, formats[3], attr2);
     printf("@program.args = global i8** null\n");
     // printf
     printf("declare i32 @atoi(i8*)\n");
@@ -177,7 +177,7 @@ void generate_code_funcdecl(ast_ptr node)
     }
     if (strcmp(func_name->str, "main") == 0)
     {
-        printf("define i32 @%s(i32 %%local_nargs, i8** %%local_args", func_name->str);
+        printf("define i32 @%s(i32 %%local_.nargs, i8** %%local_.args", func_name->str);
         if (params->children.size > 0)
         {
             printf(", ");
@@ -198,7 +198,7 @@ void generate_code_funcdecl(ast_ptr node)
     printf(") {\n");
     if (strcmp(func_name->str, "main") == 0)
     {
-        printf("store i8** %%local_args, i8*** @program.args\n");
+        printf("store i8** %%local_.args, i8*** @program.args\n");
     }
     for (int i = 0; i < params->children.size; i++)
     {
@@ -227,16 +227,16 @@ void generate_code_vardecl_local(ast_ptr node)
 {
     ast_ptr id = *(ast_ptr *)get(&node->children, 1);
     var_type v = new_var_type(node);
-    printf("%%%s = alloca %s\n", id->str, ll_type_str(v));
+    printf("%%local.%s = alloca %s\n", id->str, ll_type_str(v));
     if (strcmp(ll_type_str(v), "i8*") != 0)
     {
         if (strcmp(ll_type_str(v), "double") == 0)
         {
-            printf("store %s 0.0, %s* %%%s\n", ll_type_str(v), ll_type_str(v), id->str);
+            printf("store %s 0.0, %s* %%local.%s\n", ll_type_str(v), ll_type_str(v), id->str);
         }
         else
         {
-            printf("store %s 0, %s* %%%s\n", ll_type_str(v), ll_type_str(v), id->str);
+            printf("store %s 0, %s* %%local.%s\n", ll_type_str(v), ll_type_str(v), id->str);
         }
     }
 }
@@ -472,7 +472,7 @@ void generate_code_parseargs(ast_ptr node)
 
     switch(type_node_id(first_child)) {
         case LOCAL_VARIABLE:
-            printf("store i32 %%%d, i32* %%%s\n", current_function_var_id, first_child->str);
+            printf("store i32 %%%d, i32* %%local.%s\n", current_function_var_id, first_child->str);
             break;
         case PARAM_VARIABLE:
             printf("store i32 %%%d, i32* %%arg.%s\n", current_function_var_id, first_child->str);
@@ -549,7 +549,7 @@ void generate_code_assign(ast_ptr node)
     switch (t)
     {
     case LOCAL_VARIABLE:
-        printf("store %s %%%d, %s* %%%s\n", ll_type_str(node->type), ch2->code_gen_id, ll_type_str(node->type), ch1->str);
+        printf("store %s %%%d, %s* %%local.%s\n", ll_type_str(node->type), ch2->code_gen_id, ll_type_str(node->type), ch1->str);
         break;
     case PARAM_VARIABLE:
         printf("store %s %%%d, %s* %%arg.%s\n", ll_type_str(node->type), ch2->code_gen_id, ll_type_str(node->type), ch1->str);
@@ -602,7 +602,7 @@ void generate_code_id(ast_ptr node)
     switch (t)
     {
     case LOCAL_VARIABLE:
-        printf("%%%d = load %s, %s* %%%s\n", current_function_var_id, ll_type_str(node->type), ll_type_str(node->type), node->str);
+        printf("%%%d = load %s, %s* %%local.%s\n", current_function_var_id, ll_type_str(node->type), ll_type_str(node->type), node->str);
         break;
     case PARAM_VARIABLE:
         printf("%%%d = load %s, %s* %%arg.%s\n", current_function_var_id, ll_type_str(node->type), ll_type_str(node->type), node->str);
@@ -682,12 +682,12 @@ void generate_code_print(ast_ptr node)
     generate_code(ch1);
     if (strcmp(ll_type_str(ch1->type), "i32") == 0)
     {
-        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str_int, i64 0, i64 0), i32 %%%d)\n", ch1->code_gen_id);
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @_.str_int, i64 0, i64 0), i32 %%%d)\n", ch1->code_gen_id);
         current_function_var_id++;
     }
     else if ((ch1->node_type == Id || ch1->node_type == Call) && ch1->type.u.type == STRING_TP)
     {
-        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.new_line, i64 0, i64 0))\n");
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @_.new_line, i64 0, i64 0))\n");
 
         current_function_var_id++;
     }
@@ -711,7 +711,7 @@ void generate_code_print(ast_ptr node)
             }
         }
 
-        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([%ld x i8], [%ld x i8]* @.str_%d, i64 0, i64 0))\n", str_len + percent_count - slash, str_len + percent_count - slash, ch1->code_gen_id);
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([%ld x i8], [%ld x i8]* @_.str_%d, i64 0, i64 0))\n", str_len + percent_count - slash, str_len + percent_count - slash, ch1->code_gen_id);
         current_function_var_id++;
     }
     else if (strcmp(ll_type_str(ch1->type), "i1") == 0)
@@ -719,10 +719,10 @@ void generate_code_print(ast_ptr node)
         int c = if_counter;
         printf("br i1 %%%d, label %%then_%d, label %%else_%d\n", ch1->code_gen_id, c, c);
         printf("then_%d:\n", c);
-        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @._true, i64 0, i64 0))\n");
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @_.true, i64 0, i64 0))\n");
         printf("br label %%if_end_%d\n", c);
         printf("else_%d:\n", c);
-        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @._false, i64 0, i64 0))\n");
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @_.false, i64 0, i64 0))\n");
         printf("br label %%if_end_%d\n", c);
         printf("if_end_%d:\n", c);
         if_counter++;
@@ -730,7 +730,7 @@ void generate_code_print(ast_ptr node)
     }
     else if (strcmp(ll_type_str(ch1->type), "double") == 0)
     {
-        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str_float, i64 0, i64 0), double %%%d)\n", ch1->code_gen_id);
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @_.str_float, i64 0, i64 0), double %%%d)\n", ch1->code_gen_id);
 
         current_function_var_id++;
     }
@@ -869,7 +869,7 @@ void assign_strlit(ast_ptr node)
                 escape = 0;
             }
         }
-        printf("@.str_%d = %s [%ld x i8] c\"", code_str, attr1, strlen(node->str) + no_extra);
+        printf("@_.str_%d = %s [%ld x i8] c\"", code_str, attr1, strlen(node->str) + no_extra);
         int prev_slash = 0;
         for (size_t i = 1; node->str[i + 1]; i++)
         {
