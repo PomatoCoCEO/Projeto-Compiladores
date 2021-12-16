@@ -16,7 +16,7 @@ static char *ll_types[] = {"", "i32", "double", "i1", "i8*", "", "void"};
 static char *zeros[] = {"0", "0.0"};
 static char *formats[] = {
     "\"%d\\0A\\00\"",
-    "\"%.08f\\0A\\00\"",
+    "\"%.08lf\\0A\\00\"",
     "\"%s\\0A\\00\"",
     "\"\\0A\\00\""};
 static char *bools[] = {
@@ -31,11 +31,11 @@ void print_init()
 
     // formatting strings
     printf("@.str_int = %s [4 x i8] c%s%s\n", attr1, formats[0], attr2);
-    printf("@.str_float = %s [7 x i8] c%s%s\n", attr1, formats[1], attr2);
+    printf("@.str_float = %s [8 x i8] c%s%s\n", attr1, formats[1], attr2);
     printf("@.str_string = %s [4 x i8] c%s%s\n", attr1, formats[2], attr2);
     // boolean values
-    printf("@.false = %s [7 x i8] c%s%s\n", attr1, bools[0], attr2);
-    printf("@.true = %s [6 x i8] c%s%s\n", attr1, bools[1], attr2);
+    printf("@._false = %s [7 x i8] c%s%s\n", attr1, bools[0], attr2);
+    printf("@._true = %s [6 x i8] c%s%s\n", attr1, bools[1], attr2);
     printf("@.new_line = %s [2 x i8] c%s%s\n", attr1, formats[3], attr2);
     printf("@program.args = global i8** null\n");
     // printf
@@ -319,7 +319,11 @@ void generate_code_minus(ast_ptr node)
     generate_code(first_child);
     char c = type_arith(first_child);
     char *op = (c == 'f' ? "f" : "");
-    printf("%%%d = %ssub %s %s, %%%d\n", current_function_var_id, op, ll_type_str(node->type), zero(first_child->type), first_child->code_gen_id);
+    if(c == 'f') {
+        printf("%%%d = %smul %s -1.0, %%%d\n", current_function_var_id, op, ll_type_str(node->type), first_child->code_gen_id);
+    } else {
+        printf("%%%d = %smul %s -1, %%%d\n", current_function_var_id, op, ll_type_str(node->type), first_child->code_gen_id);
+    }
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -466,7 +470,18 @@ void generate_code_parseargs(ast_ptr node)
     current_function_var_id++;
     printf("%%%d = call i32 @atoi(i8* %%%d)\n", current_function_var_id, current_function_var_id - 1);
 
-    printf("store i32 %%%d, i32* %%%s\n", current_function_var_id, first_child->str);
+    switch(type_node_id(first_child)) {
+        case LOCAL_VARIABLE:
+            printf("store i32 %%%d, i32* %%%s\n", current_function_var_id, first_child->str);
+            break;
+        case PARAM_VARIABLE:
+            printf("store i32 %%%d, i32* %%arg.%s\n", current_function_var_id, first_child->str);
+            break;
+        case GLOBAL_VARIABBLE:
+            printf("store i32 %%%d, i32* @.%s\n", current_function_var_id, first_child->str);
+            break;
+    }
+
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -570,7 +585,7 @@ void generate_code_reallit(ast_ptr node)
     char *str_aid;
     // sscanf(node->str, "%Lf", &aid);
     aid = strtod(node->str, &str_aid);
-    printf("%%%d = fadd double %.8lf, 0.000000000000001\n", current_function_var_id, aid);
+    printf("%%%d = fadd double %.8lf, 0.0\n", current_function_var_id, aid);
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -704,10 +719,10 @@ void generate_code_print(ast_ptr node)
         int c = if_counter;
         printf("br i1 %%%d, label %%then_%d, label %%else_%d\n", ch1->code_gen_id, c, c);
         printf("then_%d:\n", c);
-        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.true, i64 0, i64 0))\n");
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @._true, i64 0, i64 0))\n");
         printf("br label %%if_end_%d\n", c);
         printf("else_%d:\n", c);
-        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.false, i64 0, i64 0))\n");
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @._false, i64 0, i64 0))\n");
         printf("br label %%if_end_%d\n", c);
         printf("if_end_%d:\n", c);
         if_counter++;
@@ -715,7 +730,7 @@ void generate_code_print(ast_ptr node)
     }
     else if (strcmp(ll_type_str(ch1->type), "double") == 0)
     {
-        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %%%d)\n", ch1->code_gen_id);
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str_float, i64 0, i64 0), double %%%d)\n", ch1->code_gen_id);
 
         current_function_var_id++;
     }
