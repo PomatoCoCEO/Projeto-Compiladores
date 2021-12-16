@@ -16,7 +16,7 @@ static char *ll_types[] = {"", "i32", "double", "i1", "i8*", "", "void"};
 static char *zeros[] = {"0", "0.0"};
 static char *formats[] = {
     "\"%d\\0A\\00\"",
-    "\"%.08lf\\0A\\00\"",
+    "\"%.08f\\0A\\00\"",
     "\"%s\\0A\\00\"",
     "\"\\0A\\00\""};
 static char *bools[] = {
@@ -31,7 +31,7 @@ void print_init()
 
     // formatting strings
     printf("@_.str_int = %s [4 x i8] c%s%s\n", attr1, formats[0], attr2);
-    printf("@_.str_float = %s [8 x i8] c%s%s\n", attr1, formats[1], attr2);
+    printf("@_.str_float = %s [7 x i8] c%s%s\n", attr1, formats[1], attr2);
     printf("@_.str_string = %s [4 x i8] c%s%s\n", attr1, formats[2], attr2);
     // boolean values
     printf("@_.false = %s [7 x i8] c%s%s\n", attr1, bools[0], attr2);
@@ -581,11 +581,29 @@ void generate_code_intlit(ast_ptr node)
 
 void generate_code_reallit(ast_ptr node)
 {
-    double aid;
+    /*double aid;
     char *str_aid;
     // sscanf(node->str, "%Lf", &aid);
     aid = strtod(node->str, &str_aid);
-    printf("%%%d = fadd double %.8lf, 0.0\n", current_function_var_id, aid);
+    printf("%%%d = fadd double 0%.015lf, 0.0\n", current_function_var_id, aid);
+    */
+    if(node->str[0] == '.') {
+        printf("%%%d = fadd double 0%s, 0.0\n", current_function_var_id, node->str);
+    } else {
+        int floating_point = 0;
+
+        printf("%%%d = fadd double ", current_function_var_id);
+        for(size_t i = 0; node->str[i]; i++) {
+            if(tolower(node->str[i]) == 'e' && !floating_point) {
+                printf(".0e");
+            } else {
+                if(node->str[i] == '.')
+                    floating_point = 1;
+                printf("%c", tolower(node->str[i]));
+            }
+        }
+        printf(", 0.0\n");
+    }
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -730,7 +748,7 @@ void generate_code_print(ast_ptr node)
     }
     else if (strcmp(ll_type_str(ch1->type), "double") == 0)
     {
-        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @_.str_float, i64 0, i64 0), double %%%d)\n", ch1->code_gen_id);
+        printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @_.str_float, i64 0, i64 0), double %%%d)\n", ch1->code_gen_id);
 
         current_function_var_id++;
     }

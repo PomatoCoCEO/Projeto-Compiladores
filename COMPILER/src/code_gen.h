@@ -4,6 +4,7 @@
 #include "ast_node.h"
 #include "var_str.h"
 #include "hash_table.h"
+#include <ctype.h>
 
 char *zero(var_type v);
 char *ll_type_str(var_type type);

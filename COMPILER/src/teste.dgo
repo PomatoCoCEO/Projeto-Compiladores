@@ -1,16 +1,5 @@
 package main;
 
 func main() {
-    var a, b, c bool;
-    a = 1 == 1;
-    b = 1 == 1;
-    c = 1 != 1;
-
-    fmt.Println(!a || !b || !c);
-    fmt.Println(!a);
-    fmt.Println(!b);
-    fmt.Println(!b || !a);
-    fmt.Println((!a || !b || !c) && 1 == 1);
-    fmt.Println((!a || !b || !c) && 1 == 1 && (!b || !a));
-    fmt.Println(!((!a || !b || !c) && 1 == 1 && (!b || !a)));
+	fmt.Println(1E1);
 }
