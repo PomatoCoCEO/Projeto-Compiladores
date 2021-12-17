@@ -38,13 +38,15 @@ void push_with_children(int node_type, char *name, int no_children, int line, in
 ast_ptr pop_node()
 {
     ast_ptr *ans = get(&stack, stack.size - 1);
+    ast_ptr res;
     if (ans == NULL)
     {
         fprintf(stderr, "No values in stack!\n");
         exit(-1);
     }
+    res = *ans;
     pop_back(&stack);
-    return *ans;
+    return res;
 }
 
 void print_top()
