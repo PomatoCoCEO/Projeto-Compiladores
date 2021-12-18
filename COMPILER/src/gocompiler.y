@@ -26,7 +26,7 @@ Program :       PACKAGE ID SEMICOLON Declarations {
                             for(size_t j = 0; j<(ch->children.size); j++) {
                                 push_back(&d, get(&(ch->children), j));
                             }
-                            free_ast_ptr(ch);
+                            // free_ast_ptr(ch);
                         }
                         else push_back(&d, &ch);
                     }
@@ -65,9 +65,9 @@ VarSpec : ID_NTERM REP_COMMA_ID Type {
     push_back(&(v_spec->children), &n);
    
     if(rep->children.size >0) {
-        vector to_free = new_vector(sizeof(ast_ptr));
+        // vector to_free = new_vector(sizeof(ast_ptr));
         ast_ptr aid = rep;
-        push_back(&to_free, &aid);
+        // push_back(&to_free, &aid);
         while(aid->children.size > 1) {
             ast_ptr _id = *(ast_ptr*)get(&(aid->children), 0);
             ast_ptr ch = new_node_ptr(VarDecl, "VarDecl", _id->line, _id->column );
@@ -79,10 +79,10 @@ VarSpec : ID_NTERM REP_COMMA_ID Type {
             //printf("Boo1\n");
             push_back(&(v_spec->children), &ch);
             aid = (*(ast_ptr*)get(&(aid->children), 1));
-            push_back(&to_free, &aid);
+            // push_back(&to_free, &aid);
         }
-        for(size_t i = 0; i<to_free.size; i++) free_ast_ptr(*(ast_ptr*)get(&to_free, i));
-        free(to_free.array);
+        // for(size_t i = 0; i<to_free.size; i++) free_ast_ptr(*(ast_ptr*)get(&to_free, i));
+        // free(to_free.array);
     }
     push_back(&stack, &v_spec);
 }; 
@@ -123,7 +123,7 @@ FuncParams      : LPAR Parameters RPAR {
                             push_back(&(p->children), get(&(par->children), 2*i+1));
                             push_back(&(funcPar->children), &p);
                         }
-                        free_ast_ptr(par);
+                        // free_ast_ptr(par);
                         push_back(&stack, &funcPar);
                     }
                 | LPAR RPAR {push_node(FuncParams, "FuncParams", "", 0, 0);}
@@ -145,10 +145,11 @@ Parameters : ID_NTERM Type REP_COMMA_ID_TYPE {
             push_back(&new_children, get(&(ch), i));
         }
         rp->children = new_children;
+        free(ch.array);
         push_back(&stack, &rp);
     }
     else {
-        free_ast_ptr(rp);
+        // free_ast_ptr(rp);
         ast_ptr type = pop_node();
         ast_ptr id = pop_node();
         vector new_children = new_vector(sizeof(ast_ptr));
@@ -162,7 +163,7 @@ Parameters : ID_NTERM Type REP_COMMA_ID_TYPE {
 FuncBody : LBRACE VarsAndStatements RBRACE {
     ast_ptr rp = pop_node();
     if(rp->children.size == 0) {
-        free(rp);
+        // free(rp);
         P_NODE(FuncBody, "", 0, 0);
     }
     else {
@@ -176,12 +177,13 @@ FuncBody : LBRACE VarsAndStatements RBRACE {
                     ast_ptr s = *(ast_ptr*) get(&w, i);
                     push_back(&(node->children), &s);
                 }
-                free_ast_ptr(ch);
+                // free_ast_ptr(ch);
             }
             else{ 
                 push_back(&(node->children), &ch);
             }
         }
+        free(v.array);
         push_back(&stack, &node);
     }
 }
@@ -249,7 +251,7 @@ FuncInvocation : ID_NTERM LPAR Expr REP_COMMA_EXPR RPAR {
                     }
                     else {
                         pop_node();
-                        free_ast_ptr(rp);
+                        // free_ast_ptr(rp);
                         push_with_children(Call, "Call", 2, 0, 0);
                     }
                 }

@@ -63,9 +63,9 @@ void generate_code(ast_ptr node)
     case RealLit:
         generate_code_reallit(node); // DONE
         break;
-    case StrLit:
-        generate_code_strlit(node); // DONE
-        break;
+    // case StrLit:
+    //     generate_code_strlit(node); // DONE
+    //     break;
     case Add:
         generate_code_add(node); // DONE
         break;
@@ -319,9 +319,12 @@ void generate_code_minus(ast_ptr node)
     generate_code(first_child);
     char c = type_arith(first_child);
     char *op = (c == 'f' ? "f" : "");
-    if(c == 'f') {
+    if (c == 'f')
+    {
         printf("%%%d = %smul %s -1.0, %%%d\n", current_function_var_id, op, ll_type_str(node->type), first_child->code_gen_id);
-    } else {
+    }
+    else
+    {
         printf("%%%d = %smul %s -1, %%%d\n", current_function_var_id, op, ll_type_str(node->type), first_child->code_gen_id);
     }
 
@@ -470,18 +473,18 @@ void generate_code_parseargs(ast_ptr node)
     current_function_var_id++;
     printf("%%%d = call i32 @atoi(i8* %%%d)\n", current_function_var_id, current_function_var_id - 1);
 
-    switch(type_node_id(first_child)) {
-        case LOCAL_VARIABLE:
-            printf("store i32 %%%d, i32* %%local.%s\n", current_function_var_id, first_child->str);
-            break;
-        case PARAM_VARIABLE:
-            printf("store i32 %%%d, i32* %%arg.%s\n", current_function_var_id, first_child->str);
-            break;
-        case GLOBAL_VARIABBLE:
-            printf("store i32 %%%d, i32* @.%s\n", current_function_var_id, first_child->str);
-            break;
+    switch (type_node_id(first_child))
+    {
+    case LOCAL_VARIABLE:
+        printf("store i32 %%%d, i32* %%local.%s\n", current_function_var_id, first_child->str);
+        break;
+    case PARAM_VARIABLE:
+        printf("store i32 %%%d, i32* %%arg.%s\n", current_function_var_id, first_child->str);
+        break;
+    case GLOBAL_VARIABBLE:
+        printf("store i32 %%%d, i32* @.%s\n", current_function_var_id, first_child->str);
+        break;
     }
-
 
     node->code_gen_id = current_function_var_id++;
 }
@@ -566,11 +569,16 @@ void generate_code_intlit(ast_ptr node)
     size_t str_len = strlen(node->str);
     int value;
 
-    if(str_len > 0 && node->str[0] == '0' && (node->str[1] == 'x' || node->str[1] == 'X')) {
+    if (str_len > 0 && node->str[0] == '0' && (node->str[1] == 'x' || node->str[1] == 'X'))
+    {
         sscanf(node->str, "%x", &value);
-    } else if(node->str[0] == '0') {
+    }
+    else if (node->str[0] == '0')
+    {
         sscanf(node->str, "%o", &value);
-    } else {
+    }
+    else
+    {
         sscanf(node->str, "%d", &value);
     }
 
@@ -587,17 +595,24 @@ void generate_code_reallit(ast_ptr node)
     aid = strtod(node->str, &str_aid);
     printf("%%%d = fadd double 0%.015lf, 0.0\n", current_function_var_id, aid);
     */
-    if(node->str[0] == '.') {
+    if (node->str[0] == '.')
+    {
         printf("%%%d = fadd double 0%s, 0.0\n", current_function_var_id, node->str);
-    } else {
+    }
+    else
+    {
         int floating_point = 0;
 
         printf("%%%d = fadd double ", current_function_var_id);
-        for(size_t i = 0; node->str[i]; i++) {
-            if(tolower(node->str[i]) == 'e' && !floating_point) {
+        for (size_t i = 0; node->str[i]; i++)
+        {
+            if (tolower(node->str[i]) == 'e' && !floating_point)
+            {
                 printf(".0e");
-            } else {
-                if(node->str[i] == '.')
+            }
+            else
+            {
+                if (node->str[i] == '.')
                     floating_point = 1;
                 printf("%c", tolower(node->str[i]));
             }
@@ -608,9 +623,9 @@ void generate_code_reallit(ast_ptr node)
     node->code_gen_id = current_function_var_id++;
 }
 
-void generate_code_strlit(ast_ptr node)
+/*void generate_code_strlit(ast_ptr node)
 {
-}
+}*/
 
 void generate_code_id(ast_ptr node)
 {

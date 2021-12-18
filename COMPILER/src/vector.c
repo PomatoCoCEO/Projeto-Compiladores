@@ -11,7 +11,7 @@ vector new_vector(size_t size_elem)
 
 void push_back(vector *vec, void *elem)
 {
-    if (vec->size == 0)
+    if (vec->capacity == 0)
     {
         void *new_vec = malloc(vec->el_size);
         vec->array = new_vec;

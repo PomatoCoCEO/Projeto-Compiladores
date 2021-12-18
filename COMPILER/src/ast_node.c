@@ -31,6 +31,7 @@ ast_node *new_node_ptr(int node_type, char *name, int line, int column)
     ans->valid = 1;
     ans->code_gen_id = 0;
     ans->type = new_var_type_t(INVALID_TP);
+    push_back(&nodes_free, &ans);
     return ans;
 }
 

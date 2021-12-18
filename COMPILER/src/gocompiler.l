@@ -20,7 +20,7 @@
     int print_syn, print_sem;
 
     int syn_error;
-    extern vector stack;
+    extern vector stack, token_free, nodes_free;
     int semicolon = 0, column = 1, line = 1, saved_line, saved_column, prev_col=1, prev_line=1; 
     void yyerror(const char *s)
     {
@@ -41,6 +41,35 @@
 
     void handle_tok(tok_type tok) {
         if(print) print_tok(tok);
+    }
+
+    void free_token_vector(vector* vector) {
+        // printf("Size: %ld\n", vector->size);
+        if(vector->size) {
+            for(int i = 0; i<vector->size; i++) {
+                token_t* elem = *(token_t**)get(vector, i);
+                free(elem->id);
+                free(elem);
+            }
+            free(vector->array);
+        }
+    }
+
+    void free_node_vector(vector*vector) {
+        // printf("Node size: %ld\n", vector->size);
+        if(vector->size) {
+            for(int i = 0; i<vector->size; i++) {
+                ast_ptr node = *(ast_ptr*)get(vector, i);
+                free(node->str);
+                if(node->children.size) 
+                    free(node->children.array);
+                if(node->type.isVec && node->type.u.vec.size) {
+                    free(node->type.u.vec.array);
+                }
+                free(node);
+            }   
+            free(vector->array);
+        }
     }
 
 %}
@@ -176,6 +205,8 @@ int yywrap() {
 }
 
 int main(int argc, char** argv) {
+    token_free = new_vector(sizeof(token_t*));
+    nodes_free = new_vector(sizeof(ast_ptr));
     if(argc>=2 && strcmp(argv[1], "-l")==0) {
         print=1;
         print_syn = 0;
@@ -191,6 +222,8 @@ int main(int argc, char** argv) {
             handle_blocks(root);
             print_ast_tree(root, 0);
         }
+        if(stack.size) free(stack.array);
+        free_node_vector(&nodes_free);
     } else if(argc >= 2 && strcmp(argv[1], "-s")==0) {
         print_sem = 1;
         print_syn = 0;
@@ -221,4 +254,7 @@ int main(int argc, char** argv) {
             generate_code(root);
         }
     }
+    free_token_vector(&token_free);
+    yylex_destroy();
+    return 0;
 }

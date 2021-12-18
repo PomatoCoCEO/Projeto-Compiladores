@@ -94,10 +94,10 @@ void handle_rep(int node_type, char *name, int no_children, int reverse, int lin
     }
     if (nodes.size == 1)
         push_back(&stack, get(&nodes, 0));
-    for (size_t i = 0; i < to_free.size; i++)
+    /*for (size_t i = 0; i < to_free.size; i++)
     {
         free_ast_ptr((*(ast_ptr *)get(&to_free, i)));
-    }
+    }*/
     free(nodes.array);
     free(to_free.array);
 }
@@ -132,10 +132,10 @@ vector flat_children(ast_ptr node, int children, int reverse)
             S RS*/
         push_back(&to_free, &cur);
     }
-    for (size_t i = 0; i < to_free.size; i++)
+    /*for (size_t i = 0; i < to_free.size; i++)
     {
         free_ast_ptr(*(ast_ptr *)get(&to_free, i));
-    }
+    }*/
     free(to_free.array);
     return ans;
 }
@@ -159,7 +159,7 @@ void handle_blocks(ast_ptr node)
                 {
                     ast_ptr grandson = *(ast_ptr *)get(&(ch->children), 0);
                     set(&(node->children), i, &grandson);
-                    free_ast_ptr(ch);
+                    // free_ast_ptr(ch);
                     ch = grandson;
                 }
                 else if (ch->children.size == 0)
@@ -177,7 +177,7 @@ void handle_blocks(ast_ptr node)
             {
                 if (i == pos1)
                 {
-                    free_ast_ptr(*(ast_ptr *)get(&(node->children), i));
+                    // free_ast_ptr(*(ast_ptr *)get(&(node->children), i));
                     pos_aid++;
                     pos1 = *(int *)get(&to_eliminate, pos_aid);
                     continue;
@@ -190,5 +190,6 @@ void handle_blocks(ast_ptr node)
             free(node->children.array);
             node->children = new_children;
         }
+        free(to_eliminate.array);
     }
 }

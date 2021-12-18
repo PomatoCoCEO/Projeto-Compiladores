@@ -3,9 +3,7 @@
 
 #include <string.h>
 #include <stdlib.h>
-
-extern int print_syn;
-
+#include "vector.h"
 typedef struct token
 {
     char *id;
@@ -13,5 +11,5 @@ typedef struct token
 } token_t;
 
 token_t *new_token(char *id, int line, int column);
-
+vector token_free; // = new_vector(sizeof(void *));
 #endif

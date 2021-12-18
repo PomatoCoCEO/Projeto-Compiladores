@@ -96,6 +96,7 @@ typedef enum
     VarSpec
 } ast_node_type;
 
+vector nodes_free;
 ast_node new_node(int node_type, char *name);
 ast_node *new_node_ptr(int node_type, char *name, int line, int column);
 
