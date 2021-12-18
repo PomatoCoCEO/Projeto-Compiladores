@@ -20,7 +20,7 @@
     int print_syn, print_sem;
 
     int syn_error;
-    extern vector stack, token_free, nodes_free;
+    extern vector stack, token_free, nodes_free, stack_tables, vec_tables;
     int semicolon = 0, column = 1, line = 1, saved_line, saved_column, prev_col=1, prev_line=1; 
     void yyerror(const char *s)
     {
@@ -63,12 +63,45 @@
                 free(node->str);
                 if(node->children.size) 
                     free(node->children.array);
-                if(node->type.isVec && node->type.u.vec.size) {
-                    free(node->type.u.vec.array);
+                if(node->type.isVec) {
+                    if(node->type.u.vec.capacity)
+                        free(node->type.u.vec.array);
+                    if(node->annotate) free(node->annotate);
                 }
                 free(node);
             }   
             free(vector->array);
+        }
+    }
+
+    void free_hash_tables() {
+        if(stack_tables.size){
+            for(int i = 0; i<stack_tables.size; i++) {
+                hash_table h = *(hash_table*) get(&stack_tables, i);
+                free(h.name);
+                if(h.vec.capacity) {
+                    for(int j = 0; j<h.vec.size; j++) {
+                        vector v = *(vector*) get(&(h.vec), j);
+                        if(v.capacity) free(v.array);
+                    }
+                    free(h.vec.array);
+                }
+            }
+            free(stack_tables.array);
+        }
+        if(vec_tables.size){
+            for(int i = 0; i<vec_tables.size; i++) {
+                hash_table h = *(hash_table*) get(&vec_tables, i);
+                free(h.name);
+                if(h.vec.capacity) {
+                    for(int j = 0; j<h.vec.size; j++) {
+                        vector v = *(vector*) get(&(h.vec), j);
+                        if(v.capacity) free(v.array);
+                    }
+                    free(h.vec.array);
+                }
+            }
+            free(vec_tables.array);
         }
     }
 
@@ -237,6 +270,9 @@ int main(int argc, char** argv) {
             if(semantic_errors == 0)
                 print_ast_tree(root, 0);
         }
+        free_node_vector(&nodes_free);
+        free_hash_tables();
+        if(stack.size) free(stack.array);
     } else {
         print_sem = 0;
         print_syn = 0;
@@ -253,6 +289,9 @@ int main(int argc, char** argv) {
             */
             generate_code(root);
         }
+        free_node_vector(&nodes_free);
+        free_hash_tables();
+        if(stack.size) free(stack.array);
     }
     free_token_vector(&token_free);
     yylex_destroy();

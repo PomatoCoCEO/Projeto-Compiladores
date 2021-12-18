@@ -54,6 +54,7 @@ void insert(hash_table *ht, hashable *elem)
         ht->vec_size_pos++;
         ht->vec_size = nos[ht->vec_size_pos];
     }
+    // free(v->array);
 }
 
 int contains(hash_table *h, hashable *d, int (*equals)(void *, void *))

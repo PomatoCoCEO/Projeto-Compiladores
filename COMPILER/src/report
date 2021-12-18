@@ -1,107 +1,77 @@
-==32469== Memcheck, a memory error detector
-==32469== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==32469== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==32469== Command: ./gocompiler -t --track-origins=yes
-==32469== 
-Program
-..FuncDecl
-....FuncHeader
-......Id(d)
-......FuncParams
-....FuncBody
-......Return
-........Or
-..........Or
-............Or
-..............Or
-................Id(a)
-................And
-..................And
-....................Id(b)
-....................Id(c)
-..................Not
-....................Not
-......................Id(b)
-..............Id(d)
-............Id(e)
-..........And
-............IntLit(34)
-............Id(teste)
-......Assign
-........Id(id)
-........Gt
-..........Le
-............Eq
-..............IntLit(1)
-..............IntLit(2)
-............IntLit(3)
-..........IntLit(4)
-......Assign
-........Id(aa)
-........And
-..........Eq
-............IntLit(56)
-............IntLit(2)
-..........IntLit(25)
-......Assign
-........Id(kkk)
-........Sub
-..........Add
-............Id(a)
-............Id(b)
-..........Div
-............Mul
-..............Id(c)
-..............Id(d)
-............Id(e)
-......Assign
-........Id(ttt)
-........Mul
-..........Mul
-............Mul
-..............Mul
-................Id(q)
-................Id(w)
-..............Id(e)
-............Id(r)
-..........Id(t)
-......Assign
-........Id(git)
-........And
-..........IntLit(100)
-..........Not
-............Minus
-..............Add
-................Minus
-..................Not
-....................Plus
-......................Id(a)
-................Id(b)
-......Assign
-........Id(aeq)
-........Or
-..........Or
-............And
-..............Eq
-................Id(a)
-................Id(b)
-..............Id(gh)
-............Id(d)
-..........Id(s)
-......Assign
-........Id(r)
-........Mod
-..........IntLit(3)
-..........IntLit(2)
-..VarDecl
-....Int
-....Id(a)
-==32469== 
-==32469== HEAP SUMMARY:
-==32469==     in use at exit: 0 bytes in 0 blocks
-==32469==   total heap usage: 804 allocs, 804 frees, 46,541 bytes allocated
-==32469== 
-==32469== All heap blocks were freed -- no leaks are possible
-==32469== 
-==32469== For lists of detected and suppressed errors, rerun with: -s
-==32469== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==38209== Memcheck, a memory error detector
+==38209== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==38209== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==38209== Command: ./gocompiler --track-origins=yes
+==38209== 
+@_.str_int = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
+@_.str_float = private unnamed_addr constant [7 x i8] c"%.08f\0A\00", align 1
+@_.str_string = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
+@_.false = private unnamed_addr constant [7 x i8] c"false\0A\00", align 1
+@_.true = private unnamed_addr constant [6 x i8] c"true\0A\00", align 1
+@_.new_line = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+@program.args = global i8** null
+declare i32 @atoi(i8*)
+declare i32 @printf(i8*, ...)
+@_.str_0 = private unnamed_addr constant [10 x i8] c"trueBool\0A\00", align 1
+@_.str_1 = private unnamed_addr constant [17 x i8] c"Do not pressint\0A\00", align 1
+@_.str_2 = private unnamed_addr constant [17 x i8] c"or Not trueBool\0A\00", align 1
+@_.str_3 = private unnamed_addr constant [20 x i8] c"one not equals two\0A\00", align 1
+@_.str_4 = private unnamed_addr constant [20 x i8] c"and for floats too\0A\00", align 1
+@_.str_5 = private unnamed_addr constant [18 x i8] c"Can't print this\0A\00", align 1
+define i32 @main(i32 %local_.nargs, i8** %local_.args) {
+store i8** %local_.args, i8*** @program.args
+%local.trueBool = alloca i1
+store i1 0, i1* %local.trueBool
+%1 = load i1, i1* %local.trueBool
+%2 = sub i1 1, %1
+store i1 %2, i1* %local.trueBool
+%3 = load i1, i1* %local.trueBool
+br i1 %3, label %then_0, label %else_0
+then_0:
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([10 x i8], [10 x i8]* @_.str_0, i64 0, i64 0))
+%5 = load i1, i1* %local.trueBool
+%6 = sub i1 1, %5
+br i1 %6, label %then_1, label %else_1
+then_1:
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @_.str_1, i64 0, i64 0))
+br label %end_if_1
+else_1:
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @_.str_2, i64 0, i64 0))
+%9 = add i32 1, 0
+%10 = add i32 2, 0
+%11 = icmp ne i32 %9, %10
+br i1 %11, label %then_2, label %else_2
+then_2:
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([20 x i8], [20 x i8]* @_.str_3, i64 0, i64 0))
+%13 = fadd double 11.012, 0.0
+%14 = fadd double 2.0e3, 0.0
+%15 = fcmp olt double %13, %14
+br i1 %15, label %then_3, label %else_3
+then_3:
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([20 x i8], [20 x i8]* @_.str_4, i64 0, i64 0))
+br label %end_if_3
+else_3:
+br label %end_if_3
+end_if_3:
+br label %end_if_2
+else_2:
+br label %end_if_2
+end_if_2:
+br label %end_if_1
+end_if_1:
+br label %end_if_0
+else_0:
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([18 x i8], [18 x i8]* @_.str_5, i64 0, i64 0))
+br label %end_if_0
+end_if_0:
+ret i32 0
+}
+==38209== 
+==38209== HEAP SUMMARY:
+==38209==     in use at exit: 0 bytes in 0 blocks
+==38209==   total heap usage: 524 allocs, 524 frees, 42,056 bytes allocated
+==38209== 
+==38209== All heap blocks were freed -- no leaks are possible
+==38209== 
+==38209== For lists of detected and suppressed errors, rerun with: -s
+==38209== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

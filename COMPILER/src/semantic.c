@@ -303,7 +303,8 @@ void sem_analysis_funcdecl(ast_ptr funcdecl)
             semantic_errors++;
         }
     }
-
+    if (nds.size)
+        free(nds.array);
     pop_back(&stack_tables);
 }
 
@@ -737,15 +738,6 @@ void sem_analysis_call(ast_ptr node)
         // printf("Pushing type %s or %d\n", child->annotate, child->type.u.type);
         var_type v = copy_var_type_t(child->type); // new_var_type(child);
         push_back(&(args.u.vec), &(v.u.type));
-        // printf("Args size: %ld\n", args.u.vec.size);
-        //  char *copy = strdup(child->annotate);
-        //  char copy[strlen(child->annotate) + 1];
-        //  strcpy(copy, child->annotate);
-        //  copy[0] = tolower(copy[0]);
-        //  strcat(args, copy);
-        //  free(copy);
-        //  if (i < node->children.size - 1)
-        //      strcat(args, ",");
     }
     // strcat(args, ")");
     id->type = args;
@@ -778,42 +770,13 @@ void sem_analysis_call(ast_ptr node)
         ast_ptr params = *(ast_ptr *)get(&header->children, header->children.size - 1);
         // printf("params type: %s %d\n", params->str, params->node_type);
         var_type func_args = new_var_type(params);
-        /* printf("func args has vector?\n");
-        printf("%d\n", func_args.isVec);
-        printf("args type is vector? %d\n", args.isVec);
-        printf("sizes: %ld and %ld\n", func_args.u.vec.size, args.u.vec.size);
-        f */
-        // printf("Call1.1\n");
-        /*for (int i = 0; i < args.u.vec.size; i++)
-        {
-            int f1, f2;
-            f1 = *(int *)get(&(args.u.vec), i);
-            f2 = *(int *)get(&(func_args.u.vec), i);
-            printf("f1=%d, f2=%d\n", f1, f2);
-        }*/
-        // printf("func args is a vector? %s\n", func_args.isVec);
-        /*char *current_args = malloc(11 * params->children.size + 10);
-        current_args[0] = 0;
-
-        strcat(current_args, "(");
-        for (int i = 0; i < params->children.size; i++)
-        {
-            ast_ptr paramdecl = *(ast_ptr *)get(&params->children, i);
-            ast_ptr paramtype = *(ast_ptr *)get(&paramdecl->children, 0);
-            char copy[strlen(paramtype->str) + 1];
-            strcpy(copy, paramtype->str);
-            copy[0] = tolower(copy[0]);
-            strcat(current_args, copy);
-            if (i < params->children.size - 1)
-                strcat(current_args, ",");
-        }
-        strcat(current_args, ")");*/
-        // if (strcmp(args, current_args) != 0)
         if (!equals_var_type(&args, &func_args))
         {
             pos = -1;
             // printf("Not equal: %s and %s\n", var_type_str(args), var_type_str(func_args));
         }
+        if (func_args.isVec)
+            free(func_args.u.vec.array);
     }
     // printf("Call2\n");
 
