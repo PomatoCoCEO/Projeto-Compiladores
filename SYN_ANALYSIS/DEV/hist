@@ -1,0 +1,1 @@
+ 2458  lex gocompiler.l && yacc -d gocompiler.y && clang-7 -Wall -Wno-unused-function -v -o gocompiler y.tab.c lex.yy.c ast_tree_2.c ast_node.c vector.c

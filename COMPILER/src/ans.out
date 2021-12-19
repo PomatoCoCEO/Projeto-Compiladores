@@ -1,0 +1,2504 @@
+@.str_int = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
+@.str_float = private unnamed_addr constant [7 x i8] c"%.08f\0A\00", align 1
+@.str_string = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
+@.false = private unnamed_addr constant [7 x i8] c"false\0A\00", align 1
+@.true = private unnamed_addr constant [6 x i8] c"true\0A\00", align 1
+@.new_line = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+@program.args = global i8** null
+declare i32 @atoi(i8*)
+declare i32 @printf(i8*, ...)
+define void @main(i32 %local_nargs, i8** %local_args) {
+store i8** %local_args, i8*** @program.args
+%1 = fadd double 41747955.986670, 0.0
+%2 = fsub double 0.0, %1
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2)
+%4 = fadd double 1927724787.861800, 0.0
+%5 = fsub double 0.0, %4
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %5)
+%7 = fadd double 908969831.382820, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %7)
+%9 = fadd double 301321269.230610, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %9)
+%11 = fadd double 433983859.323050, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %11)
+%13 = fadd double 283922626.625410, 0.0
+%14 = fsub double 0.0, %13
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %14)
+%16 = fadd double 1979228066.762200, 0.0
+%17 = fsub double 0.0, %16
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %17)
+%19 = fadd double 114115201.627910, 0.0
+%20 = fsub double 0.0, %19
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %20)
+%22 = fadd double 1069505523.240500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %22)
+%24 = fadd double 120736880.210700, 0.0
+%25 = fsub double 0.0, %24
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %25)
+%27 = fadd double 1770270477.833700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %27)
+%29 = fadd double 168586118.175440, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %29)
+%31 = fadd double 348211689.099230, 0.0
+%32 = fsub double 0.0, %31
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %32)
+%34 = fadd double 8006040.497856, 0.0
+%35 = fsub double 0.0, %34
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %35)
+%37 = fadd double 1188332157.608800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %37)
+%39 = fadd double 364307539.885460, 0.0
+%40 = fsub double 0.0, %39
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %40)
+%42 = fadd double 1219702512.252600, 0.0
+%43 = fsub double 0.0, %42
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %43)
+%45 = fadd double 519725676.140320, 0.0
+%46 = fsub double 0.0, %45
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %46)
+%48 = fadd double 185619214.389590, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %48)
+%50 = fadd double 20500638.511532, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %50)
+%52 = fadd double 59839923.250780, 0.0
+%53 = fsub double 0.0, %52
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %53)
+%55 = fadd double 1749857590.302000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %55)
+%57 = fadd double 1246537333.935800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %57)
+%59 = fadd double 1682381156.989800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %59)
+%61 = fadd double 2132422617.602400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %61)
+%63 = fadd double 180504860.353930, 0.0
+%64 = fsub double 0.0, %63
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %64)
+%66 = fadd double 1702448262.735500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %66)
+%68 = fadd double 208129644.155060, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %68)
+%70 = fadd double 2026727113.789000, 0.0
+%71 = fsub double 0.0, %70
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %71)
+%73 = fadd double 1651141937.572900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %73)
+%75 = fadd double 302541188.869960, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %75)
+%77 = fadd double 1598352528.664500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %77)
+%79 = fadd double 862774279.996910, 0.0
+%80 = fsub double 0.0, %79
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %80)
+%82 = fadd double 1570263700.864000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %82)
+%84 = fadd double 65381941.159539, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %84)
+%86 = fadd double 876400012.997470, 0.0
+%87 = fsub double 0.0, %86
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %87)
+%89 = fadd double 2042485751.197900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %89)
+%91 = fadd double 2016650645.078300, 0.0
+%92 = fsub double 0.0, %91
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %92)
+%94 = fadd double 505950.116299, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %94)
+%96 = fadd double 96226160.001929, 0.0
+%97 = fsub double 0.0, %96
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %97)
+%99 = fadd double 209819305.054110, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %99)
+%101 = fadd double 1705555704.863100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %101)
+%103 = fadd double 660812731.718320, 0.0
+%104 = fsub double 0.0, %103
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %104)
+%106 = fadd double 190298367.363450, 0.0
+%107 = fsub double 0.0, %106
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %107)
+%109 = fadd double 86239855.385006, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %109)
+%111 = fadd double 821312348.079990, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %111)
+%113 = fadd double 891829595.154820, 0.0
+%114 = fsub double 0.0, %113
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %114)
+%116 = fadd double 296760024.200600, 0.0
+%117 = fsub double 0.0, %116
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %117)
+%119 = fadd double 721235264.395270, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %119)
+%121 = fadd double 1010504366.656500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %121)
+%123 = fadd double 75295641.940738, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %123)
+%125 = fadd double 1617973318.596700, 0.0
+%126 = fsub double 0.0, %125
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %126)
+%128 = fadd double 647566228.135470, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %128)
+%130 = fadd double 876774594.747990, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %130)
+%132 = fadd double 30456279.155918, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %132)
+%134 = fadd double 595418078.993260, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %134)
+%136 = fadd double 28960287.191769, 0.0
+%137 = fsub double 0.0, %136
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %137)
+%139 = fadd double 1315942771.336400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %139)
+%141 = fadd double 1049886207.955900, 0.0
+%142 = fsub double 0.0, %141
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %142)
+%144 = fadd double 649865861.839710, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %144)
+%146 = fadd double 772431278.414330, 0.0
+%147 = fsub double 0.0, %146
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %147)
+%149 = fadd double 1392204973.987300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %149)
+%151 = fadd double 1746700030.796500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %151)
+%153 = fadd double 8483285.551573, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %153)
+%155 = fadd double 1493355527.128400, 0.0
+%156 = fsub double 0.0, %155
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %156)
+%158 = fadd double 296362879.376950, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %158)
+%160 = fadd double 81214294.241338, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %160)
+%162 = fadd double 268533542.470150, 0.0
+%163 = fsub double 0.0, %162
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %163)
+%165 = fadd double 964923612.610480, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %165)
+%167 = fadd double 746555975.714830, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %167)
+%169 = fadd double 1632857709.261200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %169)
+%171 = fadd double 1194553870.345000, 0.0
+%172 = fsub double 0.0, %171
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %172)
+%174 = fadd double 1786522266.282900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %174)
+%176 = fadd double 1284472741.017800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %176)
+%178 = fadd double 326867463.004380, 0.0
+%179 = fsub double 0.0, %178
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %179)
+%181 = fadd double 582424033.374900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %181)
+%183 = fadd double 829886264.847710, 0.0
+%184 = fsub double 0.0, %183
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %184)
+%186 = fadd double 562426859.012530, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %186)
+%188 = fadd double 1965772688.377500, 0.0
+%189 = fsub double 0.0, %188
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %189)
+%191 = fadd double 555084968.414580, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %191)
+%193 = fadd double 104536445.236290, 0.0
+%194 = fsub double 0.0, %193
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %194)
+%196 = fadd double 57931019.347337, 0.0
+%197 = fsub double 0.0, %196
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %197)
+%199 = fadd double 252642359.387760, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %199)
+%201 = fadd double 264080709.581650, 0.0
+%202 = fsub double 0.0, %201
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %202)
+%204 = fadd double 1220232817.848900, 0.0
+%205 = fsub double 0.0, %204
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %205)
+%207 = fadd double 210529122.680140, 0.0
+%208 = fsub double 0.0, %207
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %208)
+%210 = fadd double 1075410546.640900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %210)
+%212 = fadd double 2102160953.554600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %212)
+%214 = fadd double 1867869335.889400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %214)
+%216 = fadd double 1633596862.614600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %216)
+%218 = fadd double 104834626.890160, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %218)
+%220 = fadd double 974536143.223110, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %220)
+%222 = fadd double 1783625773.376700, 0.0
+%223 = fsub double 0.0, %222
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %223)
+%225 = fadd double 1253584238.787200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %225)
+%227 = fadd double 2146344920.523300, 0.0
+%228 = fsub double 0.0, %227
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %228)
+%230 = fadd double 289530030.767470, 0.0
+%231 = fsub double 0.0, %230
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %231)
+%233 = fadd double 667261962.815560, 0.0
+%234 = fsub double 0.0, %233
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %234)
+%236 = fadd double 1793410740.670700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %236)
+%238 = fadd double 288120783.224160, 0.0
+%239 = fsub double 0.0, %238
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %239)
+%241 = fadd double 198806165.400800, 0.0
+%242 = fsub double 0.0, %241
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %242)
+%244 = fadd double 211203666.835800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %244)
+%246 = fadd double 1051355156.358300, 0.0
+%247 = fsub double 0.0, %246
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %247)
+%249 = fadd double 985428951.276610, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %249)
+%251 = fadd double 1699884907.777000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %251)
+%253 = fadd double 110190822.929740, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %253)
+%255 = fadd double 137482950.331020, 0.0
+%256 = fsub double 0.0, %255
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %256)
+%258 = fadd double 938427933.185260, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %258)
+%260 = fadd double 686252249.920120, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %260)
+%262 = fadd double 65457738.047770, 0.0
+%263 = fsub double 0.0, %262
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %263)
+%265 = fadd double 355246313.717010, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %265)
+%267 = fadd double 83520920.468940, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %267)
+%269 = fadd double 441039872.656310, 0.0
+%270 = fsub double 0.0, %269
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %270)
+%272 = fadd double 737019618.127810, 0.0
+%273 = fsub double 0.0, %272
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %273)
+%275 = fadd double 34004551.819595, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %275)
+%277 = fadd double 1005126624.272800, 0.0
+%278 = fsub double 0.0, %277
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %278)
+%280 = fadd double 911318253.078820, 0.0
+%281 = fsub double 0.0, %280
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %281)
+%283 = fadd double 517979547.541220, 0.0
+%284 = fsub double 0.0, %283
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %284)
+%286 = fadd double 627185685.921340, 0.0
+%287 = fsub double 0.0, %286
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %287)
+%289 = fadd double 325119771.276810, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %289)
+%291 = fadd double 1770251388.332700, 0.0
+%292 = fsub double 0.0, %291
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %292)
+%294 = fadd double 771387149.670870, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %294)
+%296 = fadd double 1075415169.167200, 0.0
+%297 = fsub double 0.0, %296
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %297)
+%299 = fadd double 33058705.460395, 0.0
+%300 = fsub double 0.0, %299
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %300)
+%302 = fadd double 1102792642.514400, 0.0
+%303 = fsub double 0.0, %302
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %303)
+%305 = fadd double 424267903.460970, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %305)
+%307 = fadd double 360822459.653320, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %307)
+%309 = fadd double 92704192.026880, 0.0
+%310 = fsub double 0.0, %309
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %310)
+%312 = fadd double 1894276532.831500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %312)
+%314 = fadd double 18608497.784695, 0.0
+%315 = fsub double 0.0, %314
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %315)
+%317 = fadd double 763762433.924020, 0.0
+%318 = fsub double 0.0, %317
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %318)
+%320 = fadd double 376256230.110920, 0.0
+%321 = fsub double 0.0, %320
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %321)
+%323 = fadd double 212373582.669930, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %323)
+%325 = fadd double 1370943442.926200, 0.0
+%326 = fsub double 0.0, %325
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %326)
+%328 = fadd double 240617504.936380, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %328)
+%330 = fadd double 438401309.106080, 0.0
+%331 = fsub double 0.0, %330
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %331)
+%333 = fadd double 854183491.101460, 0.0
+%334 = fsub double 0.0, %333
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %334)
+%336 = fadd double 540449765.479530, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %336)
+%338 = fadd double 1605987383.825500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %338)
+%340 = fadd double 1533230254.432300, 0.0
+%341 = fsub double 0.0, %340
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %341)
+%343 = fadd double 1638774664.184500, 0.0
+%344 = fsub double 0.0, %343
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %344)
+%346 = fadd double 1599602615.247200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %346)
+%348 = fadd double 1522859734.862500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %348)
+%350 = fadd double 1906246989.103100, 0.0
+%351 = fsub double 0.0, %350
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %351)
+%353 = fadd double 81440469.879592, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %353)
+%355 = fadd double 316263380.212740, 0.0
+%356 = fsub double 0.0, %355
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %356)
+%358 = fadd double 1537964311.471000, 0.0
+%359 = fsub double 0.0, %358
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %359)
+%361 = fadd double 1466406128.999000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %361)
+%363 = fadd double 1046561273.609000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %363)
+%365 = fadd double 1360553119.661700, 0.0
+%366 = fsub double 0.0, %365
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %366)
+%368 = fadd double 1458109599.173200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %368)
+%370 = fadd double 84266094.102745, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %370)
+%372 = fadd double 2108117271.793100, 0.0
+%373 = fsub double 0.0, %372
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %373)
+%375 = fadd double 8724022.792456, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %375)
+%377 = fadd double 470377055.120430, 0.0
+%378 = fsub double 0.0, %377
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %378)
+%380 = fadd double 736280774.678370, 0.0
+%381 = fsub double 0.0, %380
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %381)
+%383 = fadd double 75485513.588283, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %383)
+%385 = fadd double 116274454.599630, 0.0
+%386 = fsub double 0.0, %385
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %386)
+%388 = fadd double 232578225.995880, 0.0
+%389 = fsub double 0.0, %388
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %389)
+%391 = fadd double 1595854426.955400, 0.0
+%392 = fsub double 0.0, %391
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %392)
+%394 = fadd double 1244820727.273800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %394)
+%396 = fadd double 347440541.104620, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %396)
+%398 = fadd double 218062163.651100, 0.0
+%399 = fsub double 0.0, %398
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %399)
+%401 = fadd double 147759075.493350, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %401)
+%403 = fadd double 933731323.132630, 0.0
+%404 = fsub double 0.0, %403
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %404)
+%406 = fadd double 160660156.325760, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %406)
+%408 = fadd double 64018279.325258, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %408)
+%410 = fadd double 1033205064.782400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %410)
+%412 = fadd double 1297246193.048900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %412)
+%414 = fadd double 906669062.011260, 0.0
+%415 = fsub double 0.0, %414
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %415)
+%417 = fadd double 473822753.784100, 0.0
+%418 = fsub double 0.0, %417
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %418)
+%420 = fadd double 1001062208.249600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %420)
+%422 = fadd double 282903437.784600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %422)
+%424 = fadd double 100939387.455070, 0.0
+%425 = fsub double 0.0, %424
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %425)
+%427 = fadd double 147615228.196870, 0.0
+%428 = fsub double 0.0, %427
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %428)
+%430 = fadd double 343992954.022870, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %430)
+%432 = fadd double 1127375594.025600, 0.0
+%433 = fsub double 0.0, %432
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %433)
+%435 = fadd double 504370973.086970, 0.0
+%436 = fsub double 0.0, %435
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %436)
+%438 = fadd double 796011273.017820, 0.0
+%439 = fsub double 0.0, %438
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %439)
+%441 = fadd double 569361170.869000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %441)
+%443 = fadd double 159220406.872970, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %443)
+%445 = fadd double 306020221.964780, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %445)
+%447 = fadd double 593765015.839220, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %447)
+%449 = fadd double 1897545324.042600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %449)
+%451 = fadd double 1269384036.130400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %451)
+%453 = fadd double 281236537.983690, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %453)
+%455 = fadd double 644540888.716750, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %455)
+%457 = fadd double 862362752.075140, 0.0
+%458 = fsub double 0.0, %457
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %458)
+%460 = fadd double 415135685.183050, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %460)
+%462 = fadd double 380575482.219770, 0.0
+%463 = fsub double 0.0, %462
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %463)
+%465 = fadd double 305101117.336090, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %465)
+%467 = fadd double 261061333.395620, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %467)
+%469 = fadd double 539315075.691100, 0.0
+%470 = fsub double 0.0, %469
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %470)
+%472 = fadd double 623182251.017090, 0.0
+%473 = fsub double 0.0, %472
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %473)
+%475 = fadd double 800128074.461170, 0.0
+%476 = fsub double 0.0, %475
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %476)
+%478 = fadd double 1767551184.929200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %478)
+%480 = fadd double 704329138.853450, 0.0
+%481 = fsub double 0.0, %480
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %481)
+%483 = fadd double 204742095.400650, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %483)
+%485 = fadd double 1984360162.542200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %485)
+%487 = fadd double 930842054.634300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %487)
+%489 = fadd double 1606065190.685800, 0.0
+%490 = fsub double 0.0, %489
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %490)
+%492 = fadd double 1129435004.761300, 0.0
+%493 = fsub double 0.0, %492
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %493)
+%495 = fadd double 1918645589.553900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %495)
+%497 = fadd double 1078616071.934100, 0.0
+%498 = fsub double 0.0, %497
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %498)
+%500 = fadd double 826582196.725660, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %500)
+%502 = fadd double 2066130953.934800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %502)
+%504 = fadd double 1252251682.909300, 0.0
+%505 = fsub double 0.0, %504
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %505)
+%507 = fadd double 1562238818.684400, 0.0
+%508 = fsub double 0.0, %507
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %508)
+%510 = fadd double 1345177095.312700, 0.0
+%511 = fsub double 0.0, %510
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %511)
+%513 = fadd double 488228370.916540, 0.0
+%514 = fsub double 0.0, %513
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %514)
+%516 = fadd double 1819561753.302600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %516)
+%518 = fadd double 287808210.662040, 0.0
+%519 = fsub double 0.0, %518
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %519)
+%521 = fadd double 1343477285.169900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %521)
+%523 = fadd double 1071108383.005000, 0.0
+%524 = fsub double 0.0, %523
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %524)
+%526 = fadd double 467281410.644260, 0.0
+%527 = fsub double 0.0, %526
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %527)
+%529 = fadd double 2139960310.690100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %529)
+%531 = fadd double 796637539.447780, 0.0
+%532 = fsub double 0.0, %531
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %532)
+%534 = fadd double 371390456.519540, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %534)
+%536 = fadd double 1903340235.441100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %536)
+%538 = fadd double 679740644.474250, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %538)
+%540 = fadd double 354720814.350320, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %540)
+%542 = fadd double 388064378.743460, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %542)
+%544 = fadd double 861798163.460220, 0.0
+%545 = fsub double 0.0, %544
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %545)
+%547 = fadd double 1832114967.147200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %547)
+%549 = fadd double 1136578771.064700, 0.0
+%550 = fsub double 0.0, %549
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %550)
+%552 = fadd double 572054659.692440, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %552)
+%554 = fadd double 1032882505.646200, 0.0
+%555 = fsub double 0.0, %554
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %555)
+%557 = fadd double 2098557979.201400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %557)
+%559 = fadd double 1199865841.298300, 0.0
+%560 = fsub double 0.0, %559
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %560)
+%562 = fadd double 285934965.788150, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %562)
+%564 = fadd double 924364745.195970, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %564)
+%566 = fadd double 781141544.789360, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %566)
+%568 = fadd double 701505934.251400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %568)
+%570 = fadd double 827119121.358310, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %570)
+%572 = fadd double 1960055531.918600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %572)
+%574 = fadd double 1423146985.140000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %574)
+%576 = fadd double 1266090864.965800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %576)
+%578 = fadd double 1107339354.895900, 0.0
+%579 = fsub double 0.0, %578
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %579)
+%581 = fadd double 845304905.199870, 0.0
+%582 = fsub double 0.0, %581
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %582)
+%584 = fadd double 1934651790.196400, 0.0
+%585 = fsub double 0.0, %584
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %585)
+%587 = fadd double 279764402.830070, 0.0
+%588 = fsub double 0.0, %587
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %588)
+%590 = fadd double 1170060889.411600, 0.0
+%591 = fsub double 0.0, %590
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %591)
+%593 = fadd double 1648954877.170400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %593)
+%595 = fadd double 699595097.424410, 0.0
+%596 = fsub double 0.0, %595
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %596)
+%598 = fadd double 1720420238.523500, 0.0
+%599 = fsub double 0.0, %598
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %599)
+%601 = fadd double 560281443.739890, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %601)
+%603 = fadd double 1774688972.339200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %603)
+%605 = fadd double 1497763394.913000, 0.0
+%606 = fsub double 0.0, %605
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %606)
+%608 = fadd double 394337676.321070, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %608)
+%610 = fadd double 350669257.031960, 0.0
+%611 = fsub double 0.0, %610
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %611)
+%613 = fadd double 34654295.778654, 0.0
+%614 = fsub double 0.0, %613
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %614)
+%616 = fadd double 2052434398.975700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %616)
+%618 = fadd double 2030906693.613000, 0.0
+%619 = fsub double 0.0, %618
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %619)
+%621 = fadd double 37586098.184728, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %621)
+%623 = fadd double 307922892.434630, 0.0
+%624 = fsub double 0.0, %623
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %624)
+%626 = fadd double 1018781563.519100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %626)
+%628 = fadd double 1818377484.550800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %628)
+%630 = fadd double 919576170.548350, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %630)
+%632 = fadd double 1589763840.286600, 0.0
+%633 = fsub double 0.0, %632
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %633)
+%635 = fadd double 661335200.715710, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %635)
+%637 = fadd double 61904708.557544, 0.0
+%638 = fsub double 0.0, %637
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %638)
+%640 = fadd double 1095864161.988800, 0.0
+%641 = fsub double 0.0, %640
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %641)
+%643 = fadd double 1531465815.664900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %643)
+%645 = fadd double 239151591.847560, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %645)
+%647 = fadd double 4303847.645421, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %647)
+%649 = fadd double 20407376.778142, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %649)
+%651 = fadd double 122690853.429540, 0.0
+%652 = fsub double 0.0, %651
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %652)
+%654 = fadd double 1313704187.681400, 0.0
+%655 = fsub double 0.0, %654
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %655)
+%657 = fadd double 507892233.765580, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %657)
+%659 = fadd double 294591440.585700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %659)
+%661 = fadd double 478240278.022810, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %661)
+%663 = fadd double 80806481.803407, 0.0
+%664 = fsub double 0.0, %663
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %664)
+%666 = fadd double 351673816.571870, 0.0
+%667 = fsub double 0.0, %666
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %667)
+%669 = fadd double 57447736.384899, 0.0
+%670 = fsub double 0.0, %669
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %670)
+%672 = fadd double 518974404.351790, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %672)
+%674 = fadd double 180633062.728950, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %674)
+%676 = fadd double 1059866035.814600, 0.0
+%677 = fsub double 0.0, %676
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %677)
+%679 = fadd double 1401567940.101300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %679)
+%681 = fadd double 1231510015.615400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %681)
+%683 = fadd double 36416439.031624, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %683)
+%685 = fadd double 1310189909.502300, 0.0
+%686 = fsub double 0.0, %685
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %686)
+%688 = fadd double 293950252.135350, 0.0
+%689 = fsub double 0.0, %688
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %689)
+%691 = fadd double 813519173.218160, 0.0
+%692 = fsub double 0.0, %691
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %692)
+%694 = fadd double 286779253.641300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %694)
+%696 = fadd double 1022748552.797300, 0.0
+%697 = fsub double 0.0, %696
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %697)
+%699 = fadd double 878480918.092040, 0.0
+%700 = fsub double 0.0, %699
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %700)
+%702 = fadd double 32364375.092814, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %702)
+%704 = fadd double 463918332.144410, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %704)
+%706 = fadd double 374946099.959020, 0.0
+%707 = fsub double 0.0, %706
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %707)
+%709 = fadd double 1212003671.378800, 0.0
+%710 = fsub double 0.0, %709
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %710)
+%712 = fadd double 1245027178.340500, 0.0
+%713 = fsub double 0.0, %712
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %713)
+%715 = fadd double 119226288.685240, 0.0
+%716 = fsub double 0.0, %715
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %716)
+%718 = fadd double 919666548.052750, 0.0
+%719 = fsub double 0.0, %718
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %719)
+%721 = fadd double 886436696.797240, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %721)
+%723 = fadd double 335313358.513700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %723)
+%725 = fadd double 1153417711.353000, 0.0
+%726 = fsub double 0.0, %725
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %726)
+%728 = fadd double 2108065640.516900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %728)
+%730 = fadd double 1163510928.611100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %730)
+%732 = fadd double 1224722289.056800, 0.0
+%733 = fsub double 0.0, %732
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %733)
+%735 = fadd double 231235914.560360, 0.0
+%736 = fsub double 0.0, %735
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %736)
+%738 = fadd double 743917940.727550, 0.0
+%739 = fsub double 0.0, %738
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %739)
+%741 = fadd double 647300012.826550, 0.0
+%742 = fsub double 0.0, %741
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %742)
+%744 = fadd double 635202896.353780, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %744)
+%746 = fadd double 1136949563.656700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %746)
+%748 = fadd double 1234375329.327300, 0.0
+%749 = fsub double 0.0, %748
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %749)
+%751 = fadd double 596292685.567750, 0.0
+%752 = fsub double 0.0, %751
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %752)
+%754 = fadd double 1748152004.044100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %754)
+%756 = fadd double 47792970.882196, 0.0
+%757 = fsub double 0.0, %756
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %757)
+%759 = fadd double 427561730.794290, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %759)
+%761 = fadd double 2079755079.643400, 0.0
+%762 = fsub double 0.0, %761
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %762)
+%764 = fadd double 1118959922.775700, 0.0
+%765 = fsub double 0.0, %764
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %765)
+%767 = fadd double 52948171.603821, 0.0
+%768 = fsub double 0.0, %767
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %768)
+%770 = fadd double 1011482431.265500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %770)
+%772 = fadd double 171710749.530260, 0.0
+%773 = fsub double 0.0, %772
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %773)
+%775 = fadd double 1093782448.894300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %775)
+%777 = fadd double 225225821.352100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %777)
+%779 = fadd double 500474030.403430, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %779)
+%781 = fadd double 556129856.115270, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %781)
+%783 = fadd double 193707920.129170, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %783)
+%785 = fadd double 1457501762.177000, 0.0
+%786 = fsub double 0.0, %785
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %786)
+%788 = fadd double 751858335.564870, 0.0
+%789 = fsub double 0.0, %788
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %789)
+%791 = fadd double 75747410.170316, 0.0
+%792 = fsub double 0.0, %791
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %792)
+%794 = fadd double 859305991.805430, 0.0
+%795 = fsub double 0.0, %794
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %795)
+%797 = fadd double 1987879799.681400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %797)
+%799 = fadd double 805264499.158290, 0.0
+%800 = fsub double 0.0, %799
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %800)
+%802 = fadd double 232749581.117690, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %802)
+%804 = fadd double 2062212330.600700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %804)
+%806 = fadd double 231606576.382860, 0.0
+%807 = fsub double 0.0, %806
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %807)
+%809 = fadd double 68869604.783372, 0.0
+%810 = fsub double 0.0, %809
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %810)
+%812 = fadd double 1613548793.973100, 0.0
+%813 = fsub double 0.0, %812
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %813)
+%815 = fadd double 716462071.130370, 0.0
+%816 = fsub double 0.0, %815
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %816)
+%818 = fadd double 1502384935.286100, 0.0
+%819 = fsub double 0.0, %818
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %819)
+%821 = fadd double 156410441.945250, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %821)
+%823 = fadd double 679964485.439800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %823)
+%825 = fadd double 867727487.435200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %825)
+%827 = fadd double 161106356.554120, 0.0
+%828 = fsub double 0.0, %827
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %828)
+%830 = fadd double 167687491.105710, 0.0
+%831 = fsub double 0.0, %830
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %831)
+%833 = fadd double 1773885902.192700, 0.0
+%834 = fsub double 0.0, %833
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %834)
+%836 = fadd double 1810466462.616800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %836)
+%838 = fadd double 138180378.412350, 0.0
+%839 = fsub double 0.0, %838
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %839)
+%841 = fadd double 1549414788.709900, 0.0
+%842 = fsub double 0.0, %841
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %842)
+%844 = fadd double 1869756292.499100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %844)
+%846 = fadd double 1878420594.357700, 0.0
+%847 = fsub double 0.0, %846
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %847)
+%849 = fadd double 382059681.419290, 0.0
+%850 = fsub double 0.0, %849
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %850)
+%852 = fadd double 477316944.383440, 0.0
+%853 = fsub double 0.0, %852
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %853)
+%855 = fadd double 257997252.867180, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %855)
+%857 = fadd double 531449811.932000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %857)
+%859 = fadd double 1469801618.178400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %859)
+%861 = fadd double 896178561.182210, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %861)
+%863 = fadd double 1037524269.933300, 0.0
+%864 = fsub double 0.0, %863
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %864)
+%866 = fadd double 420143221.382160, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %866)
+%868 = fadd double 1347525541.209500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %868)
+%870 = fadd double 785409600.613990, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %870)
+%872 = fadd double 39304262.280863, 0.0
+%873 = fsub double 0.0, %872
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %873)
+%875 = fadd double 1271005838.844900, 0.0
+%876 = fsub double 0.0, %875
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %876)
+%878 = fadd double 1729471831.763300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %878)
+%880 = fadd double 1835758310.246800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %880)
+%882 = fadd double 1452396640.754300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %882)
+%884 = fadd double 2048357080.133500, 0.0
+%885 = fsub double 0.0, %884
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %885)
+%887 = fadd double 101305886.361490, 0.0
+%888 = fsub double 0.0, %887
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %888)
+%890 = fadd double 239008525.575000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %890)
+%892 = fadd double 694829365.610860, 0.0
+%893 = fsub double 0.0, %892
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %893)
+%895 = fadd double 1790349020.427700, 0.0
+%896 = fsub double 0.0, %895
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %896)
+%898 = fadd double 531172491.746060, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %898)
+%900 = fadd double 38344548.864894, 0.0
+%901 = fsub double 0.0, %900
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %901)
+%903 = fadd double 305449183.306010, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %903)
+%905 = fadd double 873720446.424280, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %905)
+%907 = fadd double 1093969841.069100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %907)
+%909 = fadd double 448072195.345800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %909)
+%911 = fadd double 190753671.539990, 0.0
+%912 = fsub double 0.0, %911
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %912)
+%914 = fadd double 859988364.643160, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %914)
+%916 = fadd double 670215226.072700, 0.0
+%917 = fsub double 0.0, %916
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %917)
+%919 = fadd double 2137707181.002000, 0.0
+%920 = fsub double 0.0, %919
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %920)
+%922 = fadd double 472650263.811100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %922)
+%924 = fadd double 26651719.507880, 0.0
+%925 = fsub double 0.0, %924
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %925)
+%927 = fadd double 1571678133.038600, 0.0
+%928 = fsub double 0.0, %927
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %928)
+%930 = fadd double 1771900426.029600, 0.0
+%931 = fsub double 0.0, %930
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %931)
+%933 = fadd double 638468235.324710, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %933)
+%935 = fadd double 1488456991.976600, 0.0
+%936 = fsub double 0.0, %935
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %936)
+%938 = fadd double 59168356.745916, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %938)
+%940 = fadd double 394415728.701920, 0.0
+%941 = fsub double 0.0, %940
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %941)
+%943 = fadd double 1329937209.214300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %943)
+%945 = fadd double 146839010.759090, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %945)
+%947 = fadd double 892751594.812070, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %947)
+%949 = fadd double 855794285.736540, 0.0
+%950 = fsub double 0.0, %949
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %950)
+%952 = fadd double 1372204369.953300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %952)
+%954 = fadd double 613166016.964770, 0.0
+%955 = fsub double 0.0, %954
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %955)
+%957 = fadd double 216952979.146560, 0.0
+%958 = fsub double 0.0, %957
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %958)
+%960 = fadd double 649187763.555000, 0.0
+%961 = fsub double 0.0, %960
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %961)
+%963 = fadd double 1128674885.101800, 0.0
+%964 = fsub double 0.0, %963
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %964)
+%966 = fadd double 542887918.800420, 0.0
+%967 = fsub double 0.0, %966
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %967)
+%969 = fadd double 1962628703.893200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %969)
+%971 = fadd double 2057065509.917900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %971)
+%973 = fadd double 34059267.667251, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %973)
+%975 = fadd double 1130090093.917100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %975)
+%977 = fadd double 510944351.532710, 0.0
+%978 = fsub double 0.0, %977
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %978)
+%980 = fadd double 499026863.544550, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %980)
+%982 = fadd double 590191792.108290, 0.0
+%983 = fsub double 0.0, %982
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %983)
+%985 = fadd double 107123480.081770, 0.0
+%986 = fsub double 0.0, %985
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %986)
+%988 = fadd double 214947408.774150, 0.0
+%989 = fsub double 0.0, %988
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %989)
+%991 = fadd double 717292957.475610, 0.0
+%992 = fsub double 0.0, %991
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %992)
+%994 = fadd double 1764187580.654100, 0.0
+%995 = fsub double 0.0, %994
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %995)
+%997 = fadd double 320042318.624540, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %997)
+%999 = fadd double 1478720210.437100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %999)
+%1001 = fadd double 437391905.210800, 0.0
+%1002 = fsub double 0.0, %1001
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1002)
+%1004 = fadd double 1296603064.602400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1004)
+%1006 = fadd double 1090307931.710500, 0.0
+%1007 = fsub double 0.0, %1006
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1007)
+%1009 = fadd double 316231245.798910, 0.0
+%1010 = fsub double 0.0, %1009
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1010)
+%1012 = fadd double 2023461330.812700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1012)
+%1014 = fadd double 349247042.881570, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1014)
+%1016 = fadd double 418535408.424050, 0.0
+%1017 = fsub double 0.0, %1016
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1017)
+%1019 = fadd double 734261688.009930, 0.0
+%1020 = fsub double 0.0, %1019
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1020)
+%1022 = fadd double 908730583.814090, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1022)
+%1024 = fadd double 1915146334.825000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1024)
+%1026 = fadd double 1213081868.695500, 0.0
+%1027 = fsub double 0.0, %1026
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1027)
+%1029 = fadd double 1317719138.119500, 0.0
+%1030 = fsub double 0.0, %1029
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1030)
+%1032 = fadd double 1342747165.887900, 0.0
+%1033 = fsub double 0.0, %1032
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1033)
+%1035 = fadd double 311043675.733950, 0.0
+%1036 = fsub double 0.0, %1035
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1036)
+%1038 = fadd double 1830124488.969400, 0.0
+%1039 = fsub double 0.0, %1038
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1039)
+%1041 = fadd double 791966971.974790, 0.0
+%1042 = fsub double 0.0, %1041
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1042)
+%1044 = fadd double 2018935857.540900, 0.0
+%1045 = fsub double 0.0, %1044
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1045)
+%1047 = fadd double 834832942.399300, 0.0
+%1048 = fsub double 0.0, %1047
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1048)
+%1050 = fadd double 43019716.845082, 0.0
+%1051 = fsub double 0.0, %1050
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1051)
+%1053 = fadd double 1250418834.857600, 0.0
+%1054 = fsub double 0.0, %1053
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1054)
+%1056 = fadd double 631822330.765130, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1056)
+%1058 = fadd double 162309176.868750, 0.0
+%1059 = fsub double 0.0, %1058
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1059)
+%1061 = fadd double 250912990.039550, 0.0
+%1062 = fsub double 0.0, %1061
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1062)
+%1064 = fadd double 354373431.589360, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1064)
+%1066 = fadd double 664993562.455680, 0.0
+%1067 = fsub double 0.0, %1066
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1067)
+%1069 = fadd double 652618933.515590, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1069)
+%1071 = fadd double 1755371482.089400, 0.0
+%1072 = fsub double 0.0, %1071
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1072)
+%1074 = fadd double 191563276.970190, 0.0
+%1075 = fsub double 0.0, %1074
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1075)
+%1077 = fadd double 682000124.279680, 0.0
+%1078 = fsub double 0.0, %1077
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1078)
+%1080 = fadd double 1906873572.604200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1080)
+%1082 = fadd double 607744829.443500, 0.0
+%1083 = fsub double 0.0, %1082
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1083)
+%1085 = fadd double 1854201165.655800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1085)
+%1087 = fadd double 1966858262.085500, 0.0
+%1088 = fsub double 0.0, %1087
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1088)
+%1090 = fadd double 515087948.078470, 0.0
+%1091 = fsub double 0.0, %1090
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1091)
+%1093 = fadd double 267112518.157830, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1093)
+%1095 = fadd double 123675069.354020, 0.0
+%1096 = fsub double 0.0, %1095
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1096)
+%1098 = fadd double 57428884.353136, 0.0
+%1099 = fsub double 0.0, %1098
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1099)
+%1101 = fadd double 682677470.166300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1101)
+%1103 = fadd double 734340360.972030, 0.0
+%1104 = fsub double 0.0, %1103
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1104)
+%1106 = fadd double 1396736106.614500, 0.0
+%1107 = fsub double 0.0, %1106
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1107)
+%1109 = fadd double 1022587024.678000, 0.0
+%1110 = fsub double 0.0, %1109
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1110)
+%1112 = fadd double 78372508.071333, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1112)
+%1114 = fadd double 357070422.040700, 0.0
+%1115 = fsub double 0.0, %1114
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1115)
+%1117 = fadd double 1174440176.947800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1117)
+%1119 = fadd double 1963638146.147400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1119)
+%1121 = fadd double 189707360.112410, 0.0
+%1122 = fsub double 0.0, %1121
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1122)
+%1124 = fadd double 2109120931.079200, 0.0
+%1125 = fsub double 0.0, %1124
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1125)
+%1127 = fadd double 1048640921.384100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1127)
+%1129 = fadd double 1189353839.179500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1129)
+%1131 = fadd double 1550386524.618300, 0.0
+%1132 = fsub double 0.0, %1131
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1132)
+%1134 = fadd double 1071334345.515200, 0.0
+%1135 = fsub double 0.0, %1134
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1135)
+%1137 = fadd double 2049278550.401600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1137)
+%1139 = fadd double 2119209583.536900, 0.0
+%1140 = fsub double 0.0, %1139
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1140)
+%1142 = fadd double 1888271912.063800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1142)
+%1144 = fadd double 1056059366.904300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1144)
+%1146 = fadd double 428664282.241600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1146)
+%1148 = fadd double 1901743332.891700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1148)
+%1150 = fadd double 2130862846.336700, 0.0
+%1151 = fsub double 0.0, %1150
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1151)
+%1153 = fadd double 387515999.828350, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1153)
+%1155 = fadd double 1161583457.333500, 0.0
+%1156 = fsub double 0.0, %1155
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1156)
+%1158 = fadd double 291059625.261100, 0.0
+%1159 = fsub double 0.0, %1158
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1159)
+%1161 = fadd double 1648370547.678000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1161)
+%1163 = fadd double 310305472.910920, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1163)
+%1165 = fadd double 845853479.056920, 0.0
+%1166 = fsub double 0.0, %1165
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1166)
+%1168 = fadd double 730911935.529570, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1168)
+%1170 = fadd double 328093049.544810, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1170)
+%1172 = fadd double 865024205.811600, 0.0
+%1173 = fsub double 0.0, %1172
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1173)
+%1175 = fadd double 467578575.321070, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1175)
+%1177 = fadd double 325831951.815080, 0.0
+%1178 = fsub double 0.0, %1177
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1178)
+%1180 = fadd double 20625525.605245, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1180)
+%1182 = fadd double 1992545612.317600, 0.0
+%1183 = fsub double 0.0, %1182
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1183)
+%1185 = fadd double 1821736354.476600, 0.0
+%1186 = fsub double 0.0, %1185
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1186)
+%1188 = fadd double 1916053079.879500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1188)
+%1190 = fadd double 192739432.667810, 0.0
+%1191 = fsub double 0.0, %1190
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1191)
+%1193 = fadd double 117790338.051180, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1193)
+%1195 = fadd double 501766354.183830, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1195)
+%1197 = fadd double 499269144.405870, 0.0
+%1198 = fsub double 0.0, %1197
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1198)
+%1200 = fadd double 87312931.714516, 0.0
+%1201 = fsub double 0.0, %1200
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1201)
+%1203 = fadd double 41302512.038074, 0.0
+%1204 = fsub double 0.0, %1203
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1204)
+%1206 = fadd double 2068354515.538800, 0.0
+%1207 = fsub double 0.0, %1206
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1207)
+%1209 = fadd double 1210955218.120700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1209)
+%1211 = fadd double 671451695.901560, 0.0
+%1212 = fsub double 0.0, %1211
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1212)
+%1214 = fadd double 238193356.539240, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1214)
+%1216 = fadd double 1508216368.566400, 0.0
+%1217 = fsub double 0.0, %1216
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1217)
+%1219 = fadd double 747933951.616210, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1219)
+%1221 = fadd double 903170161.443570, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1221)
+%1223 = fadd double 1626606156.636400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1223)
+%1225 = fadd double 1215162915.311000, 0.0
+%1226 = fsub double 0.0, %1225
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1226)
+%1228 = fadd double 363203023.497430, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1228)
+%1230 = fadd double 1087457400.419100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1230)
+%1232 = fadd double 205217736.811100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1232)
+%1234 = fadd double 667942508.969710, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1234)
+%1236 = fadd double 1596286407.362300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1236)
+%1238 = fadd double 1980606345.932600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1238)
+%1240 = fadd double 2005010954.118200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1240)
+%1242 = fadd double 1234034398.749100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1242)
+%1244 = fadd double 462778770.242130, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1244)
+%1246 = fadd double 689176532.089740, 0.0
+%1247 = fsub double 0.0, %1246
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1247)
+%1249 = fadd double 939580272.979190, 0.0
+%1250 = fsub double 0.0, %1249
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1250)
+%1252 = fadd double 19610853.093887, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1252)
+%1254 = fadd double 509427526.871410, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1254)
+%1256 = fadd double 210031259.030370, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1256)
+%1258 = fadd double 97554342.071498, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1258)
+%1260 = fadd double 897104685.668120, 0.0
+%1261 = fsub double 0.0, %1260
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1261)
+%1263 = fadd double 1764096182.089600, 0.0
+%1264 = fsub double 0.0, %1263
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1264)
+%1266 = fadd double 1153125613.262800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1266)
+%1268 = fadd double 1127346826.052000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1268)
+%1270 = fadd double 19439420.021518, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1270)
+%1272 = fadd double 2056454526.504800, 0.0
+%1273 = fsub double 0.0, %1272
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1273)
+%1275 = fadd double 293917669.879290, 0.0
+%1276 = fsub double 0.0, %1275
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1276)
+%1278 = fadd double 1216100236.040900, 0.0
+%1279 = fsub double 0.0, %1278
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1279)
+%1281 = fadd double 465681005.252290, 0.0
+%1282 = fsub double 0.0, %1281
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1282)
+%1284 = fadd double 405941759.503160, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1284)
+%1286 = fadd double 393566369.097840, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1286)
+%1288 = fadd double 720862262.146740, 0.0
+%1289 = fsub double 0.0, %1288
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1289)
+%1291 = fadd double 500431962.427550, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1291)
+%1293 = fadd double 587470028.343890, 0.0
+%1294 = fsub double 0.0, %1293
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1294)
+%1296 = fadd double 99091777.563943, 0.0
+%1297 = fsub double 0.0, %1296
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1297)
+%1299 = fadd double 423711310.316120, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1299)
+%1301 = fadd double 713721434.649640, 0.0
+%1302 = fsub double 0.0, %1301
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1302)
+%1304 = fadd double 107148225.943690, 0.0
+%1305 = fsub double 0.0, %1304
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1305)
+%1307 = fadd double 977822228.937550, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1307)
+%1309 = fadd double 645294921.349360, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1309)
+%1311 = fadd double 2007049558.215400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1311)
+%1313 = fadd double 1135175163.865300, 0.0
+%1314 = fsub double 0.0, %1313
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1314)
+%1316 = fadd double 1663660299.582700, 0.0
+%1317 = fsub double 0.0, %1316
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1317)
+%1319 = fadd double 1409608011.481600, 0.0
+%1320 = fsub double 0.0, %1319
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1320)
+%1322 = fadd double 99616376.812998, 0.0
+%1323 = fsub double 0.0, %1322
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1323)
+%1325 = fadd double 1083470462.189000, 0.0
+%1326 = fsub double 0.0, %1325
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1326)
+%1328 = fadd double 715285524.162690, 0.0
+%1329 = fsub double 0.0, %1328
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1329)
+%1331 = fadd double 2000160664.517600, 0.0
+%1332 = fsub double 0.0, %1331
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1332)
+%1334 = fadd double 1087820947.602500, 0.0
+%1335 = fsub double 0.0, %1334
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1335)
+%1337 = fadd double 829028277.733210, 0.0
+%1338 = fsub double 0.0, %1337
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1338)
+%1340 = fadd double 503046943.329620, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1340)
+%1342 = fadd double 108010241.196130, 0.0
+%1343 = fsub double 0.0, %1342
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1343)
+%1345 = fadd double 1498719015.063900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1345)
+%1347 = fadd double 641047950.609070, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1347)
+%1349 = fadd double 857303579.332150, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1349)
+%1351 = fadd double 1025523840.320800, 0.0
+%1352 = fsub double 0.0, %1351
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1352)
+%1354 = fadd double 339365977.709540, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1354)
+%1356 = fadd double 35798849.172678, 0.0
+%1357 = fsub double 0.0, %1356
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1357)
+%1359 = fadd double 475018009.049250, 0.0
+%1360 = fsub double 0.0, %1359
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1360)
+%1362 = fadd double 1688991288.985100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1362)
+%1364 = fadd double 799526762.889840, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1364)
+%1366 = fadd double 665418704.153170, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1366)
+%1368 = fadd double 1514460601.369700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1368)
+%1370 = fadd double 2100290864.355400, 0.0
+%1371 = fsub double 0.0, %1370
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1371)
+%1373 = fadd double 1934183648.641000, 0.0
+%1374 = fsub double 0.0, %1373
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1374)
+%1376 = fadd double 1195516523.525100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1376)
+%1378 = fadd double 95153949.782891, 0.0
+%1379 = fsub double 0.0, %1378
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1379)
+%1381 = fadd double 1088592831.484900, 0.0
+%1382 = fsub double 0.0, %1381
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1382)
+%1384 = fadd double 317860634.323450, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1384)
+%1386 = fadd double 296993555.203560, 0.0
+%1387 = fsub double 0.0, %1386
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1387)
+%1389 = fadd double 2119417054.594300, 0.0
+%1390 = fsub double 0.0, %1389
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1390)
+%1392 = fadd double 578828891.932890, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1392)
+%1394 = fadd double 391499347.536930, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1394)
+%1396 = fadd double 28623021.594560, 0.0
+%1397 = fsub double 0.0, %1396
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1397)
+%1399 = fadd double 1109305152.524300, 0.0
+%1400 = fsub double 0.0, %1399
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1400)
+%1402 = fadd double 528195460.746950, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1402)
+%1404 = fadd double 93033596.487262, 0.0
+%1405 = fsub double 0.0, %1404
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1405)
+%1407 = fadd double 1830419983.309200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1407)
+%1409 = fadd double 14149895.690961, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1409)
+%1411 = fadd double 335023793.987200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1411)
+%1413 = fadd double 1217446887.904300, 0.0
+%1414 = fsub double 0.0, %1413
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1414)
+%1416 = fadd double 1915809998.669000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1416)
+%1418 = fadd double 703855189.112430, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1418)
+%1420 = fadd double 1412332219.711800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1420)
+%1422 = fadd double 1951782163.336100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1422)
+%1424 = fadd double 1708987747.588800, 0.0
+%1425 = fsub double 0.0, %1424
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1425)
+%1427 = fadd double 877248459.832830, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1427)
+%1429 = fadd double 1074851908.179600, 0.0
+%1430 = fsub double 0.0, %1429
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1430)
+%1432 = fadd double 75164467.333567, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1432)
+%1434 = fadd double 78524615.500587, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1434)
+%1436 = fadd double 376181163.505830, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1436)
+%1438 = fadd double 896664808.221340, 0.0
+%1439 = fsub double 0.0, %1438
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1439)
+%1441 = fadd double 343578254.129330, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1441)
+%1443 = fadd double 1929031248.757400, 0.0
+%1444 = fsub double 0.0, %1443
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1444)
+%1446 = fadd double 201370125.507520, 0.0
+%1447 = fsub double 0.0, %1446
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1447)
+%1449 = fadd double 1586074505.851000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1449)
+%1451 = fadd double 227669449.405600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1451)
+%1453 = fadd double 1795976825.494300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1453)
+%1455 = fadd double 917199041.626850, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1455)
+%1457 = fadd double 155638409.863790, 0.0
+%1458 = fsub double 0.0, %1457
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1458)
+%1460 = fadd double 1381497258.543100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1460)
+%1462 = fadd double 766904997.385140, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1462)
+%1464 = fadd double 161594004.065810, 0.0
+%1465 = fsub double 0.0, %1464
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1465)
+%1467 = fadd double 368474955.005410, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1467)
+%1469 = fadd double 2021068523.592700, 0.0
+%1470 = fsub double 0.0, %1469
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1470)
+%1472 = fadd double 71585291.265100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1472)
+%1474 = fadd double 318599711.544930, 0.0
+%1475 = fsub double 0.0, %1474
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1475)
+%1477 = fadd double 1324061979.069600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1477)
+%1479 = fadd double 703648178.080010, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1479)
+%1481 = fadd double 107410391.930830, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1481)
+%1483 = fadd double 1083107131.140800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1483)
+%1485 = fadd double 175028194.887730, 0.0
+%1486 = fsub double 0.0, %1485
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1486)
+%1488 = fadd double 302125519.778360, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1488)
+%1490 = fadd double 519483541.122000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1490)
+%1492 = fadd double 761648184.135890, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1492)
+%1494 = fadd double 136660766.915580, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1494)
+%1496 = fadd double 921740483.181430, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1496)
+%1498 = fadd double 122107066.471630, 0.0
+%1499 = fsub double 0.0, %1498
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1499)
+%1501 = fadd double 335182543.471300, 0.0
+%1502 = fsub double 0.0, %1501
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1502)
+%1504 = fadd double 363141358.564420, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1504)
+%1506 = fadd double 472635935.238330, 0.0
+%1507 = fsub double 0.0, %1506
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1507)
+%1509 = fadd double 274290994.605830, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1509)
+%1511 = fadd double 2091143233.280000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1511)
+%1513 = fadd double 924042783.268700, 0.0
+%1514 = fsub double 0.0, %1513
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1514)
+%1516 = fadd double 622731732.592630, 0.0
+%1517 = fsub double 0.0, %1516
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1517)
+%1519 = fadd double 823727023.920970, 0.0
+%1520 = fsub double 0.0, %1519
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1520)
+%1522 = fadd double 1832087685.265900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1522)
+%1524 = fadd double 105284421.046170, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1524)
+%1526 = fadd double 843229999.614960, 0.0
+%1527 = fsub double 0.0, %1526
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1527)
+%1529 = fadd double 1293847223.186500, 0.0
+%1530 = fsub double 0.0, %1529
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1530)
+%1532 = fadd double 1714907125.834000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1532)
+%1534 = fadd double 609177264.581930, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1534)
+%1536 = fadd double 1691351726.291700, 0.0
+%1537 = fsub double 0.0, %1536
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1537)
+%1539 = fadd double 1735460453.205500, 0.0
+%1540 = fsub double 0.0, %1539
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1540)
+%1542 = fadd double 600333097.089630, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1542)
+%1544 = fadd double 1268264975.466900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1544)
+%1546 = fadd double 1224672602.050800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1546)
+%1548 = fadd double 2117797233.344200, 0.0
+%1549 = fsub double 0.0, %1548
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1549)
+%1551 = fadd double 1898810634.182700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1551)
+%1553 = fadd double 992216102.041510, 0.0
+%1554 = fsub double 0.0, %1553
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1554)
+%1556 = fadd double 411459359.150820, 0.0
+%1557 = fsub double 0.0, %1556
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1557)
+%1559 = fadd double 19802312.869074, 0.0
+%1560 = fsub double 0.0, %1559
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1560)
+%1562 = fadd double 1525709302.105500, 0.0
+%1563 = fsub double 0.0, %1562
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1563)
+%1565 = fadd double 165322328.807680, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1565)
+%1567 = fadd double 541796440.264200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1567)
+%1569 = fadd double 31893224.862644, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1569)
+%1571 = fadd double 134927437.076530, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1571)
+%1573 = fadd double 1039081892.580600, 0.0
+%1574 = fsub double 0.0, %1573
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1574)
+%1576 = fadd double 214025998.430800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1576)
+%1578 = fadd double 1029241115.804700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1578)
+%1580 = fadd double 154367790.322310, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1580)
+%1582 = fadd double 798503603.429390, 0.0
+%1583 = fsub double 0.0, %1582
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1583)
+%1585 = fadd double 840357897.765570, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1585)
+%1587 = fadd double 1991372918.346200, 0.0
+%1588 = fsub double 0.0, %1587
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1588)
+%1590 = fadd double 9202666.025529, 0.0
+%1591 = fsub double 0.0, %1590
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1591)
+%1593 = fadd double 771534274.487630, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1593)
+%1595 = fadd double 4327516.343120, 0.0
+%1596 = fsub double 0.0, %1595
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1596)
+%1598 = fadd double 236997689.837010, 0.0
+%1599 = fsub double 0.0, %1598
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1599)
+%1601 = fadd double 1382462012.241300, 0.0
+%1602 = fsub double 0.0, %1601
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1602)
+%1604 = fadd double 1817418736.753900, 0.0
+%1605 = fsub double 0.0, %1604
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1605)
+%1607 = fadd double 931647339.409190, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1607)
+%1609 = fadd double 55682905.565493, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1609)
+%1611 = fadd double 216797692.536440, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1611)
+%1613 = fadd double 1337681646.437800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1613)
+%1615 = fadd double 237603798.069740, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1615)
+%1617 = fadd double 352100879.813390, 0.0
+%1618 = fsub double 0.0, %1617
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1618)
+%1620 = fadd double 1091501499.423900, 0.0
+%1621 = fsub double 0.0, %1620
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1621)
+%1623 = fadd double 148851365.303190, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1623)
+%1625 = fadd double 1103949121.153100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1625)
+%1627 = fadd double 219148553.217490, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1627)
+%1629 = fadd double 969333269.847560, 0.0
+%1630 = fsub double 0.0, %1629
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1630)
+%1632 = fadd double 229681797.903830, 0.0
+%1633 = fsub double 0.0, %1632
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1633)
+%1635 = fadd double 567950866.022620, 0.0
+%1636 = fsub double 0.0, %1635
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1636)
+%1638 = fadd double 667557112.785440, 0.0
+%1639 = fsub double 0.0, %1638
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1639)
+%1641 = fadd double 1450950125.989100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1641)
+%1643 = fadd double 362337328.553680, 0.0
+%1644 = fsub double 0.0, %1643
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1644)
+%1646 = fadd double 1346798136.719700, 0.0
+%1647 = fsub double 0.0, %1646
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1647)
+%1649 = fadd double 22178181.187814, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1649)
+%1651 = fadd double 67427021.481920, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1651)
+%1653 = fadd double 337264190.371140, 0.0
+%1654 = fsub double 0.0, %1653
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1654)
+%1656 = fadd double 1148530246.042300, 0.0
+%1657 = fsub double 0.0, %1656
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1657)
+%1659 = fadd double 980419957.823140, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1659)
+%1661 = fadd double 438582928.069760, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1661)
+%1663 = fadd double 976816262.999010, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1663)
+%1665 = fadd double 113568921.840680, 0.0
+%1666 = fsub double 0.0, %1665
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1666)
+%1668 = fadd double 277884154.479500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1668)
+%1670 = fadd double 938568879.074590, 0.0
+%1671 = fsub double 0.0, %1670
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1671)
+%1673 = fadd double 947095525.514840, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1673)
+%1675 = fadd double 1772964689.843400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1675)
+%1677 = fadd double 421834180.749050, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1677)
+%1679 = fadd double 606468585.019720, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1679)
+%1681 = fadd double 549088958.246860, 0.0
+%1682 = fsub double 0.0, %1681
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1682)
+%1684 = fadd double 334001574.887230, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1684)
+%1686 = fadd double 674552799.330330, 0.0
+%1687 = fsub double 0.0, %1686
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1687)
+%1689 = fadd double 1611907598.484200, 0.0
+%1690 = fsub double 0.0, %1689
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1690)
+%1692 = fadd double 963159544.728520, 0.0
+%1693 = fsub double 0.0, %1692
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1693)
+%1695 = fadd double 556346011.469490, 0.0
+%1696 = fsub double 0.0, %1695
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1696)
+%1698 = fadd double 217294039.783100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1698)
+%1700 = fadd double 138870227.634090, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1700)
+%1702 = fadd double 1084761227.473800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1702)
+%1704 = fadd double 543042322.171150, 0.0
+%1705 = fsub double 0.0, %1704
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1705)
+%1707 = fadd double 210041203.694950, 0.0
+%1708 = fsub double 0.0, %1707
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1708)
+%1710 = fadd double 1198106295.601100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1710)
+%1712 = fadd double 353683517.429910, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1712)
+%1714 = fadd double 752410264.752070, 0.0
+%1715 = fsub double 0.0, %1714
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1715)
+%1717 = fadd double 273501179.899810, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1717)
+%1719 = fadd double 852663536.382140, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1719)
+%1721 = fadd double 210624608.291090, 0.0
+%1722 = fsub double 0.0, %1721
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1722)
+%1724 = fadd double 788032520.143440, 0.0
+%1725 = fsub double 0.0, %1724
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1725)
+%1727 = fadd double 1878326964.164100, 0.0
+%1728 = fsub double 0.0, %1727
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1728)
+%1730 = fadd double 297838577.109900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1730)
+%1732 = fadd double 277938173.996750, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1732)
+%1734 = fadd double 1522217530.105100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1734)
+%1736 = fadd double 299155508.375270, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1736)
+%1738 = fadd double 1529857870.282800, 0.0
+%1739 = fsub double 0.0, %1738
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1739)
+%1741 = fadd double 135413184.688970, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1741)
+%1743 = fadd double 810975314.590480, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1743)
+%1745 = fadd double 4231593.215009, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1745)
+%1747 = fadd double 57566473.376894, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1747)
+%1749 = fadd double 525898325.547190, 0.0
+%1750 = fsub double 0.0, %1749
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1750)
+%1752 = fadd double 853095926.428850, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1752)
+%1754 = fadd double 2144196846.752300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1754)
+%1756 = fadd double 737428966.974980, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1756)
+%1758 = fadd double 195103742.267980, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1758)
+%1760 = fadd double 1191074942.902000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1760)
+%1762 = fadd double 538907669.220490, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1762)
+%1764 = fadd double 789249653.898170, 0.0
+%1765 = fsub double 0.0, %1764
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1765)
+%1767 = fadd double 226455860.051570, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1767)
+%1769 = fadd double 1461254248.491000, 0.0
+%1770 = fsub double 0.0, %1769
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1770)
+%1772 = fadd double 235003338.846590, 0.0
+%1773 = fsub double 0.0, %1772
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1773)
+%1775 = fadd double 364400242.047590, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1775)
+%1777 = fadd double 1051605310.941400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1777)
+%1779 = fadd double 7901602.329858, 0.0
+%1780 = fsub double 0.0, %1779
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1780)
+%1782 = fadd double 193167070.245670, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1782)
+%1784 = fadd double 295010041.690240, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1784)
+%1786 = fadd double 497160517.605980, 0.0
+%1787 = fsub double 0.0, %1786
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1787)
+%1789 = fadd double 1531016432.656700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1789)
+%1791 = fadd double 51418320.921598, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1791)
+%1793 = fadd double 432210252.559500, 0.0
+%1794 = fsub double 0.0, %1793
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1794)
+%1796 = fadd double 464971207.613200, 0.0
+%1797 = fsub double 0.0, %1796
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1797)
+%1799 = fadd double 295265749.782600, 0.0
+%1800 = fsub double 0.0, %1799
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1800)
+%1802 = fadd double 20287422.653801, 0.0
+%1803 = fsub double 0.0, %1802
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1803)
+%1805 = fadd double 2121909576.677300, 0.0
+%1806 = fsub double 0.0, %1805
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1806)
+%1808 = fadd double 756036939.872560, 0.0
+%1809 = fsub double 0.0, %1808
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1809)
+%1811 = fadd double 592150802.821760, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1811)
+%1813 = fadd double 539478631.554510, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1813)
+%1815 = fadd double 1582641624.190300, 0.0
+%1816 = fsub double 0.0, %1815
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1816)
+%1818 = fadd double 1427679784.883800, 0.0
+%1819 = fsub double 0.0, %1818
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1819)
+%1821 = fadd double 669472462.122590, 0.0
+%1822 = fsub double 0.0, %1821
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1822)
+%1824 = fadd double 268324993.949300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1824)
+%1826 = fadd double 1068975093.862900, 0.0
+%1827 = fsub double 0.0, %1826
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1827)
+%1829 = fadd double 1919673712.221400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1829)
+%1831 = fadd double 1245265727.876200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1831)
+%1833 = fadd double 703135533.042940, 0.0
+%1834 = fsub double 0.0, %1833
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1834)
+%1836 = fadd double 543920876.544830, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1836)
+%1838 = fadd double 1291518526.421300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1838)
+%1840 = fadd double 567142287.124470, 0.0
+%1841 = fsub double 0.0, %1840
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1841)
+%1843 = fadd double 111475963.414950, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1843)
+%1845 = fadd double 355485606.355770, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1845)
+%1847 = fadd double 552655545.305110, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1847)
+%1849 = fadd double 312665628.688420, 0.0
+%1850 = fsub double 0.0, %1849
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1850)
+%1852 = fadd double 1421962398.211700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1852)
+%1854 = fadd double 156064765.140020, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1854)
+%1856 = fadd double 1050385924.515800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1856)
+%1858 = fadd double 149983879.378550, 0.0
+%1859 = fsub double 0.0, %1858
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1859)
+%1861 = fadd double 1997107554.859300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1861)
+%1863 = fadd double 618105502.509840, 0.0
+%1864 = fsub double 0.0, %1863
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1864)
+%1866 = fadd double 173215741.896540, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1866)
+%1868 = fadd double 1996892788.660800, 0.0
+%1869 = fsub double 0.0, %1868
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1869)
+%1871 = fadd double 227962645.561440, 0.0
+%1872 = fsub double 0.0, %1871
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1872)
+%1874 = fadd double 353319901.047830, 0.0
+%1875 = fsub double 0.0, %1874
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1875)
+%1877 = fadd double 58452338.627867, 0.0
+%1878 = fsub double 0.0, %1877
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1878)
+%1880 = fadd double 668016137.761010, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1880)
+%1882 = fadd double 1033833.419830, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1882)
+%1884 = fadd double 1275842775.975600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1884)
+%1886 = fadd double 364937526.213710, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1886)
+%1888 = fadd double 586185371.731700, 0.0
+%1889 = fsub double 0.0, %1888
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1889)
+%1891 = fadd double 605420097.854210, 0.0
+%1892 = fsub double 0.0, %1891
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1892)
+%1894 = fadd double 239439632.500230, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1894)
+%1896 = fadd double 1711097411.085300, 0.0
+%1897 = fsub double 0.0, %1896
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1897)
+%1899 = fadd double 861557043.351320, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1899)
+%1901 = fadd double 1468650100.932500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1901)
+%1903 = fadd double 200056748.493590, 0.0
+%1904 = fsub double 0.0, %1903
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1904)
+%1906 = fadd double 299051872.898670, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1906)
+%1908 = fadd double 997224303.851250, 0.0
+%1909 = fsub double 0.0, %1908
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1909)
+%1911 = fadd double 852685885.560180, 0.0
+%1912 = fsub double 0.0, %1911
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1912)
+%1914 = fadd double 2099622328.455500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1914)
+%1916 = fadd double 6371220.467148, 0.0
+%1917 = fsub double 0.0, %1916
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1917)
+%1919 = fadd double 1992920600.526400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1919)
+%1921 = fadd double 385163928.292840, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1921)
+%1923 = fadd double 1255776445.827800, 0.0
+%1924 = fsub double 0.0, %1923
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1924)
+%1926 = fadd double 253811363.798030, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1926)
+%1928 = fadd double 740905176.855770, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1928)
+%1930 = fadd double 1897551977.594500, 0.0
+%1931 = fsub double 0.0, %1930
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1931)
+%1933 = fadd double 317252946.861570, 0.0
+%1934 = fsub double 0.0, %1933
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1934)
+%1936 = fadd double 1140406103.582500, 0.0
+%1937 = fsub double 0.0, %1936
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1937)
+%1939 = fadd double 466517336.046040, 0.0
+%1940 = fsub double 0.0, %1939
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1940)
+%1942 = fadd double 119166676.438340, 0.0
+%1943 = fsub double 0.0, %1942
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1943)
+%1945 = fadd double 396544940.868240, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1945)
+%1947 = fadd double 240931546.062950, 0.0
+%1948 = fsub double 0.0, %1947
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1948)
+%1950 = fadd double 975579236.610900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1950)
+%1952 = fadd double 1330246691.523200, 0.0
+%1953 = fsub double 0.0, %1952
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1953)
+%1955 = fadd double 1796174657.651200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1955)
+%1957 = fadd double 230964669.171350, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1957)
+%1959 = fadd double 1073173278.666100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1959)
+%1961 = fadd double 677792870.735590, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1961)
+%1963 = fadd double 1584467207.496000, 0.0
+%1964 = fsub double 0.0, %1963
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1964)
+%1966 = fadd double 1483785237.028500, 0.0
+%1967 = fsub double 0.0, %1966
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1967)
+%1969 = fadd double 1276453997.833600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1969)
+%1971 = fadd double 43155901.852958, 0.0
+%1972 = fsub double 0.0, %1971
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1972)
+%1974 = fadd double 180308836.272930, 0.0
+%1975 = fsub double 0.0, %1974
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1975)
+%1977 = fadd double 628085191.455360, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1977)
+%1979 = fadd double 132860087.066420, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1979)
+%1981 = fadd double 851496603.577490, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1981)
+%1983 = fadd double 1274777782.230700, 0.0
+%1984 = fsub double 0.0, %1983
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1984)
+%1986 = fadd double 618482682.315870, 0.0
+%1987 = fsub double 0.0, %1986
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1987)
+%1989 = fadd double 1099000695.363100, 0.0
+%1990 = fsub double 0.0, %1989
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1990)
+%1992 = fadd double 635836491.123690, 0.0
+%1993 = fsub double 0.0, %1992
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1993)
+%1995 = fadd double 783240532.188560, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1995)
+%1997 = fadd double 1055350510.571500, 0.0
+%1998 = fsub double 0.0, %1997
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %1998)
+%2000 = fadd double 514909787.674910, 0.0
+%2001 = fsub double 0.0, %2000
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2001)
+%2003 = fadd double 1201965382.381700, 0.0
+%2004 = fsub double 0.0, %2003
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2004)
+%2006 = fadd double 1428858060.617500, 0.0
+%2007 = fsub double 0.0, %2006
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2007)
+%2009 = fadd double 2013944456.200600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2009)
+%2011 = fadd double 359087650.383070, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2011)
+%2013 = fadd double 1521191425.331700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2013)
+%2015 = fadd double 203132482.953880, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2015)
+%2017 = fadd double 475358114.755550, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2017)
+%2019 = fadd double 1514927339.813100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2019)
+%2021 = fadd double 301476466.886360, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2021)
+%2023 = fadd double 1957092172.697800, 0.0
+%2024 = fsub double 0.0, %2023
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2024)
+%2026 = fadd double 1211263048.357000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2026)
+%2028 = fadd double 1198523242.333600, 0.0
+%2029 = fsub double 0.0, %2028
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2029)
+%2031 = fadd double 1176587355.552700, 0.0
+%2032 = fsub double 0.0, %2031
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2032)
+%2034 = fadd double 2120050711.145900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2034)
+%2036 = fadd double 1194684697.751400, 0.0
+%2037 = fsub double 0.0, %2036
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2037)
+%2039 = fadd double 134471464.893080, 0.0
+%2040 = fsub double 0.0, %2039
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2040)
+%2042 = fadd double 732332163.665340, 0.0
+%2043 = fsub double 0.0, %2042
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2043)
+%2045 = fadd double 583897741.571460, 0.0
+%2046 = fsub double 0.0, %2045
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2046)
+%2048 = fadd double 985634617.964400, 0.0
+%2049 = fsub double 0.0, %2048
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2049)
+%2051 = fadd double 73188829.266625, 0.0
+%2052 = fsub double 0.0, %2051
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2052)
+%2054 = fadd double 76975475.502423, 0.0
+%2055 = fsub double 0.0, %2054
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2055)
+%2057 = fadd double 643916296.996960, 0.0
+%2058 = fsub double 0.0, %2057
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2058)
+%2060 = fadd double 1427265145.358500, 0.0
+%2061 = fsub double 0.0, %2060
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2061)
+%2063 = fadd double 1371954440.943300, 0.0
+%2064 = fsub double 0.0, %2063
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2064)
+%2066 = fadd double 396837478.644860, 0.0
+%2067 = fsub double 0.0, %2066
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2067)
+%2069 = fadd double 2142824855.816300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2069)
+%2071 = fadd double 1982834695.922100, 0.0
+%2072 = fsub double 0.0, %2071
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2072)
+%2074 = fadd double 303401466.597620, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2074)
+%2076 = fadd double 1986675582.099800, 0.0
+%2077 = fsub double 0.0, %2076
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2077)
+%2079 = fadd double 1699825057.686900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2079)
+%2081 = fadd double 918662495.639900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2081)
+%2083 = fadd double 1854213512.825000, 0.0
+%2084 = fsub double 0.0, %2083
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2084)
+%2086 = fadd double 132118832.644500, 0.0
+%2087 = fsub double 0.0, %2086
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2087)
+%2089 = fadd double 689362922.776790, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2089)
+%2091 = fadd double 35218511.068801, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2091)
+%2093 = fadd double 1298658301.356300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2093)
+%2095 = fadd double 1929057741.008300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2095)
+%2097 = fadd double 1160390989.907000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2097)
+%2099 = fadd double 226291074.658090, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2099)
+%2101 = fadd double 681772929.753230, 0.0
+%2102 = fsub double 0.0, %2101
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2102)
+%2104 = fadd double 632385357.456370, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2104)
+%2106 = fadd double 106157799.725810, 0.0
+%2107 = fsub double 0.0, %2106
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2107)
+%2109 = fadd double 1581365904.857500, 0.0
+%2110 = fsub double 0.0, %2109
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2110)
+%2112 = fadd double 1668769304.991700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2112)
+%2114 = fadd double 220084522.851280, 0.0
+%2115 = fsub double 0.0, %2114
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2115)
+%2117 = fadd double 202943624.861380, 0.0
+%2118 = fsub double 0.0, %2117
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2118)
+%2120 = fadd double 1408842946.552800, 0.0
+%2121 = fsub double 0.0, %2120
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2121)
+%2123 = fadd double 74794908.260825, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2123)
+%2125 = fadd double 368817466.656780, 0.0
+%2126 = fsub double 0.0, %2125
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2126)
+%2128 = fadd double 322539089.020450, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2128)
+%2130 = fadd double 687435164.103620, 0.0
+%2131 = fsub double 0.0, %2130
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2131)
+%2133 = fadd double 42712679.633196, 0.0
+%2134 = fsub double 0.0, %2133
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2134)
+%2136 = fadd double 835723946.224330, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2136)
+%2138 = fadd double 151136491.336980, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2138)
+%2140 = fadd double 1133921724.508100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2140)
+%2142 = fadd double 257739521.961780, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2142)
+%2144 = fadd double 243327862.186500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2144)
+%2146 = fadd double 352656368.216470, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2146)
+%2148 = fadd double 763100710.362470, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2148)
+%2150 = fadd double 637247463.068340, 0.0
+%2151 = fsub double 0.0, %2150
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2151)
+%2153 = fadd double 880135600.371080, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2153)
+%2155 = fadd double 408168217.288340, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2155)
+%2157 = fadd double 1673136242.910500, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2157)
+%2159 = fadd double 1468054129.744200, 0.0
+%2160 = fsub double 0.0, %2159
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2160)
+%2162 = fadd double 227570703.490920, 0.0
+%2163 = fsub double 0.0, %2162
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2163)
+%2165 = fadd double 791514371.235750, 0.0
+%2166 = fsub double 0.0, %2165
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2166)
+%2168 = fadd double 558618170.173010, 0.0
+%2169 = fsub double 0.0, %2168
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2169)
+%2171 = fadd double 2083456556.368100, 0.0
+%2172 = fsub double 0.0, %2171
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2172)
+%2174 = fadd double 1824145437.613900, 0.0
+%2175 = fsub double 0.0, %2174
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2175)
+%2177 = fadd double 303978839.797070, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2177)
+%2179 = fadd double 416864759.593630, 0.0
+%2180 = fsub double 0.0, %2179
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2180)
+%2182 = fadd double 862900764.457870, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2182)
+%2184 = fadd double 1129012283.301400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2184)
+%2186 = fadd double 1245447314.109300, 0.0
+%2187 = fsub double 0.0, %2186
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2187)
+%2189 = fadd double 1696188227.072600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2189)
+%2191 = fadd double 176789032.681930, 0.0
+%2192 = fsub double 0.0, %2191
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2192)
+%2194 = fadd double 4409313.146738, 0.0
+%2195 = fsub double 0.0, %2194
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2195)
+%2197 = fadd double 189200059.612520, 0.0
+%2198 = fsub double 0.0, %2197
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2198)
+%2200 = fadd double 511523722.992330, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2200)
+%2202 = fadd double 101566154.952620, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2202)
+%2204 = fadd double 154159384.695920, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2204)
+%2206 = fadd double 912994529.457930, 0.0
+%2207 = fsub double 0.0, %2206
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2207)
+%2209 = fadd double 872752670.129120, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2209)
+%2211 = fadd double 455921712.072270, 0.0
+%2212 = fsub double 0.0, %2211
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2212)
+%2214 = fadd double 1545650441.967100, 0.0
+%2215 = fsub double 0.0, %2214
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2215)
+%2217 = fadd double 547053284.835670, 0.0
+%2218 = fsub double 0.0, %2217
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2218)
+%2220 = fadd double 237517345.729590, 0.0
+%2221 = fsub double 0.0, %2220
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2221)
+%2223 = fadd double 178605247.626720, 0.0
+%2224 = fsub double 0.0, %2223
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2224)
+%2226 = fadd double 903839510.428370, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2226)
+%2228 = fadd double 577245961.594690, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2228)
+%2230 = fadd double 1156564835.608500, 0.0
+%2231 = fsub double 0.0, %2230
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2231)
+%2233 = fadd double 215692245.118530, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2233)
+%2235 = fadd double 1858206386.650200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2235)
+%2237 = fadd double 1628852059.752500, 0.0
+%2238 = fsub double 0.0, %2237
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2238)
+%2240 = fadd double 945466897.031750, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2240)
+%2242 = fadd double 371313042.579640, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2242)
+%2244 = fadd double 222502720.548280, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2244)
+%2246 = fadd double 1417754085.378400, 0.0
+%2247 = fsub double 0.0, %2246
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2247)
+%2249 = fadd double 78402162.811354, 0.0
+%2250 = fsub double 0.0, %2249
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2250)
+%2252 = fadd double 1078184252.524500, 0.0
+%2253 = fsub double 0.0, %2252
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2253)
+%2255 = fadd double 46729547.650104, 0.0
+%2256 = fsub double 0.0, %2255
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2256)
+%2258 = fadd double 492702397.089110, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2258)
+%2260 = fadd double 246698884.829040, 0.0
+%2261 = fsub double 0.0, %2260
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2261)
+%2263 = fadd double 1782628034.895400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2263)
+%2265 = fadd double 772502462.877690, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2265)
+%2267 = fadd double 208316795.473770, 0.0
+%2268 = fsub double 0.0, %2267
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2268)
+%2270 = fadd double 1110197846.693400, 0.0
+%2271 = fsub double 0.0, %2270
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2271)
+%2273 = fadd double 569986404.095340, 0.0
+%2274 = fsub double 0.0, %2273
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2274)
+%2276 = fadd double 346854564.230700, 0.0
+%2277 = fsub double 0.0, %2276
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2277)
+%2279 = fadd double 111330750.307590, 0.0
+%2280 = fsub double 0.0, %2279
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2280)
+%2282 = fadd double 1574031437.136700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2282)
+%2284 = fadd double 963142339.646970, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2284)
+%2286 = fadd double 794788139.335410, 0.0
+%2287 = fsub double 0.0, %2286
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2287)
+%2289 = fadd double 711629889.576620, 0.0
+%2290 = fsub double 0.0, %2289
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2290)
+%2292 = fadd double 507886304.820360, 0.0
+%2293 = fsub double 0.0, %2292
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2293)
+%2295 = fadd double 462433695.788810, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2295)
+%2297 = fadd double 913450759.021920, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2297)
+%2299 = fadd double 1208408278.466600, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2299)
+%2301 = fadd double 1408220842.497900, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2301)
+%2303 = fadd double 1177894727.741700, 0.0
+%2304 = fsub double 0.0, %2303
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2304)
+%2306 = fadd double 1091249935.593700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2306)
+%2308 = fadd double 766648237.456690, 0.0
+%2309 = fsub double 0.0, %2308
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2309)
+%2311 = fadd double 214957413.694120, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2311)
+%2313 = fadd double 237695523.347470, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2313)
+%2315 = fadd double 507723289.787630, 0.0
+%2316 = fsub double 0.0, %2315
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2316)
+%2318 = fadd double 1702287346.654700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2318)
+%2320 = fadd double 330690526.331620, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2320)
+%2322 = fadd double 313863880.299070, 0.0
+%2323 = fsub double 0.0, %2322
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2323)
+%2325 = fadd double 402999441.820250, 0.0
+%2326 = fsub double 0.0, %2325
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2326)
+%2328 = fadd double 299258552.017910, 0.0
+%2329 = fsub double 0.0, %2328
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2329)
+%2331 = fadd double 354591117.328330, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2331)
+%2333 = fadd double 8244217.064122, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2333)
+%2335 = fadd double 1332475594.662700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2335)
+%2337 = fadd double 1232117876.027700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2337)
+%2339 = fadd double 333820803.430480, 0.0
+%2340 = fsub double 0.0, %2339
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2340)
+%2342 = fadd double 1915595792.952000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2342)
+%2344 = fadd double 71286401.630843, 0.0
+%2345 = fsub double 0.0, %2344
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2345)
+%2347 = fadd double 789423363.560890, 0.0
+%2348 = fsub double 0.0, %2347
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2348)
+%2350 = fadd double 551973852.288220, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2350)
+%2352 = fadd double 1247638483.237100, 0.0
+%2353 = fsub double 0.0, %2352
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2353)
+%2355 = fadd double 296111165.694600, 0.0
+%2356 = fsub double 0.0, %2355
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2356)
+%2358 = fadd double 2091476822.938700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2358)
+%2360 = fadd double 1141648678.132500, 0.0
+%2361 = fsub double 0.0, %2360
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2361)
+%2363 = fadd double 330874671.385680, 0.0
+%2364 = fsub double 0.0, %2363
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2364)
+%2366 = fadd double 245747513.485590, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2366)
+%2368 = fadd double 599468591.868890, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2368)
+%2370 = fadd double 1162531828.848700, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2370)
+%2372 = fadd double 1351769556.020700, 0.0
+%2373 = fsub double 0.0, %2372
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2373)
+%2375 = fadd double 493434954.766910, 0.0
+%2376 = fsub double 0.0, %2375
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2376)
+%2378 = fadd double 999062379.678700, 0.0
+%2379 = fsub double 0.0, %2378
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2379)
+%2381 = fadd double 1356626368.922200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2381)
+%2383 = fadd double 196408539.110330, 0.0
+%2384 = fsub double 0.0, %2383
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2384)
+%2386 = fadd double 2122598664.274700, 0.0
+%2387 = fsub double 0.0, %2386
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2387)
+%2389 = fadd double 881173680.876240, 0.0
+%2390 = fsub double 0.0, %2389
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2390)
+%2392 = fadd double 138133103.423320, 0.0
+%2393 = fsub double 0.0, %2392
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2393)
+%2395 = fadd double 333574933.184110, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2395)
+%2397 = fadd double 699987323.393610, 0.0
+%2398 = fsub double 0.0, %2397
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2398)
+%2400 = fadd double 15655449.459018, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2400)
+%2402 = fadd double 1006712177.281500, 0.0
+%2403 = fsub double 0.0, %2402
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2403)
+%2405 = fadd double 1426730129.604600, 0.0
+%2406 = fsub double 0.0, %2405
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2406)
+%2408 = fadd double 255879438.778470, 0.0
+%2409 = fsub double 0.0, %2408
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2409)
+%2411 = fadd double 710056513.289320, 0.0
+%2412 = fsub double 0.0, %2411
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2412)
+%2414 = fadd double 994897217.810370, 0.0
+%2415 = fsub double 0.0, %2414
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2415)
+%2417 = fadd double 718404905.344190, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2417)
+%2419 = fadd double 262724802.307300, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2419)
+%2421 = fadd double 158057339.080350, 0.0
+%2422 = fsub double 0.0, %2421
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2422)
+%2424 = fadd double 292194028.290050, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2424)
+%2426 = fadd double 1100720939.272000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2426)
+%2428 = fadd double 1261929167.778800, 0.0
+%2429 = fsub double 0.0, %2428
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2429)
+%2431 = fadd double 317019345.088180, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2431)
+%2433 = fadd double 1516489456.150100, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2433)
+%2435 = fadd double 35245147.627407, 0.0
+%2436 = fsub double 0.0, %2435
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2436)
+%2438 = fadd double 1340403651.396800, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2438)
+%2440 = fadd double 1490035314.428200, 0.0
+%2441 = fsub double 0.0, %2440
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2441)
+%2443 = fadd double 1036559463.386900, 0.0
+%2444 = fsub double 0.0, %2443
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2444)
+%2446 = fadd double 169388840.969490, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2446)
+%2448 = fadd double 460848477.574920, 0.0
+%2449 = fsub double 0.0, %2448
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2449)
+%2451 = fadd double 613638972.931730, 0.0
+%2452 = fsub double 0.0, %2451
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2452)
+%2454 = fadd double 982612225.181070, 0.0
+%2455 = fsub double 0.0, %2454
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2455)
+%2457 = fadd double 495750467.932080, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2457)
+%2459 = fadd double 1579728809.667200, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2459)
+%2461 = fadd double 1085182908.279700, 0.0
+%2462 = fsub double 0.0, %2461
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2462)
+%2464 = fadd double 1609217084.584200, 0.0
+%2465 = fsub double 0.0, %2464
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2465)
+%2467 = fadd double 1238754645.002400, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2467)
+%2469 = fadd double 650284583.286980, 0.0
+%2470 = fsub double 0.0, %2469
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2470)
+%2472 = fadd double 804076101.607580, 0.0
+%2473 = fsub double 0.0, %2472
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2473)
+%2475 = fadd double 1522728011.708800, 0.0
+%2476 = fsub double 0.0, %2475
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2476)
+%2478 = fadd double 1028851480.859000, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2478)
+%2480 = fadd double 155998512.829090, 0.0
+%2481 = fsub double 0.0, %2480
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2481)
+%2483 = fadd double 620076902.080030, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2483)
+%2485 = fadd double 300188449.908160, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2485)
+%2487 = fadd double 1056873646.600700, 0.0
+%2488 = fsub double 0.0, %2487
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2488)
+%2490 = fadd double 1612296666.337745, 0.0
+call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str_float, i64 0, i64 0), double %2490)
+ret void
+}

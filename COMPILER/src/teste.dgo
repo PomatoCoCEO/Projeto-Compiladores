@@ -1,0 +1,15 @@
+package main;
+
+func main() {
+	fmt.Println(1E1);
+	do_sth();
+	return;
+}
+
+func do_sth() {
+	fmt.Println("Boo");
+	var a int;
+	a = 4;
+	fmt.Println(a);
+	return;
+}

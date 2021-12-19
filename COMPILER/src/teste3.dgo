@@ -1,0 +1,5 @@
+package main;
+
+var b int;
+
+func fcat() {}
