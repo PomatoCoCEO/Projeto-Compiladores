@@ -679,11 +679,29 @@ void generate_code_call(ast_ptr node)
 
 void generate_code_return(ast_ptr node)
 {
-    ast_ptr child = *(ast_ptr *)get(&node->children, 0);
+    if (node->children.size > 0)
+    {
+        ast_ptr child = *(ast_ptr *)get(&node->children, 0);
 
-    generate_code(child);
+        generate_code(child);
 
-    printf("ret %s %%%d\n", ll_type_str(child->type), child->code_gen_id);
+        printf("ret %s %%%d\n", ll_type_str(child->type), child->code_gen_id);
+    }
+    else
+    {
+        hash_table h = *(hash_table *)get(&vec_tables, current_function);
+        ast_ptr rel = h.ref;
+        ast_ptr header = *(ast_ptr *)get(&(rel->children), 0);
+        ast_ptr name = *(ast_ptr *)get(&(header->children), 0);
+        if (strcmp(name->str, "main") == 0)
+        {
+            printf("ret i32 0\n");
+        }
+        else
+        {
+            printf("ret void\n");
+        }
+    }
 
     node->code_gen_id = current_function_var_id++;
 }
